@@ -17,6 +17,7 @@ const StudentsPage = () => {
                     navigateTo={'/teacher'}
                 />
 
+
                 <StudentElement
                     fio={'Алешин Григорий Алексалрович'}
                     description={'Middle fullstack developer'}
