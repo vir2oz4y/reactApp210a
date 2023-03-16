@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from "../../../Components/Header/Header";
 import ContentBlock from "../../../Components/ContentBlock/ContentBlock";
+import AsideMenu from "./AsideMenu/AsideMenu";
+import {Outlet} from "react-router-dom";
 
 const KryuchkovNickPage = () => {
     return (
@@ -8,7 +10,9 @@ const KryuchkovNickPage = () => {
             <Header studentFio={'Крючков Николай'}/>
 
             <ContentBlock>
-                124141
+                <AsideMenu/>
+
+                <Outlet/>
             </ContentBlock>
         </div>
     );
