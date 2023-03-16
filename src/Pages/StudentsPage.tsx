@@ -16,7 +16,14 @@ const StudentsPage = () => {
                     imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
                     navigateTo={'/teacher'}
                 />
-                
+
+
+                <StudentElement
+                    fio={'Алешин Григорий Алексалрович'}
+                    description={'Middle fullstack developer'}
+                    imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
+                    navigateTo={'/student'}
+                />
 
             </Stack>
         </div>
