@@ -11,17 +11,17 @@ const StudentsPage = () => {
             <Stack direction="row" spacing={2} padding={'1em'}>
 
                 <StudentElement
-                    fio={'Крючков Николай Алексеевич'}
-                    description={'Middle fullstack developer'}
-                    imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
-                    navigateTo={'/teacher'}
+                    fio={'Сесь Надежда Владимировна'}
+                    description={'Fullstack developer'}
+                    imageSrc={'https://sun6-20.userapi.com/s/v1/ig1/yjQgheEobaUdohztWoxMfvzfJMKZ4zoYD2gv3hoyseFRMmFML82IVIzdbQOz8ZFD9JRKVt-Q.jpg?size=1176x1176&quality=96&crop=3,101,1176,1176&ava=1'}
+                    navigateTo={'SesNV'}
                 />
 
                 <StudentElement
-                    fio={'Крючков Николай Алексеевич'}
-                    description={'Middle fullstack developer'}
-                    imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
-                    navigateTo={'/teacher'}
+                    fio={'Бурлак Александр Дмитриевич'}
+                    description={'Middle developer'}
+                    imageSrc={'https://vraki.net/sites/default/files/inline/images/29_21.jpg'}
+                    navigateTo={'BurlakAD'}
                 />
 
             </Stack>
