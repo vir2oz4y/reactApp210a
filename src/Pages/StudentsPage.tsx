@@ -17,11 +17,12 @@ const StudentsPage = () => {
                     navigateTo={'/teacher'}
                 />
 
+
                 <StudentElement
-                    fio={'Крючков Николай Алексеевич'}
+                    fio={'Алешин Григорий Алексалрович'}
                     description={'Middle fullstack developer'}
                     imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
-                    navigateTo={'/teacher'}
+                    navigateTo={'/student'}
                 />
 
             </Stack>
