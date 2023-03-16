@@ -20,6 +20,13 @@ const StudentsPage = () => {
 
                 <StudentElement
 
+                    fio={'Бушманов Максим Аркадьевич'}
+                    description={'Capitan of pirate sheep'}
+                    imageSrc={'https://seeklogo.com/images/M/mugiwara-logo-303FD55C54-seeklogo.com.png'}
+                    navigateTo={'/bushmanov'}
+                    />
+
+<StudentElement
                     fio={'Аникеева Вера Сергеевна'}
                     description={"prrrr"}
                     imageSrc={'https://static.wikia.nocookie.net/442edd41-4117-4de8-bedc-db8ac6610048'}
@@ -31,7 +38,6 @@ const StudentsPage = () => {
                     description={'Middle fullstack developer'}
                     imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
                     navigateTo={'/aleshin'}
-
                 />
 
             </Stack>
