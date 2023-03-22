@@ -39,6 +39,13 @@ const StudentsPage = () => {
                 />
 
                 <StudentElement
+                    fio={'Телелинский Андрей Витальевич'}
+                    description={'average sibstrin student'}
+                    imageSrc={'https://media.tenor.com/ZuKvt4qIKdMAAAAS/monkey-lick.gif'}
+                    navigateTo={'/Telelinskiy'}
+                />
+
+                <StudentElement
                     fio={'Гайворонских Андрей Алексеевич'}
                     description={'Student'}
                     imageSrc={'https://cdn3.iconfinder.com/data/icons/avatar-set/512/Avatar02-1024.png'}

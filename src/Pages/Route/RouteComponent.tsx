@@ -39,6 +39,10 @@ import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage
 import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";
 import {default as MemePage2} from "../StudentPage/TatarnikovEgor/test2/test2page";
 
+import TelelinskiyAndreyPage from "../StudentPage/TelelinskiyAndrey/TelelinskiyAndreyPage";
+import {default as Telelinskiy1Page} from "../StudentPage/TelelinskiyAndrey/Test1/Test1Page";
+import {default as Telelinskiy2Page} from "../StudentPage/TelelinskiyAndrey/Test2/Test2Page";
+
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
@@ -56,6 +60,16 @@ const RouteComponent = () => {
 
                     <Route index element={<StudentsPage/>} />
 
+                    <Route path={'teacher'} element={<KryuchkovNickPage/>}>
+                        <Route path={'test1'} element={<TeacherTest1Page/>}/>
+                        <Route path={'test2'} element={<TeacherTest2Page/>}/>
+                    </Route>
+
+                    <Route path={'Telelinskiy'} element={<TelelinskiyAndreyPage/>}>
+                        <Route path={'Test1'} element={<Telelinskiy1Page/>} />
+                        <Route path={'Test2'} element={<Telelinskiy2Page/>} />
+                    </Route>
+
                     <Route path={'student'} element={<SviridenkoDimPage/>}>
                         <Route path={'test1'} element={<SDBTest1Page/>}/>
                         <Route path={'test2'} element={<SDBTest2Page/>}/>
@@ -69,11 +83,6 @@ const RouteComponent = () => {
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
                         <Route path={'test1'} element={<GayvoronskikhTest1Page/>} />
                         <Route path={'test2'} element={<GayvoronskikhTest2Page/>} />
-                    </Route>
-
-                    <Route path={'teacher'} element={<KryuchkovNickPage/>}>
-                        <Route path={'test1'} element={<TeacherTest1Page/>}/>
-                        <Route path={'test2'} element={<TeacherTest2Page/>}/>
                     </Route>
 
                     <Route path={'aleshin'} element={<AleshinNickPage/>}>
