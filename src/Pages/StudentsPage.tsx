@@ -8,7 +8,7 @@ const StudentsPage = () => {
     return (
         <div>
             <Header/>
-            <Stack direction="row" spacing={2} padding={'1em'}>
+            <Stack direction="row" padding={'1em'} flexWrap={'wrap'} gap={'1em'}>
 
                 <StudentElement
                     fio={'Сесь Надежда Владимировна'}

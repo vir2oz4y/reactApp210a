@@ -1,17 +1,16 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import {List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
 const AsideMenu = () => {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
-    return (<List>
+    return (
+        <List>
             <ListItem disablePadding>
                 <ListItemButton
-                onClick ={()=>navigate('test1')}
+                    onClick={() => navigate('test1')}
                 >
                     <ListItemText primary="Test 1"/>
                 </ListItemButton>

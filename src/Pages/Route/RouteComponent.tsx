@@ -8,8 +8,8 @@ import MainPage from "../MainPage";
 import StudentsPage from "../StudentsPage"
 
 import SviridenkoDimPage from "../StudentPage/SviridenkoDim/SviridenkoDimPage";
-import {default as  SDBTest1Page} from "../StudentPage/SviridenkoDim/Test1/Test1Page";
-import {default as  SDBTest2Page} from "../StudentPage/SviridenkoDim/Test2/Test2Page";
+//import {default as  SDBTest1Page} from "../StudentPage/SviridenkoDim/Test1/Test1Page";
+//import {default as  SDBTest2Page} from "../StudentPage/SviridenkoDim/Test2/Test2Page";
 
 import GayvoronskikhAndrei from "../StudentPage/GayvoronskikhAndrei/GayvoronskikhAndrei";
 import {default as GayvoronskikhTest1Page} from "../StudentPage/GayvoronskikhAndrei/Test1/Test1Page";
@@ -31,9 +31,9 @@ import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
 import {default as AnikeevaTest1Page} from "../StudentPage/AnikeevaVera/Test1/Test1";
 import {default as AnikeevaTest2Page} from "../StudentPage/AnikeevaVera/Test2/Test2";
 
-import Payzunov from "../StudentPage/Student/Payzunov";
+/*import Payzunov from "../StudentPage/Student/Payzunov";
 import {default as PayzunovTest1Page} from "../StudentPage/Student/Test 1/Test1Page";
-import {default as PayzunovTest2Page} from "../StudentPage/Student/Test 1/Test1Page";
+import {default as PayzunovTest2Page} from "../StudentPage/Student/Test 1/Test1Page";*/
 
 import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage";
 import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";
@@ -47,9 +47,9 @@ import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
 
-import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
-import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
-import {default as AleshinTest2Page} from "../StudentPage/student/Test2/Test2Page";
+//import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
+//import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
+//import {default as AleshinTest2Page} from "../StudentPage/student/Test2/Test2Page";
 
 
 const RouteComponent = () => {
@@ -71,24 +71,24 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'student'} element={<SviridenkoDimPage/>}>
-                        <Route path={'test1'} element={<SDBTest1Page/>}/>
-                        <Route path={'test2'} element={<SDBTest2Page/>}/>
+                        {/*<Route path={'test1'} element={<SDBTest1Page/>}/>
+                        <Route path={'test2'} element={<SDBTest2Page/>}/>*/}
                     </Route>                 
                     
-                    <Route path={'payzunov'} element={<Payzunov/>}>
+                    {/*<Route path={'payzunov'} element={<Payzunov/>}>
                         <Route path={'Test 1'} element={<PayzunovTest1Page/>}/>
                         <Route path={'Test 2'} element={<PayzunovTest2Page/>}/>
-                    </Route>
+                    </Route>*/}
 
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
                         <Route path={'test1'} element={<GayvoronskikhTest1Page/>} />
                         <Route path={'test2'} element={<GayvoronskikhTest2Page/>} />
                     </Route>
 
-                    <Route path={'aleshin'} element={<AleshinNickPage/>}>
+                   {/* <Route path={'aleshin'} element={<AleshinNickPage/>}>
                         <Route path={'Test1'} element={<AleshinTest1Page/>}/>
                         <Route path={'Test2'} element={<AleshinTest2Page/>}/>
-                    </Route>
+                    </Route>*/}
 
                     <Route path={'anikeeva'} element={<AnikeevaVeraPage/>} >
                         <Route path={'Test1'} element={<AnikeevaTest1Page/>} />
