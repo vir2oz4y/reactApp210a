@@ -1,21 +1,21 @@
 import React from 'react';
 import Header from "../../../Components/Header/Header";
 import ContentBlock from "../../../Components/ContentBlock/ContentBlock";
-import AsideMenu from "./AsideMenu/AsideMenu";
+import SiteMenu from "./SiteMenu/SiteMenu";
 import {Outlet} from "react-router-dom";
 
-const KryuchkovNickPage = () => {
+const BushmanovMakPage = () => {
     return (
         <div>
-            <Header studentFio={'Крючков Николай'}/>
+            <Header studentFio={'Бушманов Максим'}/>
 
             <ContentBlock>
-                <AsideMenu/>
-
+                <SiteMenu/>
                 <Outlet/>
+                Gear secando
             </ContentBlock>
         </div>
     );
 };
 
-export default KryuchkovNickPage;
+export default BushmanovMakPage;
