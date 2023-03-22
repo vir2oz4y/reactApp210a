@@ -4,7 +4,12 @@ import {
     Route, HashRouter,
 } from "react-router-dom";
 import MainPage from "../MainPage";
-import StudentsPage from "../StudentsPage";
+
+import StudentsPage from "../StudentsPage"
+
+import SviridenkoDimPage from "../StudentPage/SviridenkoDim/SviridenkoDimPage";
+import {default as  SDBTest1Page} from "../StudentPage/SviridenkoDim/Test1/Test1Page";
+import {default as  SDBTest2Page} from "../StudentPage/SviridenkoDim/Test2/Test2Page";
 
 import GayvoronskikhAndrei from "../StudentPage/GayvoronskikhAndrei/GayvoronskikhAndrei";
 import {default as GayvoronskikhTest1Page} from "../StudentPage/GayvoronskikhAndrei/Test1/Test1Page";
@@ -50,6 +55,11 @@ const RouteComponent = () => {
                 <Route path="/" element={<MainPage/>}>
 
                     <Route index element={<StudentsPage/>} />
+
+                    <Route path={'student'} element={<SviridenkoDimPage/>}>
+                        <Route path={'test1'} element={<SDBTest1Page/>}/>
+                        <Route path={'test2'} element={<SDBTest2Page/>}/>
+                    </Route>                 
                     
                     <Route path={'payzunov'} element={<Payzunov/>}>
                         <Route path={'Test 1'} element={<PayzunovTest1Page/>}/>
@@ -95,10 +105,13 @@ const RouteComponent = () => {
                         <Route path={'test1'} element={<MemePage1/>}/>
                         <Route path={'test2'} element={<MemePage2/>}/>
                     </Route>
+
                 </Route>
             </Routes>
         </HashRouter>
     );
 };
 
-    export default RouteComponent;
+
+export default RouteComponent;
+
