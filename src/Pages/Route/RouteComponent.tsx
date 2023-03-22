@@ -30,6 +30,10 @@ import Payzunov from "../StudentPage/Student/Payzunov";
 import {default as PayzunovTest1Page} from "../StudentPage/Student/Test 1/Test1Page";
 import {default as PayzunovTest2Page} from "../StudentPage/Student/Test 1/Test1Page";
 
+import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage";
+import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";
+import {default as MemePage2} from "../StudentPage/TatarnikovEgor/test2/test2page";
+
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
@@ -37,8 +41,6 @@ import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Te
 import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
 import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
 import {default as AleshinTest2Page} from "../StudentPage/student/Test2/Test2Page";
-
-
 
 
 const RouteComponent = () => {
@@ -89,7 +91,10 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<Ses2/>} />
                     </Route>
 
-
+                    <Route path={'blink'} element={<TatarnikovEgorPage/>}>
+                        <Route path={'test1'} element={<MemePage1/>}/>
+                        <Route path={'test2'} element={<MemePage2/>}/>
+                    </Route>
                 </Route>
             </Routes>
         </HashRouter>
