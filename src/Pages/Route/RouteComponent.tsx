@@ -26,6 +26,10 @@ import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
 import {default as AnikeevaTest1Page} from "../StudentPage/AnikeevaVera/Test1/Test1";
 import {default as AnikeevaTest2Page} from "../StudentPage/AnikeevaVera/Test2/Test2";
 
+import Payzunov from "../StudentPage/Student/Payzunov";
+import {default as PayzunovTest1Page} from "../StudentPage/Student/Test 1/Test1Page";
+import {default as PayzunovTest2Page} from "../StudentPage/Student/Test 1/Test1Page";
+
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
@@ -44,6 +48,11 @@ const RouteComponent = () => {
                 <Route path="/" element={<MainPage/>}>
 
                     <Route index element={<StudentsPage/>} />
+                    
+                    <Route path={'payzunov'} element={<Payzunov/>}>
+                        <Route path={'Test 1'} element={<PayzunovTest1Page/>}/>
+                        <Route path={'Test 2'} element={<PayzunovTest2Page/>}/>
+                    </Route>
 
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
                         <Route path={'test1'} element={<GayvoronskikhTest1Page/>} />
@@ -80,10 +89,11 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<Ses2/>} />
                     </Route>
 
+
                 </Route>
             </Routes>
         </HashRouter>
     );
 };
 
-export default RouteComponent;
+    export default RouteComponent;
