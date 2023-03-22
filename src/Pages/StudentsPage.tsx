@@ -17,7 +17,6 @@ const StudentsPage = () => {
                     navigateTo={'SesNV'}
                 />
 
-
                 <StudentElement
                     fio={'Бурлак Александр Дмитриевич'}
                     description={'Middle developer'}
@@ -25,19 +24,26 @@ const StudentsPage = () => {
                     navigateTo={'BurlakAD'}
                 />
 
-<StudentElement
+                <StudentElement
                     fio={'Бушманов Максим Аркадьевич'}
                     description={'Capitan of pirate sheep'}
                     imageSrc={'https://seeklogo.com/images/M/mugiwara-logo-303FD55C54-seeklogo.com.png'}
                     navigateTo={'/bushmanov'}
-                    />
+                />
 
-<StudentElement
+                <StudentElement
                     fio={'Аникеева Вера Сергеевна'}
                     description={"prrrr"}
                     imageSrc={'https://static.wikia.nocookie.net/442edd41-4117-4de8-bedc-db8ac6610048'}
                     navigateTo={'/anikeeva'}
-                    />
+                />
+
+                <StudentElement
+                    fio={'Гайворонских Андрей Алексеевич'}
+                    description={'Student'}
+                    imageSrc={'https://cdn3.iconfinder.com/data/icons/avatar-set/512/Avatar02-1024.png'}
+                    navigateTo={'/Gayvoronskikh'}
+                />
 
                 <StudentElement
                     fio={'Алешин Григорий Алексалрович'}
