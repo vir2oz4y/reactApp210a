@@ -25,7 +25,12 @@ import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/SiteMenu/Test1/Test1";
-import {default as BushmanovTest2Page} from "../StudentPage/BushmanovMak/SiteMenu/Test2/Test2";
+import { default as BushmanovTest2Page } from "../StudentPage/BushmanovMak/SiteMenu/Test2/Test2";
+
+import JabrovPage from "../StudentPage/Jabrov1/JabrovPage";
+import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
+import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
+
 
 import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
 import {default as AnikeevaTest1Page} from "../StudentPage/AnikeevaVera/Test1/Test1";
@@ -45,7 +50,9 @@ import {default as Telelinskiy2Page} from "../StudentPage/TelelinskiyAndrey/Test
 
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
-import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
+import { default as TeacherTest2Page } from "../StudentPage/KryuchkovNick/Test2/Test2Page";
+import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
+
 
 //import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
 //import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
@@ -98,6 +105,11 @@ const RouteComponent = () => {
                     <Route path={'bushmanov'} element={<BushmanovMakPage/>} >
                         <Route path={'Test1'} element={<BushmanovTest1Page/>} />
                         <Route path={'Test2'} element={<BushmanovTest2Page/>} />
+                    </Route>
+
+                    <Route path={'jabrov'} element={<JabrovPage1 />} >
+                        <Route path={'Test1'} element={<JabrovPageTest1 />} />
+                        <Route path={'Test2'} element={<JabrovPageTest2 />} />
                     </Route>
 
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>
