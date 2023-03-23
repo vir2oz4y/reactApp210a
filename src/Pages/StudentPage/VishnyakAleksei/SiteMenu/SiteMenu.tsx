@@ -21,50 +21,43 @@ const SiteMenu = () => {
                 <List>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('Category')}
-                        >
+                            onClick = {()=>navnavigate('Category')}>
                             <ListItemText primary="Category" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('Client')}
-                        >
+                            onClick = {()=>navnavigate('Client')}>
                             <ListItemText primary="Client" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('Manufacturer')}
-                        >
+                            onClick = {()=>navnavigate('Manufacturer')}>
                             <ListItemText primary="Manufacturer" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('Order')}
-                        >
+                            onClick = {()=>navnavigate('Order')}>
                             <ListItemText primary="Order" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('Product')}
-                        >
+                            onClick = {()=>navnavigate('Product')}>
                             <ListItemText primary="Product" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('Purcase')}
-                        >
-                            <ListItemText primary="Purcase" />
+                            onClick = {()=>navnavigate('Purchase')}>
+                            <ListItemText primary="Purchase" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick = {()=>navnavigate('User')}
-                        >
+                            onClick = {()=>navnavigate('User')}>
                             <ListItemText primary="User" />
                         </ListItemButton>
                     </ListItem>

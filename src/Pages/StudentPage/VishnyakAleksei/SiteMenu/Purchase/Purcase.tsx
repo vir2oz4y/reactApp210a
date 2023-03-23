@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Purcase = () => {
+const Purchase = () => {
     return (
         <div>
             fffff
@@ -8,4 +8,4 @@ const Purcase = () => {
     );
 };
 
-export default Purcase;
+export default Purchase;
