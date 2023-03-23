@@ -24,13 +24,14 @@ import {default as Ses1} from "../StudentPage/SesNV/Test1/test1page";
 import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
-import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/Категории товаров/Test1";
-import { default as BushmanovTest2Page } from "../StudentPage/BushmanovMak/Клиенты/Test2";
-import { default as BushmanovManufacturePage } from "../StudentPage/BushmanovMak/Мануфактуры/Manufacture";
-import { default as BushmanovOrderPage } from "../StudentPage/BushmanovMak/Заказы/Order";
-import { default as BushmanovProductPage } from "../StudentPage/BushmanovMak/Товары/Product";
-import { default as BushmanovPurchasePage } from "../StudentPage/BushmanovMak/Покупки/Purchase";
-import { default as BushmanovUserPage } from "../StudentPage/BushmanovMak/Пользователь/User";
+import { default as BushmanovTest1Page } from "../StudentPage/BushmanovMak/Category/Test1";
+import { default as BushmanovTest2Page } from "../StudentPage/BushmanovMak/Client/Test2";
+import { default as BushmanovManufacturePage } from "../StudentPage/BushmanovMak/Manufacture/Manufacture";
+import { default as BushmanovOrderPage } from "../StudentPage/BushmanovMak/Order/Order";
+import { default as BushmanovProductPage } from "../StudentPage/BushmanovMak/Product/Product";
+import { default as BushmanovPurchasePage } from "../StudentPage/BushmanovMak/Purchase/Purchase";
+import { default as BushmanovUserPage } from "../StudentPage/BushmanovMak/User/User";
+
 
 import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
 import {default as AnikeevaTest1Page} from "../StudentPage/AnikeevaVera/Test1/Test1";

@@ -22,27 +22,27 @@ const SiteMenu = () => {
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Test2')}>
+                    <ListItemButton onClick={() => navigate('Manufacture')}>
                         <ListItemText primary="Manufacture" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Test2')}>
+                    <ListItemButton onClick={() => navigate('Order')}>
                         <ListItemText primary="Order" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Test2')}>
+                    <ListItemButton onClick={() => navigate('Product')}>
                         <ListItemText primary="Product" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Test2')}>
+                    <ListItemButton onClick={() => navigate('Purchase')}>
                         <ListItemText primary="Purchase" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Test2')}>
+                    <ListItemButton onClick={() => navigate('User')}>
                         <ListItemText primary="User" />
                     </ListItemButton>
                 </ListItem>
