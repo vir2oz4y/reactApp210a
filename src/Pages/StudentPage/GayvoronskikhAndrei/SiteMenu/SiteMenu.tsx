@@ -18,14 +18,28 @@ const SiteMenu = () => {
                     <ListItemButton
                         onClick={() => navigate('test1')}
                     >
-                        <ListItemText primary="Test1"/>
+                        <ListItemText primary="Категории товаров"/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
                         onClick={() => navigate('test2')}
                     >
-                        <ListItemText primary="Test2"/>
+                        <ListItemText primary="Клиенты"/>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => navigate('test2')}
+                    >
+                        <ListItemText primary="test2" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => navigate('test2')}
+                    >
+                        <ListItemText primary="Клиенты" />
                     </ListItemButton>
                 </ListItem>
             </List>
