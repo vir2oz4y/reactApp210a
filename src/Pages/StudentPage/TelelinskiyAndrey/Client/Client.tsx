@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Test2Page = () => {
+const Client = () => {
     return (
         <div>
-            BRY
+            клиент
         </div>
     );
 };
 
-export default Test2Page;
+export default Client;

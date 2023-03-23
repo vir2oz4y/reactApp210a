@@ -10,8 +10,16 @@ const TelelinskiyAndreyPage = () => {
             <Header studentFio={'Телелинский Андрей'}/>
 
             <ContentBlock>
-                <SiteMenu/>
-                <Outlet/>
+                <div style={{display:'flex',gap:'lem'}}>
+                    <div style={{width:'200px'}}>
+                        <SiteMenu/>
+                    </div>
+
+                    <div style={{padding:'lem'}}>
+                        <Outlet/>
+                    </div>
+
+                </div>
             </ContentBlock>
         </div>
     );
