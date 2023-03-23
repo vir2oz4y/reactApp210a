@@ -46,6 +46,7 @@ import {default as Telelinskiy2Page} from "../StudentPage/TelelinskiyAndrey/Test
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
+import PosniyPage from '../StudentPage/PosnijArtyom/PosniyPage';
 
 //import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
 //import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
@@ -68,6 +69,11 @@ const RouteComponent = () => {
                     <Route path={'Telelinskiy'} element={<TelelinskiyAndreyPage/>}>
                         <Route path={'Test1'} element={<Telelinskiy1Page/>} />
                         <Route path={'Test2'} element={<Telelinskiy2Page/>} />
+                    </Route>
+
+                    <Route path={'Posniy'} element={<PosniyPage />}>
+                        <Route path={'Test1'} element={<PosniyPage />} />
+                        <Route path={'Test2'} element={<PosniyPage />} />
                     </Route>
 
                     <Route path={'student'} element={<SviridenkoDimPage/>}>

@@ -80,6 +80,13 @@ const StudentsPage = () => {
                     navigateTo={'/aleshin'}
                 />
 
+                <StudentElement
+                    fio={'Посный Артём Евгеньевич'}
+                    description={'Студент'}
+                    imageSrc={''}
+                    navigateTo={'Posniy'}
+                />
+
             </Stack>
         </div>
 
