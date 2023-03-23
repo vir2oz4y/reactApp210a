@@ -47,9 +47,9 @@ import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
 
-//import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
-//import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
-//import {default as AleshinTest2Page} from "../StudentPage/student/Test2/Test2Page";
+import AleshinNickPage from "../StudentPage/Aleshin/Aleshin";
+import { default as AleshinTest1Page } from "../StudentPage/Aleshin/Test1/Test1";
+import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2";
 
 
 const RouteComponent = () => {
@@ -85,10 +85,10 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<GayvoronskikhTest2Page/>} />
                     </Route>
 
-                   {/* <Route path={'aleshin'} element={<AleshinNickPage/>}>
+                    <Route path={'aleshin'} element={<AleshinNickPage/>}>
                         <Route path={'Test1'} element={<AleshinTest1Page/>}/>
                         <Route path={'Test2'} element={<AleshinTest2Page/>}/>
-                    </Route>*/}
+                    </Route>
 
                     <Route path={'anikeeva'} element={<AnikeevaVeraPage/>} >
                         <Route path={'Test1'} element={<AnikeevaTest1Page/>} />
