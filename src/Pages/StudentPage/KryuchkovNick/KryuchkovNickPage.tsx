@@ -10,9 +10,16 @@ const KryuchkovNickPage = () => {
             <Header studentFio={'Крючков Николай'}/>
 
             <ContentBlock>
-                <AsideMenu/>
+                <div style={{display:'flex', gap:'1em'}}>
+                    <div style={{width:'200px'}}>
+                        <AsideMenu />
+                    </div>
 
-                <Outlet/>
+                    <div style={{padding:'1em'}}>
+                        <Outlet />
+                    </div>
+
+                </div>
             </ContentBlock>
         </div>
     );
