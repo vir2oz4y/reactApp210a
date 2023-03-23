@@ -28,8 +28,13 @@ import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/SiteMen
 import {default as BushmanovTest2Page} from "../StudentPage/BushmanovMak/SiteMenu/Test2/Test2";
 
 import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
-import {default as AnikeevaTest1Page} from "../StudentPage/AnikeevaVera/Test1/Test1";
-import {default as AnikeevaTest2Page} from "../StudentPage/AnikeevaVera/Test2/Test2";
+import {default as AnikeevaCategory} from "../StudentPage/AnikeevaVera/Category/Category";
+import {default as AnikeevaClient} from "../StudentPage/AnikeevaVera/Client/Client";
+import {default as AnikeevaManufacturer} from "../StudentPage/AnikeevaVera/Manufacturer/Manufacturer";
+import {default as AnikeevaOrder} from "../StudentPage/AnikeevaVera/Order/Order";
+import {default as AnikeevaProduct} from "../StudentPage/AnikeevaVera/Product/Product";
+import {default as AnikeevaPurchase} from "../StudentPage/AnikeevaVera/Purchase/Purchase";
+import {default as AnikeevaUser} from "../StudentPage/AnikeevaVera/User/User";
 
 /*import Payzunov from "../StudentPage/Student/Payzunov";
 import {default as PayzunovTest1Page} from "../StudentPage/Student/Test 1/Test1Page";
@@ -91,8 +96,14 @@ const RouteComponent = () => {
                     </Route>*/}
 
                     <Route path={'anikeeva'} element={<AnikeevaVeraPage/>} >
-                        <Route path={'Test1'} element={<AnikeevaTest1Page/>} />
-                        <Route path={'Test2'} element={<AnikeevaTest2Page/>} />
+                        <Route path={'Category'} element={<AnikeevaCategory/>} />
+                        <Route path={'Client'} element={<AnikeevaClient/>} />
+                        <Route path={'Manufacturer'} element={<AnikeevaManufacturer/>} />
+                        <Route path={'Order'} element={<AnikeevaOrder/>} />
+                        <Route path={'Product'} element={<AnikeevaProduct/>} />
+                        <Route path={'Purchase'} element={<AnikeevaPurchase/>} />
+                        <Route path={'User'} element={<AnikeevaUser/>} />
+
                     </Route>
 
                     <Route path={'bushmanov'} element={<BushmanovMakPage/>} >

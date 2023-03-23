@@ -10,8 +10,18 @@ const AnikeevaVeraPage = () => {
             <Header studentFio={'Аникеева Вера'}/>
 
             <ContentBlock>
-                <SiteMenu/>
-                <Outlet/>
+                <div style = {{display: 'flex',gap: 'lem'}}>
+                    <div style  = {{width: "200px"}}>
+                        <SiteMenu />
+                    </div>
+
+                    <div style = {{padding: 'lem'}}>
+                        <Outlet/>
+                    </div>
+                </div>
+
+
+
             </ContentBlock>
         </div>
     );
