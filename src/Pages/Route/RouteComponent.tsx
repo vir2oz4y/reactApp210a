@@ -27,16 +27,12 @@ import MalahovDmitriy from "../StudentPage/MalahovDmitriy/MalahovDmitriy";
 import { default as Mal1 } from "../StudentPage/MalahovDmitriy/Test1/test1page";
 import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 
-import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
-import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/SiteMenu/Test1/Test1";
-import { default as BushmanovTest2Page } from "../StudentPage/BushmanovMak/SiteMenu/Test2/Test2";
 
 import JabrovPage from "../StudentPage/Jabrov1/JabrovPage";
 import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
 import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
 
-import { default as BushmanovTest1Page } from "../StudentPage/BushmanovMak/Category/Test1";
-import { default as BushmanovTest2Page } from "../StudentPage/BushmanovMak/Client/Test2";
+import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import { default as BushmanovManufacturePage } from "../StudentPage/BushmanovMak/Manufacture/Manufacture";
 import { default as BushmanovOrderPage } from "../StudentPage/BushmanovMak/Order/Order";
 import { default as BushmanovProductPage } from "../StudentPage/BushmanovMak/Product/Product";
@@ -68,7 +64,6 @@ import {default as TelelinskiyManufacturer} from "../StudentPage/TelelinskiyAndr
 import {default as TelelinskiyOrder} from "../StudentPage/TelelinskiyAndrey/Order/Order";
 import {default as TelelinskiyProduct} from "../StudentPage/TelelinskiyAndrey/Product/Product";
 
-import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 
 import VishnyakAlekseiPage from "../StudentPage/VishnyakAleksei/VishnyakAlekseiPage";
 import {default as VishnyakTest1Page} from "../StudentPage/VishnyakAleksei/SiteMenu/Category/Category";
@@ -79,14 +74,18 @@ import {default as VishnyakProduct} from "../StudentPage/VishnyakAleksei/SiteMen
 import {default as VishnyakPurchase} from "../StudentPage/VishnyakAleksei/SiteMenu/Purchase/Purcase";
 import {default as VishnyakUser} from "../StudentPage/VishnyakAleksei/SiteMenu/User/User";
 
+import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
-
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
+import {default as TeacherCategoryPage} from "../StudentPage/KryuchkovNick/Category/CategoryPage";
+import {default as TeacherClientPage} from "../StudentPage/KryuchkovNick/Client/ClientPage";
+import {default as TeacherManufacturePage} from "../StudentPage/KryuchkovNick/Manufacture/ManufacturePage";
+import {default as TeacherOrderPage} from "../StudentPage/KryuchkovNick/Order/OrderPage";
+import {default as TeacherProductPage} from "../StudentPage/KryuchkovNick/Product/ProductPage";
+
+
 import PosniyPage from '../StudentPage/PosnijArtyom/PosniyPage';
-
-import { default as TeacherTest2Page } from "../StudentPage/KryuchkovNick/Test2/Test2Page";
 import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
-
 
 import AleshinNickPage from "../StudentPage/Aleshin/Aleshin";
 import { default as AleshinTest1Page } from "../StudentPage/Aleshin/Test1/Test1";
@@ -115,6 +114,11 @@ const RouteComponent = () => {
                     <Route path={'teacher'} element={<KryuchkovNickPage/>}>
                         <Route path={'test1'} element={<TeacherTest1Page/>}/>
                         <Route path={'test2'} element={<TeacherTest2Page/>}/>
+                        <Route path={'category'} element={<TeacherCategoryPage/>}/>
+                        <Route path={'manufacturer'} element={<TeacherManufacturePage/>}/>
+                        <Route path={'client'} element={<TeacherClientPage/>}/>
+                        <Route path={'order'} element={<TeacherOrderPage/>}/>
+                        <Route path={'product'} element={<TeacherProductPage/>}/>
                     </Route>
 
                     <Route path={'Telelinskiy'} element={<TelelinskiyAndreyPage/>}>
@@ -162,8 +166,6 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'bushmanov'} element={<BushmanovMakPage/>} >
-                        <Route path={'Test1'} element={<BushmanovTest1Page/>} />
-                        <Route path={'Test2'} element={<BushmanovTest2Page />} />
                         <Route path={'Manufacture'} element={<BushmanovManufacturePage />} />
                         <Route path={'Order'} element={<BushmanovOrderPage />} />
                         <Route path={'Product'} element={<BushmanovProductPage />} />
