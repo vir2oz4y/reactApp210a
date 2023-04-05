@@ -8,10 +8,17 @@ const BushmanovMakPage = () => {
     return (
         <div>
             <Header studentFio={'Бушманов Максим'}/>
-
+            
             <ContentBlock>
-                <SiteMenu/>
-                <Outlet/>
+         <div style={{ display: 'flex', gap: '1em' }}>
+                    <div style={{width: '200px'}}>
+                    <SiteMenu />
+                </div>
+                    <div style={{padding: '1em'}}>
+                    <Outlet />
+                </div>
+
+            </div>
                 Gear secando
             </ContentBlock>
         </div>
