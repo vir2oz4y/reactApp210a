@@ -10,16 +10,49 @@ const SiteMenu = () => {
 
     return (
         <List>
+
             <ListItem disablePadding>
-                <ListItemButton onClick={()=>navigate('Test1')}>
-                    <ListItemText primary="Test1" />
+                <ListItemButton onClick={()=>navigate('Category')}>
+                    <ListItemText primary="Категории товаров" />
                 </ListItemButton>
             </ListItem>
+
             <ListItem disablePadding>
-                <ListItemButton onClick={()=>navigate('Test2')}>
-                    <ListItemText primary="Test2" />
+                <ListItemButton onClick={()=>navigate('Client')}>
+                    <ListItemText primary="Клиенты" />
                 </ListItemButton>
             </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Manufacturer')}>
+                    <ListItemText primary="Мануфактуры" />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Order')}>
+                    <ListItemText primary="Заказы" />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Product')}>
+                    <ListItemText primary="Товары" />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Purchase')}>
+                    <ListItemText primary="Корзина" />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('User')}>
+                    <ListItemText primary="Пользователь" />
+                </ListItemButton>
+            </ListItem>
+
         </List>
 
     );
