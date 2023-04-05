@@ -49,9 +49,9 @@ import {default as AnikeevaProduct} from "../StudentPage/AnikeevaVera/Product/Pr
 import {default as AnikeevaPurchase} from "../StudentPage/AnikeevaVera/Purchase/Purchase";
 import {default as AnikeevaUser} from "../StudentPage/AnikeevaVera/User/User";
 
-/*import Payzunov from "../StudentPage/Student/Payzunov";
-import {default as PayzunovTest1Page} from "../StudentPage/Student/Test 1/Test1Page";
-import {default as PayzunovTest2Page} from "../StudentPage/Student/Test 1/Test1Page";*/
+import Payzunov from "../StudentPage/Payzunov/payzunov";
+import {default as PayzunovTest1Page} from "../StudentPage/Payzunov/Test1/Test1Page";
+import {default as PayzunovTest2Page} from "../StudentPage/Payzunov/Test2/Test2Page";
 
 import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage";
 import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";
@@ -116,10 +116,10 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<SDBTest2Page/>}/>*/}
                     </Route>                 
                     
-                    {/*<Route path={'payzunov'} element={<Payzunov/>}>
-                        <Route path={'Test 1'} element={<PayzunovTest1Page/>}/>
-                        <Route path={'Test 2'} element={<PayzunovTest2Page/>}/>
-                    </Route>*/}
+                    {<Route path={'payzunov'} element={<Payzunov/>}>
+                        <Route path={'Test1'} element={<PayzunovTest1Page/>}/>
+                        <Route path={'Test2'} element={<PayzunovTest2Page/>}/>
+                    </Route>}
 
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
                         <Route path={'test1'} element={<GayvoronskikhTest1Page/>} />
