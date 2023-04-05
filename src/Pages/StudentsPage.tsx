@@ -101,6 +101,13 @@ const StudentsPage = () => {
                 />
 
                 <StudentElement
+                    fio={'Посный Артём Евгеньевич'}
+                    description={'Студент'}
+                    imageSrc={''}
+                    navigateTo={'Posniy'}
+                />
+                    
+                <StudentElement    
                     fio={'Малахов Дмитрий Юрьевич'}
                     description={'праельный выбор'}
                     imageSrc={'https://kartinkin.net/uploads/posts/2022-12/1670281243_63-kartinkin-net-p-pikselnie-kartinki-genshin-krasivo-64.png'}

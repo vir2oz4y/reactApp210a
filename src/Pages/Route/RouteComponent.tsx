@@ -77,6 +77,10 @@ import {default as VishnyakPurchase} from "../StudentPage/VishnyakAleksei/SiteMe
 import {default as VishnyakUser} from "../StudentPage/VishnyakAleksei/SiteMenu/User/User";
 
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
+
+import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
+import PosniyPage from '../StudentPage/PosnijArtyom/PosniyPage';
+
 import { default as TeacherTest2Page } from "../StudentPage/KryuchkovNick/Test2/Test2Page";
 import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
 
@@ -113,6 +117,11 @@ const RouteComponent = () => {
                     <Route path={'Telelinskiy'} element={<TelelinskiyAndreyPage/>}>
                         <Route path={'Test1'} element={<Telelinskiy1Page/>} />
                         <Route path={'Test2'} element={<Telelinskiy2Page/>} />
+                    </Route>
+
+                    <Route path={'Posniy'} element={<PosniyPage />}>
+                        <Route path={'Test1'} element={<PosniyPage />} />
+                        <Route path={'Test2'} element={<PosniyPage />} />
                     </Route>
 
                     <Route path={'student'} element={<SviridenkoDimPage/>}>
