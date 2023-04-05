@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Test2Page = () => {
+const UserPage = () => {
     return (
         <div>
-            Gear fou
+            Это user
         </div>
     );
 };
 
-export default Test2Page;
+export default UserPage;
