@@ -21,7 +21,11 @@ import {default as Burlak2} from "../StudentPage/BurlakAD/Test2/test2page";
 
 import SesNV from "../StudentPage/SesNV/SesNV";
 import {default as Ses1} from "../StudentPage/SesNV/Test1/test1page";
-import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";
+import { default as Ses2 } from "../StudentPage/SesNV/Test2/test2page";
+
+import MalahovDmitriy from "../StudentPage/MalahovDmitriy/MalahovDmitriy";
+import { default as Mal1 } from "../StudentPage/MalahovDmitriy/Test1/test1page";
+import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/SiteMenu/Test1/Test1";
@@ -165,6 +169,10 @@ const RouteComponent = () => {
                     <Route path={'SesNV'} element={<SesNV/>} >
                         <Route path={'test1'} element={<Ses1/>} />
                         <Route path={'test2'} element={<Ses2/>} />
+                    </Route>
+                    <Route path={'MalahovDmitriy'} element={<MalahovDmitriy />} >
+                        <Route path={'test1'} element={<Mal1 />} />
+                        <Route path={'test2'} element={<Mal2 />} />
                     </Route>
 
                     <Route path={'blink'} element={<TatarnikovEgorPage/>}>
