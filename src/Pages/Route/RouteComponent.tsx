@@ -62,8 +62,11 @@ import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1pag
 import {default as MemePage2} from "../StudentPage/TatarnikovEgor/test2/test2page";
 
 import TelelinskiyAndreyPage from "../StudentPage/TelelinskiyAndrey/TelelinskiyAndreyPage";
-import {default as Telelinskiy1Page} from "../StudentPage/TelelinskiyAndrey/Test1/Test1Page";
-import {default as Telelinskiy2Page} from "../StudentPage/TelelinskiyAndrey/Test2/Test2Page";
+import {default as TelelinskiyCategory} from "../StudentPage/TelelinskiyAndrey/Category/Category";
+import {default as TelelinskiyClient} from "../StudentPage/TelelinskiyAndrey/Client/Client";
+import {default as TelelinskiyManufacturer} from "../StudentPage/TelelinskiyAndrey/Manufacturer/Manufacturer";
+import {default as TelelinskiyOrder} from "../StudentPage/TelelinskiyAndrey/Order/Order";
+import {default as TelelinskiyProduct} from "../StudentPage/TelelinskiyAndrey/Product/Product";
 
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 
@@ -115,8 +118,11 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'Telelinskiy'} element={<TelelinskiyAndreyPage/>}>
-                        <Route path={'Test1'} element={<Telelinskiy1Page/>} />
-                        <Route path={'Test2'} element={<Telelinskiy2Page/>} />
+                        <Route path={'Category'} element={<TelelinskiyCategory/>} />
+                        <Route path={'Client'} element={<TelelinskiyClient/>} />
+                        <Route path={'Manufacturer'} element={<TelelinskiyManufacturer/>} />
+                        <Route path={'Order'} element={<TelelinskiyOrder/>} />
+                        <Route path={'Product'} element={<TelelinskiyProduct/>} />
                     </Route>
 
                     <Route path={'Posniy'} element={<PosniyPage />}>
