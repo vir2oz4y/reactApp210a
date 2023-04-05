@@ -44,12 +44,23 @@ import {default as Telelinskiy1Page} from "../StudentPage/TelelinskiyAndrey/Test
 import {default as Telelinskiy2Page} from "../StudentPage/TelelinskiyAndrey/Test2/Test2Page";
 
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
+
+import VishnyakAlekseiPage from "../StudentPage/VishnyakAleksei/VishnyakAlekseiPage";
+import {default as VishnyakTest1Page} from "../StudentPage/VishnyakAleksei/SiteMenu/Category/Category";
+import {default as VishnyakTest2Page} from "../StudentPage/VishnyakAleksei/SiteMenu/Client/Client";
+import {default as VishnyakManufacturer} from "../StudentPage/VishnyakAleksei/SiteMenu/Manufacturer/Manufacturer";
+import {default as VishnyakOrder} from "../StudentPage/VishnyakAleksei/SiteMenu/Order/Order";
+import {default as VishnyakProduct} from "../StudentPage/VishnyakAleksei/SiteMenu/Product/Product";
+import {default as VishnyakPurchase} from "../StudentPage/VishnyakAleksei/SiteMenu/Purchase/Purcase";
+import {default as VishnyakUser} from "../StudentPage/VishnyakAleksei/SiteMenu/User/User";
+
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
 import {default as TeacherTest2Page} from "../StudentPage/KryuchkovNick/Test2/Test2Page";
 
 //import AleshinNickPage from "../StudentPage/student/AleshinNickPage";
 //import {default as AleshinTest1Page} from "../StudentPage/student/Test1/Test1Page";
 //import {default as AleshinTest2Page} from "../StudentPage/student/Test2/Test2Page";
+
 
 
 const RouteComponent = () => {
@@ -59,6 +70,16 @@ const RouteComponent = () => {
                 <Route path="/" element={<MainPage/>}>
 
                     <Route index element={<StudentsPage/>} />
+                    
+                    <Route path={'vishnyak'} element={<VishnyakAlekseiPage/>}>
+                        <Route path={'Category'} element={<VishnyakTest1Page/>}/>
+                        <Route path={'Client'} element={<VishnyakTest2Page/>}/>
+                        <Route path={'Manufacturer'} element={<VishnyakManufacturer/>}/>
+                        <Route path={'Order'} element={<VishnyakOrder/>}/>
+                        <Route path={'Product'} element={<VishnyakProduct/>}/>
+                        <Route path={'Purchase'} element={<VishnyakPurchase/>}/>
+                        <Route path={'User'} element={<VishnyakUser/>}/>
+                    </Route>
 
                     <Route path={'teacher'} element={<KryuchkovNickPage/>}>
                         <Route path={'test1'} element={<TeacherTest1Page/>}/>
@@ -114,6 +135,7 @@ const RouteComponent = () => {
                         <Route path={'test1'} element={<MemePage1/>}/>
                         <Route path={'test2'} element={<MemePage2/>}/>
                     </Route>
+
 
                 </Route>
             </Routes>
