@@ -17,6 +17,12 @@ const StudentsPage = () => {
                     navigateTo={'/teacher'}
                 />
                 
+                 <StudentElement
+                    fio={'Вишняк Алексей Евгеньевич'}
+                    description={'I am a student'}
+                    imageSrc={'https://webmg.ru/wp-content/uploads/2022/01/55-20220103_145806.jpg'}
+                    navigateTo={'/vishnyak'}
+                />
 
                 <StudentElement
                     fio={'Сесь Надежда Владимировна'}
@@ -24,7 +30,6 @@ const StudentsPage = () => {
                     imageSrc={'https://sun6-20.userapi.com/s/v1/ig1/yjQgheEobaUdohztWoxMfvzfJMKZ4zoYD2gv3hoyseFRMmFML82IVIzdbQOz8ZFD9JRKVt-Q.jpg?size=1176x1176&quality=96&crop=3,101,1176,1176&ava=1'}
                     navigateTo={'SesNV'}
                 />
-
                 <StudentElement
                     fio={'Бурлак Александр Дмитриевич'}
                     description={'Middle developer'}
