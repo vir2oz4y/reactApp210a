@@ -3,7 +3,7 @@ import React from 'react';
 const Test2Page = () => {
     return (
         <div>
-            А это тест 2
+            Gear fou
         </div>
     );
 };

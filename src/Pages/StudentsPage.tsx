@@ -11,17 +11,37 @@ const StudentsPage = () => {
             <Stack direction="row" padding={'1em'} flexWrap={'wrap'} gap={'1em'}>
 
                 <StudentElement
+                    fio={'Крючков Николай'}
+                    description={'Middle fullstack developer'}
+                    imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
+                    navigateTo={'/teacher'}
+                />
+                
+                 <StudentElement
+                    fio={'Вишняк Алексей Евгеньевич'}
+                    description={'I am a student'}
+                    imageSrc={'https://webmg.ru/wp-content/uploads/2022/01/55-20220103_145806.jpg'}
+                    navigateTo={'/vishnyak'}
+                />
+
+                <StudentElement
                     fio={'Сесь Надежда Владимировна'}
                     description={'Fullstack developer'}
                     imageSrc={'https://sun6-20.userapi.com/s/v1/ig1/yjQgheEobaUdohztWoxMfvzfJMKZ4zoYD2gv3hoyseFRMmFML82IVIzdbQOz8ZFD9JRKVt-Q.jpg?size=1176x1176&quality=96&crop=3,101,1176,1176&ava=1'}
                     navigateTo={'SesNV'}
                 />
-
                 <StudentElement
                     fio={'Бурлак Александр Дмитриевич'}
                     description={'Middle developer'}
                     imageSrc={'https://vraki.net/sites/default/files/inline/images/29_21.jpg'}
                     navigateTo={'BurlakAD'}
+                />
+
+                <StudentElement
+                    fio={'Жабров Никита Владимирович'}
+                    description={'Я КОМЕНТИЛ'}
+                    imageSrc={'https://vraki.net/sites/default/files/inline/images/29_21.jpg'}
+                    navigateTo={'/jabrov'}
                 />
 
                 <StudentElement
@@ -74,8 +94,8 @@ const StudentsPage = () => {
                 />
                     
                 <StudentElement
-                    fio={'Алешин Григорий Алексалрович'}
-                    description={'Middle fullstack developer'}
+                    fio={'Алешин Григорий Александрович'}
+                    description={'qwertyper'}
                     imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
                     navigateTo={'/aleshin'}
                 />
@@ -85,6 +105,13 @@ const StudentsPage = () => {
                     description={'Студент'}
                     imageSrc={''}
                     navigateTo={'Posniy'}
+                />
+                    
+                <StudentElement    
+                    fio={'Малахов Дмитрий Юрьевич'}
+                    description={'праельный выбор'}
+                    imageSrc={'https://kartinkin.net/uploads/posts/2022-12/1670281243_63-kartinkin-net-p-pikselnie-kartinki-genshin-krasivo-64.png'}
+                    navigateTo={'/MalahovDmitriy'}
                 />
 
             </Stack>

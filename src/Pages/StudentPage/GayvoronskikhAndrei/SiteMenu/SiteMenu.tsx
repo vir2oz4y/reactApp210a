@@ -18,15 +18,50 @@ const SiteMenu = () => {
                     <ListItemButton
                         onClick={() => navigate('test1')}
                     >
-                        <ListItemText primary="Test1"/>
+                        <ListItemText primary="Category"/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
                         onClick={() => navigate('test2')}
                     >
-                        <ListItemText primary="Test2"/>
+                        <ListItemText primary="Client"/>
                     </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => navigate('test2')}
+                    >
+                        <ListItemText primary="Manufacturer" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => navigate('test2')}
+                    >
+                        <ListItemText primary="Order" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => navigate('test2')}
+                    >
+                        <ListItemText primary="Product" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => navigate('test2')}
+                    >
+                        <ListItemText primary="Purchase" />
+                    </ListItemButton>
+                    <ListItem disablePadding>
+                        <ListItemButton
+                            onClick={() => navigate('test2')}
+                        >
+                            <ListItemText primary="User" />
+                        </ListItemButton>
+                    </ListItem>
                 </ListItem>
             </List>
         </div>

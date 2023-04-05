@@ -3,7 +3,7 @@ import React from 'react';
 const Test1Page = () => {
     return (
         <div>
-            Это тест 1
+            G-8
         </div>
     );
 };
