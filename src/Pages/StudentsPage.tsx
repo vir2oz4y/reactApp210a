@@ -94,8 +94,8 @@ const StudentsPage = () => {
                 />
                     
                 <StudentElement
-                    fio={'Алешин Григорий Алексалрович'}
-                    description={'Middle fullstack developer'}
+                    fio={'Алешин Григорий Александрович'}
+                    description={'qwertyper'}
                     imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
                     navigateTo={'/aleshin'}
                 />
