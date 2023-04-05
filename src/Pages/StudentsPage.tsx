@@ -38,6 +38,13 @@ const StudentsPage = () => {
                 />
 
                 <StudentElement
+                    fio={'Жабров Никита Владимирович'}
+                    description={'Я КОМЕНТИЛ'}
+                    imageSrc={'https://vraki.net/sites/default/files/inline/images/29_21.jpg'}
+                    navigateTo={'/jabrov'}
+                />
+
+                <StudentElement
                     fio={'Бушманов Максим Аркадьевич'}
                     description={'Capitan of pirate sheep'}
                     imageSrc={'https://seeklogo.com/images/M/mugiwara-logo-303FD55C54-seeklogo.com.png'}
