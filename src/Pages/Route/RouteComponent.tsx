@@ -13,7 +13,14 @@ import SviridenkoDimPage from "../StudentPage/SviridenkoDim/SviridenkoDimPage";
 
 import GayvoronskikhAndrei from "../StudentPage/GayvoronskikhAndrei/GayvoronskikhAndrei";
 import {default as GayvoronskikhTest1Page} from "../StudentPage/GayvoronskikhAndrei/Test1/Test1Page";
-import  {default as GayvoronskikhTest2Page} from "../StudentPage/GayvoronskikhAndrei/Test2/Test2Page";
+import { default as GayvoronskikhTest2Page } from "../StudentPage/GayvoronskikhAndrei/Test2/Test2Page";
+import { default as GayvoronskikhCategoryPage} from "../StudentPage/GayvoronskikhAndrei/Category/CategoryPage";
+import { default as GayvoronskikhClientPage } from "../StudentPage/GayvoronskikhAndrei/Client/ClientPage";
+import { default as GayvoronskikhManufacturerPage } from "../StudentPage/GayvoronskikhAndrei/Manufacturer/ManufacturerPage";
+import { default as GayvoronskikhOrderPage } from "../StudentPage/GayvoronskikhAndrei/Order/OrderPage";
+import { default as GayvoronskikhProductPage } from "../StudentPage/GayvoronskikhAndrei/Product/ProductPage";
+import { default as GayvoronskikhPurhausePage } from "../StudentPage/GayvoronskikhAndrei/Purhause/PurhausePage";
+import { default as GayvoronskikhUserPage } from "../StudentPage/GayvoronskikhAndrei/User/UserPage";
 
 import BurlakAD from "../StudentPage/BurlakAD/BurlakAD";
 import {default as Burlak1} from "../StudentPage/BurlakAD/Test1/test1page";
@@ -82,7 +89,14 @@ const RouteComponent = () => {
 
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
                         <Route path={'test1'} element={<GayvoronskikhTest1Page/>} />
-                        <Route path={'test2'} element={<GayvoronskikhTest2Page/>} />
+                        <Route path={'test2'} element={<GayvoronskikhTest2Page />} />
+                        <Route path={'category'} element={<GayvoronskikhCategoryPage />} />
+                        <Route path={'client'} element={<GayvoronskikhClientPage />} />
+                        <Route path={'manufacturer'} element={<GayvoronskikhManufacturerPage />} />
+                        <Route path={'order'} element={<GayvoronskikhOrderPage />} />
+                        <Route path={'product'} element={<GayvoronskikhProductPage />} />
+                        <Route path={'purhause'} element={<GayvoronskikhPurhausePage />} />
+                        <Route path={'user'} element={<GayvoronskikhUserPage />} />
                     </Route>
 
                    {/* <Route path={'aleshin'} element={<AleshinNickPage/>}>

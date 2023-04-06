@@ -16,48 +16,48 @@ const SiteMenu = () => {
             <List>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test1')}
+                        onClick={() => navigate('category')}
                     >
                         <ListItemText primary="Category"/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('client')}
                     >
                         <ListItemText primary="Client"/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('manufacturer')}
                     >
                         <ListItemText primary="Manufacturer" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('order')}
                     >
                         <ListItemText primary="Order" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('product')}
                     >
                         <ListItemText primary="Product" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('purhause')}
                     >
                         <ListItemText primary="Purchase" />
                     </ListItemButton>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick={() => navigate('test2')}
+                            onClick={() => navigate('user')}
                         >
                             <ListItemText primary="User" />
                         </ListItemButton>
