@@ -52,6 +52,13 @@ import {default as AnikeevaUser} from "../StudentPage/AnikeevaVera/User/User";
 import Payzunov from "../StudentPage/Payzunov/payzunov";
 import {default as PayzunovTest1Page} from "../StudentPage/Payzunov/Test1/Test1Page";
 import {default as PayzunovTest2Page} from "../StudentPage/Payzunov/Test2/Test2Page";
+import {default as PayzunovCategoryPage} from "../StudentPage/Payzunov/Category/CategoryPage";
+import {default as PayzunovClientPage} from "../StudentPage/Payzunov/Client/Client";
+import {default as PayzunovManufacturerPage} from "../StudentPage/Payzunov/Manufacturer/Manufacturer";
+import {default as PayzunovMenuPage} from "../StudentPage/Payzunov/Menu/Menu";
+import {default as PayzunovOrderPage} from "../StudentPage/Payzunov/Order/Order";
+import {default as PayzunovProductPage} from "../StudentPage/Payzunov/Product/ProductPage";
+import {default as PayzunovPurhausePage} from "../StudentPage/Payzunov/Purhause/Purhause";
 
 import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage";
 import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";
@@ -142,6 +149,14 @@ const RouteComponent = () => {
                     {<Route path={'payzunov'} element={<Payzunov/>}>
                         <Route path={'Test1'} element={<PayzunovTest1Page/>}/>
                         <Route path={'Test2'} element={<PayzunovTest2Page/>}/>
+                        <Route path={'category'} element={<PayzunovCategoryPage/>}/>
+                        <Route path={'client'} element={<PayzunovClientPage/>}/>
+                        <Route path={'manufacturer'} element={<PayzunovManufacturerPage/>}/>
+                        <Route path={'menu'} element={<PayzunovMenuPage/>}/>
+                        <Route path={'order'} element={<PayzunovOrderPage/>}/>
+                        <Route path={'product'} element={<PayzunovProductPage/>}/>
+                        <Route path={'purhause'} element={<PayzunovPurhausePage/>}/>
+
                     </Route>}
 
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
