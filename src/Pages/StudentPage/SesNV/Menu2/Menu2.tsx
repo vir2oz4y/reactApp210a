@@ -15,7 +15,7 @@ const Menu2 = () => {
         <List>
             <ListItem disablePadding>
                 <ListItemButton
-                    onClick={()=>navigate('Test1')}
+                    onClick={()=>navigate('category')}
                 >
                     <ListItemText primary="Kategory tovarov"/>
                 </ListItemButton>

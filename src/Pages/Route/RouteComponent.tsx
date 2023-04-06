@@ -20,7 +20,8 @@ import {default as Burlak1} from "../StudentPage/BurlakAD/Test1/test1page";
 import {default as Burlak2} from "../StudentPage/BurlakAD/Test2/test2page";
 
 import SesNV from "../StudentPage/SesNV/SesNV";
-import {default as Ses1} from "../StudentPage/SesNV/Test1/test1page";
+import { default as Ses1 } from "../StudentPage/SesNV/Test1/test1page";
+import { default as SesKategoyPage } from "../StudentPage/SesNV/Kategory/Kategory";
 import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
@@ -106,6 +107,7 @@ const RouteComponent = () => {
                     </Route>
                     
                     <Route path={'SesNV'} element={<SesNV/>} >
+                        <Route path={'category'} element={<SesKategoyPage/>} />
                         <Route path={'test1'} element={<Ses1/>} />
                         <Route path={'test2'} element={<Ses2/>} />
                     </Route>
