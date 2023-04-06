@@ -93,6 +93,7 @@ import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2"
 
 
 
+
 const RouteComponent = () => {
     return (
         <HashRouter>
@@ -196,6 +197,8 @@ const RouteComponent = () => {
                         <Route path={'test1'} element={<MemePage1/>}/>
                         <Route path={'test2'} element={<MemePage2/>}/>
                     </Route>
+
+                    
 
 
                 </Route>
