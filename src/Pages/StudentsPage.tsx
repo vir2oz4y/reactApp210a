@@ -82,7 +82,7 @@ const StudentsPage = () => {
 
                 <StudentElement
                     fio={'Малахов Дмитрий Юрьевич'}
-                    description={'праельный выбор'}
+                    description={'Правельный выбор'}
                     imageSrc={'https://kartinkin.net/uploads/posts/2022-12/1670281243_63-kartinkin-net-p-pikselnie-kartinki-genshin-krasivo-64.png'}
                     navigateTo={'/MalahovDmitriy'}
                 />

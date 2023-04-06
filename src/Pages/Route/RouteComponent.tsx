@@ -25,6 +25,7 @@ import { default as Ses2 } from "../StudentPage/SesNV/Test2/test2page";
 
 import MalahovDmitriy from "../StudentPage/MalahovDmitriy/MalahovDmitriy";
 import { default as Mal1 } from "../StudentPage/MalahovDmitriy/Test1/test1page";
+import { default as Malahov_Kategorii } from "../StudentPage/MalahovDmitriy/Kategorii/Kategorii";
 import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
@@ -114,6 +115,7 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<Ses2/>} />
                     </Route>
                     <Route path={'MalahovDmitriy'} element={<MalahovDmitriy />} >
+                        <Route path={'Kategorii'} element={<Malahov_Kategorii />} />
                         <Route path={'test1'} element={<Mal1 />} />
                         <Route path={'test2'} element={<Mal2 />} />
                     </Route>
