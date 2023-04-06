@@ -10,8 +10,16 @@ const SviridenkoDimPage = () => {
             <Header studentFio={'Свириденко Дмитрий'}/>
 
             <ContentBlock>
-                <AsideMenu/>
-                <Outlet/>
+                <div style={{ display: 'flex', gap: 'lem' }}>
+                    <div style={{ width: '200px' }}>
+                        <AsideMenu />
+                    </div>
+
+                    <div style={{ padding: 'lem' }}>
+                        <Outlet />
+                    </div>
+                </div >
+
             </ContentBlock>
         </div>
     );
