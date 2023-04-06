@@ -33,6 +33,7 @@ import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
 import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
+import { default as BushmanovCategoryPage } from "../StudentPage/BushmanovMak/Category/Test1";
 import { default as BushmanovManufacturePage } from "../StudentPage/BushmanovMak/Manufacture/Manufacture";
 import { default as BushmanovOrderPage } from "../StudentPage/BushmanovMak/Order/Order";
 import { default as BushmanovProductPage } from "../StudentPage/BushmanovMak/Product/Product";
@@ -165,7 +166,8 @@ const RouteComponent = () => {
 
                     </Route>
 
-                    <Route path={'bushmanov'} element={<BushmanovMakPage/>} >
+                    <Route path={'bushmanov'} element={<BushmanovMakPage />} >
+                        <Route path={'Category'} element={<BushmanovCategoryPage />} />
                         <Route path={'Manufacture'} element={<BushmanovManufacturePage />} />
                         <Route path={'Order'} element={<BushmanovOrderPage />} />
                         <Route path={'Product'} element={<BushmanovProductPage />} />

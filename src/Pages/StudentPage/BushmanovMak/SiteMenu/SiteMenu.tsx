@@ -12,7 +12,7 @@ const SiteMenu = () => {
         <div>
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={()=>navigate('Test1')}>
+                    <ListItemButton onClick={()=>navigate('Category')}>
                         <ListItemText primary="Category" />
                     </ListItemButton>
                 </ListItem>
