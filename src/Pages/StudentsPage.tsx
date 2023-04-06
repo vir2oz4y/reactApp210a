@@ -40,7 +40,7 @@ const StudentsPage = () => {
                 <StudentElement
                     fio={'Жабров Никита Владимирович'}
                     description={'Я КОМЕНТИЛ'}
-                    imageSrc={'https://vraki.net/sites/default/files/inline/images/29_21.jpg'}
+                    imageSrc={'https://media.tenor.com/3rvy5dfUPlsAAAAi/among-us-twerking.gif'}
                     navigateTo={'/jabrov'}
                 />
 

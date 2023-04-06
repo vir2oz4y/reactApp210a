@@ -28,9 +28,14 @@ import { default as Mal1 } from "../StudentPage/MalahovDmitriy/Test1/test1page";
 import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 
 
-import JabrovPage from "../StudentPage/Jabrov1/JabrovPage";
+import JabrovPage1 from "../StudentPage/Jabrov1/JabrovPage";
 import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
 import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
+import { default as JabrovCategory } from "../StudentPage/Jabrov1/Category/Category";
+import { default as JabrovTovar } from "../StudentPage/Jabrov1/Tovar/tovar";
+import { default as JabrovZakaz } from "../StudentPage/Jabrov1/Zakaz/zakaz";
+import { default as JabrovClients } from "../StudentPage/Jabrov1/Clients/Clients";
+import { default as JabrovPostavshiki } from "../StudentPage/Jabrov1/Postavshiki/Postavshiki";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import { default as BushmanovManufacturePage } from "../StudentPage/BushmanovMak/Manufacture/Manufacture";
@@ -85,7 +90,6 @@ import {default as TeacherProductPage} from "../StudentPage/KryuchkovNick/Produc
 
 
 import PosniyPage from '../StudentPage/PosnijArtyom/PosniyPage';
-import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
 
 import AleshinNickPage from "../StudentPage/Aleshin/Aleshin";
 import { default as AleshinTest1Page } from "../StudentPage/Aleshin/Test1/Test1";
@@ -176,6 +180,11 @@ const RouteComponent = () => {
                     <Route path={'jabrov'} element={<JabrovPage1 />} >
                         <Route path={'Test1'} element={<JabrovPageTest1 />} />
                         <Route path={'Test2'} element={<JabrovPageTest2 />} />
+                        <Route path={'Category'} element={<JabrovCategory />} />
+                        <Route path={'tovar'} element={<JabrovTovar />} />
+                        <Route path={'zakaz'} element={<JabrovZakaz />} />
+                        <Route path={'Clients'} element={<JabrovClients />} />
+                        <Route path={'Postavshiki'} element={<JabrovPostavshiki />} />
                     </Route>
 
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>
