@@ -7,12 +7,19 @@ import { Outlet } from "react-router-dom";
 const JabrovPage = () => {
     return (
         <div>
-            <Header studentFio={'Zhabrov Nikita'} />
+            <Header studentFio={'Жабров Никита'}/>
 
             <ContentBlock>
-                <SiteMenu />
-                <Outlet />
-                
+                <div style={{ display: 'flex', gap: '1em' }}>
+                    <div style={{width: '200px'}}>
+                        <SiteMenu />
+                    </div>
+                    <div style={{padding: '1em', width:'100%'}}>
+                        <Outlet />
+                    </div>
+
+                </div>
+                Gear secando
             </ContentBlock>
         </div>
     );
