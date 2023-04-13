@@ -14,7 +14,7 @@ const BushmanovMakPage = () => {
                     <div style={{width: '200px'}}>
                     <SiteMenu />
                 </div>
-                    <div style={{padding: '1em'}}>
+                    <div style={{padding: '1em', width: '100%'}}>
                     <Outlet />
                 </div>
 
