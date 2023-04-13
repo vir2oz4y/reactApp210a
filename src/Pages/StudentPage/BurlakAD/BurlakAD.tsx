@@ -10,8 +10,15 @@ const BurlakAD = () => {
             <Header studentFio={'Бурлак Александр'}/>
 
             <ContentBlock>
-                <Menu/>
-                <Outlet/>
+                <div style={{display:'flex',gap:'1em'}}>
+                    <div style={{width:'200px'}}>
+                        <Menu />
+                    </div>
+
+                    <div style={{padding:'1em'}}>
+                        <Outlet />
+                    </div>
+                </div>
             </ContentBlock>
         </div>
     );
