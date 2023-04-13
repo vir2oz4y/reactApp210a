@@ -18,6 +18,7 @@ const CategoryPage = () => {
         },
     ];
 
+
     const rows = [
         { id: 1, name: 'category 1' },
         { id: 2, name: 'category 2' },

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
+import MalahovDY from "../../../../Components/Malahov/MalahovDY/MalahovDY";
+import {Categorii} from "./models";
 
 const CategoryPage = () => {
     const columns: GridColDef[] = [
@@ -25,7 +27,8 @@ const CategoryPage = () => {
                         Edit
                         </Button>
                     <Button color={'primary'}
-                        variant={'contained'}>
+                        variant={'contained'}
+                        onClick={()=>onDeleteClick(e.row.id)}>
                         Delete
                         </Button>
                 </div>
@@ -33,7 +36,12 @@ const CategoryPage = () => {
         },
     ];
 
-    const rows = [
+    const  onDeleteClick = (id:number)=>{
+        setCategories(prev=>
+            prev.filter(el=>el.id !== id))
+    }
+
+    const [CategoryPage,setCategories] = useState<Categorii[]>([
         { id: 1, name: 'category 1' },
         { id: 2, name: 'category 2' },
         { id: 3, name: 'category 3' },
@@ -41,14 +49,39 @@ const CategoryPage = () => {
         { id: 5, name: 'category 5' },
         { id: 6, name: 'category 6' },
         { id: 7, name: 'category 7' },
-    ];
+    ])
     return (
+        <div>
+            <div>
+                <h1>Категории</h1>
+                <div
+                style={{
+                    display:'flex',
+                    justifyContent:'space-between',
+                    alignItems:'center'
+                }}>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}>
+                        Добавить категорию
+                    </Button>
+                </div>
+            </div>
+            <MalahovDY
+                open={true}
+                onClose={()=>{}}
+                title={'создание категории'}>
+                <div>
+                    Создание категории
+                </div>
+            </MalahovDY>
         <Box sx={{ height: '65vh', width: '100%' }}>
             <DataGrid
-                rows={rows}
+                rows={CategoryPage}
                 columns={columns}                                
             />
         </Box>
+    </div>
     )
 }
 export default CategoryPage;
