@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 const AleshinPage = () => {
     return (
         <div>
-            <Header studentFio={'Àëåøèí Ãğèãîğèé'} />
+            <Header studentFio={'Aleshin Grigory'} />
 
             <ContentBlock>
 
@@ -16,8 +16,7 @@ const AleshinPage = () => {
                         <SiteMenu />
                     </div>
 
-
-                    <div>
+                    <div style={{ padding: '1em', width: '100%' } }>
                         <Outlet />
                     </div>
                 </div>
