@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
+import {Kategory} from "./model";
+import SviridenkoDDD from "../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import Button from "@mui/material/Button";
 
 
-const kategoryproduct = () => {
+const Kategoryproduct = () => {
 
     const columns: GridColDef[] = [
 
@@ -25,21 +28,32 @@ const kategoryproduct = () => {
                 return <div>
                     <button
                         color={'primary'}
-                        variant={'contained'}>
+                        variant={'contained'}
+                    >
 
-                        Удалить
-                        </button>
+                      Edit
+                    </button>
 
-                    <button>
-                        Редактировать
-                        </button>
+                    <button
+                       color={'primary'}
+                        variant ={'contained'}
+                        onClick={()=>OnDeleteClick(e.row.id)}
+                        >
+                        Delete
+                    </button>
                 </div>
             },
         }
         
     ];
 
-    const rows = [
+    const OnDeleteClick = (id:number)=>{
+        setKategories(prev =>
+            prev.filter(el=>el.id != id)
+        )
+    }
+
+    const [kategories, setKategories]= useState<Kategory[]>([
         { id: 1, name: "Category 1" },
         { id: 2, name: "Category 2" },
         { id: 3, name: "Category 3" },
@@ -48,17 +62,43 @@ const kategoryproduct = () => {
         { id: 6, name: "Category 6" },
         { id: 7, name: "Category 7" },
 
-    ];
+    ])
 
 
     return (
+        <div>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+                }}
+                >
+
+            <h1>РљР°С‚РµРіРѕСЂРёРё</h1>
+
+        <div>
+            <Button
+        color={'primary'}
+        variant = {'contained'}
+                >
+                Р”РѕР±Р°РІРёС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ
+        </Button>
+        </div>
+        </div>
+
+            <SviridenkoDDD
+                open={true}
+                onClose={()=>{}}
+                />
+
         <Box sx = {{height: '70vh', width: '100%'}}>
             <DataGrid
-                rows={rows}
+                rows={kategories}
                 columns={columns}
             />
         
             </Box>
+        </div>
 
     );
 };
