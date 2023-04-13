@@ -15,7 +15,7 @@ const TelelinskiyAndreyPage = () => {
                         <SiteMenu/>
                     </div>
 
-                    <div style={{padding:'lem'}}>
+                    <div style={{padding:'lem', width:'100%'}}>
                         <Outlet/>
                     </div>
 
