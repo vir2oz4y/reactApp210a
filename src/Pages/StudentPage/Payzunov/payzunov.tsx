@@ -10,9 +10,16 @@ const payzunov = () => {
             <Header studentFio={'Пайзунов Никита'}/>
 
             <ContentBlock>
-                <AsideMenu/>
+                <div style={{display: 'flex', gap: '1em'}}>
+                    <div style={{width:'200px'}}>
+                        <AsideMenu/>
+                    </div>
 
-                <Outlet/>
+                    <div style={{padding:'1em', width: '100%'}}>
+                        <Outlet/>
+                    </div>
+
+                </div>
             </ContentBlock>
         </div>
     );

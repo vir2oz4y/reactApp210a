@@ -55,7 +55,6 @@ import {default as PayzunovTest2Page} from "../StudentPage/Payzunov/Test2/Test2P
 import {default as PayzunovCategoryPage} from "../StudentPage/Payzunov/Category/CategoryPage";
 import {default as PayzunovClientPage} from "../StudentPage/Payzunov/Client/Client";
 import {default as PayzunovManufacturerPage} from "../StudentPage/Payzunov/Manufacturer/Manufacturer";
-import {default as PayzunovMenuPage} from "../StudentPage/Payzunov/Menu/Menu";
 import {default as PayzunovOrderPage} from "../StudentPage/Payzunov/Order/Order";
 import {default as PayzunovProductPage} from "../StudentPage/Payzunov/Product/ProductPage";
 import {default as PayzunovPurhausePage} from "../StudentPage/Payzunov/Purhause/Purhause";
@@ -152,7 +151,6 @@ const RouteComponent = () => {
                         <Route path={'category'} element={<PayzunovCategoryPage/>}/>
                         <Route path={'client'} element={<PayzunovClientPage/>}/>
                         <Route path={'manufacturer'} element={<PayzunovManufacturerPage/>}/>
-                        <Route path={'menu'} element={<PayzunovMenuPage/>}/>
                         <Route path={'order'} element={<PayzunovOrderPage/>}/>
                         <Route path={'product'} element={<PayzunovProductPage/>}/>
                         <Route path={'purhause'} element={<PayzunovPurhausePage/>}/>

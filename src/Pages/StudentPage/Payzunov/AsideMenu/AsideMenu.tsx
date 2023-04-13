@@ -49,6 +49,14 @@ const AsideMenu = () => {
                     <ListItemText primary="Product" />
                 </ListItemButton>
             </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton
+                    onClick={()=>navigate('purhause')}
+                >
+                    <ListItemText primary="Purhause" />
+                </ListItemButton>
+            </ListItem>
         </List>
     );
 };

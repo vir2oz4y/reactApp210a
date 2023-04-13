@@ -1,21 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import {Box} from "@mui/material";
-import Button from "@mui/material/Button";
+import {Box, Button} from "@mui/material";
+import {Category} from "./model";
+import PayzunovPopup from "../../../../Components/Payzunov/PayzunovPopup/PayzunovPopup";
 const CategoryPage = () => {
 
     const columns: GridColDef[] = [
         {   field: 'id',
             headerName: 'ID',
+            width: 90,
         },
 
         {
             field: 'name',
             headerName: 'First name',
+            width: 150,
+            editable: true,
         },
         {
-            field: 'id',
+            field: '',
             headerName: '',
+            width: 200,
             renderCell: (e:any)=> {
                 return <div style={{display:'flex', gap:'1em'}}>
                 <Button
@@ -28,6 +33,7 @@ const CategoryPage = () => {
                 <Button
                     color={'primary'}
                     variant={'contained'}
+                    onClick={()=>onDeleteClick(e.row.id)}
                 >
                     Delete
                 </Button>
@@ -35,7 +41,14 @@ const CategoryPage = () => {
             },
         }
 ];
-    const rows = [
+
+    const onDeleteClick = (id: number) => {
+        setCategories(prev =>
+            prev.filter(el => el.id !== id)
+        )
+    }
+
+    const [categories, setCategories] = useState<Category[]>([
         { id: 1, name: "category 1"},
         { id: 2, name: "category 2"},
         { id: 3, name: "category 3"},
@@ -43,16 +56,50 @@ const CategoryPage = () => {
         { id: 5, name: "category 5"},
         { id: 6, name: "category 6"},
         { id: 7, name: "category 7"},
-    ];
+        { id: 8, name: "category 8"},
+        { id: 9, name: "category 9"},
+    ])
 
     return (
+        <div>
+            <div
+                style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                }}
+            >
+            <h1>Категории</h1>
+                <div>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                    >
+                        Добавить категорию
+                    </Button>
+                </div>
+            </div>
 
-        <Box sx={{ height: '70vh', width: '100%' }}>
-            <DataGrid
-                rows={rows}
+            <PayzunovPopup
+                open ={true}
+                onClose ={()=>{}}
+                title={"Создание категории"}
+            >
+                <div>
+                    Создание категории
+                </div>
+            </PayzunovPopup>
+
+
+
+
+            <Box sx={{ height: '70vh', width: '100%' }}>
+                <DataGrid
+                rows={categories}
                 columns={columns}
-            />
-        </Box>
+                />
+            </Box>
+        </div>
     );
 };
 
