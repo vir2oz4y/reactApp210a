@@ -41,7 +41,7 @@ import { default as BushmanovUserPage } from "../StudentPage/BushmanovMak/User/U
 
 
 import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
-import {default as AnikeevaCategory} from "../StudentPage/AnikeevaVera/Category/Category";
+import {default as AnikeevaCategory} from "../StudentPage/AnikeevaVera/Category/CategoryPage";
 import {default as AnikeevaClient} from "../StudentPage/AnikeevaVera/Client/Client";
 import {default as AnikeevaManufacturer} from "../StudentPage/AnikeevaVera/Manufacturer/Manufacturer";
 import {default as AnikeevaOrder} from "../StudentPage/AnikeevaVera/Order/Order";
