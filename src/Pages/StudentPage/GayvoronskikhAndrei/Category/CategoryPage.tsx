@@ -1,10 +1,16 @@
-import React from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material';
+import React, {useState} from 'react';
+import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import {Box, Button} from '@mui/material';
+import {Category} from "./model";
+import GayvoronskikhPopUp from "../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp";
 
 const CategoryPage = () => {
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 90 },
+        {
+            field: 'id',
+            headerName: 'ID',
+            width: 90
+        },
         {
             field: 'name',
             headerName: 'First name',
@@ -14,35 +20,53 @@ const CategoryPage = () => {
         {
             field: '',
             headerName: '',
-            width:200,
+            width: 200,
             renderCell: (e: any) => {
-                return <div style={{display:'flex', gap:'1em'}}>
+                return <div style={{display: 'flex', gap: '1em'}}>
                     <Button color={'primary'} variant={'contained'}>Edit</Button>
-                    <Button color={'primary'} variant={'contained'}>Delete</Button>
+                    <Button color={'primary'} variant={'contained'}
+                            onClick={() => OnDeleteClick(e.row.id)}>Delete</Button>
                 </div>
             },
         }
     ];
 
-    const rows = [
-        { id: 1,  name: 'category 1', },
-        { id: 2, name: 'category 2' },
-        { id: 3, name: 'category 3'},
-        { id: 4, name: 'category 4' },
-        { id: 5, name: 'category 5' },
-        { id: 6, name: 'category 6',  },
-        { id: 7, name: 'category 7' },
-        { id: 8, name: 'category 8'},
-        { id: 9, name: 'category 9'},
-    ];
+    const OnDeleteClick = (id: number) => {
+        setCategories(prev =>
+            prev.filter(el => el.id !== id))
+    }
+
+    const [categories, setCategories] = useState<Category[]>([
+        {id: 1, name: 'category 1'},
+          {id: 2, name: 'category 2'},
+          {id: 3, name: 'category 3'},
+          {id: 4, name: 'category 4'},
+          {id: 5, name: 'category 5'},
+          {id: 6, name: 'category 6',},
+          {id: 7, name: 'category 7'},
+    ])
+
 
     return (
-        <Box sx={{height:'70vh',width:'100%'}}>
+        <div>
+            <div style={{display:'flex',
+            justifyContent:'space-between',
+            alignItems:'center'}}>
+                <h1>Категории</h1>
+                <Button color={'primary'} variant={'contained'}>Добавить Категорию</Button>
+            </div>
+            <GayvoronskikhPopUp open={true} onClose={()=>{}}
+            title={'Создание категории'}
+            >
+                <div>Создание Категории </div>
+            </GayvoronskikhPopUp>
+        <Box sx={{height: '70vh', width: '100%'}}>
             <DataGrid
-                rows={rows}
+                rows={categories}
                 columns={columns}
             />
         </Box>
+        </div>
     );
 };
 
