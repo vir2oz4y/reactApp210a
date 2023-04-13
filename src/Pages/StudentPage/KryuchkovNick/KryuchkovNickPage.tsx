@@ -15,7 +15,7 @@ const KryuchkovNickPage = () => {
                         <AsideMenu />
                     </div>
 
-                    <div style={{padding:'1em'}}>
+                    <div style={{padding:'1em', width:'100%'}}>
                         <Outlet />
                     </div>
 
