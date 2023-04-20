@@ -31,7 +31,7 @@ import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 import JabrovPage1 from "../StudentPage/Jabrov1/JabrovPage";
 import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
 import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
-import { default as JabrovCategory } from "../StudentPage/Jabrov1/Category/Category";
+import { default as JabrovCategory } from "../StudentPage/Jabrov1/Category/CategoryPage";
 import { default as JabrovTovar } from "../StudentPage/Jabrov1/Tovar/tovar";
 import { default as JabrovZakaz } from "../StudentPage/Jabrov1/Zakaz/zakaz";
 import { default as JabrovClients } from "../StudentPage/Jabrov1/Clients/Clients";

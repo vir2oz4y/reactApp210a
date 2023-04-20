@@ -4,9 +4,13 @@
     "\\public",
     "\\src",
     "\\src\\Pages",
+    "\\src\\Pages\\Route",
     "\\src\\Pages\\StudentPage",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim",
+    "\\src\\Pages\\StudentPage\\Jabrov1",
+    "\\src\\Pages\\StudentPage\\Jabrov1\\Category",
+    "\\src\\Pages\\StudentPage\\Jabrov1\\Category\\popups",
     "\\src\\Pages\\StudentPage\\SviridenkoDim\\CiteMenu"
   ],
+  "SelectedNode": "\\src\\Pages\\StudentPage\\Jabrov1\\Category\\CategoryPage.tsx",
   "PreviewInSolutionExplorer": false
 }

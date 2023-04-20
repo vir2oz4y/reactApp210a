@@ -2,8 +2,9 @@ import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import {useState} from "react";
-import Category from "../../Aleshin/Category/Category";
 import JabrovPopUp from "../JabrovPopUp/JabrovPopUp";
+import { JabrovCreateCategoryPopUp } from './popups/JabrovCreateCategoryPopUp';
+import { Category } from './model';
 
 
 const CategoryPage = () => {
@@ -52,13 +53,21 @@ const CategoryPage = () => {
     }
 
     // @ts-ignore
-    const [categories, setCategories] = useState<Category[]>([{ id: 1, name:"category 1" },
+    const [categories, setCategories] = useState<Category[]>([
+        { id: 1, name: "category 1" },
         { id: 2, name: "category 2" },
         { id: 3, name: "category 3" },
         { id: 4, name: "category 4" },
         { id: 5, name: "category 5" },
         { id: 6, name: "category 6" },
         { id: 7, name: "category 7" },])
+
+    const [showCreateCatrgory, setShowCreateCategory] = useState(false);
+
+    const onCreate = (newCategory: Category) => {
+        setCategories(prev => [...prev, newCategory]);
+
+    }
 
 
 
@@ -71,7 +80,9 @@ const CategoryPage = () => {
             </h1>
 
                 <div>
-                    <Button color = {'primary'} variant = {'contained'}>
+                    <Button color={'primary'}
+                            variant={'contained'}
+                            onClick={() => setShowCreateCategory(true)}>
                         Добавить категорию
                     </Button>
 
@@ -79,15 +90,12 @@ const CategoryPage = () => {
 
             </div>
 
-            <JabrovPopUp
+            {showCreateCatrgory && <JabrovCreateCategoryPopUp
                 open={true}
-                onClose={()=>{}}
-                title ={"Создание категории"}
-            >
-            <div>
-                Создание категории
-            </div>
-            </JabrovPopUp>
+                onClose={() => setShowCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
+            />
+            }
 
         <Box sx={{ height: "70vh", width: "100%" }}>
             <DataGrid
