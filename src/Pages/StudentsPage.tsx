@@ -118,7 +118,7 @@ const StudentsPage = () => {
                     fio={'Черняк Мария Викторовна'}
                     description={'Студент'}
                     imageSrc={''}
-                    navigateTo={'/сhernyak'}
+                    navigateTo={'/chernyak'}
                 />
 
             </Stack>

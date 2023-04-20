@@ -3,16 +3,16 @@ import Modal from '@mui/material/Modal';
 import Button from "@mui/material/Button";
 import "./ChernyakPopup.scss";
 
-export type IPoup = {
+export type IPopup = {
     open: boolean,
     onClose: () => void;
 }
 
-type Props = IPoup &{
+type Props = IPopup &{
      title:string,
     children: any
 }
-const ChernyakPopup = ({open, onClose, title,children}:Props) => {
+const ChernyakPopup = ({open, onClose, title ,children}:Props) => {
 
     return (
         <Modal
@@ -21,26 +21,29 @@ const ChernyakPopup = ({open, onClose, title,children}:Props) => {
 
         >
             <div className={'popup'}>
-                <div className={'popup__cantent__title'}>
-                    <div>
-                        Заголовок
+                <div className={'popup__content'}>
+                    <div className={'popup__content__title'}>
+                        <div>
+                            Заголовок
+                        </div>
+
+                        <div>
+                            <Button
+                                color={'primary'}
+                                variant={'contained'}
+                                onClick={()=>onClose}
+                            >
+                                Закрыть
+                            </Button>
+                        </div>
+
                     </div>
 
                     <div>
-                        <Button
-                            color={'primary'}
-                            variant={'contained'}
-                            onClick={()=>onClose}
-                        >
-                            Закрыть
-                        </Button>
+                        {children}
                     </div>
-
                 </div>
 
-                <div>
-                    {children}
-                </div>
 
             </div>
         </Modal>

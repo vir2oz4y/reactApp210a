@@ -205,7 +205,7 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<MemePage2/>}/>
                     </Route>
 
-                    <Route path={'Chernyak'} element={<ChernyakM/>} >
+                    <Route path={'chernyak'} element={<ChernyakM/>} >
                         <Route path={'Category'} element={<ChernyakMCategory/>} />
                         <Route path={'Client'} element={<ChernyakMClient/>} />
                         <Route path={'Manufacture'} element={<ChernyakMManufacture/>} />

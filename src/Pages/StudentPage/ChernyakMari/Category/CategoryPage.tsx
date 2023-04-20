@@ -4,6 +4,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import ChernyakPopup from "../../../../Components/Chernyak/ChernyakPopup/ChernyakPopup";
 import {Category} from "./model"
+import {ChernyakCreateCategoryPopup} from "./Popup/ChernyakCreateCategoryPopup";
 const CategoryPage = () => {
     const columns: GridColDef[] = [
         {
@@ -56,6 +57,10 @@ const CategoryPage = () => {
         { id: 7, name: "category 7" },
 
     ])
+    const[showCreateCategory, setShowCreateCategory] = useState(false);
+    const onCreate = (newCategory: Category) =>{
+        setCategories(prev => [...prev,newCategory]);
+    }
     return (
         <div>
             <div style={{
@@ -71,25 +76,21 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        >
+                        onClick={()=>setShowCreateCategory(true)}
+                    >
                         Добавить категорию
                     </Button>
                 </div>
             </div>
+            {showCreateCategory && <ChernyakCreateCategoryPopup
+                open={showCreateCategory}
+                onClose={() => setShowCreateCategory(false)}
+            onCreate={(category) => onCreate(category)}/>}
 
-            <ChernyakPopup
 
 
-                open={true}
-                onClose={() =>{}}
-                title={'Создание категории '}
-                >
-                <div>
-                    dgfg
-                </div>
-            </ChernyakPopup>
 
-            <Box sx={{ height: '70vh', width: '100%' }}>
+            <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
                     rows={categories}
                     columns={columns}
