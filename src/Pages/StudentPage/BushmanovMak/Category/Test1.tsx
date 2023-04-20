@@ -3,6 +3,7 @@ import { DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Category } from './model';
 import BushmanovPopUp from "../BushmanovPopUp/BushmanovPopUp";
+import { BushmanovCreateCategoryPagePopup } from '../BushmanovPopUp/Popups/BushmanovCreateCategoryPopup';
 
 const Test1 = () => {
 
@@ -48,7 +49,15 @@ const Test1 = () => {
         { id: 4, name: "category 4"},
         { id: 5, name: "category 5" },
         { id: 6, name: "category 6" },
-        { id: 7, name: "category 7" },])
+        { id: 7, name: "category 7" },
+    ])
+
+    const [ShowCreateCategory, setShowCreateCategory] = useState(false);
+    
+
+    const onCreate = (newCategory: Category) => {
+        setCategories(prev => [...prev, newCategory]);
+    }
 
     return (
         <div>
@@ -58,19 +67,24 @@ const Test1 = () => {
                 </h1>
 
                 <div>
-                    <Button color = {'primary'} variant = {'contained'}>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={() => setShowCreateCategory(true)}
+                    >
                         Добавить категорию
                     </Button>
                 </div>
 
             </div>
 
-            <BushmanovPopUp open={true} onClose={()=>{}} title = {"Создание категории"}
-            >
-                <div>
-                    Создание категории
-                </div>
-                </BushmanovPopUp>
+            {ShowCreateCategory && <BushmanovCreateCategoryPagePopup
+                open={ShowCreateCategory}
+                onClose={() => setShowCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
+
+            />}
+
         <Box sx={{height: '70vh', width: '100%'}}>
             <DataGrid
                 rows={categories}
