@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import {Box, Button} from "@mui/material";
 import {Category} from "./model";
-import PayzunovPopup from "../../../../Components/Payzunov/PayzunovPopup/PayzunovPopup";
+import PayzunovCreateCategoryPopup from "./Popups/PayzunovCreateCategoryPopup";
 const CategoryPage = () => {
 
     const columns: GridColDef[] = [
@@ -60,6 +60,12 @@ const CategoryPage = () => {
         { id: 9, name: "category 9"},
     ])
 
+    const [showCreateCategory, setShowCreateCategory] = useState(false);
+
+    const onCreate = (newCategory: Category) => {
+      setCategories(prev=> [...prev, newCategory]);
+    }
+
     return (
         <div>
             <div
@@ -74,24 +80,18 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
+                        onClick={()=> setShowCreateCategory(true)}
                     >
                         Добавить категорию
                     </Button>
                 </div>
             </div>
 
-            <PayzunovPopup
-                open ={true}
-                onClose ={()=>{}}
-                title={"Создание категории"}
-            >
-                <div>
-                    Создание категории
-                </div>
-            </PayzunovPopup>
-
-
-
+            {showCreateCategory && <PayzunovCreateCategoryPopup
+                open={showCreateCategory}
+                onClose={() => setShowCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
+            />}
 
             <Box sx={{ height: '70vh', width: '100%' }}>
                 <DataGrid
