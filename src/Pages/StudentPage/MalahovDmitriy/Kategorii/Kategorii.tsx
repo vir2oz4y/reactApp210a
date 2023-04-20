@@ -4,6 +4,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import MalahovDY from "../../../../Components/Malahov/MalahovDY/MalahovDY";
 import {Categorii} from "./models";
+import { Malahov_creat_categori_prefab } from './modals/Malahov_creat_categori_prefab';
 
 const CategoryPage = () => {
     const columns: GridColDef[] = [
@@ -50,6 +51,12 @@ const CategoryPage = () => {
         { id: 6, name: 'category 6' },
         { id: 7, name: 'category 7' },
     ])
+
+    const [showCreateCaregory, setShowCreateCaregory] = useState(false);
+
+    const onCreate = (newCategory: Categorii)=>{
+        setCategories(prev => [...prev, newCategory]);
+    }
     return (
         <div>
             <div>
@@ -62,19 +69,19 @@ const CategoryPage = () => {
                 }}>
                     <Button
                         color={'primary'}
-                        variant={'contained'}>
+                        variant={'contained'}
+                        onClick={() => setShowCreateCaregory(true)}>
                         Добавить категорию
                     </Button>
                 </div>
             </div>
-            <MalahovDY
-                open={true}
-                onClose={()=>{}}
-                title={'создание категории'}>
-                <div>
-                    Создание категории
-                </div>
-            </MalahovDY>
+
+            {showCreateCaregory && <Malahov_creat_categori_prefab
+                open={showCreateCaregory}
+                onClose={() => setShowCreateCaregory(false)}
+                onCreate={(category) => onCreate(category)}
+            />}
+
         <Box sx={{ height: '65vh', width: '100%' }}>
             <DataGrid
                 rows={CategoryPage}
