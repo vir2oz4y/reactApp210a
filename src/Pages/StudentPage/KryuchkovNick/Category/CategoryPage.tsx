@@ -3,6 +3,7 @@ import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {Box, Button, dividerClasses} from '@mui/material';
 import {Category} from "./model";
 import KryuchkovPopup from "../../../../Components/Kryuchkov/KryuchkovPopup/KryuchkovPopup";
+import { KryuchkovCreateCategoryPopup } from './Popups/KryuchkovCreateCategotyPopup';
 
 const CategoryPage = () => {
 
@@ -56,6 +57,11 @@ const CategoryPage = () => {
         {id: 7, name: "category 7"},
     ])
 
+    const [showCreateCategory, setShowCreateCategory] = useState(false);
+
+    const onCreate = (newCategory: Category) => {
+        setCategories(prev => [...prev, newCategory]);
+    }
 
     return (
         <div>
@@ -72,21 +78,18 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
+                        onClick={() => setShowCreateCategory(true)}
                     >
                         Добавить категорию
                     </Button>
                 </div>
             </div>
 
-            <KryuchkovPopup
-                open={true}
-                onClose={()=>{}}
-                title={'Создание категории'}
-            >
-                <div>
-                    СОздание категории
-                </div>
-            </KryuchkovPopup>
+            {showCreateCategory && <KryuchkovCreateCategoryPopup
+                open={showCreateCategory}
+                onClose={() => setShowCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
+            />}
 
             <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
