@@ -34,10 +34,12 @@ const GayvoronskikhPopUp = ({open, onClose, title, children}: Props) => {
                             </Button>
                         </div>
                     </div>
+
+                    <div>
+                        {children}
+                    </div>
                 </div>
-                <div>
-                    {children}
-                </div>
+                
             </div>
         </Modal>
     );

@@ -3,6 +3,7 @@ import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import {Box, Button} from '@mui/material';
 import {Category} from "./model";
 import GayvoronskikhPopUp from "../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp";
+import { GayvoronskikhCreateCategoryPopUp } from './Modals/GayvoronskikhCreateCategoryPopUp';
 
 const CategoryPage = () => {
     const columns: GridColDef[] = [
@@ -30,7 +31,7 @@ const CategoryPage = () => {
             },
         }
     ];
-
+    const [showCreateCategory, setShowCategory] = useState(false);
     const OnDeleteClick = (id: number) => {
         setCategories(prev =>
             prev.filter(el => el.id !== id))
@@ -46,6 +47,9 @@ const CategoryPage = () => {
           {id: 7, name: 'category 7'},
     ])
 
+    const onCreate = (newCategory:Category) => {
+        setCategories(prev => [...prev, newCategory]);
+    }
 
     return (
         <div>
@@ -53,13 +57,17 @@ const CategoryPage = () => {
             justifyContent:'space-between',
             alignItems:'center'}}>
                 <h1>Категории</h1>
-                <Button color={'primary'} variant={'contained'}>Добавить Категорию</Button>
+                <Button color={'primary'} variant={'contained'} onClick={() => setShowCategory(true) }>Добавить Категорию</Button>
             </div>
-            <GayvoronskikhPopUp open={true} onClose={()=>{}}
-            title={'Создание категории'}
-            >
-                <div>Создание Категории </div>
-            </GayvoronskikhPopUp>
+
+            {showCreateCategory && <GayvoronskikhCreateCategoryPopUp
+                open={showCreateCategory}
+                onClose={()=>setShowCategory(false)}
+                onCreate={(category) => onCreate(category)}
+
+            />}
+
+            
         <Box sx={{height: '70vh', width: '100%'}}>
             <DataGrid
                 rows={categories}
