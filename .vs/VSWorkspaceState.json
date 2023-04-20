@@ -1,15 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public",
     "\\src",
+    "\\src\\AppContext",
+    "\\src\\Components",
+    "\\src\\Components\\Aleshin",
+    "\\src\\Components\\Aleshin\\AleshinPopup",
     "\\src\\Pages",
-    "\\src\\Pages\\Route",
     "\\src\\Pages\\StudentPage",
     "\\src\\Pages\\StudentPage\\Aleshin",
-    "\\src\\Pages\\StudentPage\\Aleshin\\Category",
-    "\\src\\Pages\\StudentPage\\KryuchkovNick\\Category",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\CiteMenu"
+    "\\src\\Pages\\StudentPage\\Aleshin\\SiteMenu"
   ],
   "SelectedNode": "\\src\\Pages\\StudentPage\\Aleshin\\Category\\Category.tsx",
   "PreviewInSolutionExplorer": false

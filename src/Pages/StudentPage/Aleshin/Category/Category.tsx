@@ -3,6 +3,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Category } from "./model";
 import AleshinPopup from '../../../../Components/Aleshin/AleshinPopup/AleshinPopup';
+import {AleshinCreateCategoryPopup} from "./Popups/AleshinCreateCategoryPopup";
 
 const CategoryPage = () => {
 
@@ -21,14 +22,14 @@ const CategoryPage = () => {
         {
             field: '',
             headerName: '',
-            width: 200,
+            width: 300,
             renderCell: (e: any) => {
                 return <div style={{ display: 'flex', gap:'1em' } }>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                     >
-                        Edit
+                        Редактировать
                     </Button>
 
                     <Button
@@ -36,7 +37,7 @@ const CategoryPage = () => {
                         variant={'contained'}
                         onClick={() => onDeleteClick(e.row.id)}
                     >
-                        Delete
+                        Удалить
                     </Button>
                 </div>
             },
@@ -60,6 +61,12 @@ const CategoryPage = () => {
             { id: 7, name: 'category 7' },
         ])
 
+    const [showCreateCategory, setCreateCategory] = useState(false)
+
+    const onCreate = (newCategory: Category) => {
+        setCategories(prev=>[...prev, newCategory]);
+    }
+
     return (
         <div>
             <div
@@ -69,27 +76,24 @@ const CategoryPage = () => {
 
                 } }>
                 <div>
-                    <h1> ��������� </h1>
+                    <h1> Категории </h1>
 
                     <div>
                         <Button
                             color={'primary'}
                             variant={'contained'}
+                            onClick ={()=> setCreateCategory(true)}
                         >
-                            Add category
+                            Добавить категорию
                         </Button>
                     </div>
                 </div>
 
-                <AleshinPopup
-                    open={true}
-                    onClose={() => {}}
-                    title={'Create category' }
-                >
-                    <div>
-                        Create category
-                    </div>
-                </AleshinPopup>
+                {showCreateCategory && <AleshinCreateCategoryPopup
+                    open={showCreateCategory}
+                    onClose={() => setCreateCategory(false)}
+                    onCreate={(category) => onCreate(category)}
+                />}
 
                 <Box sx={{ height: '70vh', width: '100%' }}>
                     <DataGrid

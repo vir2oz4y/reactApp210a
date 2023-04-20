@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 const AleshinPage = () => {
     return (
         <div>
-            <Header studentFio={'Aleshin Grigory'} />
+            <Header studentFio={'Алешин Григорий'} />
 
             <ContentBlock>
 

@@ -31,7 +31,7 @@ const AleshinPopup = ({ open, onClose, title, children }:Props) => {
                                 variant={'contained'}
                                 onClick={()=>onClose() }
                             >
-                                Clouse
+                                Закрыть
                             </Button>
                         </div>
                     </div>
