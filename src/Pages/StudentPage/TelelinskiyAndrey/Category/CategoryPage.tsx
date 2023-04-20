@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material';
 import { useState } from 'react';
 import { Category } from './models';
 import TelelinskiyPopUp from "../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
+import {TelelinskiyCreateCategoryPopUp} from "./Modals/TelelinskiyCreateCategoryPopUp";
 
 const CategoryPage=()=>{
     const columns: GridColDef[] = [
@@ -13,7 +14,7 @@ const CategoryPage=()=>{
             width: 90
         },
         {
-            field: 'Name',
+            field: 'name',
             headerName: 'First name',
             width: 150,
             editable: true,
@@ -48,8 +49,8 @@ const CategoryPage=()=>{
     }
 
     const [categories,setCategories]=useState<Category[]>([
-        { id: 1,name: 'Category 1'},
-        { id: 2,name: 'Category 2'},
+        { id: 1,name: 'ooooooooooooooooooooooooooooooooooooo 1'},
+        { id: 2,name: 'Categoru 4'},
         { id: 3,name: 'Category 3'},
         { id: 4,name: 'Category 4'},
         { id: 5,name: 'Category 5'},
@@ -58,6 +59,13 @@ const CategoryPage=()=>{
         { id: 8,name: 'Category 8'},
         { id: 9,name: 'Category 9'},
     ]);
+
+    const [showCreateCategory, setShowCreateCategory]=useState(false);
+
+    const onCreate =(newCategory:Category)=>{
+        setCategories(prev=>[...prev,newCategory]);
+    }
+
     return (
         <div>
             <div style={{display:'flex',
@@ -71,21 +79,20 @@ const CategoryPage=()=>{
                 <div>
                     <Button
                     color={'primary'}
-                    variant={'contained'}>
+                    variant={'contained'}
+                    onClick={()=>setShowCreateCategory(true)}>
                         Добавить категорию
                     </Button>
                 </div>
             </div>
 
-            <TelelinskiyPopUp
+            {showCreateCategory && <TelelinskiyCreateCategoryPopUp
                 open={true}
-                onClose={()=>{}}
-                title={'создание категории'}
-            >
-            <div>
-                создание категории
-            </div>
-            </TelelinskiyPopUp>
+                onClose={ ()=> setShowCreateCategory(false)}
+                onCreate={(category)=>onCreate(category)}
+
+                />}
+
             <Box sx={{height:'100vh',width:'100%'}}>
                 <DataGrid
                     rows={categories}
