@@ -4,6 +4,8 @@ import {Box} from "@mui/material";
 import Button from "@mui/material/Button";
 import {Category} from "./model";
 import AnikeevaPopUp from "../AnikeevaPopUp/AnikeevaPopUp";
+import { AnikeevaCreateCategoryPagePopup } from '../AnikeevaPopUp/popups/AnikeevaCreateCategoryPagePopup';
+
 
 const CategoryPage = () => {
     const columns: GridColDef[] = [
@@ -49,6 +51,13 @@ const CategoryPage = () => {
         { id: 5, name: 'category 5' },
         { id: 6, name: 'category 6' },])
 
+    const [ShowCreateCategory, setShowCreateCategory] = useState(false);
+
+
+    const onCreate = (newCategory: Category) => {
+        SetCategories(prev => [...prev, newCategory]);
+    }
+
     return (
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -56,25 +65,30 @@ const CategoryPage = () => {
                     Категории
                 </h1>
 
-            <div>
-                <Button color = {'primary'} variant = {'contained'}>
-                    Добавить категорию
-                </Button>
-            </div>
-            </div>
-        <div>
-            <AnikeevaPopUp open={ true } onClose={()=>{}}title ={"Создание категории"}>
                 <div>
-                    Создание категории
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={() => setShowCreateCategory(true)}>
+
+                        Добавить категорию
+                    </Button>
                 </div>
-            </AnikeevaPopUp>
-        <Box sx={{ height: '70vh', width: '100%' }}>
-            <DataGrid
-                rows={categories}
-                columns={columns}
-            />
-        </Box>
-        </div>
+            </div>
+            <div>
+                {ShowCreateCategory && <AnikeevaCreateCategoryPagePopup
+                    open={ShowCreateCategory}
+                    onClose={() => setShowCreateCategory(false)}
+                    onCreate={(category) => onCreate(category)}
+
+                />}
+                <Box sx={{height: '70vh', width: '100%'}}>
+                    <DataGrid
+                        rows={categories}
+                        columns={columns}
+                    />
+                </Box>
+            </div>
         </div>
     );
 };
