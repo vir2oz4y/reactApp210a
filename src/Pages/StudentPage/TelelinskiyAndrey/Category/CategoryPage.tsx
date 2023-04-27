@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Category } from './models';
 import TelelinskiyPopUp from "../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import {TelelinskiyCreateCategoryPopUp} from "./Modals/TelelinskiyCreateCategoryPopUp";
+import {TelelinskiyEditCategoryPopUp} from "./Modals/TelelinskiyEditCategoryPopUp";
 
 const CategoryPage=()=>{
     const columns: GridColDef[] = [
@@ -28,6 +29,7 @@ const CategoryPage=()=>{
                     <Button
                     color={'primary'}
                     variant={'contained'}
+                    onClick={()=>setEditedCategory(e.row)}
                     >
                         Редактировать
                     </Button>
@@ -61,9 +63,22 @@ const CategoryPage=()=>{
     ]);
 
     const [showCreateCategory, setShowCreateCategory]=useState(false);
+    const [editedCategory, setEditedCategory] = useState<Category|null>(null);
 
     const onCreate =(newCategory:Category)=>{
         setCategories(prev=>[...prev,newCategory]);
+    }
+
+    const onEdit = (category: Category)=>{
+        setCategories(prev=>{
+            const editCategory = prev.find(el=>el.id === category.id);
+
+            if (editCategory){
+                editCategory.name = category.name;
+            }
+
+            return [...prev];
+        });
     }
 
     return (
@@ -92,6 +107,13 @@ const CategoryPage=()=>{
                 onCreate={(category)=>onCreate(category)}
 
                 />}
+
+            {editedCategory !== null && <TelelinskiyEditCategoryPopUp
+                open={editedCategory !==null}
+                onClose={()=>setEditedCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
+            />}
 
             <Box sx={{height:'100vh',width:'100%'}}>
                 <DataGrid

@@ -60,7 +60,7 @@ import {default as MemePage2} from "../StudentPage/TatarnikovEgor/test2/test2pag
 import TelelinskiyAndreyPage from "../StudentPage/TelelinskiyAndrey/TelelinskiyAndreyPage";
 import {default as TelelinskiyCategory} from "../StudentPage/TelelinskiyAndrey/Category/CategoryPage";
 import {default as TelelinskiyClient} from "../StudentPage/TelelinskiyAndrey/Client/Client";
-import {default as TelelinskiyManufacturer} from "../StudentPage/TelelinskiyAndrey/Manufacturer/Manufacturer";
+import {default as TelelinskiyManufacturer} from "../StudentPage/TelelinskiyAndrey/Manufacturer/ManufacturerPage";
 import {default as TelelinskiyOrder} from "../StudentPage/TelelinskiyAndrey/Order/Order";
 import {default as TelelinskiyProduct} from "../StudentPage/TelelinskiyAndrey/Product/Product";
 
