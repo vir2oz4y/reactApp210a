@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material';
 import { Category } from "./model";
 import AleshinPopup from '../../../../Components/Aleshin/AleshinPopup/AleshinPopup';
 import {AleshinCreateCategoryPopup} from "./Popups/AleshinCreateCategoryPopup";
+import {AleshinEditCategoryPopup} from "./Popups/AleshinEditCategoryPopup";
 
 const CategoryPage = () => {
 
@@ -28,6 +29,7 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
+                        onClick={()=>setEditedCategory(e.row)}
                     >
                         Редактировать
                     </Button>
@@ -62,9 +64,22 @@ const CategoryPage = () => {
         ])
 
     const [showCreateCategory, setCreateCategory] = useState(false)
+    const [editedCategory, setEditedCategory] = useState<Category|null>(null)
 
     const onCreate = (newCategory: Category) => {
         setCategories(prev=>[...prev, newCategory]);
+    }
+
+    const onEdit = (category: Category) => {
+        setCategories(prev=> {
+            const editCategory = prev.find(el=>el.id === category.id)
+
+            if (editCategory){
+                editCategory.name = category.name;
+            }
+
+            return [...prev];
+        });
     }
 
     return (
@@ -73,26 +88,32 @@ const CategoryPage = () => {
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}
+            >
+                <h1> Категории </h1>
 
-                } }>
                 <div>
-                    <h1> Категории </h1>
-
-                    <div>
-                        <Button
-                            color={'primary'}
-                            variant={'contained'}
-                            onClick ={()=> setCreateCategory(true)}
-                        >
-                            Добавить категорию
-                        </Button>
-                    </div>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick ={()=> setCreateCategory(true)}
+                    >
+                        Добавить категорию
+                    </Button>
                 </div>
-
+            </div>
                 {showCreateCategory && <AleshinCreateCategoryPopup
                     open={showCreateCategory}
                     onClose={() => setCreateCategory(false)}
                     onCreate={(category) => onCreate(category)}
+                />}
+
+                {editedCategory !== null && <AleshinEditCategoryPopup
+                    open={editedCategory !== null}
+                    onClose={()=>setEditedCategory(null)}
+                    category={editedCategory}
+                    onEdit={(category)=>onEdit(category)}
                 />}
 
                 <Box sx={{ height: '70vh', width: '100%' }}>
@@ -101,7 +122,6 @@ const CategoryPage = () => {
                         columns={columns}
                     />
                 </Box>
-             </div>
         </div>
     )
 }

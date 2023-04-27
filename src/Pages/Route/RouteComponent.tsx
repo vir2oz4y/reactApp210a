@@ -89,12 +89,12 @@ import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
 
 import AleshinNickPage from "../StudentPage/Aleshin/Aleshin";
 import { default as AleshinTest1Page } from "../StudentPage/Aleshin/Test1/Test1";
+import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2";
 import { default as AleshinCategoryPage } from "../StudentPage/Aleshin/Category/Category";
 import { default as AleshinClientPage } from "../StudentPage/Aleshin/Client/Client";
-import { default as AleshinManufacturesPage } from "../StudentPage/Aleshin/Manufactures/Manufactures";
+import { default as AleshinManufacturePage} from "../StudentPage/Aleshin/Manufactures/Manufactures";
 import { default as AleshinOrderPage } from "../StudentPage/Aleshin/Order/Order";
 import { default as AleshinProductPage } from "../StudentPage/Aleshin/Product/Product";
-import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2";
 
 
 
@@ -155,10 +155,11 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'aleshin'} element={<AleshinNickPage/>}>
-                        <Route path={'Test1'} element={<AleshinTest1Page />} />
-                        <Route path={'Test2'} element={<AleshinTest2Page/>}/>
                         <Route path={'Category'} element={<AleshinCategoryPage />} />
                         <Route path={'Client'} element={<AleshinClientPage/> } />
+                        <Route path={'Manufacture'} element={<AleshinManufacturePage/>} />
+                        <Route path={'Order'} element={<AleshinOrderPage/>} />
+                        <Route path={'Product'} element={<AleshinProductPage/>} />
                     </Route>
 
                     <Route path={'anikeeva'} element={<AnikeevaVeraPage/>} >

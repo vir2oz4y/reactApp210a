@@ -1,18 +1,20 @@
 import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
 import { TextField, Button } from "@mui/material";
-import {Category} from "../model";
+import {Manufacture} from "../model";
 
 type Props = IPopup & {
-    category: Category,
-    onEdit:(category: Category) => void;
+    onCreate:(newManufacture: Manufacture) => void;
 }
-export const AleshinEditCategoryPopup = ({open, onClose, onEdit, category:categoryProps}:Props) => {
+export const AleshinCreateManufacturePopup = ({open, onClose, onCreate}:Props) => {
 
-    const [category, setCategory] = useState(categoryProps)
+    const [manufactureName, setManufactureName] = useState('')
 
-    const onEditClick = () => {
-        onEdit(category)
+    const onCreateClick = () => {
+        onCreate({
+            id: Math.random(),
+            name: manufactureName,
+        })
         onClose();
     }
 
@@ -20,29 +22,25 @@ export const AleshinEditCategoryPopup = ({open, onClose, onEdit, category:catego
         <AleshinPopup
             open={open}
             onClose={onClose}
-            title={'Редактировать категорию'}
+            title={'Создать мануфактуру' }
         >
             <div style = {{display:'flex', flexDirection:'column', gap:'1em'}}>
-
                 <TextField
-                    label = "Имя категории"
+                    label = "Имя мануфактуры"
                     variant="standard"
-                    value={category.name}
-                    onChange={e => setCategory(prev => ({...prev, name: e.target.value}))}
+                    value={manufactureName}
+                    onChange={e => setManufactureName(e.target.value)}
                 />
-
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick ={() => onEditClick()}
+                        onClick ={() => onCreateClick()}
                     >
-                        Редактировать
+                        Создать
                     </Button>
                 </div>
             </div>
         </AleshinPopup>
     )
 }
-
-export default AleshinEditCategoryPopup;
