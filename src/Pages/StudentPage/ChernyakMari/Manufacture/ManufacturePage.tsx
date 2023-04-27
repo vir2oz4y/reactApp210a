@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import ChernyakPopup from "../../../../Components/Chernyak/ChernyakPopup/ChernyakPopup";
-import {Category} from "./model"
-import {ChernyakCreateCategoryPopup} from "./Popup/ChernyakCreateCategoryPopup";
-import {ChernyakEditCategoryPopup} from "./Popup/ChernyakEditCategoryPopup";
-const CategoryPage = () => {
+import {Manufacture} from "./model"
+import {ChernyakCreateManufacturePopup} from "./Popup/ChernyakCreateManufacturePopup";
+import {ChernyakEditManufacturePopup} from "./Popup/ChernyakEditManufacturePopup";
+const ManufacturePage = () => {
     const columns: GridColDef[] = [
         {
             field: 'id',
@@ -27,7 +27,7 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setEditedCategory(e.row)}
+                        onClick={()=>setEditedManufacture(e.row)}
                     >
                         Edit
                     </Button>
@@ -45,10 +45,10 @@ const CategoryPage = () => {
     ];
 
     const onDeleteClick= (id:number)=>{
-    setCategories( prev => prev.filter (el => el.id !== id))
+        setManufacturers( prev => prev.filter (el => el.id !== id))
     }
 
-    const [categories, setCategories] = useState <Category[]> ( [
+    const [manufacturers, setManufacturers] = useState <Manufacture[]> ( [
 
         { id: 1, name: "category 1" },
         { id: 2, name: "category 2" },
@@ -59,19 +59,19 @@ const CategoryPage = () => {
         { id: 7, name: "category 7" },
 
     ])
-    const[showCreateCategory, setShowCreateCategory] = useState(false);
+    const[showCreateManufacture, setShowCreateManufacture] = useState(false);
 
-    const[editedCategory, setEditedCategory] = useState<Category|null>(null)
-    const onCreate = (newCategory: Category) =>{
-        setCategories(prev => [...prev,newCategory]);
+    const[editedManufacture, setEditedManufacture] = useState<Manufacture|null>(null)
+    const onCreate = (newCategory: Manufacture) =>{
+        setManufacturers(prev => [...prev,newManufacture]);
     }
 
-    const onEdit = (category: Category) => {
-        setCategories(prev => {
-            const editCategory = prev.find(el=>el.id === category.id);
+    const onEdit = (category: Manufacture) => {
+        setManufacturers(prev => {
+            const editManufacture = prev.find(el=>el.id === manufacture.id);
 
-            if (editCategory){
-                editCategory.name = category.name
+            if (editManufacture){
+                editManufacture.name = manufacture.name
             }
             return [...prev]
         })
@@ -85,35 +85,35 @@ const CategoryPage = () => {
             }}
             >
 
-                <h1>Категории</h1>
+                <h1>Производители</h1>
 
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setShowCreateCategory(true)}
+                        onClick={()=>setShowCreateManufacture(true)}
                     >
-                        Добавить категорию
+                        Добавить производителя
                     </Button>
                 </div>
             </div>
-            {showCreateCategory && <ChernyakCreateCategoryPopup
-                open={showCreateCategory}
-                onClose={() => setShowCreateCategory(false)}
-            onCreate={(category) => onCreate(category)}/>}
+            {showCreateManufacture && <ChernyakCreateManufacturePopup
+                open={showCreateManufacture}
+                onClose={() => setShowCreateManufacture(false)}
+                onCreate={(manufacture) => onCreate(manufacture)}/>}
 
-            {editedCategory !== null && <ChernyakEditCategoryPopup
-                open={editedCategory !== null}
-                onClose={() => setEditedCategory(null)}
-                category = {editedCategory}
-                onEdit={(category)=>onEdit(category)}
-                />}
+            {editedManufacture !== null && <ChernyakEditManufacturePopup
+                open={editedManufacture !== null}
+                onClose={() => setEditedManufacture(null)}
+                category = {editedManufacture}
+                onEdit={(manufacture)=>onEdit(manufacture)}
+            />}
 
 
 
             <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
-                    rows={categories}
+                    rows={manufacturers}
                     columns={columns}
                 />
             </Box>
@@ -121,7 +121,7 @@ const CategoryPage = () => {
     );
 
 };
-export default CategoryPage;
+export default ManufacturePage;
 
 
 

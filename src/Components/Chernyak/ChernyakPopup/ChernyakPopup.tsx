@@ -31,7 +31,7 @@ const ChernyakPopup = ({open, onClose, title ,children}:Props) => {
                             <Button
                                 color={'primary'}
                                 variant={'contained'}
-                                onClick={()=>onClose}
+                                onClick={()=>onClose()}
                             >
                                 Закрыть
                             </Button>

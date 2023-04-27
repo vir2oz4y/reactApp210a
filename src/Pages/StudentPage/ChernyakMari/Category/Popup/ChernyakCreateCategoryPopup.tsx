@@ -30,7 +30,7 @@ export const ChernyakCreateCategoryPopup = ({open, onClose, onCreate}:Props) => 
                     <TextField
                         label="Category name"
                         variant="standard"
-                    value={'CategoryName'}
+                    value={categoryName}
                     onChange={e => setCategoryName(e.target.value)}
 
                     />
