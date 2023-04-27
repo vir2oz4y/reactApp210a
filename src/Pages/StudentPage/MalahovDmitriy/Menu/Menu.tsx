@@ -23,6 +23,14 @@ const Menu2 = () => {
 
             <ListItem disablePadding>
                 <ListItemButton
+                    onClick={() => navigate('Manufacture')}
+                >
+                    <ListItemText primary="Proizvoditeli" />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+                <ListItemButton
                     onClick={() => navigate('Test2')}
                 >
                     <ListItemText primary="Klienti" />
