@@ -25,7 +25,7 @@ const SiteMenu = () => {
 
             <ListItem disablePadding>
                 <ListItemButton onClick={()=>navigate('Manufacturer')}>
-                    <ListItemText primary="Мануфактуры" />
+                    <ListItemText primary="Производители" />
                 </ListItemButton>
             </ListItem>
 

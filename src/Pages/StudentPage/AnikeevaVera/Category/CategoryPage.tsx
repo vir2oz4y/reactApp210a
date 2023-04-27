@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import {Category} from "./model";
 import AnikeevaPopUp from "../AnikeevaPopUp/AnikeevaPopUp";
 import { AnikeevaCreateCategoryPagePopup } from '../AnikeevaPopUp/popups/AnikeevaCreateCategoryPagePopup';
+import {AnikeevaEditCategoryPagePopup} from "../AnikeevaPopUp/popups/AnikeevaEditCategoryPagePopup";
+
 
 
 const CategoryPage = () => {
@@ -27,7 +29,11 @@ const CategoryPage = () => {
             width: 200,
             renderCell:(e:any) =>{
                 return <div style={{display: 'flex', gap:'lem'}}>
-                    <Button color ={'primary'} variant = {'contained'}>
+                    <Button
+                        color = {'primary'}
+                        variant = {'contained'}
+                        onClick = {()=>setShowEditCategory(e.row)}>
+
                         EDIT
                     </Button>
 
@@ -52,10 +58,21 @@ const CategoryPage = () => {
         { id: 6, name: 'category 6' },])
 
     const [ShowCreateCategory, setShowCreateCategory] = useState(false);
+    const [EditedCategory, setShowEditCategory] = useState<Category|null>(null);
 
 
     const onCreate = (newCategory: Category) => {
         SetCategories(prev => [...prev, newCategory]);
+    }
+    const onEdit = (category: Category) => {
+        SetCategories(prev => {
+            const EditCategory = prev.find(el => el.id === category.id)
+
+            if (EditCategory) {
+                EditCategory.name = category.name;
+            }
+            return [...prev]
+        });
     }
 
     return (
@@ -82,6 +99,14 @@ const CategoryPage = () => {
                     onCreate={(category) => onCreate(category)}
 
                 />}
+
+                {EditedCategory !== null && <AnikeevaEditCategoryPagePopup
+                    open={EditedCategory !== null}
+                    onClose={()=>setShowEditCategory(null)}
+                    category = {EditedCategory}
+                    onEdit={(category)=>onEdit(category)}
+                    />}
+
                 <Box sx={{height: '70vh', width: '100%'}}>
                     <DataGrid
                         rows={categories}
