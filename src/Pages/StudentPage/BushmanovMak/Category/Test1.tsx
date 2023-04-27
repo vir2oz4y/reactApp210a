@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material';
 import { Category } from './model';
 import BushmanovPopUp from "../BushmanovPopUp/BushmanovPopUp";
 import { BushmanovCreateCategoryPagePopup } from '../BushmanovPopUp/Popups/BushmanovCreateCategoryPopup';
+import {BushmanovEditCategoryPagePopup} from "../BushmanovPopUp/Popups/BushmanovEditCategoryPopup";
 
 const Test1 = () => {
 
@@ -25,7 +26,11 @@ const Test1 = () => {
             width: 200,
             renderCell: (e: any) => {
                 return <div style={{display: 'flex', gap: '1em'}}>
-                    <Button color={'primary'} variant={'contained'}>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick = {()=>setShowEditCategory(e.row)}
+                    >
                         Edit
                     </Button>
 
@@ -53,10 +58,21 @@ const Test1 = () => {
     ])
 
     const [ShowCreateCategory, setShowCreateCategory] = useState(false);
+    const [editedCategory, setShowEditCategory] = useState <Category|null>(null);
     
 
     const onCreate = (newCategory: Category) => {
         setCategories(prev => [...prev, newCategory]);
+    }
+    const onEdit = (category: Category) => {
+        setCategories(prev => {
+            const editCategory = prev.find(el => el.id === category.id)
+
+            if(editCategory) {
+                editCategory.name = category.name;
+            }
+            return [...prev];
+        });
     }
 
     return (
@@ -83,6 +99,13 @@ const Test1 = () => {
                 onClose={() => setShowCreateCategory(false)}
                 onCreate={(category) => onCreate(category)}
 
+            />}
+
+            {editedCategory !== null && <BushmanovEditCategoryPagePopup
+                open={editedCategory !== null}
+                onClose={()=> setShowEditCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
             />}
 
         <Box sx={{height: '70vh', width: '100%'}}>
