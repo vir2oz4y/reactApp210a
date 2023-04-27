@@ -3,6 +3,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import {Box, Button} from "@mui/material";
 import {Category} from "./model";
 import PayzunovCreateCategoryPopup from "./Popups/PayzunovCreateCategoryPopup";
+import PayzunovEditCategoryPopup  from "./Popups/PayzunovEditCategoryPopup";
 const CategoryPage = () => {
 
     const columns: GridColDef[] = [
@@ -26,6 +27,7 @@ const CategoryPage = () => {
                 <Button
                     color={'primary'}
                     variant={'contained'}
+                    onClick={()=>setEditedCategory(e.row)}
                 >
                     Edit
                 </Button>
@@ -62,8 +64,23 @@ const CategoryPage = () => {
 
     const [showCreateCategory, setShowCreateCategory] = useState(false);
 
+    const [editedCategory, setEditedCategory] = useState<Category|null>(null);
+
+
     const onCreate = (newCategory: Category) => {
       setCategories(prev=> [...prev, newCategory]);
+    }
+
+    const onEdit = (category: Category) => {
+        setCategories(prev=>{
+            const editCategory = prev.find(el=>el.id === category.id);
+
+            if (editCategory){
+                editCategory.name = category.name;
+            }
+
+            return[...prev];
+        });
     }
 
     return (
@@ -91,6 +108,13 @@ const CategoryPage = () => {
                 open={showCreateCategory}
                 onClose={() => setShowCreateCategory(false)}
                 onCreate={(category) => onCreate(category)}
+            />}
+
+            {editedCategory !== null && <PayzunovEditCategoryPopup
+                open={editedCategory !== null}
+                onClose={()=>setEditedCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
             />}
 
             <Box sx={{ height: '70vh', width: '100%' }}>

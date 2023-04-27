@@ -54,7 +54,7 @@ import {default as PayzunovTest1Page} from "../StudentPage/Payzunov/Test1/Test1P
 import {default as PayzunovTest2Page} from "../StudentPage/Payzunov/Test2/Test2Page";
 import {default as PayzunovCategoryPage} from "../StudentPage/Payzunov/Category/CategoryPage";
 import {default as PayzunovClientPage} from "../StudentPage/Payzunov/Client/Client";
-import {default as PayzunovManufacturerPage} from "../StudentPage/Payzunov/Manufacturer/Manufacturer";
+import {default  as PayzunovManufacturerPage} from "../StudentPage/Payzunov/Manufacturer/ManufacturerPage";
 import {default as PayzunovOrderPage} from "../StudentPage/Payzunov/Order/Order";
 import {default as PayzunovProductPage} from "../StudentPage/Payzunov/Product/ProductPage";
 import {default as PayzunovPurhausePage} from "../StudentPage/Payzunov/Purhause/Purhause";
