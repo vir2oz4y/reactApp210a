@@ -31,7 +31,7 @@ export const ChernyakEditManufacturePopup = ({open, onClose, onEdit,manufacture:
                     value={manufacture.name}
                     onChange={e => setManufacture(prev => ({
                         ...prev,
-                        naem: e.target.value
+                        name: e.target.value
                     }))}
 
                 />

@@ -31,7 +31,7 @@ export const ChernyakEditCategoryPopup = ({open, onClose, onEdit,category:catego
                     value={category.name}
                     onChange={e => setCategory(prev => ({
                         ...prev,
-                        naem: e.target.value
+                        name: e.target.value
                     }))}
 
                     />

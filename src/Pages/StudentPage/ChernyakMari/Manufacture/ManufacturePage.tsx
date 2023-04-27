@@ -50,13 +50,13 @@ const ManufacturePage = () => {
 
     const [manufacturers, setManufacturers] = useState <Manufacture[]> ( [
 
-        { id: 1, name: "category 1" },
-        { id: 2, name: "category 2" },
-        { id: 3, name: "category 3" },
-        { id: 4, name: "category 4" },
-        { id: 5, name: "category 5" },
-        { id: 6, name: "category 6" },
-        { id: 7, name: "category 7" },
+        { id: 1, name: "manufacture 1", city:"",country: "" },
+        { id: 2, name: "manufacture 2", city:"",country: "" },
+        { id: 3, name: "manufacture 3", city:"",country: "" },
+        { id: 4, name: "manufacture 4", city:"",country: "" },
+        { id: 5, name: "manufacture5", city:"",country: "" },
+        { id: 6, name: "manufacture 6", city:"",country: "" },
+        { id: 7, name: "manufacture 7", city:"",country: "" },
 
     ])
     const[showCreateManufacture, setShowCreateManufacture] = useState(false);
