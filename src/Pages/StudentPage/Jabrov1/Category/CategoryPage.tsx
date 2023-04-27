@@ -5,6 +5,7 @@ import {useState} from "react";
 import JabrovPopUp from "../JabrovPopUp/JabrovPopUp";
 import { JabrovCreateCategoryPopUp } from './popups/JabrovCreateCategoryPopUp';
 import { Category } from './model';
+import {JabrovEditCategoryPopUp} from "./popups/JabrovEditCategoryPopUp";
 
 
 const CategoryPage = () => {
@@ -29,6 +30,7 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
+                        onClick = {()=>setShowEditCategory(e.row)}
                     >
                         Edit
                     </Button>
@@ -63,9 +65,22 @@ const CategoryPage = () => {
         { id: 7, name: "category 7" },])
 
     const [showCreateCatrgory, setShowCreateCategory] = useState(false);
+    const [editedCategory, setShowEditCategory] =  useState<Category|null>(null);
 
     const onCreate = (newCategory: Category) => {
         setCategories(prev => [...prev, newCategory]);
+
+    }
+
+    const onEdit = (category: Category) => {
+        setCategories(prev => {
+            const editCategory = prev.find(el=>el.id ===category.id)
+
+            if(editCategory){
+                editCategory.name = category.name
+            }
+            return [...prev]
+        });
 
     }
 
@@ -96,6 +111,14 @@ const CategoryPage = () => {
                 onCreate={(category) => onCreate(category)}
             />
             }
+            {editedCategory !== null && <JabrovEditCategoryPopUp
+                open={editedCategory !==null}
+                onClose={()=>setShowEditCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
+
+                />}
+
 
         <Box sx={{ height: "70vh", width: "100%" }}>
             <DataGrid
