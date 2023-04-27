@@ -4,6 +4,7 @@ import {Box, Button, dividerClasses} from '@mui/material';
 import {Category} from "./model";
 import KryuchkovPopup from "../../../../Components/Kryuchkov/KryuchkovPopup/KryuchkovPopup";
 import { KryuchkovCreateCategoryPopup } from './Popups/KryuchkovCreateCategotyPopup';
+import {KryuchkovEditCategoryPopup} from "./Popups/KryuchkovEditCategotyPopup";
 
 const CategoryPage = () => {
 
@@ -25,6 +26,7 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
+                        onClick={()=>setEditedCategory(e.row)}
                     >
                         Edit
                     </Button>
@@ -59,8 +61,22 @@ const CategoryPage = () => {
 
     const [showCreateCategory, setShowCreateCategory] = useState(false);
 
+    const [editedCategory, setEditedCategory] = useState<Category|null>(null);
+
     const onCreate = (newCategory: Category) => {
         setCategories(prev => [...prev, newCategory]);
+    }
+
+    const onEdit = (category: Category) => {
+        setCategories(prev => {
+            const editCategory = prev.find(el=>el.id === category.id);
+
+            if (editCategory){
+                editCategory.name = category.name;
+            }
+
+            return [...prev];
+        });
     }
 
     return (
@@ -89,6 +105,13 @@ const CategoryPage = () => {
                 open={showCreateCategory}
                 onClose={() => setShowCreateCategory(false)}
                 onCreate={(category) => onCreate(category)}
+            />}
+
+            {editedCategory !== null && <KryuchkovEditCategoryPopup
+                open={editedCategory !== null}
+                onClose={()=>setEditedCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
             />}
 
             <Box sx={{height: '70vh', width: '100%'}}>
