@@ -11,36 +11,32 @@ const ManufacturerPage=()=>{
         {
             field: 'id',
             headerName: 'ID',
-            width: 90
         },
         {
             field: 'name',
             headerName: 'Manufacturer',
-            width: 150,
-            editable: true,
+            flex: 1,
         },
         {
             field: 'city',
             headerName: 'city name',
-            width: 150,
-            editable: true,
+            flex: 1,
         },
         {
             field: 'country',
             headerName: 'country name',
-            width: 150,
-            editable: true,
+            flex: 1,
         },
         {
             field:'',
             headerName:'',
-            width: 500,
+            width: 250,
             renderCell:(e:any)=>{
                 return <div style={{display:'flex',gap:'1em'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setEditedManufacturer(e.row)}
+                        onClick={()=>setEditedManufacture(e.row)}
                     >
                         Редактировать
                     </Button>
@@ -57,28 +53,28 @@ const ManufacturerPage=()=>{
     ];
 
     const onDeleteClick = (id:number)=>{
-        setManufacturer(prev=>
+        setManufacturies(prev=>
             prev.filter(el=>el.id != id))
     }
 
-    const [manufacturer,setManufacturer,setCity,setCountry]=useState<Manufacturer[]>([
+    const [manufacturies,setManufacturies]=useState<Manufacturer[]>([
         { id: 1,name: 'Manufacturer 1', city: "Nsk", country: "RU"},
     ]);
 
-    const [showCreateManufacturer, setShowCreateManufacturer]=useState(false);
-    const [editedManufacturer, setEditedManufacturer] = useState<Manufacturer|null>(null);
+    const [showCreateManufacture, setShowCreateManufacture]=useState(false);
+    const [editedManufacture, setEditedManufacture] = useState<Manufacturer|null>(null);
 
     const onCreate =(newManufacturer:Manufacturer)=>{
-        setManufacturer(prev=>[...prev,newManufacturer]);
+        setManufacturies(prev=>[...prev,newManufacturer]);
 
     }
 
     const onEdit = (manufacturer: Manufacturer)=>{
-        setManufacturer(prev=>{
-            const editManufacturer = prev.find(el=>el.id === manufacturer.id);
+        setManufacturies(prev=>{
+            const editCategory = prev.find(el=>el.id === manufacturer.id);
 
-            if (editManufacturer){
-                editManufacturer.name = manufacturer.name;
+            if (editCategory){
+                editCategory.name = manufacturer.name;
             }
 
             return [...prev];
@@ -99,29 +95,29 @@ const ManufacturerPage=()=>{
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setShowCreateManufacturer(true)}>
+                        onClick={()=>setShowCreateManufacture(true)}>
                         Добавить производителя
                     </Button>
                 </div>
             </div>
 
-            {showCreateManufacturer && <TelelinskiyCreateManufacturerPopUp
-                open={true}
-                onClose={ ()=> setShowCreateManufacturer(false)}
-                onCreate={(manufacturer)=>onCreate(manufacturer)}
+            {showCreateManufacture && <TelelinskiyCreateManufacturerPopUp
+                open={showCreateManufacture}
+                onClose={ ()=> setShowCreateManufacture(false)}
+                onCreate={(manufacture)=>onCreate(manufacture)}
 
             />}
 
-            {editedManufacturer !== null && <TelelinskiyEditManufacturerPopUp
-                open={editedManufacturer !==null}
-                onClose={()=>setEditedManufacturer(null)}
-                manufacturer={editedManufacturer}
+            {editedManufacture !== null && <TelelinskiyEditManufacturerPopUp
+                open={editedManufacture !==null}
+                onClose={()=>setEditedManufacture(null)}
+                manufacturer={editedManufacture}
                 onEdit={(manufacturer)=>onEdit(manufacturer)}
             />}
 
             <Box sx={{height:'100vh',width:'100%'}}>
                 <DataGrid
-                    rows={manufacturer}
+                    rows={manufacturies}
                     columns={columns}
                 />
             </Box>

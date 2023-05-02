@@ -6,18 +6,14 @@ import { Manufacturer } from '../models';
 
 type Props = IPopup & {
     manufacturer:Manufacturer,
-    city:Manufacturer,
-    country:Manufacturer,
-    onEdit:(manufacturer:Manufacturer)=>void;
+    onEdit:(newManufacturer:Manufacturer)=>void;
 }
 export const TelelinskiyEditManufacturerPopUp =({open,onClose,onEdit,manufacturer:manufacturerProps}:Props)=>{
 
-    const [manufacturer, setManufacturer, manufacturerCity, setManufacturerCity,manufacturerCountry, setManufacturerCountry]=useState(manufacturerProps)
+    const [manufacturer, setManufacturer]=useState<Manufacturer>(manufacturerProps)
 
     const onEditClick=()=>{
         onEdit(manufacturer);
-        onEdit(manufacturerCity);
-        onEdit(manufacturerCountry);
 
         onClose();
     }
@@ -26,7 +22,7 @@ export const TelelinskiyEditManufacturerPopUp =({open,onClose,onEdit,manufacture
         <TelelinskiyPopUp
             open={open}
             onClose={onClose}
-            title={'создание Производителя'}
+            title={'Изменение Производителя'}
         >
             <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
 
@@ -40,15 +36,15 @@ export const TelelinskiyEditManufacturerPopUp =({open,onClose,onEdit,manufacture
                 <TextField
                     label="Manufacturer city"
                     variant="standard"
-                    value={manufacturer.name}
-                    onChange={e=>setManufacturerCity(prev=>({...prev,name:e.target.value}))}
+                    value={manufacturer.city}
+                    onChange={e=>setManufacturer(prev=>({...prev,name:e.target.value}))}
 
                 />
                 <TextField
                     label="Manufacturer country"
                     variant="standard"
-                    value={manufacturer.name}
-                    onChange={e=>setManufacturerCountry(prev=>({...prev,name:e.target.value}))}
+                    value={manufacturer.country}
+                    onChange={e=>setManufacturer(prev=>({...prev,name:e.target.value}))}
 
                 />
                 <div style={{display:'flex',justifyContent:'center'}}>

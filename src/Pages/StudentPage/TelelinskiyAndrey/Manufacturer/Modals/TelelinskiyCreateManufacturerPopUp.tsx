@@ -9,21 +9,18 @@ type Props = IPopup & {
 }
 export const TelelinskiyCreateManufacturerPopUp =({open,onClose,onCreate}:Props)=>{
 
-    const [manufacturerName, setManufacturerName,manufacturerCity, setManufacturerCity,manufacturerCountry, setManufacturerCountry]=useState('')
+    const [manufacturer, setManufacturer]=useState<Manufacturer>({
+        id: Math.random(),
+        city: "",
+        country: "",
+        name: ""
+    })
 
     const onCreateClick=()=>{
-        onCreate({
-            id: Math.random(),
-            name: manufacturerName,
-            city: manufacturerCity,
-            country:manufacturerCountry
-        })
+        onCreate(manufacturer)
         onClose();
     }
 
-    function setShowCreateManufacturer(arg0: boolean): void {
-        throw new Error('Function not implemented.');
-    }
 
     return (<div>
         <TelelinskiyPopUp
@@ -36,22 +33,22 @@ export const TelelinskiyCreateManufacturerPopUp =({open,onClose,onCreate}:Props)
                 <TextField
                     label="Manufacturer name"
                     variant="standard"
-                    value={manufacturerName}
-                    onChange={e=>setManufacturerName(e.target.value)}
+                    value={manufacturer.name}
+                    onChange={e=>setManufacturer(prev=>({...prev, name:e.target.value}))}
 
                 />
                 <TextField
                     label="city name"
                     variant="standard"
-                    value={manufacturerName}
-                    onChange={e=>setManufacturerCity(e.target.value)}
+                    value={manufacturer.city}
+                    onChange={e=>setManufacturer(prev=>({...prev, name:e.target.value}))}
 
                 />
                 <TextField
                     label="country name"
                     variant="standard"
-                    value={manufacturerName}
-                    onChange={e=>setManufacturerCountry(e.target.value)}
+                    value={manufacturer.country}
+                    onChange={e=>setManufacturer(prev=>({...prev, name:e.target.value}))}
 
                 />
                 <div style={{display:'flex',justifyContent:'center'}}>
