@@ -41,14 +41,14 @@ export const TelelinskiyCreateManufacturerPopUp =({open,onClose,onCreate}:Props)
                     label="city name"
                     variant="standard"
                     value={manufacturer.city}
-                    onChange={e=>setManufacturer(prev=>({...prev, name:e.target.value}))}
+                    onChange={e=>setManufacturer(prev=>({...prev, city:e.target.value}))}
 
                 />
                 <TextField
                     label="country name"
                     variant="standard"
                     value={manufacturer.country}
-                    onChange={e=>setManufacturer(prev=>({...prev, name:e.target.value}))}
+                    onChange={e=>setManufacturer(prev=>({...prev, country:e.target.value}))}
 
                 />
                 <div style={{display:'flex',justifyContent:'center'}}>
