@@ -16,19 +16,19 @@ const ManufacturePage = () => {
         },
         {
             field: 'name',
-            headerName: 'first name',
+            headerName: 'Manufacture',
             flex: 1,
             editable: true,
         },
         {
             field: 'city',
-            headerName: 'city',
+            headerName: 'City',
             flex: 1,
             editable: true,
         },
         {
             field: 'country',
-            headerName: 'first name',
+            headerName: 'Country',
             flex: 1,
             editable: true,
         },
@@ -94,7 +94,7 @@ const ManufacturePage = () => {
         <div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h1>
-                    Категории
+                    Мануфактуры
                 </h1>
 
                 <div>
@@ -103,7 +103,7 @@ const ManufacturePage = () => {
                         variant={'contained'}
                         onClick={() => setShowCreateManufacture(true)}
                     >
-                        Добавить категорию
+                        Добавить мануфактуру
                     </Button>
                 </div>
 
