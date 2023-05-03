@@ -1,23 +1,24 @@
 import {Button, ListItemAvatarProps, TextField} from '@mui/material'
 import React, { useState } from 'react'
 import ChernyakPopup, { IPopup }from "../../../../../Components/Chernyak/ChernyakPopup/ChernyakPopup";
-import { Manufacture } from "../model";
+import { Client } from "../model";
 
 type Props = IPopup & {
-    onCreate: (newManufacture: Manufacture) => void;
+    onCreate: (newManufacture: Client) => void;
 }
 
-export const ChernyakCreateManufacturePopup = ({ open, onClose, onCreate }: Props) => {
+export const ChernyakCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
 
-    const [manufacture, setManufacture] = useState<Manufacture>({
+    const [client, setClient] = useState<Client>({
         id: Math.random(),
-        city: "",
-        country: "",
-        name: ""
+        email: "",
+        phoneNumber: "",
+        firstName: "",
+        lastName: "",
     })
 
     const onCreateClick = () => {
-        onCreate(manufacture)
+        onCreate(client)
 
         onClose();
     }
@@ -26,30 +27,37 @@ export const ChernyakCreateManufacturePopup = ({ open, onClose, onCreate }: Prop
         <ChernyakPopup
             open={open}
             onClose={onClose}
-            title={'Создание производителя'}
+            title={'Создание клиента'}
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
 
                 <TextField
-                    label="Название"
+                    label="Имя"
                     variant="standard"
-                    value={manufacture.name}
-                    onChange={e => setManufacture(prev=>({...prev, name:e.target.value}))}
+                    value={client.firstName}
+                    onChange={e => setClient(prev=>({...prev, firstName:e.target.value}))}
                 />
 
                 <TextField
-                    label="Страна"
+                    label="Фамилия"
                     variant="standard"
-                    value={manufacture.country}
-                    onChange={e => setManufacture(prev=>({...prev, country:e.target.value}))}
+                    value={client.lastName}
+                    onChange={e => setClient(prev=>({...prev, lastName:e.target.value}))}
+                />
+
+                <TextField
+                    label="Номер телефона"
+                    variant="standard"
+                    value={client.phoneNumber}
+                    onChange={e => setClient(prev=>({...prev, phoneNumber:e.target.value}))}
                 />
 
 
                 <TextField
-                    label="Город"
+                    label="Почта"
                     variant="standard"
-                    value={manufacture.city}
-                    onChange={e => setManufacture(prev=>({...prev, city:e.target.value}))}
+                    value={client.email}
+                    onChange={e => setClient(prev=>({...prev, email:e.target.value}))}
                 />
 
 

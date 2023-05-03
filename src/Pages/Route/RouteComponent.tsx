@@ -94,7 +94,7 @@ import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2"
 import ChernyakM from "../StudentPage/ChernyakMari/ChernyakM";
 import {default as ChernyakMCategory} from "../StudentPage/ChernyakMari/Category/CategoryPage";
 import {default as ChernyakMClient} from "../StudentPage/ChernyakMari/Client/Client";
-import {default as ChernyakMManufacture} from "../StudentPage/ChernyakMari/Manufacture/Manufacture";
+import {default as ChernyakMManufacture} from "../StudentPage/ChernyakMari/Manufacture/ManufacturePage";
 import {default as ChernyakMOrder} from "../StudentPage/ChernyakMari/Order/Order";
 import {default as ChernyakMProduct} from "../StudentPage/ChernyakMari/Product/Product";
 import {default as ChernyakMPurchase} from "../StudentPage/ChernyakMari/Purchase/Purchase";
