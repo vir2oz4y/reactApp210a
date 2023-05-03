@@ -75,6 +75,8 @@ const ManufacturerPage=()=>{
 
             if (editCategory){
                 editCategory.name = manufacturer.name;
+                editCategory.city = manufacturer.city;
+                editCategory.country = manufacturer.country;
             }
 
             return [...prev];

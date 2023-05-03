@@ -23,7 +23,7 @@ const AsideMenu = () => {
                 <ListItemButton
                     onClick={()=>navigate('client')}
                 >
-                    <ListItemText primary="Client" />
+                    <ListItemText primary="ClientPage" />
                 </ListItemButton>
             </ListItem>
 
