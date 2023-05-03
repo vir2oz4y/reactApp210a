@@ -12,18 +12,18 @@ const SiteMenu = () => {
         <div>
             <List>
                 <ListItem disablePadding>
+                    <ListItemButton onClick={() => navigate('Client')}>
+                        <ListItemText primary="Client" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton onClick={() => navigate('Manufacturer')}>
+                        <ListItemText primary="Manufacturer" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
                     <ListItemButton onClick={() => navigate('Test1')}>
                         <ListItemText primary="Test1" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Test2')}>
-                        <ListItemText primary="Test2" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('Postavshiki')}>
-                        <ListItemText primary="Postavshiki" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

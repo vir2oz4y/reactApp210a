@@ -2,14 +2,14 @@ import React from 'react';
 import {Modal} from "@mui/material";
 import Button from "@mui/material/Button";
 import "./JabrovPopUp.scss";
-export type Ipopup ={
+export type IPopup ={
 
     open:boolean,
 
     onClose:()=>void;
 }
 
-type Props = Ipopup & {
+type Props = IPopup & {
     title:string
     children:any
 

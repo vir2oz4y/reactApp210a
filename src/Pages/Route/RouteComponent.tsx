@@ -34,8 +34,8 @@ import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
 import { default as JabrovCategory } from "../StudentPage/Jabrov1/Category/CategoryPage";
 import { default as JabrovTovar } from "../StudentPage/Jabrov1/Tovar/tovar";
 import { default as JabrovZakaz } from "../StudentPage/Jabrov1/Zakaz/zakaz";
-import { default as JabrovClients } from "../StudentPage/Jabrov1/Clients/Clients";
-import { default as JabrovPostavshiki } from "../StudentPage/Jabrov1/Postavshiki/Postavshiki";
+import { default as JabrovClient } from "../StudentPage/Jabrov1/Clients/ClientPage";
+import { default as JabrovManufacturer } from "../StudentPage/Jabrov1/Manufacturer/ManufacturerPage";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import { default as BushmanovManufacturePage } from "../StudentPage/BushmanovMak/Manufacture/Manufacture";
@@ -183,8 +183,8 @@ const RouteComponent = () => {
                         <Route path={'Category'} element={<JabrovCategory />} />
                         <Route path={'tovar'} element={<JabrovTovar />} />
                         <Route path={'zakaz'} element={<JabrovZakaz />} />
-                        <Route path={'Clients'} element={<JabrovClients />} />
-                        <Route path={'Postavshiki'} element={<JabrovPostavshiki />} />
+                        <Route path={'Client'} element={<JabrovClient />} />
+                        <Route path={'Manufacturer'} element={<JabrovManufacturer />} />
                     </Route>
 
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>

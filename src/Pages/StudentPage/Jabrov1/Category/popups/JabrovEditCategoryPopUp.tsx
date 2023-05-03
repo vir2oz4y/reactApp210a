@@ -1,12 +1,12 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import JabrovPopUp, { Ipopup } from '../../JabrovPopUp/JabrovPopUp'
+import JabrovPopUp, { IPopup } from '../../JabrovPopUp/JabrovPopUp'
 import { Category } from '../model'
 //import { Category } from '../Category/model'
 
 
 
-type Props = Ipopup & {
+type Props = IPopup & {
     category:Category,
     onEdit: (category: Category) => void;
 
