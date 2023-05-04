@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import KryuchkovPopup, { IPopup } from '../../../../../Components/Kryuchkov/KryuchkovPopup/KryuchkovPopup'
+import { kryuchkovAxios } from '../../KryuchkovNickPage'
 import { Category } from '../model'
 
 type Props = IPopup & {
@@ -12,12 +13,17 @@ export const KryuchkovCreateCategoryPopup = ({ open, onClose, onCreate }: Props)
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: categoryName
-        })
 
-        onClose();
+        kryuchkovAxios.post<{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        ).then((response) => {
+
+            onCreate(response.data.item)
+            onClose();
+        })
     }
 
 	return (

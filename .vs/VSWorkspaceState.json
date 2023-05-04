@@ -5,8 +5,11 @@
     "\\src",
     "\\src\\Pages",
     "\\src\\Pages\\StudentPage",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim",
+    "\\src\\Pages\\StudentPage\\KryuchkovNick",
+    "\\src\\Pages\\StudentPage\\KryuchkovNick\\Category",
+    "\\src\\Pages\\StudentPage\\KryuchkovNick\\Category\\Popups",
     "\\src\\Pages\\StudentPage\\SviridenkoDim\\CiteMenu"
   ],
+  "SelectedNode": "\\src\\Pages\\StudentPage\\KryuchkovNick\\Category\\Popups\\KryuchkovEditCategotyPopup.tsx",
   "PreviewInSolutionExplorer": false
 }

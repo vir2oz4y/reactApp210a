@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {Box, Button, dividerClasses} from '@mui/material';
 import {Category} from "./model";
 import KryuchkovPopup from "../../../../Components/Kryuchkov/KryuchkovPopup/KryuchkovPopup";
 import { KryuchkovCreateCategoryPopup } from './Popups/KryuchkovCreateCategotyPopup';
 import {KryuchkovEditCategoryPopup} from "./Popups/KryuchkovEditCategotyPopup";
+import { kryuchkovAxios } from '../KryuchkovNickPage';
 
 const CategoryPage = () => {
 
@@ -44,20 +45,27 @@ const CategoryPage = () => {
     ];
 
     const onDeleteClick = (id: number) => {
-        setCategories(prev =>
-            prev.filter(el => el.id !== id)
-        )
+
+        kryuchkovAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+            .then(() => {
+                setCategories(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [categories, setCategories] = useState<Category[]>([
-        {id: 1, name: "category 1"},
-        {id: 2, name: "category 2"},
-        {id: 3, name: "category 3"},
-        {id: 4, name: "category 4"},
-        {id: 5, name: "category 5"},
-        {id: 6, name: "category 6"},
-        {id: 7, name: "category 7"},
-    ])
+    const [categories, setCategories] = useState<Category[]>([])
+
+
+    useEffect(() => {
+        kryuchkovAxios.get<{ items: Category[] }>(
+            'https://canstudy.ru/orderapi/category/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+    },[])
+
 
     const [showCreateCategory, setShowCreateCategory] = useState(false);
 
