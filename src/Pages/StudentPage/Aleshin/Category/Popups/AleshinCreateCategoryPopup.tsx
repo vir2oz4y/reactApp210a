@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
 import { TextField, Button } from "@mui/material";
 import {Category} from "../model";
+import {aleshinAxios} from "../../Aleshin";
 
 type Props = IPopup & {
     onCreate:(newCategory: Category) => void;
@@ -11,11 +12,19 @@ export const AleshinCreateCategoryPopup = ({open, onClose, onCreate}:Props) => {
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: categoryName
-        })
-        onClose();
+
+        aleshinAxios.post<{ item: Category }>(
+            'https://canstudy.ru/orderapi/Category',
+            {
+                name: categoryName
+            }
+        )
+            .then((response) => {
+
+                onCreate(response.data.item)
+                onClose();
+
+            })
     }
 
     return (

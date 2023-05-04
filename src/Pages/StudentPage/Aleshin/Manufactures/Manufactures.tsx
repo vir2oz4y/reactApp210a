@@ -12,11 +12,22 @@ const ManufacturePage = () => {
         {
             field: 'id',
             headerName: 'ID',
-            width: 90
         },
         {
             field: 'name',
-            headerName: 'First name',
+            headerName: 'Name',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'country',
+            headerName: 'Country',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'city',
+            headerName: 'City',
             width: 150,
             editable: true,
         },
@@ -53,14 +64,15 @@ const ManufacturePage = () => {
         )
     }
 
-    const [categories, setManufactures] = useState<Manufacture[]>([
-        { id: 1, name: 'Manufacture 1' },
-        { id: 1, name: 'Manufacture 1' },
-        { id: 1, name: 'Manufacture 1' },
-        { id: 1, name: 'Manufacture 1' },
-        { id: 1, name: 'Manufacture 1' },
-        { id: 1, name: 'Manufacture 1' },
-        { id: 1, name: 'Manufacture 1' },
+    const [manufactures, setManufactures] = useState<Manufacture[]>([
+        {id: 1, name: "Производитель 1", country:'rus', city:'nsk'},
+        /*{ id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
+        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
+        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
+        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
+        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
+        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
+        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },*/
     ])
 
     const [showCreateManufacture, setCreateManufacture] = useState(false)
@@ -76,6 +88,8 @@ const ManufacturePage = () => {
 
             if (editManufacture){
                 editManufacture.name = manufacture.name;
+                editManufacture.country = manufacture.country;
+                editManufacture.city = manufacture.city;
             }
 
             return [...prev];
@@ -118,7 +132,7 @@ const ManufacturePage = () => {
 
                 <Box sx={{ height: '70vh', width: '100%' }}>
                     <DataGrid
-                        rows={categories}
+                        rows={manufactures}
                         columns={columns}
                     />
                 </Box>

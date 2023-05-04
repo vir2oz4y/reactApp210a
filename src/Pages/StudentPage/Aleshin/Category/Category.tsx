@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Category } from "./model";
 import AleshinPopup from '../../../../Components/Aleshin/AleshinPopup/AleshinPopup';
 import {AleshinCreateCategoryPopup} from "./Popups/AleshinCreateCategoryPopup";
 import {AleshinEditCategoryPopup} from "./Popups/AleshinEditCategoryPopup";
+import {aleshinAxios} from "../Aleshin";
 
 const CategoryPage = () => {
 
@@ -48,20 +49,25 @@ const CategoryPage = () => {
 
 
     const onDeleteClick = (id: number) => {
-        setCategories(  prev =>
-            prev.filter(el => el.id !== id)
-        )
+
+        aleshinAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+            .then(() => {
+                setCategories(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [categories, setCategories] = useState<Category[]>([
-            { id: 1, name: 'category 1' },
-            { id: 2, name: 'category 2' },
-            { id: 3, name: 'category 3' },
-            { id: 4, name: 'category 4' },
-            { id: 5, name: 'category 5' },
-            { id: 6, name: 'category 6' },
-            { id: 7, name: 'category 7' },
-        ])
+    const [categories, setCategories] = useState<Category[]>([])
+
+    useEffect(() => {
+        aleshinAxios.get<{ items: Category[] }>(
+            'https://canstudy.ru/orderapi/Category/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items)
+            })
+    },[])
 
     const [showCreateCategory, setCreateCategory] = useState(false)
     const [editedCategory, setEditedCategory] = useState<Category|null>(null)

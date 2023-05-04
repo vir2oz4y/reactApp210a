@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
 import { TextField, Button } from "@mui/material";
 import {Category} from "../model";
+import {aleshinAxios} from "../../Aleshin";
 
 type Props = IPopup & {
     category: Category,
@@ -12,8 +13,17 @@ export const AleshinEditCategoryPopup = ({open, onClose, onEdit, category:catego
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
-        onEdit(category)
-        onClose();
+
+        aleshinAxios.patch<{ item: Category }>(
+            'https://canstudy.ru/orderapi/Category',
+            {
+                item: category
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item)
+                onClose();
+            })
     }
 
     return (

@@ -5,7 +5,7 @@ import {Manufacture} from "../model";
 
 type Props = IPopup & {
     manufacture: Manufacture,
-    onEdit:(manufacture: Manufacture) => void;
+    onEdit:(newManufacture: Manufacture) => void;
 }
 export const AleshinEditManufacturePopup = ({open, onClose, onEdit, manufacture:manufactureProps}:Props) => {
 
@@ -25,10 +25,24 @@ export const AleshinEditManufacturePopup = ({open, onClose, onEdit, manufacture:
             <div style = {{display:'flex', flexDirection:'column', gap:'1em'}}>
 
                 <TextField
-                    label = "Имя мануфакутры"
+                    label = "Мануфакутра"
                     variant="standard"
                     value={manufacture.name}
                     onChange={e => setManufacture(prev => ({...prev, name: e.target.value}))}
+                />
+
+                <TextField
+                    label = "Страна"
+                    variant="standard"
+                    value={manufacture.country}
+                    onChange={e => setManufacture(prev => ({...prev, country: e.target.value}))}
+                />
+
+                <TextField
+                    label = "Город"
+                    variant="standard"
+                    value={manufacture.city}
+                    onChange={e => setManufacture(prev => ({...prev, city: e.target.value}))}
                 />
 
                 <div>
