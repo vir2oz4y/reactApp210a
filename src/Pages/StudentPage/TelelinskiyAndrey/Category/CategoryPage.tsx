@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Category } from './models';
 import TelelinskiyPopUp from "../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import {TelelinskiyCreateCategoryPopUp} from "./Modals/TelelinskiyCreateCategoryPopUp";
 import {TelelinskiyEditCategoryPopUp} from "./Modals/TelelinskiyEditCategoryPopUp";
+import { TelelinskiyAxios } from '../TelelinskiyAndreyPage';
 
 const CategoryPage=()=>{
     const columns: GridColDef[] = [
@@ -46,21 +47,26 @@ const CategoryPage=()=>{
     ];
 
     const onDeleteClick = (id:number)=>{
-    setCategories(prev=>
-    prev.filter(el=>el.id != id))
+        TelelinskiyAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+            .then(()=>{
+                setCategories(prev=>
+                    prev.filter(el=>el.id !== id)
+                )
+            })
     }
 
-    const [categories,setCategories]=useState<Category[]>([
-        { id: 1,name: 'ooooooooooooooooooooooooooooooooooooo 1'},
-        { id: 2,name: 'Categoru 4'},
-        { id: 3,name: 'Category 3'},
-        { id: 4,name: 'Category 4'},
-        { id: 5,name: 'Category 5'},
-        { id: 6,name: 'Category 6'},
-        { id: 7,name: 'Category 7'},
-        { id: 8,name: 'Category 8'},
-        { id: 9,name: 'Category 9'},
-    ]);
+    const [categories,setCategories]=useState<Category[]>([]);
+
+    useEffect(() => {
+        TelelinskiyAxios.get<{
+            items: Category[]
+        }>(
+            'https://canstudy.ru/orderapi/category/list'
+        )
+            .then((response)=>{
+                setCategories(response.data.items)
+            })
+    },[])
 
     const [showCreateCategory, setShowCreateCategory]=useState(false);
     const [editedCategory, setEditedCategory] = useState<Category|null>(null);

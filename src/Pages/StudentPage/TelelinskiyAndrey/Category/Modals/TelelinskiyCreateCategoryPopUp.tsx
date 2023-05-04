@@ -2,6 +2,7 @@ import {Button, TextField } from '@mui/material';
 import  React, { useState } from 'react'
 import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import { Category } from '../models';
+import {TelelinskiyAxios} from "../../TelelinskiyAndreyPage";
 
 
 type Props = IPopup & {
@@ -12,11 +13,15 @@ export const TelelinskiyCreateCategoryPopUp =({open,onClose,onCreate}:Props)=>{
     const [categoryName, setCategoryName]=useState('')
 
     const onCreateClick=()=>{
-        onCreate({
-            id: Math.random(),
-            name: categoryName
+        TelelinskiyAxios.post<{item:Category}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        ).then((response)=>{
+            onCreate(response.data.item)
+            onClose();
         })
-        onClose();
     }
 
     function setShowCreateCategory(arg0: boolean): void {

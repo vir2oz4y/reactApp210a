@@ -2,6 +2,7 @@ import {Button, TextField } from '@mui/material';
 import  React, { useState } from 'react'
 import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import { Category } from '../models';
+import {TelelinskiyAxios} from "../../TelelinskiyAndreyPage";
 
 
 type Props = IPopup & {
@@ -13,9 +14,15 @@ export const TelelinskiyEditCategoryPopUp =({open,onClose,onEdit,category:catego
     const [category, setCategory]=useState(categoryProps)
 
     const onEditClick=()=>{
-        onEdit(category);
-
-        onClose();
+        TelelinskiyAxios.patch<{item:Category}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: category
+            }
+        ).then((response)=>{
+            onEdit(response.data.item);
+            onClose();
+        })
     }
 
     return (<div>
