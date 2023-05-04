@@ -2,7 +2,6 @@ import { Button, TextField } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 import GayvoronskikhPopUp, { IPopUp } from '../../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp'
-import { GayvoronskikhAxios } from '../../GayvoronskikhAndrei'
 import { Category } from '../model'
 
 type Props = IPopUp & {
@@ -13,14 +12,11 @@ export const GayvoronskikhCreateCategoryPopUp = ({ open, onClose,onCreate }:Prop
 
     const [CategoryName, setCategoryName]= useState('')
     const onCreateClick = () => {
-        GayvoronskikhAxios.post<{item:Category}>('https://canstudy.ru/orderapi/category',
-            {
-                name: CategoryName
-            }
-        ).then((response)=> {
-    onCreate(response.data.item)
-    onClose();
-    })
+        onCreate({
+            id: Math.random(),
+            name: CategoryName
+        })
+        onClose()
     }
 
     return (

@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 import GayvoronskikhPopUp, { IPopUp } from '../../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp'
+import { GayvoronskikhAxios } from '../../GayvoronskikhAndrei'
 import { Category } from '../model'
 
 type Props = IPopUp & {
@@ -13,9 +14,19 @@ export const GayvoronskikhEditCategoryPopUp = ({ open, onClose,onEdit,category:c
 
     const [category, setCategory] = useState(categoryProps)
     const onEditClick = () => {
-        onEdit(category);
-        onClose();
+
+        GayvoronskikhAxios.patch<{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: category
+            }
+        ).then((response) => {
+            onEdit(response.data.item);
+            onClose();
+        })
     }
+        
+    
 
     return (
         <div>

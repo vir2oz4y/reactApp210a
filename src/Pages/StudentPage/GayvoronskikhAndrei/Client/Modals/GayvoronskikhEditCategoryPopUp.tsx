@@ -2,25 +2,19 @@ import { Button, TextField } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 import GayvoronskikhPopUp, { IPopUp } from '../../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp'
-import { GayvoronskikhAxios } from '../../GayvoronskikhAndrei'
 import { Category } from '../model'
 
 type Props = IPopUp & {
-    onCreate: (newCategory: Category) => void;
+    category: Category,
+    onEdit: (category: Category) => void;
 }
 
-export const GayvoronskikhCreateCategoryPopUp = ({ open, onClose,onCreate }:Props) => {
+export const GayvoronskikhEditCategoryPopUp = ({ open, onClose,onEdit,category:categoryProps}:Props) => {
 
-    const [CategoryName, setCategoryName]= useState('')
-    const onCreateClick = () => {
-        GayvoronskikhAxios.post<{item:Category}>('https://canstudy.ru/orderapi/category',
-            {
-                name: CategoryName
-            }
-        ).then((response)=> {
-    onCreate(response.data.item)
-    onClose();
-    })
+    const [category, setCategory] = useState(categoryProps)
+    const onEditClick = () => {
+        onEdit(category);
+        onClose();
     }
 
     return (
@@ -28,7 +22,7 @@ export const GayvoronskikhCreateCategoryPopUp = ({ open, onClose,onCreate }:Prop
             <GayvoronskikhPopUp
             open={open}
             onClose={onClose}
-            title={'Create Category'}
+            title={'Edit Category'}
             >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
 
@@ -36,16 +30,19 @@ export const GayvoronskikhCreateCategoryPopUp = ({ open, onClose,onCreate }:Prop
                         id="standard-basic"
                         label="Standard"
                         variant="standard"
-                        value={CategoryName}
-                        onChange={(e)=>setCategoryName(e.target.value)}
+                        value={category.name}
+                        onChange={(e) => setCategory(prev => ({
+                            ...prev,
+                            name: e.target.value
+                        }))}
                     />
                         <div style={{ display: 'flex', justifyContent:'center'}}>
                         <Button
                             color={'primary'}
                             variant={'contained'}
-                            onClick={()=>onCreateClick()}
+                            onClick={()=>onEditClick()}
                         >
-                                 Create
+                                 Edit
                          </Button>
                         </div>
                 </div>
