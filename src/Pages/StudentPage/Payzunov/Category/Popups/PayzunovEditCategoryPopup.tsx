@@ -3,6 +3,7 @@ import PayzunovPopup, {IPopup} from "../../../../../Components/Payzunov/Payzunov
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {Category} from "../model";
+import {PayzunovAxios} from "../../payzunov";
 
 type Props = IPopup & {
     category: Category,
@@ -14,9 +15,16 @@ const PayzunovEditCategoryPopup = ({open, onClose, onEdit, category:categoryProp
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
-        onEdit(category);
 
-        onClose();
+        PayzunovAxios.patch<{item: Category}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: category
+            }
+        ).then((response) => {
+            onEdit(response.data.item);
+            onClose();
+        })
     }
 
     return (

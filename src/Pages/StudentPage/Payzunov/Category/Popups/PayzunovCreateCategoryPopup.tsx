@@ -3,6 +3,7 @@ import PayzunovPopup, {IPopup} from "../../../../../Components/Payzunov/Payzunov
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {Category} from "../model";
+import {PayzunovAxios} from "../../payzunov";
 
 type Props = IPopup & {
     onCreate: (newCategory: Category) => void;
@@ -13,11 +14,17 @@ const PayzunovCreateCategoryPopup = ({open, onClose, onCreate}:Props) => {
     const [categoryName, setCategoryName] = useState('')
 
     const onCrateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: categoryName
+
+        PayzunovAxios.post<{ item: Category }>(
+            "https://canstudy.ru/orderapi/category",
+            {
+                name: categoryName
+            }
+        ).then((response) => {
+
+            onCreate(response.data.item)
+            onClose();
         })
-        onClose();
     }
 
     return (

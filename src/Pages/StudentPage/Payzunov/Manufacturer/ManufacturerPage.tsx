@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import {Box, Button} from "@mui/material";
+import {Box, Button, dividerClasses} from "@mui/material";
 import {Manufacturer} from "./model";
+import PayzunovPopup from "../../../../Components/Payzunov/PayzunovPopup/PayzunovPopup";
 import PayzunovCreateManufacturerPopup from "./Popups/PayzunovCreateManufacturerPopup";
 import PayzunovEditManufacturerPopup  from "./Popups/PayzunovEditManufacturerPopup";
 const ManufacturerPage = () => {
@@ -14,10 +15,22 @@ const ManufacturerPage = () => {
 
         {
             field: 'name',
-            headerName: 'First name',
-            width: 150,
-            editable: true,
+            headerName: 'Название',
+            flex: 1,
         },
+
+        {
+            field: 'country',
+            headerName: 'Страна',
+            flex: 1,
+        },
+
+        {
+            field: 'city',
+            headerName: 'Россия',
+            flex: 1,
+        },
+
         {
             field: '',
             headerName: '',
@@ -51,15 +64,7 @@ const ManufacturerPage = () => {
     }
 
     const [manufactureries, setManufactureries] = useState<Manufacturer[]>([
-        { id: 1, name: "category 1"},
-        { id: 2, name: "category 2"},
-        { id: 3, name: "category 3"},
-        { id: 4, name: "category 4"},
-        { id: 5, name: "category 5"},
-        { id: 6, name: "category 6"},
-        { id: 7, name: "category 7"},
-        { id: 8, name: "category 8"},
-        { id: 9, name: "category 9"},
+        { id: 1, name: "Производитель 1", country:"rus", city:"nsk"},
     ])
 
     const [showCreateManufacturer, setShowCreateManufacturer] = useState(false);
@@ -92,14 +97,15 @@ const ManufacturerPage = () => {
                     alignItems: 'center',
                 }}
             >
-                <h1>Манафактура</h1>
+                <h1>Производитель</h1>
+
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={()=> setShowCreateManufacturer(true)}
                     >
-                        Добавить ману
+                        Добавить производителя
                     </Button>
                 </div>
             </div>
