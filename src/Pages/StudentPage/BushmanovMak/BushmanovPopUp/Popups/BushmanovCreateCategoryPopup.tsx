@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { bushmanovAxios } from '../../BushmanovMakPage'
 import { Category } from '../../Category/model'
 import BushmanovPopUp, { Ipopup } from '../BushmanovPopUp'
 
@@ -12,11 +13,18 @@ export const BushmanovCreateCategoryPagePopup = ({ open, onClose, onCreate }: Pr
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: categoryName
-        })
-        onClose();
+
+        bushmanovAxios.post<{item: Category}>('https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        )
+            .then((response) => {
+                onCreate(response.data.item)
+                onClose();
+            })
+
+        
     }
 
     return (

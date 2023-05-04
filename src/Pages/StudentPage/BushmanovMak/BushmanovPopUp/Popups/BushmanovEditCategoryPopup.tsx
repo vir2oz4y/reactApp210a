@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { bushmanovAxios } from '../../BushmanovMakPage'
 import { Category } from '../../Category/model'
 import BushmanovPopUp, { Ipopup } from '../BushmanovPopUp'
 
@@ -13,8 +14,17 @@ export const BushmanovEditCategoryPagePopup = ({ open, onClose, onEdit, category
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
-        onEdit(category);
-        onClose();
+
+        bushmanovAxios.patch<{item: Category}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: category
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item);
+                onClose();
+            })     
     }
 
     return (
