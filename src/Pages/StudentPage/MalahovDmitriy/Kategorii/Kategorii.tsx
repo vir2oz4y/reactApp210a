@@ -6,6 +6,7 @@ import MalahovDY, {IPopup} from "../../../../Components/Malahov/MalahovDY/Malaho
 import {Categorii} from "./models";
 import { Malahov_creat_categori_prefab } from './modals/Malahov_creat_categori_prefab';
 import { Malahov_Edit_categori_prefab } from './modals/Malahov_Edit_categori_prefab';
+import { MalahovAxios, MalahovAxios } from '../MalahovDmitriy';
 
 type Props = IPopup & {
     category: Categorii,
@@ -48,15 +49,15 @@ const CategoryPage = () => {
             prev.filter(el=>el.id !== id))
     }
 
-    const [CategoryPage,setCategories] = useState<Categorii[]>([
-        { id: 1, name: 'category 1' },
-        { id: 2, name: 'category 2' },
-        { id: 3, name: 'category 3' },
-        { id: 4, name: 'category 4' },
-        { id: 5, name: 'category 5' },
-        { id: 6, name: 'category 6' },
-        { id: 7, name: 'category 7' },
-    ])
+    const [CategoryPage, setCategories] = useState<Categorii[]>([])
+
+    useEffect(() => {
+        MalahovAxios.get<{ items: Categorii[] }>(
+            ' ')
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+    },[])
 
     const [showCreateCaregory, setShowCreateCaregory] = useState(false);
     const [editedCategoru,seteditedCategoru]=useState<Categorii|null>(null);

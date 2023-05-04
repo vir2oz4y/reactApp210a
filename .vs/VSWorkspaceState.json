@@ -2,15 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\Components\\ContentBlock",
-    "\\src\\Components\\Header",
     "\\src\\Pages",
     "\\src\\Pages\\StudentPage",
-    "\\src\\Pages\\StudentPage\\BurlakAD\\Test1",
-    "\\src\\Pages\\StudentPage\\BushmanovMak\\SiteMenu",
     "\\src\\Pages\\StudentPage\\MalahovDmitriy",
-    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii"
+    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii",
+    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii\\modals"
   ],
-  "SelectedNode": "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii\\Kategorii.tsx",
+  "SelectedNode": "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii\\modals\\Malahov_creat_categori_prefab.tsx",
   "PreviewInSolutionExplorer": false
 }
