@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { JabrovAxios } from '../../JabrovPage'
 import JabrovPopUp, { IPopup } from '../../JabrovPopUp/JabrovPopUp'
 import { Category } from '../model'
 //import { Category } from '../Category/model'
@@ -16,8 +17,18 @@ export const JabrovEditCategoryPopUp = ({ open, onClose, onEdit, category: categ
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
-        onEdit(category);
-        onClose();
+
+        JabrovAxios.patch <{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item:category
+            }
+        ).then((response) => {
+            onEdit(response.data.item);
+            onClose();
+        })
+
+        
     }
 
 

@@ -1,11 +1,13 @@
-import * as React from 'react';
+
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import JabrovPopUp from "../JabrovPopUp/JabrovPopUp";
 import { JabrovCreateCategoryPopUp } from './popups/JabrovCreateCategoryPopUp';
 import { Category } from './model';
 import {JabrovEditCategoryPopUp} from "./popups/JabrovEditCategoryPopUp";
+import { JabrovAxios } from '../JabrovPage';
+import React from 'react';
 
 
 const CategoryPage = () => {
@@ -48,21 +50,30 @@ const CategoryPage = () => {
     ];
 
 
-    const OneDeleteClick = (id:number) =>{
-        setCategories(prev =>
-            prev.filter(el=>el.id !==id))
+    const OneDeleteClick = (id: number) => {
 
+        JabrovAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+            .then(() => {
+                setCategories(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
     // @ts-ignore
-    const [categories, setCategories] = useState<Category[]>([
-        { id: 1, name: "category 1" },
-        { id: 2, name: "category 2" },
-        { id: 3, name: "category 3" },
-        { id: 4, name: "category 4" },
-        { id: 5, name: "category 5" },
-        { id: 6, name: "category 6" },
-        { id: 7, name: "category 7" },])
+    
+
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        JabrovAxios.get<{ items: Category[] }>(
+            'https://canstudy.ru/orderapi/category/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+
+    },[])
 
     const [showCreateCatrgory, setShowCreateCategory] = useState(false);
     const [editedCategory, setShowEditCategory] =  useState<Category|null>(null);

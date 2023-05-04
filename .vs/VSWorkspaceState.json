@@ -8,9 +8,8 @@
     "\\src\\Pages\\StudentPage",
     "\\src\\Pages\\StudentPage\\Jabrov1",
     "\\src\\Pages\\StudentPage\\Jabrov1\\Category",
-    "\\src\\Pages\\StudentPage\\Jabrov1\\Category\\popups",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\CiteMenu"
+    "\\src\\Pages\\StudentPage\\Jabrov1\\Category\\popups"
   ],
-  "SelectedNode": "\\src\\Pages\\StudentPage\\Jabrov1\\Category\\CategoryPage.tsx",
+  "SelectedNode": "\\src\\Pages\\StudentPage\\Jabrov1\\Category\\popups\\JabrovEditCategoryPopUp.tsx",
   "PreviewInSolutionExplorer": false
 }

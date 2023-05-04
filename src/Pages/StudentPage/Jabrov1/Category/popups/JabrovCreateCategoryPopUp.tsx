@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { JabrovAxios } from '../../JabrovPage';
 import JabrovPopUp, { IPopup } from '../../JabrovPopUp/JabrovPopUp';
 import { Category } from '../model';
 //import { Category } from '../Category/model'
@@ -15,11 +16,20 @@ type Props = IPopup & {
 export const JabrovCreateCategoryPopUp = ({ open, onClose, onCreate }: Props) => {
     const [categoryName, setCategoryName] = useState('')
 
+   
+
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name:categoryName
+
+        JabrovAxios.post<{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        ).then((response) => {
+            onCreate(response.data.item)
+            onClose();
         })
+       
     }
     
 
