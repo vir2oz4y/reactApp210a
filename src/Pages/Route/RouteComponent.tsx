@@ -15,9 +15,14 @@ import GayvoronskikhAndrei from "../StudentPage/GayvoronskikhAndrei/Gayvoronskik
 import {default as GayvoronskikhTest1Page} from "../StudentPage/GayvoronskikhAndrei/Test1/Test1Page";
 import  {default as GayvoronskikhTest2Page} from "../StudentPage/GayvoronskikhAndrei/Test2/Test2Page";
 
-import BurlakAD from "../StudentPage/BurlakAD/BurlakAD";
-import {default as Burlak1} from "../StudentPage/BurlakAD/Test1/test1page";
-import {default as Burlak2} from "../StudentPage/BurlakAD/Test2/test2page";
+import BurlakAdPage from "../StudentPage/BurlakAD/BurlakADPage";
+import {default as BurlakADTest1Page} from "../StudentPage/BurlakAD/Test1/Test1Page";
+import {default as BurlakTest2Page} from "../StudentPage/BurlakAD/Test2/Test2Page";
+import {default as BurlakCategoryPage} from "../StudentPage/BurlakAD/Category/CategoryPage";
+import {default as BurlakClientPage} from "../StudentPage/BurlakAD/Client/ClientPage";
+import {default as BurlakManufacturePage} from "../StudentPage/BurlakAD/Manufacture/ManufacturePage";
+import {default as BurlakOrderPage} from "../StudentPage/BurlakAD/Order/OrderPage";
+import {default as BurlakProductPage} from "../StudentPage/BurlakAD/Product/ProductPage";
 
 import SesNV from "../StudentPage/SesNV/SesNV";
 import {default as Ses1} from "../StudentPage/SesNV/Test1/test1page";
@@ -178,9 +183,14 @@ const RouteComponent = () => {
                         <Route path={'Test2'} element={<JabrovPageTest2 />} />
                     </Route>
 
-                    <Route path={'BurlakAD'} element={<BurlakAD/>}>
-                        <Route path={'test1'} element={<Burlak1/>} />
-                        <Route path={'test2'} element={<Burlak2/>} />
+                    <Route path={'BurlakAD'} element={<BurlakAdPage/>}>
+                        <Route path={'test1'} element={<BurlakADTest1Page/>} />
+                        <Route path={'test2'} element={<BurlakTest2Page/>} />
+                        <Route path={'category'} element={<BurlakCategoryPage/>}/>
+                        <Route path={'manufacturer'} element={<BurlakManufacturePage/>}/>
+                        <Route path={'client'} element={<BurlakClientPage/>}/>
+                        <Route path={'order'} element={<BurlakOrderPage/>}/>
+                        <Route path={'product'} element={<BurlakProductPage/>}/>
                     </Route>
                     
                     <Route path={'SesNV'} element={<SesNV/>} >
