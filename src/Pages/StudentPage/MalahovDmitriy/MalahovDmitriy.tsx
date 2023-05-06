@@ -9,6 +9,25 @@ import Menu from '../MalahovDmitriy/Menu/Menu';
 export const MalahovAxios = axios.create();
 const key = "19436010-da02-4b6a-be9d-5febaa38468b";
 
+const KryuchkovNickPage = () => {
+
+    useEffect(() => {
+        MalahovAxios.post<{ authToken: string }>(
+            'https://canstudy.ru/orderapi/user/login',
+            {
+                identifier: key
+            }
+        )
+            .then((response) => {
+
+                MalahovAxios
+                    .defaults
+                    .headers
+                    .common['Authorization'] = 'Bearer ' + response.data.authToken
+            });
+    }, [])
+}
+
 
 const MalahovDmitriy = () => {
     return (
@@ -20,7 +39,7 @@ const MalahovDmitriy = () => {
                         <Menu />
                     </div>
 
-                    <div style={{padding:'1em'}}>
+                    <div style={{ padding: '1em', width: '100%'}}>
                         <Outlet />
                     </div>
                 </div>

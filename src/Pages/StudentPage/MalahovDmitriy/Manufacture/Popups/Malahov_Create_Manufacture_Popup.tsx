@@ -53,8 +53,6 @@ export const Malahov_Create_Manufacturer_Popup = ({ open, onClose, onCreate }: P
                 />
 
 
-
-
                 <div style={{display:'flex', justifyContent:'center'}}>
                     <Button
                         color={'primary'}

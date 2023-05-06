@@ -76,11 +76,8 @@ const ManufacturerPage = () => {
         setManufacturies(prev => {
             const editCategory = prev.find(el=>el.id === manufacturer.id);
 
-            if (editCategory){
+            if (editCategory) {
                 editCategory.name = manufacturer.name;
-                editCategory.country = manufacturer.country;
-                editCategory.city = manufacturer.city;
-
             }
 
             return [...prev];

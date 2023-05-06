@@ -2,25 +2,27 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import MalahovDY, { IPopup } from '../../../../../Components/Malahov/MalahovDY/MalahovDY'
 import { MalahovAxios } from '../../MalahovDmitriy'
-import { Categorii } from '../models'
+import { Category } from '../models'
 
 type Props = IPopup & {
-    onCreate: (newCategory: Categorii) => void;
+    onCreate: (newCategory: Category) => void;
 }
 export const Malahov_creat_categori_prefab = ({ open, onClose, onCreate }:Props) => {
 
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
-        MalahovAxios.post(
-            ''
-        )
 
-        onCreate({
-            id: Math.random(),
-            name: categoryName
+        MalahovAxios.post<{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        ).then((response) => {
+
+            onCreate(response.data.item)
+            onClose();
         })
-        onClose();
     }
     return (
         <div>

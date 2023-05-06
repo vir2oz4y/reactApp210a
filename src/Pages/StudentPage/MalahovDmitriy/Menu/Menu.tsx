@@ -28,19 +28,23 @@ const Menu2 = () => {
                     <ListItemText primary="Proizvoditeli" />
                 </ListItemButton>
             </ListItem>
-
             <ListItem disablePadding>
-                <ListItemButton
-                    onClick={() => navigate('Test2')}
-                >
-                    <ListItemText primary="Klienti" />
+                <ListItemButton onClick={() => navigate('Client')}>
+                    <ListItemText primary="Client" />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
                 <ListItemButton
-                    onClick={() => navigate('Test2')}
+                    onClick={() => navigate('Zakaz')}
                 >
-                    <ListItemText primary="Tovari" />
+                    <ListItemText primary="Zakaz" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton
+                    onClick={() => navigate('Tovar')}
+                >
+                    <ListItemText primary="Tovar" />
                 </ListItemButton>
             </ListItem>
 
