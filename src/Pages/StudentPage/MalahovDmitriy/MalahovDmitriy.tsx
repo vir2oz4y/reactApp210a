@@ -9,7 +9,7 @@ import Menu from '../MalahovDmitriy/Menu/Menu';
 export const MalahovAxios = axios.create();
 const key = "19436010-da02-4b6a-be9d-5febaa38468b";
 
-const KryuchkovNickPage = () => {
+const MalahovDmitriy = () => {
 
     useEffect(() => {
         MalahovAxios.post<{ authToken: string }>(
@@ -26,22 +26,21 @@ const KryuchkovNickPage = () => {
                     .common['Authorization'] = 'Bearer ' + response.data.authToken
             });
     }, [])
-}
 
-
-const MalahovDmitriy = () => {
     return (
         <div>
-            <Header studentFio={'Malahov Dmitriy'} />
+            <Header studentFio={'Malahov Dmitry'} />
+
             <ContentBlock>
-                <div style={{display:'flex',gap:'1em'}}>
-                    <div style={{width:'200px'}}>
+                <div style={{ display: 'flex', gap: '1em' }}>
+                    <div style={{ width: '200px' }}>
                         <Menu />
                     </div>
 
-                    <div style={{ padding: '1em', width: '100%'}}>
+                    <div style={{ padding: '1em', width: '100%' }}>
                         <Outlet />
                     </div>
+
                 </div>
             </ContentBlock>
         </div>

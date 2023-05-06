@@ -2,11 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\Components\\Malahov",
+    "\\src\\Components\\Malahov\\MalahovDY",
     "\\src\\Pages",
+    "\\src\\Pages\\Route",
     "\\src\\Pages\\StudentPage",
     "\\src\\Pages\\StudentPage\\MalahovDmitriy",
-    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii",
-    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii\\modals"
+    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Clients\\Modals",
+    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii"
   ],
   "SelectedNode": "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii\\modals\\Malahov_creat_categori_prefab.tsx",
   "PreviewInSolutionExplorer": false
