@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import {Box, Button, dividerClasses} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import { DataGrid, GridColDef} from '@mui/x-data-grid';
+import {Box, Button} from "@mui/material";
 import {Manufacturer} from "./model";
-import PayzunovPopup from "../../../../Components/Payzunov/PayzunovPopup/PayzunovPopup";
 import PayzunovCreateManufacturerPopup from "./Popups/PayzunovCreateManufacturerPopup";
 import PayzunovEditManufacturerPopup  from "./Popups/PayzunovEditManufacturerPopup";
+import {PayzunovAxios} from "../payzunov";
+
 const ManufacturerPage = () => {
 
     const columns: GridColDef[] = [
@@ -27,7 +28,7 @@ const ManufacturerPage = () => {
 
         {
             field: 'city',
-            headerName: 'Россия',
+            headerName: 'Город',
             flex: 1,
         },
 
@@ -58,14 +59,24 @@ const ManufacturerPage = () => {
     ];
 
     const onDeleteClick = (id: number) => {
-        setManufactureries(prev =>
-            prev.filter(el => el.id !== id)
-        )
+        PayzunovAxios.delete(`https://canstudy.ru/orderapi/manufacturer/${id}`)
+            .then(() => {
+                setManufactureries(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [manufactureries, setManufactureries] = useState<Manufacturer[]>([
-        { id: 1, name: "Производитель 1", country:"rus", city:"nsk"},
-    ])
+    const [manufactureries, setManufactureries] = useState<Manufacturer[]>([])
+
+        useEffect(() => {
+            PayzunovAxios.get<{ items: Manufacturer[] }>(
+                'https://canstudy.ru/orderapi/manufacturer/list'
+            )
+                .then((response) => {
+                    setManufactureries(response.data.items);
+                })
+        },[])
 
     const [showCreateManufacturer, setShowCreateManufacturer] = useState(false);
 
@@ -80,9 +91,9 @@ const ManufacturerPage = () => {
         setManufactureries(prev=>{
             const editManufacturer = prev.find(el=>el.id === manufacturer.id);
 
-            if (editManufacturer){
-                editManufacturer.name = manufacturer.name;
-            }
+            editManufacturer.name = manufacturer.name;
+            editManufacturer.country = manufacturer.country;
+            editManufacturer.city = manufacturer.city;
 
             return[...prev];
         });
@@ -119,7 +130,7 @@ const ManufacturerPage = () => {
             {editedManufacturer !== null && <PayzunovEditManufacturerPopup
                 open={editedManufacturer !== null}
                 onClose={()=>setEditedManufacturer(null)}
-                manufacturer={editedManufacturer}
+                Manufacturer={editedManufacturer}
                 onEdit={(manufacturer)=>onEdit(manufacturer)}
             />}
 

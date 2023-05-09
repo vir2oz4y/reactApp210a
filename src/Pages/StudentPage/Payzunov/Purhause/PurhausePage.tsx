@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Purhause = () => {
+const PurhausePage = () => {
     return (
         <div>
             Your purhause
@@ -8,4 +8,4 @@ const Purhause = () => {
     );
 };
 
-export default Purhause;
+export default PurhausePage;

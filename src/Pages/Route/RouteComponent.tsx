@@ -53,11 +53,11 @@ import Payzunov from "../StudentPage/Payzunov/payzunov";
 import {default as PayzunovTest1Page} from "../StudentPage/Payzunov/Test1/Test1Page";
 import {default as PayzunovTest2Page} from "../StudentPage/Payzunov/Test2/Test2Page";
 import {default as PayzunovCategoryPage} from "../StudentPage/Payzunov/Category/CategoryPage";
-import {default as PayzunovClientPage} from "../StudentPage/Payzunov/Client/Client";
+import {default as PayzunovClientPage} from "../StudentPage/Payzunov/Client/ClientPage";
 import {default  as PayzunovManufacturerPage} from "../StudentPage/Payzunov/Manufacturer/ManufacturerPage";
-import {default as PayzunovOrderPage} from "../StudentPage/Payzunov/Order/Order";
+import {default as PayzunovOrderPage} from "../StudentPage/Payzunov/Order/OrderPage";
 import {default as PayzunovProductPage} from "../StudentPage/Payzunov/Product/ProductPage";
-import {default as PayzunovPurhausePage} from "../StudentPage/Payzunov/Purhause/Purhause";
+import {default as PayzunovPurhausePage} from "../StudentPage/Payzunov/Purhause/PurhausePage";
 
 import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage";
 import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";

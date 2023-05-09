@@ -1,69 +1,84 @@
 import React, {useState} from 'react';
 import PayzunovPopup, {IPopup} from "../../../../../Components/Payzunov/PayzunovPopup/PayzunovPopup";
-import TextField from "@mui/material/TextField";
-import {Button, ListItemAvatarProps, } from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import {Manufacturer} from "../model";
-
+import {PayzunovAxios} from "../../payzunov";
 type Props = IPopup & {
     onCreate: (newManufacturer: Manufacturer) => void;
 }
-
-export const PayzunovCreateManufacturerPopup = ({open, onClose, onCreate}:Props) => {
-
+const PayzunovCreateManufacturerPopup = ({open, onClose, onCreate}: Props) => {
+    const createManufacturer = () => {
+        PayzunovAxios.post<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                name: manufacturer.name,
+                city: manufacturer.city,
+                country:manufacturer.country
+            })
+            .then(res => {
+                onCreate(res.data.item)
+            })
+    }
     const [manufacturer, setManufacturer] = useState<Manufacturer>({
-        id: Math.random(),
-        city: "",
-        country: "",
-        name: ""
+        id: 0,
+        name: '',
+        country: '',
+        city: ''
     })
-
-    const onCrateClick = () => {
-        onCreate(manufacturer)
-
+    const onCreateClick = () => {
+        createManufacturer();
         onClose();
     }
-
     return (
         <PayzunovPopup
-            open ={open}
-            onClose ={onClose}
-            title={"Создание производителя"}
+            title={'Создание производителя'}
+            open={open}
+            onClose={() => onClose()}
         >
-            <div style={{display: 'flex', flexDirection: 'column', gap: '1em'}}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
                 <TextField
-                    label="Название"
+                    label="Название производителя"
                     variant="standard"
+                    fullWidth={true}
                     value={manufacturer.name}
-                    onChange={e => setManufacturer(prev=>({...prev, name:e.target.value}))}
+                    onChange={e => setManufacturer(prev => (
+                        {...prev, name: e.target.value}
+                    ))}
                 />
-
                 <TextField
                     label="Страна"
                     variant="standard"
+                    fullWidth={true}
                     value={manufacturer.country}
-                    onChange={e => setManufacturer(prev=>({...prev, country:e.target.value}))}
+                    onChange={e => setManufacturer(prev => (
+                        {...prev, country: e.target.value}
+                    ))}
                 />
-
                 <TextField
                     label="Город"
                     variant="standard"
+                    fullWidth={true}
                     value={manufacturer.city}
-                    onChange={e => setManufacturer(prev=>({...prev, city:e.target.value}))}
+                    onChange={e => setManufacturer(prev => (
+                        {...prev, city: e.target.value}
+                    ))}
                 />
-
-                <div style={{display:'flex', justifyContent:'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <Button
-                        color = {'primary'}
-                        variant = {'contained'}
-                        onClick={() => onCrateClick()}
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={() => onCreateClick()}
                     >
                         Создать
                     </Button>
-
                 </div>
             </div>
         </PayzunovPopup>
     );
 };
-
 export default PayzunovCreateManufacturerPopup;

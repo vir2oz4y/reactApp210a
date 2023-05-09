@@ -1,62 +1,60 @@
 import {Button, IconButton} from '@mui/material';
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import React, {useEffect, useState} from 'react';
-import {Product} from './model';
+import {Client} from './model';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {PayzunovAxios} from "../payzunov";
-import PayzunovCreateProductPopup from "./Popups/PayzunovCreateProductPopup";
-import PayzunovEditProductPopup from "./Popups/PayzunovEditProductPopup";
+import PayzunovCreateClientPopup from "./Popups/PayzunovCreateClientPopup";
+import PayzunovEditClientPopup from "./Popups/PayzunovEditClientPopup";
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
 
+const ClientPage = () => {
 
-const ProductPage = () => {
+    const [ClientList, setClientList] = useState<Client[]>([])
 
-    const [ProductList, setProductList] = useState<Product[]>([])
-
-    const getProducts = () => {
-        PayzunovAxios.get<{ items: Product[] }>('https://canstudy.ru/orderapi/Product/list')
+    const getClients = () => {
+        PayzunovAxios.get<{ items: Client[] }>('https://canstudy.ru/orderapi/Client/list')
             .then(res => {
-                setProductList(res.data.items);
+                setClientList(res.data.items);
             })
     }
 
 
     useEffect(() => {
-        getProducts();
+        getClients();
     }, [])
 
 
     const onDeleteClick = (id: number) => {
-        PayzunovAxios.delete(`https://canstudy.ru/orderapi/Product/${id}`)
+        PayzunovAxios.delete(`https://canstudy.ru/orderapi/Client/${id}`)
             .then(res => {
-                setProductList(prev =>
+                setClientList(prev =>
                     prev.filter(el => el.id !== id)
                 )
             })
     }
 
     const onEditClick = (id: number) => {
-        const Product = ProductList.find(el => el.id === id)!;
-        setEditProduct(Product)
+        const Client = ClientList.find(el => el.id === id)!;
+        setEditClient(Client)
     }
 
-    const onCreate = (Product: Product) => {
-        setProductList(prev => [...prev, Product])
+    const onCreate = (Client: Client) => {
+        setClientList(prev => [...prev, Client])
     }
 
-    const onEdit = (Product: Product) => {
-        setProductList(prev => {
+    const onEdit = (Client: Client) => {
+        setClientList(prev => {
+            const curClient = prev.find(el => el.id === Client.id)!;
 
-            const curProduct = prev.find(el => el.id === Product.id)!;
-
-            if (curProduct) {
-                curProduct.name = Product.name;
-                curProduct.description = Product.description;
-                curProduct.cost = Product.cost;
-                curProduct.manufacturerId = Product.manufacturerId;
-                curProduct.manufacturerName = Product.manufacturerName;
-                curProduct.categoryId = Product.categoryId;
-                curProduct.categoryName = Product.categoryName;
+            if (curClient) {
+                curClient.firstName = Client.firstName;
+                curClient.lastName = Client.lastName;
+                curClient.phoneNumber = Client.phoneNumber;
+                curClient.email = Client.email;
+                curClient.sex = Client.sex;
             }
 
             return [...prev]
@@ -69,23 +67,34 @@ const ProductPage = () => {
             headerName: 'Id'
         },
         {
-            field: 'name',
-            headerName: 'Название',
+            field: 'sex',
+            headerName: 'Пол',
+            flex: 1,
+            renderCell:(e)=>{
+                if (e.value?.toString() === "0")
+                    return <MaleIcon/>
+
+                return <FemaleIcon/>
+            }
+        },
+        {
+            field: 'firstName',
+            headerName: 'Имя',
             flex: 1
         },
         {
-            field: 'cost',
-            headerName: 'Цена',
+            field: 'lastName',
+            headerName: 'Фамилия',
             flex: 1
         },
         {
-            field: 'categoryName',
-            headerName: 'Категория',
+            field: 'email',
+            headerName: 'Почта',
             flex: 1
         },
         {
-            field: 'manufacturerName',
-            headerName: 'Производитель',
+            field: 'phoneNumber',
+            headerName: 'Телефон',
             flex: 1
         },
         {
@@ -114,23 +123,23 @@ const ProductPage = () => {
 
     const [createPopupOpened, setCreatePopupOpened] = useState(false)
 
-    const [editProduct, setEditProduct] = useState<Product | null>(null)
+    const [editClient, setEditClient] = useState<Client | null>(null)
 
     return (
         <div style={{width: '100%'}}>
 
-            {createPopupOpened && <PayzunovCreateProductPopup
+            {createPopupOpened && <PayzunovCreateClientPopup
                 open={createPopupOpened}
                 onClose={() => setCreatePopupOpened(false)}
-                onCreate={(newProduct) => onCreate(newProduct)}
+                onCreate={(newClient) => onCreate(newClient)}
             />}
 
 
-            {editProduct !== null && <PayzunovEditProductPopup
-                open={editProduct !== null}
-                onClose={() => setEditProduct(null)}
-                Product={editProduct}
-                onEdit={(editProduct) => onEdit(editProduct)}
+            {editClient !== null && <PayzunovEditClientPopup
+                open={editClient !== null}
+                onClose={() => setEditClient(null)}
+                client={editClient}
+                onEdit={(editClient) => onEdit(editClient)}
             />}
 
             <div style={{
@@ -139,7 +148,7 @@ const ProductPage = () => {
                 alignItems: 'center'
             }}>
 
-                <h1>Товар</h1>
+                <h1>Клиенты</h1>
 
                 <div>
                     <Button
@@ -147,7 +156,7 @@ const ProductPage = () => {
                         variant={'contained'}
                         onClick={() => setCreatePopupOpened(true)}
                     >
-                        Создать товар
+                        Создать клиента
                     </Button>
 
                 </div>
@@ -156,7 +165,7 @@ const ProductPage = () => {
 
             <div style={{height: '80vh', width: '100%'}}>
                 <DataGrid
-                    rows={ProductList}
+                    rows={ClientList}
                     columns={columns}
                     initialState={{
                         pagination: {
@@ -174,4 +183,4 @@ const ProductPage = () => {
     );
 };
 
-export default ProductPage;
+export default ClientPage;
