@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { Client } from '../../Client/model'
 import BushmanovPopUp, { Ipopup } from '../BushmanovPopUp'
+import {bushmanovAxios} from "../../BushmanovMakPage";
 
 type Props = Ipopup & {
     onCreate: (newClient: Client) => void;
@@ -16,15 +17,21 @@ export const BushmanovCreateClientPagePopup = ({ open, onClose, onCreate }: Prop
     const [ClientPhoneNumber, setClientPhoneNumber] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            sex: ClientSex,
-            firstName: ClientFirstName,
-            lastName: ClientLastName,
-            email: ClientEmail,
-            phoneNumber: ClientPhoneNumber
-        })
-        onClose();
+
+        bushmanovAxios.post<{item: Client}>('https://canstudy.ru/orderapi/client',
+            {
+                sex: ClientSex,
+                firstName: ClientFirstName,
+                lastName: ClientLastName,
+                email: ClientEmail,
+                phoneNumber: ClientPhoneNumber
+                }
+        )
+            .then((response) => {
+                onCreate(response.data.item)
+                onClose();
+            })
+
     }
 
     return (

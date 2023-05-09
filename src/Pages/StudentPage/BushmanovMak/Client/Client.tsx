@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Client } from './model';
 import BushmanovPopUp from "../BushmanovPopUp/BushmanovPopUp";
 import { BushmanovCreateClientPagePopup } from '../BushmanovPopUp/Popups/BushmanovCreateClientPopup';
 import {BushmanovEditClientPagePopup} from "../BushmanovPopUp/Popups/BushmanovEditClientPopup";
+import {bushmanovAxios} from "../BushmanovMakPage";
 
 const ClientPage = () => {
 
@@ -58,7 +59,10 @@ const ClientPage = () => {
                         Edit
                     </Button>
 
-                    <Button color={'primary'} variant={'contained'} onClick={()=>OneDeleteClick(e.row.id)}>
+                    <Button color={'primary'}
+                            variant={'contained'}
+                            onClick={()=>OneDeleteClick(e.row.id)}
+                    >
                         Delete
                     </Button>
                 </div>
@@ -68,37 +72,42 @@ const ClientPage = () => {
     ];
 
     const OneDeleteClick = (id:number) => {
-        setCategories(prev => prev.filter(el=>el.id !== id)
-        )
+
+        bushmanovAxios.delete(`https://canstudy.ru/orderapi/client/${id}`)
+            .then(() => {
+                setClients(prev => prev.filter(el => el.id !== id)
+                )
+            })
     }
-    const [categories, setCategories] = useState<Client[]>([
-        { id: 1, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
-        { id: 2, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
-        { id: 3, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
-        { id: 4, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
-        { id: 5, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
-        { id: 6, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
-        { id: 7, sex: "Male", firstName: "Jamal", lastName: "Gregory", email: "urMhouse@mail.ru", phoneNumber: "+13372281488"},
+    const [clients, setClients] = useState<Client[]>([
+
     ])
+
+    useEffect(() => {
+        bushmanovAxios.get<{ items: Client[] }>(
+            'https://canstudy.ru/orderapi/client/list'
+        )
+            .then((response) => {
+                setClients(response.data.items);
+            })
+    }, [])
 
     const [ShowCreateClient, setShowCreateClient] = useState(false);
     const [editedClient, setShowEditClient] = useState <Client|null>(null);
 
-
-
     const onCreate = (newClient: Client) => {
-        setCategories(prev => [...prev, newClient]);
+        setClients(prev => [...prev, newClient]);
     }
-    const onEdit = (Client: Client) => {
-        setCategories(prev => {
-            const editClient = prev.find(el => el.id === Client.id)
+    const onEdit = (client: Client) => {
+        setClients(prev => {
+            const editClient = prev.find(el => el.id === client.id)
 
             if(editClient) {
-                editClient.sex = Client.sex;
-                editClient.firstName = Client.firstName;
-                editClient.lastName = Client.lastName;
-                editClient.email = Client.email;
-                editClient.phoneNumber = Client.phoneNumber;
+                editClient.sex = client.sex;
+                editClient.firstName = client.firstName;
+                editClient.lastName = client.lastName;
+                editClient.email = client.email;
+                editClient.phoneNumber = client.phoneNumber;
             }
             return [...prev];
         });
@@ -120,7 +129,6 @@ const ClientPage = () => {
                         Добавить клиента
                     </Button>
                 </div>
-
             </div>
 
             {ShowCreateClient && <BushmanovCreateClientPagePopup
@@ -133,13 +141,13 @@ const ClientPage = () => {
             {editedClient !== null && <BushmanovEditClientPagePopup
                 open={editedClient !== null}
                 onClose={()=> setShowEditClient(null)}
-                Client={editedClient}
+                client={editedClient}
                 onEdit={(Client)=>onEdit(Client)}
             />}
 
             <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
-                    rows={categories}
+                    rows={clients}
                     columns={columns}
                 />
             </Box>

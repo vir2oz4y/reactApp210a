@@ -2,21 +2,30 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { Client } from '../../Client/model'
 import BushmanovPopUp, { Ipopup } from '../BushmanovPopUp'
+import {bushmanovAxios} from "../../BushmanovMakPage";
 
 type Props = Ipopup & {
-    Client: Client,
+    client: Client,
 
-    onEdit: (Client: Client) => void;
+    onEdit: (client: Client) => void;
 }
 
-export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, Client:ClientProps}: Props) => {
+export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, client:ClientProps}: Props) => {
 
-    const [Client, setClient] = useState(ClientProps)
+    const [client, setClient] = useState(ClientProps)
 
 
     const onEditClick = () => {
-        onEdit(Client);
-        onClose();
+        bushmanovAxios.patch<{item: Client}>(
+            'https://canstudy.ru/orderapi/client',
+            {
+                item: client
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item);
+                onClose();
+            })
     }
 
     return (
@@ -29,7 +38,7 @@ export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, Client:Cli
                 <TextField
                     label="Client sex"
                     variant="standard"
-                    value={Client.sex}
+                    value={client.sex}
                     onChange={e => setClient(prev => ({
                         ...prev, sex: e.target.value
                     }))}
@@ -39,7 +48,7 @@ export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, Client:Cli
                 <TextField
                     label="Client name"
                     variant="standard"
-                    value={Client.firstName}
+                    value={client.firstName}
                     onChange={e => setClient(prev => ({
                         ...prev, firstName: e.target.value
                     }))}
@@ -49,7 +58,7 @@ export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, Client:Cli
                     <TextField
                         label="Client city"
                         variant="standard"
-                        value={Client.lastName}
+                        value={client.lastName}
                         onChange={e => setClient(prev => ({
                             ...prev, lastName: e.target.value
                         }))}
@@ -59,7 +68,7 @@ export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, Client:Cli
                         <TextField
                             label="Client country"
                             variant="standard"
-                            value={Client.email}
+                            value={client.email}
                             onChange={e => setClient(prev => ({
                                 ...prev, email: e.target.value
                             }))}
@@ -69,7 +78,7 @@ export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, Client:Cli
                             <TextField
                                 label="Client country"
                                 variant="standard"
-                                value={Client.phoneNumber}
+                                value={client.phoneNumber}
                                 onChange={e => setClient(prev => ({
                                     ...prev, phoneNumber: e.target.value
                                 }))}

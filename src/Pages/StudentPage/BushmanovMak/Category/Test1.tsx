@@ -65,7 +65,7 @@ const Test1 = () => {
             'https://canstudy.ru/orderapi/category/list'
         )
             .then((response) => {
-    setCategories(response.data.items);
+                setCategories(response.data.items);
         })
     }, [])
 
