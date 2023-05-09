@@ -26,21 +26,21 @@ const Kategoryproduct = () => {
             field: 'id',
             renderCell: (e: any) => {
                 return <div>
-                    <button
+                    <Button
                         color={'primary'}
                         variant={'contained'}
                     >
 
                       Edit
-                    </button>
+                    </Button>
 
-                    <button
+                    <Button
                        color={'primary'}
                         variant ={'contained'}
                         onClick={()=>OnDeleteClick(e.row.id)}
                         >
                         Delete
-                    </button>
+                    </Button>
                 </div>
             },
         }
@@ -103,5 +103,5 @@ const Kategoryproduct = () => {
     );
 };
 
-export default kategoryproduct;
+export default Kategoryproduct;
    

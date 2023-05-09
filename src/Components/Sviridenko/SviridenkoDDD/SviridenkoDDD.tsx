@@ -20,7 +20,7 @@ const SviridenkoDdd = ({open,onClose}:Props) => {
 
             <Modal
                 open={open}
-                onClose={handleClose}
+                onClose={onClose}
             >
                 <div className={'popup'}>
                     <div className={'popup__content'}>
