@@ -1,4 +1,8 @@
-export type Category = {
+export type Client = {
     id: number,
-    name: string,
+    sex: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string
 }

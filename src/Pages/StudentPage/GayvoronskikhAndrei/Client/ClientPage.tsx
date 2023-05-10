@@ -1,79 +1,184 @@
-import React, { useState } from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material';
-import { Category } from "./model";
-import GayvoronskikhPopUp from "../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp";
-import { GayvoronskikhCreateCategoryPopUp } from './Modals/GayvoronskikhCreateCategoryPopUp';
+import { Button, IconButton } from '@mui/material';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import { Client } from './model';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { GayvoronskikhAxios } from "../GayvoronskikhAndrei";
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
+import GayvoronskikhEditClientPopup from './Modals/GayvoronskikhEditClientPopUp';
+import GayvoronskikhCreateClientPopup from './Modals/GayvoronskikhCreateClientPopUp';
 
 const ClientPage = () => {
+
+    const [ClientList, setClientList] = useState<Client[]>([])
+
+    const getClients = () => {
+        GayvoronskikhAxios.get<{ items: Client[] }>('https://canstudy.ru/orderapi/Client/list')
+            .then(res => {
+                setClientList(res.data.items);
+            })
+    }
+
+
+    useEffect(() => {
+        getClients();
+    }, [])
+
+
+    const onDeleteClick = (id: number) => {
+        GayvoronskikhAxios.delete(`https://canstudy.ru/orderapi/Client/${id}`)
+            .then(res => {
+                setClientList(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
+    }
+
+    const onEditClick = (id: number) => {
+        const Client = ClientList.find(el => el.id === id)!;
+        setEditClient(Client)
+    }
+
+    const onCreate = (Client: Client) => {
+        setClientList(prev => [...prev, Client])
+    }
+
+    const onEdit = (Client: Client) => {
+        setClientList(prev => {
+            const curClient = prev.find(el => el.id === Client.id)!;
+
+            if (curClient) {
+                curClient.firstName = Client.firstName;
+                curClient.lastName = Client.lastName;
+                curClient.phoneNumber = Client.phoneNumber;
+                curClient.email = Client.email;
+                curClient.sex = Client.sex;
+            }
+
+            return [...prev]
+        })
+    }
+
     const columns: GridColDef[] = [
         {
             field: 'id',
-            headerName: 'ID',
-            width: 90
+            headerName: 'Id'
         },
         {
-            field: 'name',
-            headerName: 'First name',
-            width: 150,
-            editable: true,
+            field: 'sex',
+            headerName: 'Пол',
+            flex: 1,
+            renderCell: (e) => {
+                if (e.value?.toString() === "0")
+                    return <MaleIcon />
+
+                return <FemaleIcon />
+            }
+        },
+        {
+            field: 'firstName',
+            headerName: 'Имя',
+            flex: 1
+        },
+        {
+            field: 'lastName',
+            headerName: 'Фамилия',
+            flex: 1
+        },
+        {
+            field: 'email',
+            headerName: 'Почта',
+            flex: 1
+        },
+        {
+            field: 'phoneNumber',
+            headerName: 'Телефон',
+            flex: 1
         },
         {
             field: '',
             headerName: '',
-            width: 200,
             renderCell: (e: any) => {
-                return <div style={{display: 'flex', gap: '1em'}}>
-                    <Button color={'primary'} variant={'contained'}>Edit</Button>
-                    <Button color={'primary'} variant={'contained'}
-                            onClick={() => OnDeleteClick(e.row.id)}>Delete</Button>
+                return <div style={{ display: 'flex', gap: '1em' }}>
+
+                    <IconButton
+                        aria-label="edit"
+                        onClick={() => onEditClick(e.row.id)}
+                    >
+                        <EditIcon />
+                    </IconButton>
+
+                    <IconButton
+                        onClick={() => onDeleteClick(e.row.id)}
+                        aria-label="delete"
+                    >
+                        <DeleteIcon />
+                    </IconButton>
                 </div>
-            },
+            }
         }
-    ];
-    const [showCreateCategory, setShowCategory] = useState(false);
-    const OnDeleteClick = (id: number) => {
-        setCategories(prev =>
-            prev.filter(el => el.id !== id))
-    }
+    ]
 
-    const [categories, setCategories] = useState<Category[]>([
-        {id: 1, name: 'category 1'},
-          {id: 2, name: 'category 2'},
-          {id: 3, name: 'category 3'},
-          {id: 4, name: 'category 4'},
-          {id: 5, name: 'category 5'},
-          {id: 6, name: 'category 6',},
-          {id: 7, name: 'category 7'},
-    ])
+    const [createPopupOpened, setCreatePopupOpened] = useState(false)
 
-    const onCreate = (newCategory:Category) => {
-        setCategories(prev => [...prev, newCategory]);
-    }
+    const [editClient, setEditClient] = useState<Client | null>(null)
 
     return (
-        <div>
-            <div style={{display:'flex',
-            justifyContent:'space-between',
-            alignItems:'center'}}>
-                <h1>Категории</h1>
-                <Button color={'primary'} variant={'contained'} onClick={() => setShowCategory(true) }>Добавить Категорию</Button>
-            </div>
+        <div style={{ width: '100%' }}>
 
-            {showCreateCategory && <GayvoronskikhCreateCategoryPopUp
-                open={showCreateCategory}
-                onClose={()=>setShowCategory(false)}
-                onCreate={(category) => onCreate(category)}
-
+            {createPopupOpened && <GayvoronskikhCreateClientPopup
+                open={createPopupOpened}
+                onClose={() => setCreatePopupOpened(false)}
+                onCreate={(newClient) => onCreate(newClient)}
             />}
 
-            
-        <Box sx={{height: '70vh', width: '100%'}}>
-            <DataGrid
-                rows={categories}
-                columns={columns}
-            />
-        </Box>
+
+            {editClient !== null && <GayvoronskikhEditClientPopup
+                open={editClient !== null}
+                onClose={() => setEditClient(null)}
+                client={editClient}
+                onEdit={(editClient) => onEdit(editClient)}
+            />}
+
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+            }}>
+
+                <h1>Клиенты</h1>
+
+                <div>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={() => setCreatePopupOpened(true)}
+                    >
+                        Создать клиента
+                    </Button>
+
+                </div>
+            </div>
+
+
+            <div style={{ height: '80vh', width: '100%' }}>
+                <DataGrid
+                    rows={ClientList}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: 5,
+                            },
+                        },
+                    }}
+                    pageSizeOptions={[5]}
+                    //checkboxSelection
+                    disableRowSelectionOnClick
+                />
+            </div>
         </div>
     );
 };

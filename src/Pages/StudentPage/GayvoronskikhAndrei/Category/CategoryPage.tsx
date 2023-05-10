@@ -5,6 +5,7 @@ import {Category} from "./model";
 import GayvoronskikhPopUp from "../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp";
 import { GayvoronskikhCreateCategoryPopUp } from './Modals/GayvoronskikhCreateCategoryPopUp';
 import { GayvoronskikhAxios } from '../GayvoronskikhAndrei';
+import { GayvoronskikhEditCategoryPopUp } from './Modals/GayvoronskikhEditCategoryPopUp';
 
 const CategoryPage = () => {
     const columns: GridColDef[] = [
@@ -25,7 +26,8 @@ const CategoryPage = () => {
             width: 200,
             renderCell: (e: any) => {
                 return <div style={{display: 'flex', gap: '1em'}}>
-                    <Button color={'primary'} variant={'contained'}>Edit</Button>
+                    <Button color={'primary'} variant={'contained'}
+                        onClick={() => setEditedCategory(e.row)}>Edit</Button>
                     <Button color={'primary'} variant={'contained'}
                             onClick={() => onDeleteClick(e.row.id)}>Delete</Button>
                 </div>
@@ -89,7 +91,12 @@ const CategoryPage = () => {
                 onCreate={(category) => onCreate(category)}
 
             />}
-
+            {editedCategory !== null && <GayvoronskikhEditCategoryPopUp
+                open={editedCategory !== null}
+                onClose={() => setEditedCategory(null)}
+                category={editedCategory}
+                onEdit={(category) => onEdit(category)}
+            />}
             
         <Box sx={{height: '70vh', width: '100%'}}>
             <DataGrid

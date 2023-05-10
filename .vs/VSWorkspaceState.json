@@ -2,14 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\Components",
-    "\\src\\Components\\StudentElement",
     "\\src\\Pages",
     "\\src\\Pages\\StudentPage",
-    "\\src\\Pages\\StudentPage\\BushmanovMak\\SiteMenu",
-    "\\src\\Pages\\StudentPage\\BushmanovMak\\SiteMenu\\Test1",
-    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei"
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei",
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Category",
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Category\\Modals",
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Client",
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Client\\Modals",
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Manufacturer",
+    "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Manufacturer\\Modals"
   ],
-  "SelectedNode": "\\src\\Pages\\Route",
+  "SelectedNode": "\\src\\Pages\\StudentPage\\GayvoronskikhAndrei\\Category\\CategoryPage.tsx",
   "PreviewInSolutionExplorer": false
 }

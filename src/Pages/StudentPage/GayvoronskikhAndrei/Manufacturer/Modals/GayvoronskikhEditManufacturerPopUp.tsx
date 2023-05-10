@@ -2,18 +2,18 @@ import { Button, TextField } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 import GayvoronskikhPopUp, { IPopUp } from '../../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp'
-import { Category } from '../model'
+import { Manufacturer } from '../model'
 
 type Props = IPopUp & {
-    category: Category,
-    onEdit: (category: Category) => void;
+    manufacturer: Manufacturer,
+    onEdit: (manufacturer: Manufacturer) => void;
 }
 
-export const GayvoronskikhEditCategoryPopUp = ({ open, onClose,onEdit,category:categoryProps}:Props) => {
+export const GayvoronskikhEditManufacturerPopUp = ({ open, onClose,onEdit,manufacturer:manufacturerProps}:Props) => {
 
-    const [category, setCategory] = useState(categoryProps)
+    const [manufacturer, setManufacturer] = useState(manufacturerProps)
     const onEditClick = () => {
-        onEdit(category);
+        onEdit(manufacturer);
         onClose();
     }
 
@@ -22,7 +22,7 @@ export const GayvoronskikhEditCategoryPopUp = ({ open, onClose,onEdit,category:c
             <GayvoronskikhPopUp
             open={open}
             onClose={onClose}
-            title={'Edit Category'}
+            title={'Edit Manifacturer'}
             >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
 
@@ -30,10 +30,30 @@ export const GayvoronskikhEditCategoryPopUp = ({ open, onClose,onEdit,category:c
                         id="standard-basic"
                         label="Standard"
                         variant="standard"
-                        value={category.name}
-                        onChange={(e) => setCategory(prev => ({
+                        value={manufacturer.name}
+                        onChange={(e) => setManufacturer(prev => ({
                             ...prev,
                             name: e.target.value
+                        }))}
+                    />
+                    <TextField
+                        id="standard-basic"
+                        label="Standard"
+                        variant="standard"
+                        value={manufacturer.city}
+                        onChange={(e) => setManufacturer(prev => ({
+                            ...prev,
+                            city: e.target.value
+                        }))}
+                    />
+                    <TextField
+                        id="standard-basic"
+                        label="Standard"
+                        variant="standard"
+                        value={manufacturer.country}
+                        onChange={(e) => setManufacturer(prev => ({
+                            ...prev,
+                            country: e.target.value
                         }))}
                     />
                         <div style={{ display: 'flex', justifyContent:'center'}}>
