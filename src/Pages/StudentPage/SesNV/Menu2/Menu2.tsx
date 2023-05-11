@@ -17,28 +17,28 @@ const Menu2 = () => {
                 <ListItemButton
                     onClick={()=>navigate('category')}
                 >
-                    <ListItemText primary="Kategory tovarov"/>
+                    <ListItemText primary="Category "/>
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
                 <ListItemButton
                     onClick={()=>navigate('Test2')}
                 >
-                    <ListItemText primary="Klient" />
+                    <ListItemText primary="Client" />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
                 <ListItemButton
                     onClick={() => navigate('Test2')}
                 >
-                    <ListItemText primary="Postavchiki" />
+                    <ListItemText primary="Product" />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
                 <ListItemButton
                     onClick={() => navigate('Test2')}
                 >
-                    <ListItemText primary="Tovary" />
+                    <ListItemText primary="Order" />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>

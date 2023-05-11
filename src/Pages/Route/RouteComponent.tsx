@@ -21,7 +21,7 @@ import {default as Burlak2} from "../StudentPage/BurlakAD/Test2/test2page";
 
 import SesNV from "../StudentPage/SesNV/SesNV";
 import { default as Ses1 } from "../StudentPage/SesNV/Test1/test1page";
-import { default as SesKategoyPage } from "../StudentPage/SesNV/Kategory/Kategory";
+import { default as SesKategoyPage } from "../StudentPage/SesNV/Kategory/CategoryPage";
 import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";

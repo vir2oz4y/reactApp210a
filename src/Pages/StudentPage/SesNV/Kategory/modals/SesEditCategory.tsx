@@ -1,5 +1,6 @@
 import { Button, TextField, textFieldClasses } from '@mui/material'
 import React, { useState } from 'react'
+import { sesAxios } from '../../SesNV'
 import { Category } from '../model'
 import SesPopUp, { IPopUp } from '../sesNV/Ses'
 
@@ -8,12 +9,19 @@ type Props = IPopUp & {
     onEdit: (category: Category) => void;
 }
 
-export const SesCreatCategory = ({ open, onClose, onEdit, category: categoryProps}: Props) => {
+export const SesEditCategory = ({ open, onClose, onEdit, category: categoryProps}: Props) => {
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
-        onEdit(category);
-        onClose();
+        sesAxios.patch<{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: category
+            }
+        ).then((response) => {
+            onEdit(category);
+            onClose();
+        })
     }
     return (
 
@@ -24,7 +32,7 @@ export const SesCreatCategory = ({ open, onClose, onEdit, category: categoryProp
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
                 <TextField
-                    label="imya category"
+                    label="name category"
                     variant="standard"
                     value={category.name}
                     onChange={e => setCategory((prev:any) => ({

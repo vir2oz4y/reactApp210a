@@ -13,7 +13,6 @@ type Props = IPopUp & {
 }
 const SesPopUp = ({ open, onClose, title, children }: Props) => {
     return (
-
         <Modal
             open={open}
             onClose={onClose}
@@ -30,7 +29,7 @@ const SesPopUp = ({ open, onClose, title, children }: Props) => {
                                 variant={'contained'}
                                 onClick={onClose}
                             >
-                                Закрыть
+                                Р·Р°РєСЂС‹С‚СЊ
                             </Button>
                         </div>
                     </div>

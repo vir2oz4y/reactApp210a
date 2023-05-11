@@ -1,31 +1,37 @@
 import { Button, TextField, textFieldClasses } from '@mui/material'
 import React, { useState } from 'react'
+import { sesAxios } from '../../SesNV'
 import { Category } from '../model'
 import SesPopUp, { IPopUp } from '../sesNV/Ses'
 
 type Props = IPopUp & {
-    onCreate: (newCategory:Category) => void;
+    onCreate: (newCategory: Category) => void;
 }
 
 export const SesCreatCategory = ({ open, onClose, onCreate }: Props) => {
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: categoryName
+        sesAxios.post<{ item: Category }>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        ).then((response) => {
+
+            onCreate(response.data.item)
+            onClose();
         })
     }
     return (
-
         <SesPopUp
-            open={true}
-            onClose={() => { }}
-            title={'создание категории'}
+            open={open}
+            onClose={onClose}
+            title={'Create Category'}
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-                        <TextField
-                    label="imya category"
+                <TextField
+                    label="category name"
                     variant="standard"
                     value={categoryName}
                     onChange={e => setCategoryName(e.target.value)}
@@ -36,7 +42,7 @@ export const SesCreatCategory = ({ open, onClose, onCreate }: Props) => {
                         variant={'contained'}
                         onClick={() => onCreateClick()}
                     >
-                        sozdan
+                        Create
                         </Button>
                 </div>
             </div>
