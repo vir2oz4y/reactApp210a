@@ -1,10 +1,12 @@
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import { DataGrid } from "@mui/x-data-grid/DataGrid";
-import { GridColDef } from "@mui/x-data-grid/models";
+import { Box, Button, IconButton } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { sesAxios } from "../SesNV";
 import { Product } from "./model";
+import SesCreateProductPopup from "./popup/SesCreateProductPopup";
+import SesEditProductPopup from "./popup/SesEditProductPopup";
 
 const ProductPage = () => {
 
@@ -15,49 +17,6 @@ const ProductPage = () => {
             .then(res => {
                 setProductList(res.data.items);
             })
-    }
-
-
-    useEffect(() => {
-        getProducts();
-    }, [])
-
-
-    const onDeleteClick = (id: number) => {
-        sesAxios.delete(`https://canstudy.ru/orderapi/Product/${id}`)
-            .then(res => {
-                setProductList(prev =>
-                    prev.filter(el => el.id !== id)
-                )
-            })
-    }
-
-    const onEditClick = (id: number) => {
-        const Product = ProductList.find(el => el.id === id)!;
-        setEditProduct(Product)
-    }
-
-    const onCreate = (Product: Product) => {
-        setProductList(prev => [...prev, Product])
-    }
-
-    const onEdit = (Product: Product) => {
-        setProductList(prev => {
-
-            const curProduct = prev.find(el => el.id === Product.id)!;
-
-            if (curProduct) {
-                curProduct.name = Product.name;
-                curProduct.description = Product.description;
-                curProduct.cost = Product.cost;
-                curProduct.manufacturerId = Product.manufacturerId;
-                curProduct.manufacturerName = Product.manufacturerName;
-                curProduct.categoryId = Product.categoryId;
-                curProduct.categoryName = Product.categoryName;
-            }
-
-            return [...prev]
-        })
     }
 
     const columns: GridColDef[] = [
@@ -89,41 +48,86 @@ const ProductPage = () => {
             field: '',
             headerName: '',
             renderCell: (e: any) => {
-                return <div style={{display: 'flex', gap: '1em'}}>
+                return <div style={{ display: 'flex', gap: '1em' }}>
 
                     <IconButton
                         aria-label="edit"
                         onClick={() => onEditClick(e.row.id)}
                     >
-                        <EditIcon/>
+                       {/* <EditIcon />*/}
                     </IconButton>
 
                     <IconButton
                         onClick={() => onDeleteClick(e.row.id)}
                         aria-label="delete"
                     >
-                        <DeleteIcon/>
+                       {/* <DeleteIcon />*/}
                     </IconButton>
                 </div>
             }
         }
     ]
 
+    const onDeleteClick = (id: number) => {
+
+       sesAxios.delete(`https://canstudy.ru/orderapi/product/${id}`)
+           .then(res => {
+               setProductList(prev =>
+                   prev.filter(el => el.id !== id)
+               )
+            })
+    }
+
+    const onEditClick = (id: number) => {
+        const Product = ProductList.find(el => el.id === id)!;
+        setEditProduct(Product)
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, [])
+
+
+
+    const onCreate = (Product: Product) => {
+        setProductList(prev => [...prev, Product])
+    }
+
+
+    const onEdit = (Product: Product) => {
+        setProductList(prev => {
+
+            const curProduct = prev.find(el => el.id === Product.id)!;
+
+            if (curProduct) {
+                curProduct.name = Product.name;
+                curProduct.description = Product.description;
+                curProduct.cost = Product.cost;
+                curProduct.manufacturerId = Product.manufacturerId;
+                curProduct.manufacturerName = Product.manufacturerName;
+                curProduct.categoryId = Product.categoryId;
+                curProduct.categoryName = Product.categoryName;
+            }
+
+            return [...prev]
+        })
+    }
     const [createPopupOpened, setCreatePopupOpened] = useState(false)
 
     const [editProduct, setEditProduct] = useState<Product | null>(null)
 
-    return (
-        <div style={{width: '100%'}}>
 
-            {createPopupOpened && <PayzunovCreateProductPopup
+    return (
+        <div style={{ width: '100%' }}>
+
+            {createPopupOpened && <SesCreateProductPopup
                 open={createPopupOpened}
                 onClose={() => setCreatePopupOpened(false)}
                 onCreate={(newProduct) => onCreate(newProduct)}
             />}
 
 
-            {editProduct !== null && <PayzunovEditProductPopup
+            {editProduct !== null && <SesEditProductPopup
                 open={editProduct !== null}
                 onClose={() => setEditProduct(null)}
                 Product={editProduct}
@@ -151,7 +155,7 @@ const ProductPage = () => {
             </div>
 
 
-            <div style={{height: '80vh', width: '100%'}}>
+            <div style={{ height: '80vh', width: '100%' }}>
                 <DataGrid
                     rows={ProductList}
                     columns={columns}
@@ -172,11 +176,3 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
-
-function useEffect(arg0: () => void, arg1: undefined[]) {
-    throw new Error("Function not implemented.");
-}
-function useState<T>(arg0: undefined[]): [any, any] {
-    throw new Error("Function not implemented.");
-}
-

@@ -3,6 +3,7 @@ import React from "react";
 import {useEffect, useState } from "react";
 import { Category } from "../../Kategory/model";
 import SesPopUp, { IPopUp } from "../../Kategory/sesNV/Ses";
+import { Manufacturer } from "../../Manufacturer/model";
 import { sesAxios } from "../../SesNV";
 import { Product } from "../model";
 

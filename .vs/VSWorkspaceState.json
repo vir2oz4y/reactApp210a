@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Pages",
-    "\\src\\Pages\\Route",
     "\\src\\Pages\\StudentPage",
     "\\src\\Pages\\StudentPage\\SesNV",
     "\\src\\Pages\\StudentPage\\SesNV\\Kategory",
     "\\src\\Pages\\StudentPage\\SesNV\\Klient",
+    "\\src\\Pages\\StudentPage\\SesNV\\Klient\\popup",
     "\\src\\Pages\\StudentPage\\SesNV\\Menu2",
     "\\src\\Pages\\StudentPage\\SesNV\\Test1"
   ],
-  "SelectedNode": "\\src\\Pages\\Route\\RouteComponent.tsx",
+  "SelectedNode": "\\src\\Pages\\StudentPage\\SesNV\\Klient\\Klient.tsx",
   "PreviewInSolutionExplorer": false
 }

@@ -20,9 +20,13 @@ import {default as Burlak1} from "../StudentPage/BurlakAD/Test1/test1page";
 import {default as Burlak2} from "../StudentPage/BurlakAD/Test2/test2page";
 
 import SesNV from "../StudentPage/SesNV/SesNV";
-import { default as Ses1 } from "../StudentPage/SesNV/Test1/test1page";
-import { default as SesKategoyPage } from "../StudentPage/SesNV/Kategory/CategoryPage";
-import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";
+import { default as CategoryPage } from "../StudentPage/SesNV/Kategory/CategoryPage";
+import { default as Klient } from "../StudentPage/SesNV/Klient/Klient";
+import { default as ManufacturerPage } from "../StudentPage/SesNV/Manufacturer/ManufacturerPage";
+import { default as ProductPage } from "../StudentPage/SesNV/Product/ProductPage";
+/*import { default as Ses1 } from "../StudentPage/SesNV/Test1/test1page";*/
+/*import { default as SesKategoyPage } from "../StudentPage/SesNV/Kategory/CategoryPage";*/
+/*import {default as Ses2} from "../StudentPage/SesNV/Test2/test2page";*/
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/SiteMenu/Test1/Test1";
@@ -106,10 +110,14 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<Burlak2/>} />
                     </Route>
                     
-                    <Route path={'SesNV'} element={<SesNV/>} >
-                        <Route path={'category'} element={<SesKategoyPage/>} />
-                        <Route path={'test1'} element={<Ses1/>} />
-                        <Route path={'test2'} element={<Ses2/>} />
+                    <Route path={'SesNV'} element={<SesNV />} >
+                        <Route path={'Kategory'} element={<CategoryPage/>} />
+                        <Route path={'Klient'} element={<Klient />} />
+                        <Route path={'Manufacturer'} element={<ManufacturerPage />} />
+                        <Route path={'Product'} element={<ProductPage />} />
+                        {/*<Route path={'category'} element={<SesKategoyPage/>} />*/}
+                        {/*<Route path={'test1'} element={<Ses1/>} />*/}
+                        {/*<Route path={'test2'} element={<Ses2/>} />*/}
                     </Route>
 
                     <Route path={'blink'} element={<TatarnikovEgorPage/>}>
