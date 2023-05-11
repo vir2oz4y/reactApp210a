@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { Manufacture } from '../../Manufacture/model'
 import BushmanovPopUp, { Ipopup } from '../BushmanovPopUp'
+import {bushmanovAxios} from "../../BushmanovMakPage";
 
 type Props = Ipopup & {
     onCreate: (newManufacture: Manufacture) => void;
@@ -14,13 +15,16 @@ export const BushmanovCreateManufacturePagePopup = ({ open, onClose, onCreate }:
     const [ManufactureCountry, setManufactureCountry] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: ManufactureName,
-            city: ManufactureCity,
-            country: ManufactureCountry
-        })
-        onClose();
+        bushmanovAxios.post<{ item: Manufacture }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                name: ManufactureName,
+                city: ManufactureCity,
+                country:ManufactureCountry
+            })
+            .then(response => {
+                onCreate(response.data.item)
+                onClose()
+            })
     }
 
     return (

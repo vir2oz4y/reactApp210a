@@ -20,7 +20,7 @@ export const BushmanovCreateClientPagePopup = ({ open, onClose, onCreate }: Prop
 
         bushmanovAxios.post<{item: Client}>('https://canstudy.ru/orderapi/client',
             {
-                sex: ClientSex,
+                sex: parseInt(ClientSex, 10),
                 firstName: ClientFirstName,
                 lastName: ClientLastName,
                 email: ClientEmail,

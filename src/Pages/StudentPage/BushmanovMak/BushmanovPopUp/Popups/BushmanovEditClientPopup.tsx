@@ -19,7 +19,10 @@ export const BushmanovEditClientPagePopup = ({ open, onClose, onEdit, client:Cli
         bushmanovAxios.patch<{item: Client}>(
             'https://canstudy.ru/orderapi/client',
             {
-                item: client
+                item: {
+                    ...client,
+                    sex: parseInt(client.sex, 10)
+                }
             }
         )
             .then((response) => {

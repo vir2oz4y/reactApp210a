@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { Manufacture } from '../../Manufacture/model'
 import BushmanovPopUp, { Ipopup } from '../BushmanovPopUp'
+import {bushmanovAxios} from "../../BushmanovMakPage";
 
 type Props = Ipopup & {
     manufacture: Manufacture,
@@ -15,8 +16,16 @@ export const BushmanovEditManufacturePagePopup = ({ open, onClose, onEdit, manuf
 
 
     const onEditClick = () => {
-        onEdit(Manufacture);
-        onClose();
+        bushmanovAxios.patch<{item: Manufacture}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: Manufacture
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item);
+                onClose();
+            })
     }
 
     return (

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Manufacture } from './model';
 import BushmanovPopUp from "../BushmanovPopUp/BushmanovPopUp";
 import { BushmanovCreateManufacturePagePopup } from '../BushmanovPopUp/Popups/BushmanovCreateManufacturePopup';
 import {BushmanovEditManufacturePagePopup} from "../BushmanovPopUp/Popups/BushmanovEditManufacturePopup";
+import {bushmanovAxios} from "../BushmanovMakPage";
 
 const ManufacturePage = () => {
 
@@ -55,19 +56,26 @@ const ManufacturePage = () => {
 
     ];
 
-    const OneDeleteClick = (id:number) => {
-        setCategories(prev => prev.filter(el=>el.id !== id)
-        )
+    const OneDeleteClick = (id: number) => {
+
+        bushmanovAxios.delete(`https://canstudy.ru/orderapi/Manufacturer/${id}`)
+            .then(() => {
+                setCategories(prev => prev.filter(el => el.id !== id)
+                )
+            })
     }
     const [categories, setCategories] = useState<Manufacture[]>([
-        { id: 1, name: "Manufacture 1", city: "berlin", country: "ssha"},
-        { id: 2, name: "Manufacture 2", city: "berlin", country: "ssha"},
-        { id: 3, name: "Manufacture 3", city: "berlin", country: "ssha"},
-        { id: 4, name: "Manufacture 4", city: "berlin", country: "ssha"},
-        { id: 5, name: "Manufacture 5", city: "berlin", country: "ssha"},
-        { id: 6, name: "Manufacture 6", city: "berlin", country: "ssha"},
-        { id: 7, name: "Manufacture 7", city: "berlin", country: "ssha"},
+
     ])
+
+    useEffect(() => {
+        bushmanovAxios.get<{ items: Manufacture[] }>(
+            'https://canstudy.ru/orderapi/manufacturer/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+    },[])
 
     const [ShowCreateManufacture, setShowCreateManufacture] = useState(false);
     const [editedManufacture, setShowEditManufacture] = useState <Manufacture|null>(null);
