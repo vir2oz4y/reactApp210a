@@ -1,55 +1,67 @@
-import { Box, Button } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import React, { useEffect, useState } from 'react';
-import { GayvoronskikhAxios } from '../GayvoronskikhAndrei';
-import { GayvoronskikhCreateManufacturerPopUp } from './Modals/GayvoronskikhCreateManufacturerPopUp';
+import React, {useEffect, useState} from 'react';
+import { DataGrid, GridColDef} from '@mui/x-data-grid';
+import {Box, Button} from "@mui/material";
+import {Manufacturer} from "./model";
+import {GayvoronskikhAxios} from "../GayvoronskikhAndrei";
 import { GayvoronskikhEditManufacturerPopUp } from './Modals/GayvoronskikhEditManufacturerPopUp';
-import { Manufacturer } from './model';
+import { GayvoronskikhCreateManufacturerPopUp } from './Modals/GayvoronskikhCreateManufacturerPopUp';
 
 const ManufacturerPage = () => {
+
     const columns: GridColDef[] = [
-        {
-            field: 'id',
+        {   field: 'id',
             headerName: 'ID',
-            width: 90
+            width: 90,
         },
+
         {
             field: 'name',
-            headerName: 'Name Manufacturer',
-            width: 150,
+            headerName: 'Название',
             flex: 1,
         },
-        {
-            field: 'city',
-            headerName: 'City',
-            width: 150,
-            flex: 1,
-        },
+
         {
             field: 'country',
-            headerName: 'Country',
-            width: 150,
+            headerName: 'Страна',
             flex: 1,
         },
+
+        {
+            field: 'city',
+            headerName: 'Город',
+            flex: 1,
+        },
+
         {
             field: '',
             headerName: '',
             width: 200,
-            renderCell: (e: any) => {
-                return <div style={{ display: 'flex', gap: '1em' }}>
-                    <Button color={'primary'} variant={'contained'}
-                        onClick={() => setEditedManufacturer(e.row)}>Edit</Button>
-                    <Button color={'primary'} variant={'contained'}
-                        onClick={() => onDeleteClick(e.row.id)}>Delete</Button>
+            renderCell: (e:any)=> {
+                return <div style={{display:'flex', gap:'1em'}}>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={()=>setEditedManufacturer(e.row)}
+                    >
+                        Edit
+                    </Button>
+
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={()=>onDeleteClick(e.row.id)}
+                    >
+                        Delete
+                    </Button>
                 </div>
             },
         }
     ];
-    const onDeleteClick = (id: number) => {
 
+    const onDeleteClick = (id: number) => {
         GayvoronskikhAxios.delete(`https://canstudy.ru/orderapi/manufacturer/${id}`)
             .then(() => {
-                setManufacturer(prev =>
+                setManufactureries(prev =>
                     prev.filter(el => el.id !== id)
                 )
             })
@@ -64,29 +76,26 @@ const ManufacturerPage = () => {
             .then((response) => {
                 setManufactureries(response.data.items);
             })
-    }, [])
-    const [manufacturer, setManufacturer] = useState<Manufacturer[]>([])
+    },[])
 
     const [showCreateManufacturer, setShowCreateManufacturer] = useState(false);
 
-    const [editedManufacturer, setEditedManufacturer] = useState<Manufacturer | null>(null);
+    const [editedManufacturer, setEditedManufacturer] = useState<Manufacturer|null>(null);
 
 
     const onCreate = (newManufacturer: Manufacturer) => {
-        setManufacturer(prev => [...prev, newManufacturer]);
+        setManufactureries(prev=> [...prev, newManufacturer]);
     }
 
     const onEdit = (manufacturer: Manufacturer) => {
-        setManufacturer(prev => {
-            const editManufacturer = prev.find(el => el.id === manufacturer.id);
+        setManufactureries(prev=>{
+            const editManufacturer = prev.find(el=>el.id === manufacturer.id);
 
-            
-                editManufacturer.name = manufacturer.name;
-                editManufacturer.country = manufacturer.country;
-               editManufacturer.city = manufacturer.city;
-            
+            editManufacturer.name = manufacturer.name;
+            editManufacturer.country = manufacturer.country;
+            editManufacturer.city = manufacturer.city;
 
-            return [...prev];
+            return[...prev];
         });
     }
 
@@ -105,7 +114,7 @@ const ManufacturerPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => setShowCreateManufacturer(true)}
+                        onClick={()=> setShowCreateManufacturer(true)}
                     >
                         Добавить производителя
                     </Button>
@@ -120,9 +129,9 @@ const ManufacturerPage = () => {
 
             {editedManufacturer !== null && <GayvoronskikhEditManufacturerPopUp
                 open={editedManufacturer !== null}
-                onClose={() => setEditedManufacturer(null)}
+                onClose={()=>setEditedManufacturer(null)}
                 manufacturer={editedManufacturer}
-                onEdit={(manufacturer) => onEdit(manufacturer)}
+                onEdit={(manufacturer)=>onEdit(manufacturer)}
             />}
 
             <Box sx={{ height: '70vh', width: '100%' }}>

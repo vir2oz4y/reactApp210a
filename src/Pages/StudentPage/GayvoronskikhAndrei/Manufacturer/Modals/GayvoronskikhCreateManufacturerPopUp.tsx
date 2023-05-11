@@ -3,6 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import GayvoronskikhPopUp, { IPopUp } from '../../../../../Components/Gayvoronskikh/GayvoronskikhPopUp/GayvoronskikhPopUp'
 import { Manufacturer } from '../model'
+import {GayvoronskikhAxios} from "../../GayvoronskikhAndrei";
+import {Category} from "../../Category/model";
 
 type Props = IPopUp & {
 
@@ -17,30 +19,33 @@ export const GayvoronskikhCreateManufacturerPopUp = ({ open, onClose,onCreate }:
         country: "",
         name: ""
     })
-
     const onCreateClick = () => {
-        onCreate(manufacturer)
-
-        onClose();
+        GayvoronskikhAxios.post<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                ...manufacturer
+            }
+        ).then((response) => {
+            onCreate(response.data.item)
+            onClose();
+        })
     }
-
     return (
         <GayvoronskikhPopUp
             open={open}
             onClose={onClose}
-            title={'Ñîçäàíèå ïðîèçâîäèòåëÿ'}
+            title={'Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÐœÐ°Ð½ÑƒÑ„Ð°ÐºÑ‚ÑƒÑ€Ñ‹'}
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
 
                 <TextField
-                    label="Íàçâàíèå"
+                    label="ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ"
                     variant="standard"
                     value={manufacturer.name}
                     onChange={e => setManufacturer(prev => ({ ...prev, name: e.target.value }))}
                 />
 
                 <TextField
-                    label="Ñòðàíà"
+                    label="Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
                     variant="standard"
                     value={manufacturer.country}
                     onChange={e => setManufacturer(prev => ({ ...prev, country: e.target.value }))}
@@ -48,7 +53,7 @@ export const GayvoronskikhCreateManufacturerPopUp = ({ open, onClose,onCreate }:
 
 
                 <TextField
-                    label="Ãîðîä"
+                    label="Ð“Ð¾Ñ€Ð¾Ð´"
                     variant="standard"
                     value={manufacturer.city}
                     onChange={e => setManufacturer(prev => ({ ...prev, city: e.target.value }))}

@@ -68,7 +68,7 @@ const ClientPage = () => {
         },
         {
             field: 'sex',
-            headerName: 'Пол',
+            headerName: 'РїРѕР»',
             flex: 1,
             renderCell: (e) => {
                 if (e.value?.toString() === "0")
@@ -79,22 +79,22 @@ const ClientPage = () => {
         },
         {
             field: 'firstName',
-            headerName: 'Имя',
+            headerName: 'РРјСЏ',
             flex: 1
         },
         {
             field: 'lastName',
-            headerName: 'Фамилия',
+            headerName: 'Р¤Р°РјРёР»РёСЏ',
             flex: 1
         },
         {
             field: 'email',
-            headerName: 'Почта',
+            headerName: 'РџРѕС‡С‚Р°',
             flex: 1
         },
         {
             field: 'phoneNumber',
-            headerName: 'Телефон',
+            headerName: 'РўРµР»РµС„РѕРЅ',
             flex: 1
         },
         {
@@ -148,7 +148,7 @@ const ClientPage = () => {
                 alignItems: 'center'
             }}>
 
-                <h1>Клиенты</h1>
+                <h1>РљР»РёРµРЅС‚С‹</h1>
 
                 <div>
                     <Button
@@ -156,7 +156,7 @@ const ClientPage = () => {
                         variant={'contained'}
                         onClick={() => setCreatePopupOpened(true)}
                     >
-                        Создать клиента
+                        Р”РѕР±Р°РІРёС‚СЊ РєР»РёРµРЅС‚Р°
                     </Button>
 
                 </div>

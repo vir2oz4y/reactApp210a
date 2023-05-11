@@ -39,7 +39,7 @@ const GayvoronskikhCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
 
     return (
         <GayvoronskikhPopUp
-            title={'Создание клиента'}
+            title={'Р”РѕР±Р°РІР»РµРЅРёРµ РєР»РёРµРЅС‚Р°'}
             open={open}
             onClose={() => onClose()}
         >
@@ -53,21 +53,21 @@ const GayvoronskikhCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
             >
 
                 <FormControl fullWidth>
-                    <InputLabel id="sex">Пол</InputLabel>
+                    <InputLabel id="sex">пїЅпїЅпїЅ</InputLabel>
                     <Select
                         labelId="sex"
                         value={client.sex?.toString()}
-                        label="Пол"
+                        label="РїРѕР»"
                         onChange={(e) => setClient(prev => ({ ...prev, sex: e.target.value as any }))}
                     >
-                        <MenuItem value={"0"}>Женский</MenuItem>
-                        <MenuItem value={"1"}>Мужской</MenuItem>
+                        <MenuItem value={"0"}>РјСѓР¶СЃРєРѕР№</MenuItem>
+                        <MenuItem value={"1"}>Р¶РµРЅСЃРєРёР№</MenuItem>
                     </Select>
                 </FormControl>
 
 
                 <TextField
-                    label="Имя"
+                    label="РРјСЏ"
                     variant="standard"
                     fullWidth={true}
                     value={client.firstName}
@@ -75,7 +75,7 @@ const GayvoronskikhCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                 />
 
                 <TextField
-                    label="Фамилия"
+                    label="Р¤Р°РјРёР»РёСЏ"
                     variant="standard"
                     fullWidth={true}
                     value={client.lastName}
@@ -83,7 +83,7 @@ const GayvoronskikhCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                 />
 
                 <TextField
-                    label="Почта"
+                    label="РџРѕС‡С‚Р°"
                     variant="standard"
                     fullWidth={true}
                     value={client.email}
@@ -91,7 +91,7 @@ const GayvoronskikhCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                 />
 
                 <TextField
-                    label="Телефон"
+                    label="РўРµР»РµС„РѕРЅ"
                     variant="standard"
                     fullWidth={true}
                     value={client.phoneNumber}
@@ -104,7 +104,7 @@ const GayvoronskikhCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                         variant={'contained'}
                         onClick={() => onCreateClick()}
                     >
-                        Создать
+                        Р”РѕР±Р°РІРёС‚СЊ
                     </Button>
                 </div>
 

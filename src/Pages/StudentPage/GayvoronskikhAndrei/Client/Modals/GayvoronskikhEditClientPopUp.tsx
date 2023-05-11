@@ -29,7 +29,7 @@ const GayvoronskikhEditClientPopup = ({ open, onClose, client: clientEdit, onEdi
 
     return (
         <GayvoronskikhPopUp
-            title={'Изменение клиента'}
+            title={'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'}
             open={open}
             onClose={() => onClose()}
         >
@@ -41,21 +41,21 @@ const GayvoronskikhEditClientPopup = ({ open, onClose, client: clientEdit, onEdi
                 }}
             >
                 <FormControl fullWidth>
-                    <InputLabel id="sex">Пол</InputLabel>
+                    <InputLabel id="sex">РїРѕР»</InputLabel>
                     <Select
                         labelId="sex"
                         value={client.sex}
-                        label="Пол"
+                        label="пїЅпїЅпїЅ"
                         onChange={(e) => setClient(prev => ({ ...prev, sex: e.target.value as any }))}
                     >
-                        <MenuItem value={0}>Женский</MenuItem>
-                        <MenuItem value={1}>Мужской</MenuItem>
+                        <MenuItem value={0}>РјСѓР¶СЃРєРѕР№</MenuItem>
+                        <MenuItem value={1}>Р¶РµРЅСЃРєРёР№</MenuItem>
                     </Select>
                 </FormControl>
 
 
                 <TextField
-                    label="Имя"
+                    label="РРјСЏ"
                     variant="standard"
                     fullWidth={true}
                     value={client.firstName}
@@ -63,7 +63,7 @@ const GayvoronskikhEditClientPopup = ({ open, onClose, client: clientEdit, onEdi
                 />
 
                 <TextField
-                    label="Фамилия"
+                    label="Р¤Р°РјРёР»РёСЏ"
                     variant="standard"
                     fullWidth={true}
                     value={client.lastName}
@@ -71,7 +71,7 @@ const GayvoronskikhEditClientPopup = ({ open, onClose, client: clientEdit, onEdi
                 />
 
                 <TextField
-                    label="Почта"
+                    label="РџРѕС‡С‚Р°"
                     variant="standard"
                     fullWidth={true}
                     value={client.email}
@@ -79,7 +79,7 @@ const GayvoronskikhEditClientPopup = ({ open, onClose, client: clientEdit, onEdi
                 />
 
                 <TextField
-                    label="Телефон"
+                    label="РўРµР»РµС„РѕРЅ"
                     variant="standard"
                     fullWidth={true}
                     value={client.phoneNumber}
@@ -92,7 +92,7 @@ const GayvoronskikhEditClientPopup = ({ open, onClose, client: clientEdit, onEdi
                         variant={'contained'}
                         onClick={() => onEditClick()}
                     >
-                        Изменить
+                        РР·РјРµРЅРёС‚СЊ
                     </Button>
                 </div>
 
