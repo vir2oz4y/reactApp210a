@@ -96,7 +96,7 @@ const StudentsPage = () => {
                 <StudentElement
                     fio={'Алешин Григорий Александрович'}
                     description={'qwertyper'}
-                    imageSrc={'https://sky.pro/media/wp-content/uploads/2022/03/glavnaya-9-1.png'}
+                    imageSrc={'https://u.livelib.ru/reader/Friday_1864/o/suig1e1b/o-o.jpeg'}
                     navigateTo={'/aleshin'}
                 />
 

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Manufacture } from "./model";
-import AleshinPopup from '../../../../Components/Aleshin/AleshinPopup/AleshinPopup';
 import {AleshinCreateManufacturePopup} from "./Popups/AleshinCreateManufacturePopup";
 import {AleshinEditManufacturePopup} from "./Popups/AleshinEditManufacturePopup";
+import {aleshinAxios} from "../Aleshin";
 
 const ManufacturePage = () => {
 
@@ -59,21 +59,25 @@ const ManufacturePage = () => {
 
 
     const onDeleteClick = (id: number) => {
-        setManufactures(  prev =>
-            prev.filter(el => el.id !== id)
-        )
+
+        aleshinAxios.delete(`https://canstudy.ru/orderapi/Manufacturer/${id}`)
+            .then(response => {
+                setManufactures(  prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [manufactures, setManufactures] = useState<Manufacture[]>([
-        {id: 1, name: "Производитель 1", country:'rus', city:'nsk'},
-        /*{ id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },*/
-    ])
+    const [manufactures, setManufactures] = useState<Manufacture[]>([])
+
+    useEffect(() => {
+        aleshinAxios.get<{ items: Manufacture[] }>(
+            'https://canstudy.ru/orderapi/Manufacturer/list'
+        )
+            .then((response) => {
+                setManufactures(response.data.items)
+            })
+    },[])
 
     const [showCreateManufacture, setCreateManufacture] = useState(false)
     const [editedManufacture, setEditedManufacture] = useState<Manufacture|null>(null)

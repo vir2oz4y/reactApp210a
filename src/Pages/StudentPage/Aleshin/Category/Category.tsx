@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Category } from "./model";
-import AleshinPopup from '../../../../Components/Aleshin/AleshinPopup/AleshinPopup';
 import {AleshinCreateCategoryPopup} from "./Popups/AleshinCreateCategoryPopup";
 import {AleshinEditCategoryPopup} from "./Popups/AleshinEditCategoryPopup";
 import {aleshinAxios} from "../Aleshin";
@@ -109,25 +108,25 @@ const CategoryPage = () => {
                     </Button>
                 </div>
             </div>
-                {showCreateCategory && <AleshinCreateCategoryPopup
-                    open={showCreateCategory}
-                    onClose={() => setCreateCategory(false)}
-                    onCreate={(category) => onCreate(category)}
-                />}
+            {showCreateCategory && <AleshinCreateCategoryPopup
+                open={showCreateCategory}
+                onClose={() => setCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
+            />}
 
-                {editedCategory !== null && <AleshinEditCategoryPopup
-                    open={editedCategory !== null}
-                    onClose={()=>setEditedCategory(null)}
-                    category={editedCategory}
-                    onEdit={(category)=>onEdit(category)}
-                />}
+            {editedCategory !== null && <AleshinEditCategoryPopup
+                open={editedCategory !== null}
+                onClose={()=>setEditedCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
+            />}
 
-                <Box sx={{ height: '70vh', width: '100%' }}>
-                    <DataGrid
-                        rows={categories}
-                        columns={columns}
-                    />
-                </Box>
+            <Box sx={{ height: '70vh', width: '100%' }}>
+                <DataGrid
+                    rows={categories}
+                    columns={columns}
+                />
+            </Box>
         </div>
     )
 }

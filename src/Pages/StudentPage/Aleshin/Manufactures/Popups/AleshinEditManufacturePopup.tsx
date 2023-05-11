@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
 import { TextField, Button } from "@mui/material";
 import {Manufacture} from "../model";
+import {aleshinAxios} from "../../Aleshin";
+import {Client} from "../../Client/model";
 
 type Props = IPopup & {
     manufacture: Manufacture,
@@ -12,8 +14,17 @@ export const AleshinEditManufacturePopup = ({open, onClose, onEdit, manufacture:
     const [manufacture, setManufacture] = useState(manufactureProps)
 
     const onEditClick = () => {
-        onEdit(manufacture)
-        onClose();
+
+        aleshinAxios.patch<{ item: Manufacture }>(
+            'https://canstudy.ru/orderapi/Manufacturer',
+            {
+                item: manufacture
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item)
+                onClose();
+            })
     }
 
     return (

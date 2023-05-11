@@ -34,12 +34,14 @@ export const AleshinCreateCategoryPopup = ({open, onClose, onCreate}:Props) => {
             title={'Создать категорию' }
         >
             <div style = {{display:'flex', flexDirection:'column', gap:'1em'}}>
+
                 <TextField
                     label = "Имя категории"
                     variant="standard"
                     value={categoryName}
                     onChange={e => setCategoryName(e.target.value)}
                 />
+
                 <div>
                     <Button
                         color={'primary'}
@@ -49,6 +51,7 @@ export const AleshinCreateCategoryPopup = ({open, onClose, onCreate}:Props) => {
                         Создать
                     </Button>
                 </div>
+
             </div>
         </AleshinPopup>
     )

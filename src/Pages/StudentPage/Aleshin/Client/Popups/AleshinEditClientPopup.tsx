@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
 import { TextField, Button } from "@mui/material";
 import {Client} from "../model";
+import {aleshinAxios} from "../../Aleshin";
 
 type Props = IPopup & {
     client: Client,
@@ -12,8 +13,17 @@ export const AleshinEditClientPopup = ({open, onClose, onEdit, client:clientProp
     const [client, setClient] = useState(clientProps)
 
     const onEditClick = () => {
-        onEdit(client)
-        onClose();
+
+        aleshinAxios.patch<{ item: Client }>(
+            'https://canstudy.ru/orderapi/Client',
+            {
+                item: client
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item)
+                onClose();
+            })
     }
 
     return (
@@ -27,15 +37,15 @@ export const AleshinEditClientPopup = ({open, onClose, onEdit, client:clientProp
                 <TextField
                     label = "Имя клиента"
                     variant="standard"
-                    value={client.firstname}
-                    onChange={e => setClient(prev => ({...prev, firstname: e.target.value}))}
+                    value={client.firstName}
+                    onChange={e => setClient(prev => ({...prev, firstName: e.target.value}))}
                 />
 
                 <TextField
                     label = "Фамилия клиента"
                     variant="standard"
-                    value={client.lastname}
-                    onChange={e => setClient(prev => ({...prev, lastname: e.target.value}))}
+                    value={client.lastName}
+                    onChange={e => setClient(prev => ({...prev, lastName: e.target.value}))}
                 />
 
                 <TextField
@@ -48,8 +58,8 @@ export const AleshinEditClientPopup = ({open, onClose, onEdit, client:clientProp
                 <TextField
                     label = "Телефон клиента"
                     variant="standard"
-                    value={client.phonenumber}
-                    onChange={e => setClient(prev => ({...prev, phonenumber: e.target.value}))}
+                    value={client.phoneNumber}
+                    onChange={e => setClient(prev => ({...prev, phoneNumber: e.target.value}))}
                 />
 
                 <div>

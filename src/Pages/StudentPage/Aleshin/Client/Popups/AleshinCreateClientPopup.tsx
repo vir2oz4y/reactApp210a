@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
-import { TextField, Button } from "@mui/material";
+import {TextField, Button, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {Client} from "../model";
-import {Manufacture} from "../../Manufactures/model";
+import {aleshinAxios} from "../../Aleshin";
 
 type Props = IPopup & {
     onCreate:(newClient: Client) => void;
@@ -10,39 +10,70 @@ type Props = IPopup & {
 export const AleshinCreateClientPopup = ({open, onClose, onCreate}:Props) => {
 
     const [client, setClient] = useState<Client>({
-        id: Math.random(),
-        sex: Math.random(),
-        firstname: "",
-        lastname: "",
+        id: 0,
+        sex: 0,
+        firstName: "",
+        lastName: "",
         email: "",
-        phonenumber: ""
+        phoneNumber: ""
     })
 
     const onCreateClick = () => {
-        onCreate(client)
 
-        onClose();
+        aleshinAxios.post<{ item: Client }>(
+            'https://canstudy.ru/orderapi/client',
+            {
+
+                ...client,
+                sex:parseInt(client.sex?.toString(), 10)
+            }
+        )
+            .then((response) => {
+
+                onCreate(response.data.item)
+                onClose();
+
+            })
     }
 
     return (
         <AleshinPopup
             open={open}
-            onClose={onClose}
+            onClose={() => onClose()}
             title={'Создать клиента' }
         >
-            <div style = {{display:'flex', flexDirection:'column', gap:'1em'}}>
+            <div
+                style = {{
+                    display:'flex',
+                    flexDirection:'column',
+                    gap:'1em'
+                }}
+            >
+                <FormControl fullWidth>
+                    <InputLabel id="sex">Пол</InputLabel>
+                    <Select
+                        labelId="sex"
+                        value={client.sex?.toString()}
+                        label="Пол"
+                        onChange={ e =>setClient(prev=>({...prev, sex:e.target.value as any}))}
+                        >
+                        <MenuItem value={"0"}>Женский</MenuItem>
+                        <MenuItem value={"1"}>Мужской</MenuItem>
+                    </Select>
+                </FormControl>
+
                 <TextField
                     label = "Имя клиента"
                     variant="standard"
-                    value={client.firstname}
-                    onChange={e => setClient(prev=>({...prev, firstname:e.target.value}))}
+                    value={client.firstName}
+                    onChange={e => setClient(prev=>({...prev, firstName:e.target.value}))}
                 />
 
                 <TextField
                     label = "Фамилия клиента"
                     variant="standard"
-                    value={client.lastname}
-                    onChange={e => setClient(prev=>({...prev, lastname:e.target.value}))}
+                    value={client.lastName}
+                    onChange={e => setClient(prev=>({...prev, lastName:e.target.value}))}
                 />
 
                 <TextField
@@ -55,8 +86,8 @@ export const AleshinCreateClientPopup = ({open, onClose, onCreate}:Props) => {
                 <TextField
                     label = "Телефон клиента"
                     variant="standard"
-                    value={client.phonenumber}
-                    onChange={e => setClient(prev=>({...prev, phonenumber:e.target.value}))}
+                    value={client.phoneNumber}
+                    onChange={e => setClient(prev=>({...prev, phoneNumber:e.target.value}))}
                 />
                 <div>
                     <Button

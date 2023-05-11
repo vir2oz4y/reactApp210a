@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import AleshinPopup, {IPopup} from "../../../../../Components/Aleshin/AleshinPopup/AleshinPopup";
 import { TextField, Button } from "@mui/material";
 import {Manufacture} from "../model";
+import {aleshinAxios} from "../../Aleshin";
+import {Client} from "../../Client/model";
 
 type Props = IPopup & {
     onCreate:(newManufacture: Manufacture) => void;
@@ -9,16 +11,27 @@ type Props = IPopup & {
 export const AleshinCreateManufacturePopup = ({open, onClose, onCreate}:Props) => {
 
     const [manufacture, setManufacture] = useState<Manufacture>({
-        id: Math.random(),
+        id: 0,
         city: "",
         country: "",
         name: ""
     })
 
     const onCreateClick = () => {
-        onCreate(manufacture)
 
-        onClose();
+        aleshinAxios.post<{ item: Manufacture }>(
+            'https://canstudy.ru/orderapi/Manufacturer',
+            {
+
+                ...manufacture,
+            }
+        )
+            .then((response) => {
+
+                onCreate(response.data.item)
+                onClose();
+
+            })
     }
 
     return (

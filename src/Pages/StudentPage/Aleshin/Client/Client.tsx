@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { Client } from "./model";
-import AleshinPopup from '../../../../Components/Aleshin/AleshinPopup/AleshinPopup';
 import {AleshinCreateClientPopup} from "./Popups/AleshinCreateClientPopup";
 import {AleshinEditClientPopup} from "./Popups/AleshinEditClientPopup";
+import {aleshinAxios} from "../Aleshin";
 
 const ClientPage = () => {
 
@@ -15,27 +15,27 @@ const ClientPage = () => {
         },
         {
             field: 'sex',
-            headerName: 'Sex',
+            headerName: 'Пол',
             flex: 1
         },
         {
-            field: 'first name',
-            headerName: 'First name',
+            field: 'firstName',
+            headerName: 'Имя',
             flex: 1
         },
         {
-            field: 'last name',
-            headerName: 'Last name',
+            field: 'lastName',
+            headerName: 'Фамилия',
             flex: 1
         },
         {
             field: 'email',
-            headerName: 'Email',
+            headerName: 'Почта',
             flex: 1
         },
         {
-            field: 'phonenumber',
-            headerName: 'Phonenumber',
+            field: 'phoneNumber',
+            headerName: 'Номер',
             flex: 1
         },
         {
@@ -66,21 +66,25 @@ const ClientPage = () => {
 
 
     const onDeleteClick = (id: number) => {
-        setClients(  prev =>
-            prev.filter(el => el.id !== id)
-        )
+
+        aleshinAxios.delete(`https://canstudy.ru/orderapi/Client/${id}`)
+            .then(response => {
+                setClients(  prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [clients, setClients] = useState<Client[]>([
-        { id: 1, sex: 1, firstname: '51651651', lastname: 'ьасо', email: 'qwerty123@mail.ru', phonenumber: '+72283778800' },
-        /*{ id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },
-        { id: 1, name: 'Manufacture 1', city: 'City 1', country: 'Country 1' },*/
-    ])
+    const [clients, setClients] = useState<Client[]>([])
+
+    useEffect(() => {
+        aleshinAxios.get<{ items: Client[] }>(
+            'https://canstudy.ru/orderapi/Client/list'
+        )
+            .then((response) => {
+                setClients(response.data.items)
+            })
+    },[])
 
     const [showCreateClient, setCreateClient] = useState(false)
     const [editedClient, setEditedClient] = useState<Client|null>(null)
@@ -95,10 +99,10 @@ const ClientPage = () => {
 
             if (editClient){
                 editClient.sex = client.sex;
-                editClient.firstname = client.firstname;
-                editClient.lastname = client.lastname;
+                editClient.firstName = client.firstName;
+                editClient.lastName = client.lastName;
                 editClient.email = client.email;
-                editClient.phonenumber = client.phonenumber;
+                editClient.phoneNumber = client.phoneNumber;
             }
 
             return [...prev];
@@ -136,7 +140,7 @@ const ClientPage = () => {
                 open={editedClient !== null}
                 onClose={()=>setEditedClient(null)}
                 client={editedClient}
-                onEdit={(client)=>onEdit(client)}
+                onEdit={(editedClient)=>onEdit(editedClient)}
             />}
 
             <Box sx={{ height: '70vh', width: '100%' }}>
