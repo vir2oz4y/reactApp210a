@@ -1,55 +1,71 @@
-import {Button, ListItemAvatarProps, TextField} from '@mui/material'
-import React, {useState} from 'react'
-import MalahovDY, {IPopup} from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
-import {Manufacturer} from "../models";
+import React, { useState } from 'react';
+import { Button, TextField } from "@mui/material";
+import { Manufacturer } from "../models";
+import { MalahovAxios } from '../../MalahovDmitriy'
+import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
 
 type Props = IPopup & {
-    manufacturer: Manufacturer,
     onEdit: (newManufacturer: Manufacturer) => void;
+    Manufacturer: Manufacturer
 }
-
-export const Malahov_Edit_Manufacturer_Popup = ({open, onClose, manufacturer: manufacturerProps, onEdit}: Props) => {
-
-    const [manufacturer, setManufacturer] = useState<Manufacturer>(manufacturerProps)
-
+const MalahovEditManufacturerPopup = ({ open, onClose, Manufacturer, onEdit }: Props) => {
+    const [ManufacturerEdit, setManufacturerEdit] = useState(Manufacturer)
     const onEditClick = () => {
-        onEdit(manufacturer)
-
-        onClose();
+        MalahovAxios.patch<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                item: {
+                    id: ManufacturerEdit.id,
+                    name: ManufacturerEdit.name,
+                    city: ManufacturerEdit.city,
+                    country: ManufacturerEdit.country,
+                }
+            })
+            .then(res => {
+                onEdit(ManufacturerEdit)
+                onClose();
+            })
     }
-
     return (
         <MalahovDY
+            title={'Создание категории'}
             open={open}
-            onClose={onClose}
-            title={'Изменение производителя'}
+            onClose={() => onClose()}
         >
-            <div style={{display: 'flex', flexDirection: 'column', gap: '1em'}}>
-
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
                 <TextField
-                    label="Название"
+                    label="Название производителя"
                     variant="standard"
-                    value={manufacturer.name}
-                    onChange={e => setManufacturer(prev => ({...prev, name: e.target.value}))}
+                    fullWidth={true}
+                    value={ManufacturerEdit.name}
+                    onChange={e =>
+                        setManufacturerEdit(prev => ({ ...prev, name: e.target.value }))
+                    }
                 />
-
                 <TextField
                     label="Страна"
                     variant="standard"
-                    value={manufacturer.country}
-                    onChange={e => setManufacturer(prev => ({...prev, country: e.target.value}))}
+                    fullWidth={true}
+                    value={ManufacturerEdit.country}
+                    onChange={e => setManufacturerEdit(prev => (
+                        { ...prev, country: e.target.value }
+                    ))}
                 />
-
-
                 <TextField
                     label="Город"
                     variant="standard"
-                    value={manufacturer.city}
-                    onChange={e => setManufacturer(prev => ({...prev, city: e.target.value}))}
+                    fullWidth={true}
+                    value={ManufacturerEdit.city}
+                    onChange={e => setManufacturerEdit(prev => (
+                        { ...prev, city: e.target.value }
+                    ))}
                 />
-
-
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
@@ -57,9 +73,9 @@ export const Malahov_Edit_Manufacturer_Popup = ({open, onClose, manufacturer: ma
                     >
                         Изменить
                     </Button>
-
                 </div>
             </div>
         </MalahovDY>
-    )
-}
+    );
+};
+export default MalahovEditManufacturerPopup;

@@ -34,6 +34,11 @@ const Menu2 = () => {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
+                <ListItemButton onClick={() => navigate('Product')}>
+                    <ListItemText primary="Product" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
                 <ListItemButton
                     onClick={() => navigate('Zakaz')}
                 >

@@ -1,76 +1,104 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
-import { Client } from '../models';
-
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Client } from "../models";
+import { MalahovAxios } from '../../MalahovDmitriy';
 
 type Props = IPopup & {
-    client: Client,
     onEdit: (newClient: Client) => void;
+    client: Client
 }
-export const MalahovEditClientPopup = ({ open, onClose, onEdit, client: clientProps }: Props) => {
 
-    const [client, setClient] = useState<Client>(clientProps)
+const  MalahovEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: Props) => {
+
+    const [client, setClient] = useState(clientEdit)
 
     const onEditClick = () => {
-        onEdit(client);
 
-        onClose();
+        MalahovAxios.patch<{ item: Client }>('https://canstudy.ru/orderapi/Client',
+            {
+                item: {
+                    ...client
+                }
+            })
+            .then(res => {
+                onEdit(res.data.item)
+                onClose();
+            })
     }
 
-    return (<div>
+    return (
         <MalahovDY
+            title={'Changing the client'}
             open={open}
-            onClose={onClose}
-            title={'Changing the Client'}
+            onClose={() => onClose()}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
+                <FormControl fullWidth>
+                    <InputLabel id="sex">ex</InputLabel>
+                    <Select
+                        labelId="sex"
+                        value={client.sex}
+                        label="sex"
+                        onChange={(e) => setClient(prev => ({ ...prev, sex: e.target.value as any }))}
+                    >
+                        <MenuItem value={0}>Female</MenuItem>
+                        <MenuItem value={1}>Male</MenuItem>
+                    </Select>
+                </FormControl>
+
 
                 <TextField
-                    label="Client sex"
+                    label="FirstName"
                     variant="standard"
-                    value={client.sex}
-                    onChange={e => setClient(prev => ({ ...prev, sex: e.target.value }))}
-
-                />
-                <TextField
-                    label="Client First Name"
-                    variant="standard"
+                    fullWidth={true}
                     value={client.firstName}
                     onChange={e => setClient(prev => ({ ...prev, firstName: e.target.value }))}
-
                 />
+
                 <TextField
-                    label="Client Last Name"
+                    label="LastName"
                     variant="standard"
+                    fullWidth={true}
                     value={client.lastName}
                     onChange={e => setClient(prev => ({ ...prev, lastName: e.target.value }))}
-
                 />
+
                 <TextField
-                    label="Client Email"
+                    label="email"
                     variant="standard"
+                    fullWidth={true}
                     value={client.email}
                     onChange={e => setClient(prev => ({ ...prev, email: e.target.value }))}
-
                 />
+
                 <TextField
-                    label="Client PhoneNumber"
+                    label="phoneNumber"
                     variant="standard"
+                    fullWidth={true}
                     value={client.phoneNumber}
                     onChange={e => setClient(prev => ({ ...prev, phoneNumber: e.target.value }))}
-
                 />
+
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={() => onEditClick()}
                     >
-                        Edit
+                        To change
                     </Button>
                 </div>
+
             </div>
         </MalahovDY>
-    </div>)
-}
+    );
+};
+
+export default  MalahovEditClientPopup;

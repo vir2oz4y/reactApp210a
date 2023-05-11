@@ -29,6 +29,7 @@ import { default as Malahov_Category } from "../StudentPage/MalahovDmitriy/Kateg
 import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 import {default as MalahovManufacturePage} from "../StudentPage/MalahovDmitriy/Manufacture/ManufacturePage"
 import { default as MalahovClient } from "../StudentPage/MalahovDmitriy/Clients/ClientPage";
+import { default as MalahovProduct } from "../StudentPage/MalahovDmitriy/Product/ProductPage";
 import { default as MalahovTovar } from "../StudentPage/MalahovDmitriy/Tovar/tovar";
 import { default as MalahovZakaz } from "../StudentPage/MalahovDmitriy/Zakaz/zakaz";
 
@@ -124,6 +125,7 @@ const RouteComponent = () => {
                         <Route path={'test2'} element={<Mal2 />} />
                         <Route path={'Client'} element={<MalahovClient/>} />
                         <Route path={'Manufacture'} element={< MalahovManufacturePage />} />
+                        <Route path={'Product'} element={< MalahovProduct />} />
                         <Route path={'tovar'} element={<MalahovTovar />} />
                         <Route path={'zakaz'} element={<MalahovZakaz />} />
 

@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {DataGrid, GridColDef} from '@mui/x-data-grid';
-import {Box, Button, dividerClasses} from '@mui/material';
-import MalahovDY, {IPopup} from "../../../../Components/Malahov/MalahovDY/MalahovDY";
-import {Manufacturer} from "./models";
-import {Malahov_Create_Manufacturer_Popup} from "./Popups/Malahov_Create_Manufacture_Popup";
-import {Malahov_Edit_Manufacturer_Popup} from "./Popups/Malahov_Edit_Manufacture_Popup";
+import React, { useEffect, useState } from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Box, Button } from "@mui/material";
+import { Manufacturer } from "./models";
+import MalahovCreateManufacturerPopup from "./Popups/Malahov_Create_Manufacture_Popup";
+import MalahovEditManufacturerPopup from "./Popups/Malahov_Edit_Manufacture_Popup";
+import { MalahovAxios } from '../MalahovDmitriy'
 
 const ManufacturerPage = () => {
 
@@ -12,32 +12,37 @@ const ManufacturerPage = () => {
         {
             field: 'id',
             headerName: 'ID',
+            width: 90,
         },
+
         {
             field: 'name',
             headerName: 'Название',
-            flex:1,
+            flex: 1,
         },
+
         {
             field: 'country',
             headerName: 'Страна',
-            flex:1,
+            flex: 1,
         },
+
         {
             field: 'city',
-            headerName: 'Россия',
-            flex:1,
+            headerName: 'Город',
+            flex: 1,
         },
+
         {
             field: '',
             headerName: '',
             width: 200,
             renderCell: (e: any) => {
-                return <div style={{display: 'flex', gap: '1em'}}>
+                return <div style={{ display: 'flex', gap: '1em' }}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setEditedManufacture(e.row)}
+                        onClick={() => setEditedManufacturer(e.row)}
                     >
                         Edit
                     </Button>
@@ -55,30 +60,41 @@ const ManufacturerPage = () => {
     ];
 
     const onDeleteClick = (id: number) => {
-        setManufacturies(prev =>
-            prev.filter(el => el.id !== id)
-        )
+        MalahovAxios.delete(`https://canstudy.ru/orderapi/manufacturer/${id}`)
+            .then(() => {
+                setManufactureries(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [manufacturies, setManufacturies] = useState<Manufacturer[]>([
-        {id: 1, name: "Производитель 1", country:'rus', city:'nsk'},
-    ])
+    const [manufactureries, setManufactureries] = useState<Manufacturer[]>([])
 
-    const [showCreateManufacture, setShowCreateManufacture] = useState(false);
+    useEffect(() => {
+        MalahovAxios.get<{ items: Manufacturer[] }>(
+            'https://canstudy.ru/orderapi/manufacturer/list'
+        )
+            .then((response) => {
+                setManufactureries(response.data.items);
+            })
+    }, [])
 
-    const [editedManufacture, setEditedManufacture] = useState<Manufacturer|null>(null);
+    const [showCreateManufacturer, setShowCreateManufacturer] = useState(false);
+
+    const [editedManufacturer, setEditedManufacturer] = useState<Manufacturer | null>(null);
+
 
     const onCreate = (newManufacturer: Manufacturer) => {
-        setManufacturies(prev => [...prev, newManufacturer]);
+        setManufactureries(prev => [...prev, newManufacturer]);
     }
 
     const onEdit = (manufacturer: Manufacturer) => {
-        setManufacturies(prev => {
-            const editCategory = prev.find(el=>el.id === manufacturer.id);
+        setManufactureries(prev => {
+            const editManufacturer = prev.find(el => el.id === manufacturer.id);
 
-            if (editCategory) {
-                editCategory.name = manufacturer.name;
-            }
+            editManufacturer.name = manufacturer.name;
+            editManufacturer.country = manufacturer.country;
+            editManufacturer.city = manufacturer.city;
 
             return [...prev];
         });
@@ -90,44 +106,42 @@ const ManufacturerPage = () => {
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'center'
+                    alignItems: 'center',
                 }}
             >
-                <h1>Производители</h1>
+                <h1>Производитель</h1>
 
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => setShowCreateManufacture(true)}
+                        onClick={() => setShowCreateManufacturer(true)}
                     >
                         Добавить производителя
                     </Button>
                 </div>
             </div>
 
-            {showCreateManufacture && <Malahov_Create_Manufacturer_Popup
-                open={showCreateManufacture}
-                onClose={() => setShowCreateManufacture(false)}
-                onCreate={(manufacture) => onCreate(manufacture)}
+            {showCreateManufacturer && <MalahovCreateManufacturerPopup
+                open={showCreateManufacturer}
+                onClose={() => setShowCreateManufacturer(false)}
+                onCreate={(manufacturer) => onCreate(manufacturer)}
             />}
 
-            {editedManufacture !== null && <Malahov_Edit_Manufacturer_Popup
-                open={editedManufacture !== null}
-                onClose={()=>setEditedManufacture(null)}
-                manufacturer={editedManufacture}
-                onEdit={(manufacturer)=>onEdit(manufacturer)}
+            {editedManufacturer !== null && <MalahovEditManufacturerPopup
+                open={editedManufacturer !== null}
+                onClose={() => setEditedManufacturer(null)}
+                Manufacturer={editedManufacturer}
+                onEdit={(manufacturer) => onEdit(manufacturer)}
             />}
 
-            <Box sx={{height: '70vh', width: '100%'}}>
+            <Box sx={{ height: '70vh', width: '100%' }}>
                 <DataGrid
-                    rows={manufacturies}
+                    rows={manufactureries}
                     columns={columns}
                 />
             </Box>
         </div>
-
-
     );
 };
 
