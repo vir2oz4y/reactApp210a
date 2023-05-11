@@ -28,7 +28,6 @@ import { default as Mal1 } from "../StudentPage/MalahovDmitriy/Test1/test1page";
 import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 
 
-import JabrovPage from "../StudentPage/Jabrov1/JabrovPage";
 import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
 import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
 
@@ -66,13 +65,13 @@ import {default as TelelinskiyProduct} from "../StudentPage/TelelinskiyAndrey/Pr
 
 
 import VishnyakAlekseiPage from "../StudentPage/VishnyakAleksei/VishnyakAlekseiPage";
-import {default as VishnyakTest1Page} from "../StudentPage/VishnyakAleksei/SiteMenu/Category/Category";
-import {default as VishnyakTest2Page} from "../StudentPage/VishnyakAleksei/SiteMenu/Client/Client";
-import {default as VishnyakManufacturer} from "../StudentPage/VishnyakAleksei/SiteMenu/Manufacturer/Manufacturer";
-import {default as VishnyakOrder} from "../StudentPage/VishnyakAleksei/SiteMenu/Order/Order";
-import {default as VishnyakProduct} from "../StudentPage/VishnyakAleksei/SiteMenu/Product/Product";
-import {default as VishnyakPurchase} from "../StudentPage/VishnyakAleksei/SiteMenu/Purchase/Purcase";
-import {default as VishnyakUser} from "../StudentPage/VishnyakAleksei/SiteMenu/User/User";
+import {default as VishnyakCategoryPage} from "../StudentPage/VishnyakAleksei/Category/CategoryPage";
+import {default as VishnyakClient} from "../StudentPage/VishnyakAleksei/Client/ClientPage";
+import {default as VishnyakManufacturer} from "../StudentPage/VishnyakAleksei/Manufacture/ManufacturePage";
+import {default as VishnyakOrder} from "../StudentPage/VishnyakAleksei/Order/OrderPage";
+import {default as VishnyakPurchase} from "../StudentPage/VishnyakAleksei/Purchase/Purchase";
+import {default as VishnyakProduct} from "../StudentPage/VishnyakAleksei/Product/ProductPage";
+import {default as VishnyakUser} from "../StudentPage/VishnyakAleksei/User/User";
 
 import KryuchkovNickPage from "../StudentPage/KryuchkovNick/KryuchkovNickPage";
 import {default as TeacherTest1Page} from "../StudentPage/KryuchkovNick/Test1/Test1Page";
@@ -100,10 +99,10 @@ const RouteComponent = () => {
                 <Route path="/" element={<MainPage/>}>
 
                     <Route index element={<StudentsPage/>} />
-                    
+
                     <Route path={'vishnyak'} element={<VishnyakAlekseiPage/>}>
-                        <Route path={'Category'} element={<VishnyakTest1Page/>}/>
-                        <Route path={'Client'} element={<VishnyakTest2Page/>}/>
+                        <Route path={'Category'} element={<VishnyakCategoryPage/>}/>
+                        <Route path={'Client'} element={<VishnyakClient/>}/>
                         <Route path={'Manufacturer'} element={<VishnyakManufacturer/>}/>
                         <Route path={'Order'} element={<VishnyakOrder/>}/>
                         <Route path={'Product'} element={<VishnyakProduct/>}/>
@@ -135,10 +134,8 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'student'} element={<SviridenkoDimPage/>}>
-                        {/*<Route path={'test1'} element={<SDBTest1Page/>}/>
-                        <Route path={'test2'} element={<SDBTest2Page/>}/>*/}
-                    </Route>                 
-                    
+                    </Route>
+
                     {<Route path={'payzunov'} element={<Payzunov/>}>
                         <Route path={'Test1'} element={<PayzunovTest1Page/>}/>
                         <Route path={'Test2'} element={<PayzunovTest2Page/>}/>
@@ -182,7 +179,7 @@ const RouteComponent = () => {
                         <Route path={'test1'} element={<Burlak1/>} />
                         <Route path={'test2'} element={<Burlak2/>} />
                     </Route>
-                    
+
                     <Route path={'SesNV'} element={<SesNV/>} >
                         <Route path={'test1'} element={<Ses1/>} />
                         <Route path={'test2'} element={<Ses2/>} />

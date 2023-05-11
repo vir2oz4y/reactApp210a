@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Category = () => {
+const User = () => {
     return (
         <div>
-            lllllllllll
+            User
         </div>
     );
 };
 
-export default Category;
+export default User;

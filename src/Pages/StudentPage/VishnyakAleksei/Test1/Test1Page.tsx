@@ -1,11 +1,11 @@
 import React from 'react';
 
-const User = () => {
+const Test1Page = () => {
     return (
         <div>
-            dddd
+            hhushfhsufuh
         </div>
     );
 };
 
-export default User;
+export default Test1Page;

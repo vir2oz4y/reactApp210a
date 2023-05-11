@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Client = () => {
+const Test2Page = () => {
     return (
         <div>
-            ddddddddd
+            Test 2
         </div>
     );
 };
 
-export default Client;
+export default Test2Page;
