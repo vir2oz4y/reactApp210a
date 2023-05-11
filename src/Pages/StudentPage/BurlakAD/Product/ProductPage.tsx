@@ -1,143 +1,177 @@
-import * as React from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material';
-import { useState } from 'react';
-import { Product } from './models';
-import BurlakPopup, { IPopup } from "../../../../Components/Burlak/BurlakPopup/BurlakPopup";
-import { BurlakCreateProductPopup } from './Modals/BurlakCreateProductPopup';
-import { BurlakEditProductPopup } from './Modals/BurlakEditProductPopup';
+import {Button, IconButton} from '@mui/material';
+import {DataGrid, GridColDef} from '@mui/x-data-grid';
+import React, {useEffect, useState} from 'react';
+import {Product} from './models';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import {BurlakAxios} from "../BurlakADPage";
+import BurlakCreateProductPopup from "./Modals/BurlakCreateProductPopup";
+import BurlakEditProductPopup from "./Modals/BurlakEditProductPopup";
+
+
 const ProductPage = () => {
+
+    const [ProductList, setProductList] = useState<Product[]>([])
+
+    const getProducts = () => {
+        BurlakAxios.get<{ items: Product[] }>('https://canstudy.ru/orderapi/Product/list')
+            .then(res => {
+                setProductList(res.data.items);
+            })
+    }
+
+
+    useEffect(() => {
+        getProducts();
+    }, [])
+
+
+    const onDeleteClick = (id: number) => {
+        BurlakAxios.delete(`https://canstudy.ru/orderapi/Product/${id}`)
+            .then(res => {
+                setProductList(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
+    }
+
+    const onEditClick = (id: number) => {
+        const Product = ProductList.find(el => el.id === id)!;
+        setEditProduct(Product)
+    }
+
+    const onCreate = (Product: Product) => {
+        setProductList(prev => [...prev, Product])
+    }
+
+    const onEdit = (Product: Product) => {
+        setProductList(prev => {
+
+            const curProduct = prev.find(el => el.id === Product.id)!;
+
+            if (curProduct) {
+                curProduct.name = Product.name;
+                curProduct.description = Product.description;
+                curProduct.cost = Product.cost;
+                curProduct.manufacturerId = Product.manufacturerId;
+                curProduct.manufacturerName = Product.manufacturerName;
+                curProduct.categoryId = Product.categoryId;
+                curProduct.categoryName = Product.categoryName;
+            }
+
+            return [...prev]
+        })
+    }
+
     const columns: GridColDef[] = [
         {
             field: 'id',
-            headerName: 'ID',
+            headerName: 'Id'
         },
         {
             field: 'name',
-            headerName: 'name',
+            headerName: 'Название',
+            flex: 1
         },
         {
-            field: 'firstName',
-            headerName: 'ProductFirstName',
-            flex: 1,
+            field: 'cost',
+            headerName: 'Цена',
+            flex: 1
         },
         {
-            field: 'lastName',
-            headerName: 'ProductLastName',
-            flex: 1,
+            field: 'categoryName',
+            headerName: 'Категория',
+            flex: 1
         },
         {
-            field: 'category',
-            headerName: 'category',
-            flex: 1,
-        },
-        {
-            field: 'cena',
-            headerName: 'cena',
-            flex: 1,
+            field: 'manufacturerName',
+            headerName: 'Производитель',
+            flex: 1
         },
         {
             field: '',
             headerName: '',
-            width: 290,
             renderCell: (e: any) => {
-                return <div style={{ display: 'flex', gap: '1em' }}>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={() => setEditedProduct(e.row)}
+                return <div style={{display: 'flex', gap: '1em'}}>
+
+                    <IconButton
+                        aria-label="edit"
+                        onClick={() => onEditClick(e.row.id)}
                     >
-                        Edit
-                    </Button>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
+                        <EditIcon/>
+                    </IconButton>
+
+                    <IconButton
                         onClick={() => onDeleteClick(e.row.id)}
+                        aria-label="delete"
                     >
-                        delete
-                    </Button>
+                        <DeleteIcon/>
+                    </IconButton>
                 </div>
-            },
-        }
-    ];
-
-    const onDeleteClick = (id: number) => {
-        setProduct(prev =>
-            prev.filter(el => el.id != id))
-    }
-
-    const [Product, setProduct] = useState<Product[]>([
-        { id: 1, name: 'Вязанка', firstName: 'Большая', lastName: 'Сырокопченная', category: 'Колбаса', cena: '50' },
-    ]);
-
-    const [showCreateProduct, setShowCreateProduct] = useState(false);
-    const [editedProduct, setEditedProduct] = useState<Product | null>(null);
-
-    const onCreate = (newProduct: Product) => {
-        setProduct(prev => [...prev, newProduct]);
-
-    }
-
-    const onEdit = (Product: Product) => {
-        setProduct(prev => {
-            const editCategory = prev.find(el => el.id === Product.id);
-
-            if (editCategory) {
-                editCategory.name = Product.name;
-                editCategory.firstName = Product.firstName;
-                editCategory.lastName = Product.lastName;
-                editCategory.category = Product.category;
-                editCategory.cena = Product.cena;
             }
+        }
+    ]
 
-            return [...prev];
-        });
-    }
+    const [createPopupOpened, setCreatePopupOpened] = useState(false)
+
+    const [editProduct, setEditProduct] = useState<Product | null>(null)
 
     return (
-        <div>
+        <div style={{width: '100%'}}>
+
+            {createPopupOpened && <BurlakCreateProductPopup
+                open={createPopupOpened}
+                onClose={() => setCreatePopupOpened(false)}
+                onCreate={(newProduct) => onCreate(newProduct)}
+            />}
+
+
+            {editProduct !== null && <BurlakEditProductPopup
+                open={editProduct !== null}
+                onClose={() => setEditProduct(null)}
+                Product={editProduct}
+                onEdit={(editProduct) => onEdit(editProduct)}
+            />}
+
             <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
-            }}
-            >
-                <h1>
-                    Product
-                </h1>
+            }}>
+
+                <h1>Товар</h1>
+
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => setShowCreateProduct(true)}>
-                        Add a Product
+                        onClick={() => setCreatePopupOpened(true)}
+                    >
+                        Создать товар
                     </Button>
+
                 </div>
             </div>
 
-            {showCreateProduct && <BurlakCreateProductPopup
-                open={showCreateProduct}
-                onClose={() => setShowCreateProduct(false)}
-                onCreate={(Product) => onCreate(Product)}
 
-            />}
-
-            {editedProduct !== null && <BurlakEditProductPopup
-                open={editedProduct !== null}
-                onClose={() => setEditedProduct(null)}
-                Product ={editedProduct}
-                onEdit={(Product) => onEdit(Product)}
-            />}
-
-            <Box sx={{ height: '100vh', width: '100%' }}>
+            <div style={{height: '80vh', width: '100%'}}>
                 <DataGrid
-                    rows={Product}
+                    rows={ProductList}
                     columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: 5,
+                            },
+                        },
+                    }}
+                    pageSizeOptions={[5]}
+                    //checkboxSelection
+                    disableRowSelectionOnClick
                 />
-            </Box>
+            </div>
         </div>
-
     );
-}
+};
 
 export default ProductPage;

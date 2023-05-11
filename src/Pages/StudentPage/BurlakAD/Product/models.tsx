@@ -1,8 +1,10 @@
 export type Product = {
     id: number,
+    categoryId: number,
+    manufacturerId: number,
     name: string,
-    firstName: string,
-    lastName: string,
-    category: string,
-    cena: string
+    cost: number,
+    description: string,
+    categoryName: string,
+    manufacturerName: string
 }

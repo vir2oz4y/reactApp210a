@@ -1,76 +1,139 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react'
-import BurlakPopup, { IPopup } from "../../../../../Components/Burlak/BurlakPopup/BurlakPopup";
-import { Product } from '../models';
-
+import React, {useEffect, useState} from 'react';
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Product} from "../models";
+import {BurlakAxios} from "../../BurlakADPage";
+import {Category} from "../../Category/model";
+import {Manufacturer} from "../../Manufacture/models";
+import BurlakPopup, {IPopup} from "../../../../../Components/Burlak/BurlakPopup/BurlakPopup";
 
 type Props = IPopup & {
-    Product: Product,
     onEdit: (newProduct: Product) => void;
+    Product: Product
 }
-export const BurlakEditProductPopup = ({ open, onClose, onEdit, Product: ProductProps }: Props) => {
 
-    const [Product, setProduct] = useState<Product>(ProductProps)
+const BurlakEditProductPopup = ({open, onClose, Product:ProductEdit, onEdit}: Props) => {
+
+    const [Product, setProduct] = useState(ProductEdit)
 
     const onEditClick = () => {
-        onEdit(Product);
 
-        onClose();
+        BurlakAxios.patch<{ item:Product }>('https://canstudy.ru/orderapi/Product',
+            {
+                item:{
+                    ...Product
+                }
+            })
+            .then(res => {
+                onEdit(res.data.item)
+                onClose();
+            })
     }
 
-    return (<div>
+    const [categoryList, setCategoryList] = useState<Category[]>([])
+
+    const [manufactureList, setManufactureList] = useState<Manufacturer[]>([])
+
+    const getCategories = () => {
+        BurlakAxios<{ items: Category[] }>('https://canstudy.ru/orderapi/category/list')
+            .then(res => {
+                setCategoryList(res.data.items);
+            })
+    }
+
+    const getManufacturies = () => {
+        BurlakAxios.get<{ items: Manufacturer[] }>('https://canstudy.ru/orderapi/manufacturer/list')
+            .then(res => {
+                setManufactureList(res.data.items);
+            })
+    }
+
+    useEffect(() => {
+        getCategories();
+        getManufacturies();
+    }, [])
+
+
+    return (
         <BurlakPopup
+            title={'Изменение клиента'}
             open={open}
-            onClose={onClose}
-            title={'Changing the Product'}
+            onClose={() => onClose()}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
                 <TextField
-                    label="Product name"
+                    label="Название"
                     variant="standard"
+                    fullWidth={true}
                     value={Product.name}
-                    onChange={e => setProduct(prev => ({ ...prev, name: e.target.value }))}
-
+                    onChange={e => setProduct(prev => ({...prev, name: e.target.value}))}
                 />
+
                 <TextField
-                    label="Product First Name"
+                    label="Описание"
                     variant="standard"
-                    value={Product.firstName}
-                    onChange={e => setProduct(prev => ({ ...prev, firstName: e.target.value }))}
-
+                    fullWidth={true}
+                    value={Product.description}
+                    onChange={e => setProduct(prev => ({...prev, description: e.target.value}))}
                 />
+
+
                 <TextField
-                    label="Product Last Name"
+                    label="Цена"
                     variant="standard"
-                    value={Product.lastName}
-                    onChange={e => setProduct(prev => ({ ...prev, lastName: e.target.value }))}
-
+                    fullWidth={true}
+                    value={Product.cost}
+                    onChange={e => setProduct(prev => ({...prev, cost: e.target.value as any}))}
                 />
-                <TextField
-                    label="Product category"
-                    variant="standard"
-                    value={Product.category}
-                    onChange={e => setProduct(prev => ({ ...prev, category: e.target.value }))}
 
-                />
-                <TextField
-                    label="Product cena"
-                    variant="standard"
-                    value={Product.cena}
-                    onChange={e => setProduct(prev => ({ ...prev, cena: e.target.value }))}
+                <FormControl fullWidth>
+                    <InputLabel id="category">Категория</InputLabel>
+                    <Select
+                        labelId="category"
+                        value={Product.categoryId?.toString()}
+                        label="Категория"
+                        onChange={(e) => setProduct(prev => ({...prev, categoryId: e.target.value as any}))}
+                    >
+                        {categoryList.map((el, i) =>
+                            <MenuItem value={el.id.toString()}>{el.name}</MenuItem>)
+                        }
 
-                />
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    </Select>
+                </FormControl>
+
+                <FormControl fullWidth>
+                    <InputLabel id="manufacturer">Производитель</InputLabel>
+                    <Select
+                        labelId="manufacturer"
+                        value={Product.manufacturerId?.toString()}
+                        label="Производитель"
+                        onChange={(e) => setProduct(prev => ({...prev, manufacturerId: e.target.value as any}))}
+                    >
+                        {manufactureList.map((el, i) =>
+                            <MenuItem value={el.id.toString()}>{el.name}</MenuItem>)
+                        }
+
+                    </Select>
+                </FormControl>
+
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={() => onEditClick()}
                     >
-                        Edit
+                        Изменить
                     </Button>
                 </div>
+
             </div>
         </BurlakPopup>
-    </div>)
-}
+    );
+};
+
+export default BurlakEditProductPopup;

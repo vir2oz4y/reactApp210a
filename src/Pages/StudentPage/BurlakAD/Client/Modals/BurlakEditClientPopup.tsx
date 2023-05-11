@@ -1,76 +1,103 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react'
-import BurlakPopup, { IPopup } from "../../../../../Components/Burlak/BurlakPopup/BurlakPopup";
-import { Client } from '../models';
-
+import React, {useState} from 'react';
+import BurlakPopup, {IPopup} from "../../../../../Components/Burlak/BurlakPopup/BurlakPopup";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Client} from "../models";
+import {BurlakAxios} from "../../BurlakADPage";
 
 type Props = IPopup & {
-    client: Client,
     onEdit: (newClient: Client) => void;
+    client: Client
 }
-export const BurlakEditClientPopup = ({ open, onClose, onEdit, client: clientProps }: Props) => {
 
-    const [client, setClient] = useState<Client>(clientProps)
+const BurlakEditClientPopup = ({open, onClose, client:clientEdit, onEdit}: Props) => {
+
+    const [client, setClient] = useState(clientEdit)
 
     const onEditClick = () => {
-        onEdit(client);
 
-        onClose();
+        BurlakAxios.patch<{ item:Client }>('https://canstudy.ru/orderapi/Client',
+            {
+                item:{
+                    ...client
+                }
+            })
+            .then(res => {
+                onEdit(res.data.item)
+                onClose();
+            })
     }
 
-    return (<div>
+    return (
         <BurlakPopup
+            title={'Изменение клиента'}
             open={open}
-            onClose={onClose}
-            title={'Changing the Client'}
+            onClose={() => onClose()}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
+                <FormControl fullWidth>
+                    <InputLabel id="sex">Пол</InputLabel>
+                    <Select
+                        labelId="sex"
+                        value={client.sex}
+                        label="Пол"
+                        onChange={(e)=>setClient(prev=>({...prev, sex:e.target.value as any}))}
+                    >
+                        <MenuItem value={0}>Женский</MenuItem>
+                        <MenuItem value={1}>Мужской</MenuItem>
+                    </Select>
+                </FormControl>
+
 
                 <TextField
-                    label="Client sex"
+                    label="Имя"
                     variant="standard"
-                    value={client.sex}
-                    onChange={e => setClient(prev => ({ ...prev, sex: e.target.value }))}
-
-                />
-                <TextField
-                    label="Client First Name"
-                    variant="standard"
+                    fullWidth={true}
                     value={client.firstName}
-                    onChange={e => setClient(prev => ({ ...prev, firstName: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  firstName:e.target.value}))}
                 />
+
                 <TextField
-                    label="Client Last Name"
+                    label="Фамилия"
                     variant="standard"
+                    fullWidth={true}
                     value={client.lastName}
-                    onChange={e => setClient(prev => ({ ...prev, lastName: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  lastName:e.target.value}))}
                 />
+
                 <TextField
-                    label="Client Email"
+                    label="Почта"
                     variant="standard"
+                    fullWidth={true}
                     value={client.email}
-                    onChange={e => setClient(prev => ({ ...prev, email: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  email:e.target.value}))}
                 />
+
                 <TextField
-                    label="Client PhoneNumber"
+                    label="Телефон"
                     variant="standard"
+                    fullWidth={true}
                     value={client.phoneNumber}
-                    onChange={e => setClient(prev => ({ ...prev, phoneNumber: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  phoneNumber:e.target.value}))}
                 />
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={() => onEditClick()}
                     >
-                        Edit
+                        Изменить
                     </Button>
                 </div>
+
             </div>
         </BurlakPopup>
-    </div>)
-}
+    );
+};
+export default BurlakEditClientPopup;

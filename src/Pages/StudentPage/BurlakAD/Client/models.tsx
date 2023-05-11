@@ -1,6 +1,6 @@
 export type Client = {
     id: number,
-    sex: string,
+    sex: number,
     firstName: string,
     lastName: string,
     email: string,
