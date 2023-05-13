@@ -21,7 +21,7 @@ const AsideMenu = () => {
 
             <ListItem disablePadding>
                 <ListItemButton
-                    onClick={()=>navigate('test2')}
+                    onClick={()=>navigate('Product')}
                 >
                     <ListItemText primary="Test 2" />
                 </ListItemButton>

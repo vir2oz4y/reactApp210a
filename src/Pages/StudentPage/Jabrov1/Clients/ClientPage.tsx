@@ -1,142 +1,159 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import { Client } from './models';
 import JabrovPopUp, {IPopup} from '../JabrovPopUp/JabrovPopUp';
 import { JabrovCreateClientPopUp } from './Modals/JabrovCreateClientPopUp';
 import { JabrovEditClientPopUp } from './Modals/JabrovEditClientPopUp';
-const ClientPage=()=>{
+import {JabrovAxios} from "../JabrovPage";
+
+const ClientPage = () => {
+
     const columns: GridColDef[] = [
         {
             field: 'id',
             headerName: 'ID',
+            flex: .3
         },
         {
             field: 'sex',
             headerName: 'Sex',
+            flex: 1,
+            editable: true,
         },
         {
             field: 'firstName',
-            headerName: 'ClientFirstName',
+            headerName: 'First name',
             flex: 1,
+            editable: true,
         },
         {
             field: 'lastName',
-            headerName: 'ClientLastName',
+            headerName: 'Last name',
             flex: 1,
+            editable: true,
         },
         {
             field: 'email',
             headerName: 'Email',
             flex: 1,
+            editable: true,
         },
         {
             field: 'phoneNumber',
-            headerName: 'PhoneNumber',
+            headerName: 'Phone number',
             flex: 1,
+            editable: true,
         },
         {
-            field:'',
-            headerName:'',
-            width: 290,
-            renderCell:(e:any)=>{
-                return <div style={{display:'flex',gap:'1em'}}>
+            field: '',
+            headerName: '',
+            width: 200,
+            renderCell: (e: any) => {
+                return <div style={{display: 'flex', gap: '1em'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setEditedClient(e.row)}
+                        onClick = {()=>setShowEditClient(e.row)}
                     >
-                        Редактировать
+                        Edit
                     </Button>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={()=>onDeleteClick(e.row.id)}
+
+                    <Button color={'primary'}
+                            variant={'contained'}
+                            onClick={()=>OneDeleteClick(e.row.id)}
                     >
-                        Удалить
+                        Delete
                     </Button>
                 </div>
             },
         }
+
     ];
 
-    const onDeleteClick = (id:number)=>{
-        setClient(prev=>
-            prev.filter(el=>el.id != id))
+    const OneDeleteClick = (id:number) => {
+
+        JabrovAxios.delete(`https://canstudy.ru/orderapi/client/${id}`)
+            .then(() => {
+                setClients(prev => prev.filter(el => el.id !== id)
+                )
+            })
     }
+    const [clients, setClients] = useState<Client[]>([
 
-    const [client,setClient]=useState<Client[]>([
-        { id: 1, sex: 'male',firstName:'Nikita',lastName:'Jabrov',email:'Sibstrin.ru',phoneNumber:'42' },
-    ]);
+    ])
 
-    const [showCreateClient, setShowCreateClient]=useState(false);
-    const [editedClient, setEditedClient] = useState<Client|null>(null);
+    useEffect(() => {
+        JabrovAxios.get<{ items: Client[] }>(
+            'https://canstudy.ru/orderapi/client/list'
+        )
+            .then((response) => {
+                setClients(response.data.items);
+            })
+    }, [])
 
-    const onCreate =(newClient:Client)=>{
-        setClient(prev=>[...prev,newClient]);
+    const [ShowCreateClient, setShowCreateClient] = useState(false);
+    const [editedClient, setShowEditClient] = useState <Client|null>(null);
 
+    const onCreate = (newClient: Client) => {
+        setClients(prev => [...prev, newClient]);
     }
+    const onEdit = (client: Client) => {
+        setClients(prev => {
+            const editClient = prev.find(el => el.id === client.id)
 
-    const onEdit = (client: Client)=>{
-        setClient(prev=>{
-            const editCategory = prev.find(el=>el.id === client.id);
-
-            if (editCategory){
-                editCategory.sex = client.sex;
-                editCategory.firstName = client.firstName;
-                editCategory.lastName = client.lastName;
-                editCategory.email = client.email;
-                editCategory.phoneNumber = client.phoneNumber;
+            if(editClient) {
+                editClient.sex = client.sex;
+                editClient.firstName = client.firstName;
+                editClient.lastName = client.lastName;
+                editClient.email = client.email;
+                editClient.phoneNumber = client.phoneNumber;
             }
-
             return [...prev];
         });
     }
 
     return (
         <div>
-            <div style={{display:'flex',
-                justifyContent:'space-between',
-                alignItems:'center'
-            }}
-            >
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h1>
-                    Клиент
+                    Клиенты
                 </h1>
+
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setShowCreateClient(true)}>
+                        onClick={() => setShowCreateClient(true)}
+                    >
                         Добавить клиента
                     </Button>
                 </div>
             </div>
 
-            {showCreateClient && <JabrovCreateClientPopUp
-                open={showCreateClient}
-                onClose={ ()=> setShowCreateClient(false)}
-                onCreate={(client)=>onCreate(client)}
+            {ShowCreateClient && <JabrovCreateClientPopUp
+                open={ShowCreateClient}
+                onClose={() => setShowCreateClient(false)}
+                onCreate={(Client) => onCreate(Client)}
 
             />}
 
             {editedClient !== null && <JabrovEditClientPopUp
-                open={editedClient !==null}
-                onClose={()=>setEditedClient(null)}
+                open={editedClient !== null}
+                onClose={()=> setShowEditClient(null)}
                 client={editedClient}
-                onEdit={(client)=>onEdit(client)}
+                onEdit={(Client)=>onEdit(Client)}
             />}
 
-            <Box sx={{height:'100vh',width:'100%'}}>
+            <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
-                    rows={client}
+                    rows={clients}
                     columns={columns}
                 />
             </Box>
         </div>
-
     );
-}
+};
 
 export default ClientPage;

@@ -9,7 +9,7 @@ import StudentsPage from "../StudentsPage"
 
 import SviridenkoDimPage from "../StudentPage/SviridenkoDim/SviridenkoDimPage";
 //import {default as  SDBTest1Page} from "../StudentPage/SviridenkoDim/Test1/Test1Page";
-//import {default as  SDBTest2Page} from "../StudentPage/SviridenkoDim/Test2/Test2Page";
+//import {default as  SDBTest2Page} from "../StudentPage/SviridenkoDim/ProductPage/Test2Page";
 
 import GayvoronskikhAndrei from "../StudentPage/GayvoronskikhAndrei/GayvoronskikhAndrei";
 import {default as GayvoronskikhTest1Page} from "../StudentPage/GayvoronskikhAndrei/Test1/Test1Page";
@@ -30,7 +30,7 @@ import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
 
 import JabrovPage1 from "../StudentPage/Jabrov1/JabrovPage";
 import { default as JabrovPageTest1 } from "../StudentPage/Jabrov1/test1/Test1";
-import { default as JabrovPageTest2 } from "../StudentPage/Jabrov1/test2/Test2";
+import { default as JabrovPageProduct } from "../StudentPage/Jabrov1/Product/ProductPage";
 import { default as JabrovCategory } from "../StudentPage/Jabrov1/Category/CategoryPage";
 import { default as JabrovTovar } from "../StudentPage/Jabrov1/Tovar/tovar";
 import { default as JabrovZakaz } from "../StudentPage/Jabrov1/Zakaz/zakaz";
@@ -117,7 +117,7 @@ const RouteComponent = () => {
 
                     <Route path={'teacher'} element={<KryuchkovNickPage/>}>
                         <Route path={'test1'} element={<TeacherTest1Page/>}/>
-                        <Route path={'test2'} element={<TeacherTest2Page/>}/>
+                        <Route path={'Product'} element={<TeacherTest2Page/>}/>
                         <Route path={'category'} element={<TeacherCategoryPage/>}/>
                         <Route path={'manufacturer'} element={<TeacherManufacturePage/>}/>
                         <Route path={'client'} element={<TeacherClientPage/>}/>
@@ -140,7 +140,7 @@ const RouteComponent = () => {
 
                     <Route path={'student'} element={<SviridenkoDimPage/>}>
                         {/*<Route path={'test1'} element={<SDBTest1Page/>}/>
-                        <Route path={'test2'} element={<SDBTest2Page/>}/>*/}
+                        <Route path={'Product'} element={<SDBTest2Page/>}/>*/}
                     </Route>                 
                     
                     {<Route path={'payzunov'} element={<Payzunov/>}>
@@ -150,7 +150,7 @@ const RouteComponent = () => {
 
                     <Route path={'Gayvoronskikh'} element={<GayvoronskikhAndrei/>} >
                         <Route path={'test1'} element={<GayvoronskikhTest1Page/>} />
-                        <Route path={'test2'} element={<GayvoronskikhTest2Page/>} />
+                        <Route path={'Product'} element={<GayvoronskikhTest2Page/>} />
                     </Route>
 
                     <Route path={'aleshin'} element={<AleshinNickPage/>}>
@@ -179,7 +179,7 @@ const RouteComponent = () => {
 
                     <Route path={'jabrov'} element={<JabrovPage1 />} >
                         <Route path={'Test1'} element={<JabrovPageTest1 />} />
-                        <Route path={'Test2'} element={<JabrovPageTest2 />} />
+                        <Route path={'Product'} element={<JabrovPageProduct />} />
                         <Route path={'Category'} element={<JabrovCategory />} />
                         <Route path={'tovar'} element={<JabrovTovar />} />
                         <Route path={'zakaz'} element={<JabrovZakaz />} />
@@ -189,21 +189,21 @@ const RouteComponent = () => {
 
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>
                         <Route path={'test1'} element={<Burlak1/>} />
-                        <Route path={'test2'} element={<Burlak2/>} />
+                        <Route path={'Product'} element={<Burlak2/>} />
                     </Route>
                     
                     <Route path={'SesNV'} element={<SesNV/>} >
                         <Route path={'test1'} element={<Ses1/>} />
-                        <Route path={'test2'} element={<Ses2/>} />
+                        <Route path={'Product'} element={<Ses2/>} />
                     </Route>
                     <Route path={'MalahovDmitriy'} element={<MalahovDmitriy />} >
                         <Route path={'test1'} element={<Mal1 />} />
-                        <Route path={'test2'} element={<Mal2 />} />
+                        <Route path={'Product'} element={<Mal2 />} />
                     </Route>
 
                     <Route path={'blink'} element={<TatarnikovEgorPage/>}>
                         <Route path={'test1'} element={<MemePage1/>}/>
-                        <Route path={'test2'} element={<MemePage2/>}/>
+                        <Route path={'Product'} element={<MemePage2/>}/>
                     </Route>
 
 

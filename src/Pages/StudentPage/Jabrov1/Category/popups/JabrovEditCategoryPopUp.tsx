@@ -3,64 +3,52 @@ import React, { useState } from 'react'
 import { JabrovAxios } from '../../JabrovPage'
 import JabrovPopUp, { IPopup } from '../../JabrovPopUp/JabrovPopUp'
 import { Category } from '../model'
-//import { Category } from '../Category/model'
-
-
 
 type Props = IPopup & {
     category:Category,
-    onEdit: (category: Category) => void;
-
+    onEdit:(category:Category)=>void;
 }
+export const JabrovEditCategoryPopUp =({open,onClose,onEdit,category:categoryProps}:Props)=>{
 
-export const JabrovEditCategoryPopUp = ({ open, onClose, onEdit, category: categoryProps }: Props) => {
-    const [category, setCategory] = useState(categoryProps)
+    const [category, setCategory]=useState(categoryProps)
 
-    const onEditClick = () => {
-
-        JabrovAxios.patch <{ item: Category }>(
+    const onEditClick=()=>{
+        JabrovAxios.patch<{item:Category}>(
             'https://canstudy.ru/orderapi/category',
             {
-                item:category
+                item: category
             }
-        ).then((response) => {
+        ).then((response)=>{
             onEdit(response.data.item);
             onClose();
         })
-
-        
     }
 
-
-
-    return (
+    return (<div>
         <JabrovPopUp
             open={open}
             onClose={onClose}
-            title={"Createe Category"}
+            title={'создание категории'}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+            <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
+
                 <TextField
-                    label="CategoryName"
+                    label="Category name"
                     variant="standard"
                     value={category.name}
-                    onChange={e => setCategory(prev => ({ ...prev, name: e.target.value }))}
+                    onChange={e=>setCategory(prev=>({...prev,name:e.target.value}))}
+
                 />
-
-
-
-
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{display:'flex',justifyContent:'center'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => onEditClick()}
+                        onClick={()=>onEditClick()}
                     >
                         Edit
-                        </Button>
+                    </Button>
                 </div>
             </div>
         </JabrovPopUp>
-    )
-
+    </div>)
 }

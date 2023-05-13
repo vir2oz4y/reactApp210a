@@ -3,63 +3,56 @@ import React, { useState } from 'react'
 import { JabrovAxios } from '../../JabrovPage';
 import JabrovPopUp, { IPopup } from '../../JabrovPopUp/JabrovPopUp';
 import { Category } from '../model';
-//import { Category } from '../Category/model'
-
 
 
 type Props = IPopup & {
-
-    onCreate: (newCategory: Category) => void;
-
+    onCreate:(newCategory: Category)=>void;
 }
+export const JabrovCreateCategoryPopUp =({open,onClose,onCreate}:Props)=>{
 
-export const JabrovCreateCategoryPopUp = ({ open, onClose, onCreate }: Props) => {
-    const [categoryName, setCategoryName] = useState('')
+    const [categoryName, setCategoryName]=useState('')
 
-   
-
-    const onCreateClick = () => {
-
-        JabrovAxios.post<{ item: Category }>(
+    const onCreateClick=()=>{
+        JabrovAxios.post<{item:Category}>(
             'https://canstudy.ru/orderapi/category',
             {
                 name: categoryName
             }
-        ).then((response) => {
+        ).then((response)=>{
             onCreate(response.data.item)
             onClose();
         })
-       
     }
-    
 
-    return(
+    function setShowCreateCategory(arg0: boolean): void {
+        throw new Error('Function not implemented.');
+    }
+
+    return (<div>
         <JabrovPopUp
             open={open}
             onClose={onClose}
-            title={"Createe Category"}
+            title={'создание категории'}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+            <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
+
                 <TextField
-                    label="CategoryName"
+                    label="Category name"
                     variant="standard"
                     value={categoryName}
-                    onChange={e => setCategoryName(e.target.value)}
+                    onChange={e=>setCategoryName(e.target.value)}
+
                 />
-
-                
-            
-
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{display:'flex',justifyContent:'center'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={()=>onCreateClick()}
                     >
                         Create
-                        </Button>
-                    </div>
+                    </Button>
+                </div>
             </div>
         </JabrovPopUp>
-    )
+    </div>)
 }

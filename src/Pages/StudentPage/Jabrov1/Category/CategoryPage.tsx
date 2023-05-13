@@ -10,7 +10,7 @@ import { JabrovAxios } from '../JabrovPage';
 import React from 'react';
 
 
-const CategoryPage = () => {
+const CategoryPage=()=>{
     const columns: GridColDef[] = [
         {
             field: 'id',
@@ -24,121 +24,114 @@ const CategoryPage = () => {
             editable: true,
         },
         {
-            field: '',
-            headerName: '',
-            width:200,
-            renderCell: (e: any) => {
-                return <div style={{ display: 'flex', gap:'1em'}}>
+            field:'',
+            headerName:'',
+            width:500,
+            renderCell:(e:any)=>{
+                return <div style={{display:'flex',gap:'1em'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick = {()=>setShowEditCategory(e.row)}
+                        onClick={()=>setEditedCategory(e.row)}
                     >
-                        Edit
+                        Редактировать
                     </Button>
-
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>OneDeleteClick(e.row.id)}>
-
-                        Delete
+                        onClick={()=>onDeleteClick(e.row.id)}
+                    >
+                        Удалить
                     </Button>
                 </div>
-            }
-        },
+            },
+        }
     ];
 
-
-    const OneDeleteClick = (id: number) => {
-
+    const onDeleteClick = (id:number)=>{
         JabrovAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
-            .then(() => {
-                setCategories(prev =>
-                    prev.filter(el => el.id !== id)
+            .then(()=>{
+                setCategories(prev=>
+                    prev.filter(el=>el.id !== id)
                 )
             })
     }
 
-    // @ts-ignore
-    
-
-    const [categories, setCategories] = useState<Category[]>([]);
+    const [categories,setCategories]=useState<Category[]>([]);
 
     useEffect(() => {
-        JabrovAxios.get<{ items: Category[] }>(
+        JabrovAxios.get<{
+            items: Category[]
+        }>(
             'https://canstudy.ru/orderapi/category/list'
         )
-            .then((response) => {
-                setCategories(response.data.items);
+            .then((response)=>{
+                setCategories(response.data.items)
             })
-
     },[])
 
-    const [showCreateCatrgory, setShowCreateCategory] = useState(false);
-    const [editedCategory, setShowEditCategory] =  useState<Category|null>(null);
+    const [showCreateCategory, setShowCreateCategory]=useState(false);
+    const [editedCategory, setEditedCategory] = useState<Category|null>(null);
 
-    const onCreate = (newCategory: Category) => {
-        setCategories(prev => [...prev, newCategory]);
-
+    const onCreate =(newCategory:Category)=>{
+        setCategories(prev=>[...prev,newCategory]);
     }
 
-    const onEdit = (category: Category) => {
-        setCategories(prev => {
-            const editCategory = prev.find(el=>el.id ===category.id)
+    const onEdit = (category: Category)=>{
+        setCategories(prev=>{
+            const editCategory = prev.find(el=>el.id === category.id);
 
-            if(editCategory){
-                editCategory.name = category.name
+            if (editCategory){
+                editCategory.name = category.name;
             }
-            return [...prev]
+
+            return [...prev];
         });
-
     }
-
-
 
     return (
         <div>
-            <div style={{display:'flex',justifyContent:'space-between', alignItems:'center'}}>
-
-            <h1>
-                Категории
-            </h1>
-
+            <div style={{display:'flex',
+                justifyContent:'space-between',
+                alignItems:'center'
+            }}
+            >
+                <h1>
+                    Категории
+                </h1>
                 <div>
-                    <Button color={'primary'}
-                            variant={'contained'}
-                            onClick={() => setShowCreateCategory(true)}>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={()=>setShowCreateCategory(true)}>
                         Добавить категорию
                     </Button>
-
                 </div>
-
             </div>
 
-            {showCreateCatrgory && <JabrovCreateCategoryPopUp
+            {showCreateCategory && <JabrovCreateCategoryPopUp
                 open={true}
-                onClose={() => setShowCreateCategory(false)}
-                onCreate={(category) => onCreate(category)}
-            />
-            }
+                onClose={ ()=> setShowCreateCategory(false)}
+                onCreate={(category)=>onCreate(category)}
+
+            />}
+
             {editedCategory !== null && <JabrovEditCategoryPopUp
                 open={editedCategory !==null}
-                onClose={()=>setShowEditCategory(null)}
+                onClose={()=>setEditedCategory(null)}
                 category={editedCategory}
                 onEdit={(category)=>onEdit(category)}
+            />}
 
-                />}
-
-
-        <Box sx={{ height: "70vh", width: "100%" }}>
-            <DataGrid
-                rows={categories}
-                columns={columns}
-            />
-        </Box>
+            <Box sx={{height:'100vh',width:'100%'}}>
+                <DataGrid
+                    rows={categories}
+                    columns={columns}
+                />
+            </Box>
         </div>
+
     );
-};
+}
 
 export default CategoryPage;

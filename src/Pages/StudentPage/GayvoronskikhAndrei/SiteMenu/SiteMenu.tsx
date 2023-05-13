@@ -23,41 +23,41 @@ const SiteMenu = () => {
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('Product')}
                     >
                         <ListItemText primary="Client"/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('Product')}
                     >
                         <ListItemText primary="Manufacturer" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('Product')}
                     >
                         <ListItemText primary="Order" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('Product')}
                     >
                         <ListItemText primary="Product" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={() => navigate('test2')}
+                        onClick={() => navigate('Product')}
                     >
                         <ListItemText primary="Purchase" />
                     </ListItemButton>
                     <ListItem disablePadding>
                         <ListItemButton
-                            onClick={() => navigate('test2')}
+                            onClick={() => navigate('Product')}
                         >
                             <ListItemText primary="User" />
                         </ListItemButton>

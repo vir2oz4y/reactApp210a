@@ -21,7 +21,7 @@ const Menu = () => {
                         <ListItemButton
                             onClick={()=>navigate('Test2')}
                         >
-                            <ListItemText primary="Test2" />
+                            <ListItemText primary="ProductPage" />
                         </ListItemButton>
                     </ListItem>
                 </List>
