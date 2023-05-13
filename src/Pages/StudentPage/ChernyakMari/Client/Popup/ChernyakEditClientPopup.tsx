@@ -45,7 +45,7 @@ const ChernyakEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: 
                     <Select
                         labelId="sex"
                         value={client.sex}
-                        label="���"
+                        label="Пол"
                         onChange={(e) => setClient(prev => ({ ...prev, sex: e.target.value as any }))}
                     >
                         <MenuItem value={0}>Мужской</MenuItem>
