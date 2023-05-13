@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {DataGrid, GridColDef} from '@mui/x-data-grid';
-import {Box, Button, dividerClasses} from '@mui/material';
-import {Client} from "./model";
-import {ChernyakCreateClientPopup} from "./Popup/ChernyakCreateClientPopup";
-import {ChernyakEditClientPopup} from "./Popup/ChernyakEditManufacturePopup";
-
+import { Button, IconButton } from '@mui/material';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import { Client } from './model';
+import { chernyakAxios } from "../ChernyakM";
+import ChernyakCreateClientPopup from "./Popup/ChernyakCreateClientPopup";
+import ChernyakEditClientPopup from "./Popup/ChernyakEditClientPopup";
+import Box from "@mui/material/Box";
 
 
 const ClientPage = () => {
@@ -13,21 +14,37 @@ const ClientPage = () => {
         {
             field: 'id',
             headerName: 'ID',
+            flex: .3
         },
         {
-            field: ' firstName',
+            field: 'sex',
+            headerName: 'Пол',
+            flex: 1,
+            editable: true,
+        },
+        {
+            field: 'firstName',
             headerName: 'Имя',
-            flex:1,
+            flex: 1,
+            editable: true,
         },
         {
             field: 'lastName',
             headerName: 'Фамилия',
-            flex:1,
+            flex: 1,
+            editable: true,
+        },
+        {
+            field: 'email',
+            headerName: 'Почта',
+            flex: 1,
+            editable: true,
         },
         {
             field: 'phoneNumber',
-            headerName: 'Телефон',
-            flex:1,
+            headerName: 'Номер телефона',
+            flex: 1,
+            editable: true,
         },
         {
             field: '',
@@ -38,67 +55,75 @@ const ClientPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setEditedClient(e.row)}
+                        onClick = {()=>setShowEditClient(e.row)}
                     >
                         Edit
                     </Button>
 
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={() => onDeleteClick(e.row.id)}
+                    <Button color={'primary'}
+                            variant={'contained'}
+                            onClick={()=>OneDeleteClick(e.row.id)}
                     >
                         Delete
                     </Button>
                 </div>
             },
         }
+
     ];
 
-    const onDeleteClick = (id: number) => {
-        setClients(prev =>
-            prev.filter(el => el.id !== id)
-        )
-    }
+    const OneDeleteClick = (id:number) => {
 
+        chernyakAxios.delete(`https://canstudy.ru/orderapi/client/${id}`)
+            .then(() => {
+                setClients(prev => prev.filter(el => el.id !== id)
+                )
+            })
+    }
     const [clients, setClients] = useState<Client[]>([
-        {id: 1, firstName: "Имя", lastName: "Фамилия", email:'почта', phoneNumber:'номер'},
+
     ])
 
-    const [showCreateClient, setShowCreateClient] = useState(false);
+    useEffect(() => {
+        chernyakAxios.get<{ items: Client[] }>(
+            'https://canstudy.ru/orderapi/client/list'
+        )
+            .then((response) => {
+                setClients(response.data.items);
+            })
+    }, [])
 
-    const [editedClient, setEditedClient] = useState<Client|null>(null);
 
-    const onCreate = (newClient: Client) => {
-        setClients(prev => [...prev, newClient]);
+    const [ShowCreateClient, setShowCreateClient] = useState(false);
+    const [editedClient, setShowEditClient] = useState <Client|null>(null)
+
+    const onCreate = (Client: Client) => {
+        setClients(prev => [...prev, Client])
     }
 
-    const onEdit = (client: Client) => {
+    const onEdit = (Client: Client) => {
         setClients(prev => {
-            const editCategory = prev.find(el=>el.id === client.id);
+            const curClient = prev.find(el => el.id === Client.id)!;
 
-            if (editCategory){
-                editCategory.firstName = client.firstName;
-                editCategory.lastName = client.lastName;
-                editCategory.email = client.email;
-                editCategory.phoneNumber = client.phoneNumber;
-
+            if (curClient) {
+                curClient.firstName = Client.firstName;
+                curClient.lastName = Client.lastName;
+                curClient.phoneNumber = Client.phoneNumber;
+                curClient.email = Client.email;
+                curClient.sex = Client.sex;
             }
 
-            return [...prev];
-        });
+            return [...prev]
+        })
     }
+
 
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                }}
-            >
-                <h1>Клиенты</h1>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <h1>
+                    Клиенты
+                </h1>
 
                 <div>
                     <Button
@@ -111,17 +136,18 @@ const ClientPage = () => {
                 </div>
             </div>
 
-            {showCreateClient && <ChernyakCreateClientPopup
-                open={showCreateClient}
+            {ShowCreateClient && <ChernyakCreateClientPopup
+                open={ShowCreateClient}
                 onClose={() => setShowCreateClient(false)}
-                onCreate={(client) => onCreate(client)}
+                onCreate={(Client) => onCreate(Client)}
+
             />}
 
             {editedClient !== null && <ChernyakEditClientPopup
                 open={editedClient !== null}
-                onClose={()=>setEditedClient(null)}
+                onClose={()=> setShowEditClient(null)}
                 client={editedClient}
-                onEdit={(client)=>onEdit(client)}
+                onEdit={(Client)=>onEdit(Client)}
             />}
 
             <Box sx={{height: '70vh', width: '100%'}}>
@@ -131,9 +157,6 @@ const ClientPage = () => {
                 />
             </Box>
         </div>
-
-
     );
 };
-
 export default ClientPage;

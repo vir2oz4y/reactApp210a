@@ -1,71 +1,85 @@
-import {Button, ListItemAvatarProps, TextField} from '@mui/material'
-import React, { useState } from 'react'
+import React, {useState} from 'react';
 import ChernyakPopup, { IPopup }from "../../../../../Components/Chernyak/ChernyakPopup/ChernyakPopup";
-import { Manufacture } from "../model";
+import {Button, TextField} from "@mui/material";
+import {Manufacture} from "../model";
+import {chernyakAxios} from "../../ChernyakM";
 
 type Props = IPopup & {
     onCreate: (newManufacture: Manufacture) => void;
 }
-
-export const ChernyakCreateManufacturePopup = ({ open, onClose, onCreate }: Props) => {
-
+const ChernyakCreateManufacturerPopup = ({open, onClose, onCreate}: Props) => {
+    const createManufacture = () => {
+        chernyakAxios.post<{ item: Manufacture }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                name: manufacture.name,
+                city: manufacture.city,
+                country:manufacture.country
+            })
+           .then(res => {
+                onCreate(res.data.item)
+            })
+    }
     const [manufacture, setManufacture] = useState<Manufacture>({
-        id: Math.random(),
-        city: "",
-        country: "",
-        name: ""
+        id: 0,
+        name: '',
+        country: '',
+        city: ''
     })
-
     const onCreateClick = () => {
-        onCreate(manufacture)
-
+        createManufacture();
         onClose();
     }
-
     return (
         <ChernyakPopup
-            open={open}
-            onClose={onClose}
             title={'Создание производителя'}
+            open={open}
+            onClose={() => onClose()}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
                 <TextField
-                    label="Название"
+                    label="Название производителя"
                     variant="standard"
+                    fullWidth={true}
                     value={manufacture.name}
-                    onChange={e => setManufacture(prev=>({...prev, name:e.target.value}))}
+                    onChange={e => setManufacture(prev => (
+                        {...prev, name: e.target.value}
+                    ))}
                 />
-
                 <TextField
                     label="Страна"
                     variant="standard"
+                    fullWidth={true}
                     value={manufacture.country}
-                    onChange={e => setManufacture(prev=>({...prev, country:e.target.value}))}
+                    onChange={e => setManufacture(prev => (
+                        {...prev, country: e.target.value}
+                    ))}
                 />
-
-
                 <TextField
                     label="Город"
                     variant="standard"
+                    fullWidth={true}
                     value={manufacture.city}
-                    onChange={e => setManufacture(prev=>({...prev, city:e.target.value}))}
+                    onChange={e => setManufacture(prev => (
+                        {...prev, city: e.target.value}
+                    ))}
                 />
-
-
-
-
-                <div style={{display:'flex', justifyContent:'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={() => onCreateClick()}
                     >
-                        Create
+                        Создать
                     </Button>
-
                 </div>
             </div>
         </ChernyakPopup>
     );
-}
+};
+export default ChernyakCreateManufacturerPopup;

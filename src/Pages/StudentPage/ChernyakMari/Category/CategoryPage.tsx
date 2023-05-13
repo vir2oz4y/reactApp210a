@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import ChernyakPopup from "../../../../Components/Chernyak/ChernyakPopup/ChernyakPopup";
 import {Category} from "./model"
 import {ChernyakCreateCategoryPopup} from "./Popup/ChernyakCreateCategoryPopup";
 import {ChernyakEditCategoryPopup} from "./Popup/ChernyakEditCategoryPopup";
+import {chernyakAxios} from "../ChernyakM";
 const CategoryPage = () => {
     const columns: GridColDef[] = [
         {
@@ -16,6 +16,8 @@ const CategoryPage = () => {
         {
             field: 'Name',
             headerName: 'First name',
+            width: 150,
+            editable: true,
 
         },
         {
@@ -37,28 +39,34 @@ const CategoryPage = () => {
                         onClick={()=>onDeleteClick (e.row.id)}
 
                     >
-                        delite
+                        Delete
                     </Button>
                 </div>
             }
         },
     ];
 
-    const onDeleteClick= (id:number)=>{
-    setCategories( prev => prev.filter (el => el.id !== id))
+    const onDeleteClick = (id: number) => {
+
+        chernyakAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+            .then(() => {
+                setCategories(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
     }
 
-    const [categories, setCategories] = useState <Category[]> ( [
+    const [categories, setCategories] = useState<Category[]>([])
 
-        { id: 1, name: "category 1" },
-        { id: 2, name: "category 2" },
-        { id: 3, name: "category 3" },
-        { id: 4, name: "category 4" },
-        { id: 5, name: "category 5" },
-        { id: 6, name: "category 6" },
-        { id: 7, name: "category 7" },
+    useEffect(() => {
+        chernyakAxios.get<{ items: Category[] }>(
+            'https://canstudy.ru/orderapi/category/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+    },[])
 
-    ])
     const[showCreateCategory, setShowCreateCategory] = useState(false);
 
     const[editedCategory, setEditedCategory] = useState<Category|null>(null)

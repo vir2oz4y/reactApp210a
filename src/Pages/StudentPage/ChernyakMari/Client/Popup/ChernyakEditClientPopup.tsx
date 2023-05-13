@@ -1,45 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { Client } from "../model";
-import {chernyakAxios} from "../../ChernyakM";
 import ChernyakPopup, { IPopup } from "../../../../../Components/Chernyak/ChernyakPopup/ChernyakPopup";
-
+import {chernyakAxios} from "../../ChernyakM";
 
 type Props = IPopup & {
-    onCreate: (newClient: Client) => void;
+    onEdit: (newClient: Client) => void;
+    client: Client
 }
 
-const ChernyakCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
+const ChernyakEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: Props) => {
 
-    const createClient = () => {
-        chernyakAxios.post<{ item: Client }>('https://canstudy.ru/orderapi/Client',
+    const [client, setClient] = useState(clientEdit)
+
+    const onEditClick = () => {
+
+        chernyakAxios.patch<{ item: Client }>('https://canstudy.ru/orderapi/Client',
             {
-                ...client
+                item: {
+                    ...client
+                }
             })
             .then(res => {
-                onCreate(res.data.item)
+                onEdit(res.data.item)
+                onClose();
             })
-    }
-
-
-    const [client, setClient] = useState<Client>({
-        sex: 0,
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        id: 0,
-    })
-
-    const onCreateClick = () => {
-        createClient();
-
-        onClose();
     }
 
     return (
         <ChernyakPopup
-            title={'Добавление клиента'}
+            title={'Изменение клиента'}
             open={open}
             onClose={() => onClose()}
         >
@@ -47,21 +37,19 @@ const ChernyakCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '1em',
-                    paddingTop: '1em'
+                    gap: '1em'
                 }}
             >
-
                 <FormControl fullWidth>
                     <InputLabel id="sex">Пол</InputLabel>
                     <Select
                         labelId="sex"
-                        value={client.sex?.toString()}
-                        label="пол"
+                        value={client.sex}
+                        label="���"
                         onChange={(e) => setClient(prev => ({ ...prev, sex: e.target.value as any }))}
                     >
-                        <MenuItem value={"0"}>Мужской</MenuItem>
-                        <MenuItem value={"1"}>Женский</MenuItem>
+                        <MenuItem value={0}>Мужской</MenuItem>
+                        <MenuItem value={1}>Женский</MenuItem>
                     </Select>
                 </FormControl>
 
@@ -102,9 +90,9 @@ const ChernyakCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => onCreateClick()}
+                        onClick={() => onEditClick()}
                     >
-                        Добавить
+                        Изменить
                     </Button>
                 </div>
 
@@ -113,4 +101,4 @@ const ChernyakCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
     );
 };
 
-export default ChernyakCreateClientPopup;
+export default ChernyakEditClientPopup;

@@ -93,10 +93,10 @@ import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2"
 
 import ChernyakM from "../StudentPage/ChernyakMari/ChernyakM";
 import {default as ChernyakMCategory} from "../StudentPage/ChernyakMari/Category/CategoryPage";
-import {default as ChernyakMClient} from "../StudentPage/ChernyakMari/Client/Client";
+import {default as ChernyakMClient} from "../StudentPage/ChernyakMari/Client/ClientPage";
 import {default as ChernyakMManufacture} from "../StudentPage/ChernyakMari/Manufacture/ManufacturePage";
 import {default as ChernyakMOrder} from "../StudentPage/ChernyakMari/Order/Order";
-import {default as ChernyakMProduct} from "../StudentPage/ChernyakMari/Product/Product";
+import {default as ChernyakMProduct} from "../StudentPage/ChernyakMari/Product/ProductPage";
 import {default as ChernyakMPurchase} from "../StudentPage/ChernyakMari/Purchase/Purchase";
 import {default as ChernyakMUser} from "../StudentPage/ChernyakMari/User/User";
 
@@ -208,7 +208,7 @@ const RouteComponent = () => {
                     <Route path={'chernyak'} element={<ChernyakM/>} >
                         <Route path={'Category'} element={<ChernyakMCategory/>} />
                         <Route path={'Client'} element={<ChernyakMClient/>} />
-                        <Route path={'Manufacture'} element={<ChernyakMManufacture/>} />
+                        <Route path={'Manufacturer'} element={<ChernyakMManufacture/>} />
                         <Route path={'Order'} element={<ChernyakMOrder/>} />
                         <Route path={'Product'} element={<ChernyakMProduct/>} />
                         <Route path={'Purchase'} element={<ChernyakMPurchase/>} />

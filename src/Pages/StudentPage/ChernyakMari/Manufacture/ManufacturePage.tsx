@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {Box, Button, dividerClasses} from '@mui/material';
 import {Manufacture} from "./model";
-import {ChernyakCreateManufacturePopup} from "./Popup/ChernyakCreateManufacturePopup";
 import {ChernyakEditManufacturePopup} from "./Popup/ChernyakEditManufacturePopup";
+import {chernyakAxios} from "../ChernyakM";
+import ChernyakCreateManufacturePopup from "./Popup/ChernyakCreateManufacturePopup";
+
 
 
 const ManufacturePage = () => {
@@ -12,6 +14,7 @@ const ManufacturePage = () => {
         {
             field: 'id',
             headerName: 'ID',
+            width: 90
         },
         {
             field: 'name',
@@ -26,11 +29,6 @@ const ManufacturePage = () => {
         {
             field: 'city',
             headerName: 'Город',
-            flex:1,
-        },
-        {
-            field: 'email',
-            headerName: 'Почта',
             flex:1,
         },
         {
@@ -60,25 +58,37 @@ const ManufacturePage = () => {
     ];
 
     const onDeleteClick = (id: number) => {
-        setManufacturies(prev =>
-            prev.filter(el => el.id !== id)
-        )
+      chernyakAxios.delete(`https://canstudy.ru/orderapi/manufacturer/${id}`)
+    .then(() => {
+            setManufactureries(prev =>
+                prev.filter(el => el.id !== id)
+            )
+        })
     }
+    const [manufactureries, setManufactureries] = useState<Manufacture[]>([])
 
-    const [manufacturies, setManufacturies] = useState<Manufacture[]>([
-        {id: 1, name: "Производитель 1", country:'rus', city:'nsk'},
-    ])
+    useEffect(() => {
+        chernyakAxios.get<{ items: Manufacture[] }>(
+            'https://canstudy.ru/orderapi/manufacturer/list'
+        )
+            .then((response) => {
+                setManufactureries(response.data.items);
+            })
+    },[])
+
+
+
 
     const [showCreateManufacture, setShowCreateManufacture] = useState(false);
 
     const [editedManufacture, setEditedManufacture] = useState<Manufacture|null>(null);
 
     const onCreate = (newManufacture: Manufacture) => {
-        setManufacturies(prev => [...prev, newManufacture]);
+        setManufactureries(prev => [...prev, newManufacture]);
     }
 
     const onEdit = (manufacture: Manufacture) => {
-        setManufacturies(prev => {
+        setManufactureries(prev => {
             const editCategory = prev.find(el=>el.id === manufacture.id);
 
             if (editCategory){
@@ -129,7 +139,7 @@ const ManufacturePage = () => {
 
             <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
-                    rows={manufacturies}
+                    rows={manufactureries}
                     columns={columns}
                 />
             </Box>
