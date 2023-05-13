@@ -1,82 +1,102 @@
-import {Button, TextField } from '@mui/material';
+import {Button,TextField } from '@mui/material';
 import  React, { useState } from 'react'
 import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import { Client } from '../models';
+import {TelelinskiyAxios} from "../../TelelinskiyAndreyPage";
+import {Category} from "../../Category/models";
 
 
 type Props = IPopup & {
-    onCreate:(newClient: Client)=>void;
+    onCreate: (newClient: Client) => void;
 }
-export const TelelinskiyCreateClientPopUp =({open,onClose,onCreate}:Props)=>{
 
-    const [client, setClient]=useState<Client>({
-        id: Math.random(),
-        sex:'',
-        firstName:'',
-        lastName:'',
-        email:'',
-        phoneNumber:''
-    })
+export const TelelinskiyCreateClientPopUp = ({ open, onClose, onCreate }: Props) => {
 
-    const onCreateClick=()=>{
-        onCreate(client)
-        onClose();
+    const [ClientSex, setClientSex] = useState('')
+    const [ClientFirstName, setClientFirstName] = useState('')
+    const [ClientLastName, setClientLastName] = useState('')
+    const [ClientEmail, setClientEmail] = useState('')
+    const [ClientPhoneNumber, setClientPhoneNumber] = useState('')
+
+    const onCreateClick = () => {
+
+        TelelinskiyAxios.post<{item: Client}>('https://canstudy.ru/orderapi/client',
+            {
+                sex: parseInt(ClientSex, 10),
+                firstName: ClientFirstName,
+                lastName: ClientLastName,
+                email: ClientEmail,
+                phoneNumber: ClientPhoneNumber
+            }
+        )
+            .then((response) => {
+                onCreate(response.data.item)
+                onClose();
+            })
+
     }
 
-
-    return (<div>
+    return (
         <TelelinskiyPopUp
             open={open}
             onClose={onClose}
-            title={'создание Клиента'}
+            title={"Create Client"}
         >
-            <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
 
+            <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                 <TextField
-                    label="Client sex"
+                    label="Client Sex"
                     variant="standard"
-                    value={client.sex}
-                    onChange={e=>setClient(prev=>({...prev,sex:e.target.value}))}
-
+                    value={ClientSex}
+                    onChange={e => setClientSex(e.target.value)}
                 />
-                <TextField
-                    label="Client First Name"
-                    variant="standard"
-                    value={client.firstName}
-                    onChange={e=>setClient(prev=>({...prev,firstName:e.target.value}))}
 
-                />
-                <TextField
-                    label="Client Last Name"
-                    variant="standard"
-                    value={client.lastName}
-                    onChange={e=>setClient(prev=>({...prev,lastName:e.target.value}))}
+                <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                    <TextField
+                        label="Client First Name"
+                        variant="standard"
+                        value={ClientFirstName}
+                        onChange={e => setClientFirstName(e.target.value)}
+                    />
 
-                />
-                <TextField
-                    label="Client Email"
-                    variant="standard"
-                    value={client.email}
-                    onChange={e=>setClient(prev=>({...prev,email:e.target.value}))}
+                    <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                        <TextField
+                            label="Client Last Name"
+                            variant="standard"
+                            value={ClientLastName}
+                            onChange={e => setClientLastName(e.target.value)}
+                        />
 
-                />
-                <TextField
-                    label="Client PhoneNumber"
-                    variant="standard"
-                    value={client.phoneNumber}
-                    onChange={e=>setClient(prev=>({...prev,phoneNumber:e.target.value}))}
+                        <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                            <TextField
+                                label="Client Email"
+                                variant="standard"
+                                value={ClientEmail}
+                                onChange={e => setClientEmail(e.target.value)}
+                            />
 
-                />
-                <div style={{display:'flex',justifyContent:'center'}}>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={()=>onCreateClick()}
-                    >
-                        Create
-                    </Button>
+                            <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                                <TextField
+                                    label="Client Phone Number"
+                                    variant="standard"
+                                    value={ClientPhoneNumber}
+                                    onChange={e => setClientPhoneNumber(e.target.value)}
+                                />
+
+                                <div style = {{display: 'flex', justifyContent: 'center'}}>
+                                    <Button
+                                        color={'primary'}
+                                        variant={'contained'}
+                                        onClick={() => onCreateClick()}
+                                    >
+                                        Create
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </TelelinskiyPopUp>
-    </div>)
+    )
 }

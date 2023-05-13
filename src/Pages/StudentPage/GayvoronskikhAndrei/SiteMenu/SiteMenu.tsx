@@ -46,7 +46,7 @@ const SiteMenu = () => {
                     <ListItemButton
                         onClick={() => navigate('test2')}
                     >
-                        <ListItemText primary="Product" />
+                        <ListItemText primary="ProductPage" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

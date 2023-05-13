@@ -2,61 +2,79 @@ import {Button, TextField } from '@mui/material';
 import  React, { useState } from 'react'
 import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import { Manufacturer } from '../models';
-
+import {TelelinskiyAxios} from "../../TelelinskiyAndreyPage";
 
 type Props = IPopup & {
-    manufacturer:Manufacturer,
-    onEdit:(newManufacturer:Manufacturer)=>void;
+    manufacture: Manufacturer,
+
+    onEdit: (Manufacture: Manufacturer) => void;
 }
-export const TelelinskiyEditManufacturerPopUp =({open,onClose,onEdit,manufacturer:manufacturerProps}:Props)=>{
 
-    const [manufacturer, setManufacturer]=useState<Manufacturer>(manufacturerProps)
+export const TelelinskiyEditManufacturerPopUp = ({ open, onClose, onEdit, manufacture:ManufactureProps}: Props) => {
 
-    const onEditClick=()=>{
-        onEdit(manufacturer);
+    const [Manufacturer, setManufacture] = useState(ManufactureProps)
 
-        onClose();
+
+    const onEditClick = () => {
+        TelelinskiyAxios.patch<{item: Manufacturer}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: Manufacturer
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item);
+                onClose();
+            })
     }
 
-    return (<div>
+    return (
         <TelelinskiyPopUp
             open={open}
             onClose={onClose}
-            title={'Изменение Производителя'}
+            title={"Edit Manufacture"}
         >
-            <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
-
+            <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                 <TextField
-                    label="Manufacturer name"
+                    label="Manufacture name"
                     variant="standard"
-                    value={manufacturer.name}
-                    onChange={e=>setManufacturer(prev=>({...prev,name:e.target.value}))}
-
+                    value={Manufacturer.name}
+                    onChange={e => setManufacture(prev => ({
+                        ...prev, name: e.target.value
+                    }))}
                 />
-                <TextField
-                    label="Manufacturer city"
-                    variant="standard"
-                    value={manufacturer.city}
-                    onChange={e=>setManufacturer(prev=>({...prev,city:e.target.value}))}
+                <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                    <TextField
+                        label="Manufacture city"
+                        variant="standard"
+                        value={Manufacturer.city}
+                        onChange={e => setManufacture(prev => ({
+                            ...prev, city: e.target.value
+                        }))}
+                    />
 
-                />
-                <TextField
-                    label="Manufacturer country"
-                    variant="standard"
-                    value={manufacturer.country}
-                    onChange={e=>setManufacturer(prev=>({...prev,country:e.target.value}))}
+                    <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                        <TextField
+                            label="Manufacture country"
+                            variant="standard"
+                            value={Manufacturer.country}
+                            onChange={e => setManufacture(prev => ({
+                                ...prev, country: e.target.value
+                            }))}
+                        />
 
-                />
-                <div style={{display:'flex',justifyContent:'center'}}>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={()=>onEditClick()}
-                    >
-                        Edit
-                    </Button>
+                        <div style = {{display: 'flex', justifyContent: 'center'}}>
+                            <Button
+                                color={'primary'}
+                                variant={'contained'}
+                                onClick={() => onEditClick()}
+                            >
+                                Edit
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </TelelinskiyPopUp>
-    </div>)
+    )
 }

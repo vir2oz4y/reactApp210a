@@ -47,7 +47,7 @@ const AsideMenu = () => {
                 <ListItemButton
                     onClick={() => navigate('product')}
                 >
-                    <ListItemText primary="Product" />
+                    <ListItemText primary="ProductPage" />
                 </ListItemButton>
             </ListItem>
         </List>

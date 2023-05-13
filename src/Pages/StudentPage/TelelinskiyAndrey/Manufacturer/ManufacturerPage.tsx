@@ -1,131 +1,144 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import {useEffect, useState } from 'react';
 import { Manufacturer } from './models';
 import TelelinskiyPopUp from "../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import { TelelinskiyCreateManufacturerPopUp } from './Modals/TelelinskiyCreateManufacturerPopUp';
 import { TelelinskiyEditManufacturerPopUp } from './Modals/TelelinskiyEditManufacturerPopUp';
-const ManufacturerPage=()=>{
+import {TelelinskiyAxios} from "../TelelinskiyAndreyPage";
+const ManufacturerPage = () => {
+
     const columns: GridColDef[] = [
         {
             field: 'id',
             headerName: 'ID',
+            flex: .3
         },
         {
             field: 'name',
-            headerName: 'Manufacturer',
+            headerName: 'Manufacture',
             flex: 1,
+            editable: true,
         },
         {
             field: 'city',
-            headerName: 'city name',
+            headerName: 'City',
             flex: 1,
+            editable: true,
         },
         {
             field: 'country',
-            headerName: 'country name',
+            headerName: 'Country',
             flex: 1,
+            editable: true,
         },
         {
-            field:'',
-            headerName:'',
-            width: 250,
-            renderCell:(e:any)=>{
-                return <div style={{display:'flex',gap:'1em'}}>
+            field: '',
+            headerName: '',
+            width: 200,
+            renderCell: (e: any) => {
+                return <div style={{display: 'flex', gap: '1em'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setEditedManufacture(e.row)}
+                        onClick = {()=>setShowEditManufacture(e.row)}
                     >
-                        Редактировать
+                        Edit
                     </Button>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={()=>onDeleteClick(e.row.id)}
-                    >
-                        Удалить
+
+                    <Button color={'primary'} variant={'contained'} onClick={()=>OneDeleteClick(e.row.id)}>
+                        Delete
                     </Button>
                 </div>
             },
         }
+
     ];
 
-    const onDeleteClick = (id:number)=>{
-        setManufacturies(prev=>
-            prev.filter(el=>el.id != id))
+    const OneDeleteClick = (id: number) => {
+
+        TelelinskiyAxios.delete(`https://canstudy.ru/orderapi/Manufacturer/${id}`)
+            .then(() => {
+                setCategories(prev => prev.filter(el => el.id !== id)
+                )
+            })
     }
+    const [categories, setCategories] = useState<Manufacturer[]>([
 
-    const [manufacturies,setManufacturies]=useState<Manufacturer[]>([
-        { id: 1,name: 'Manufacturer 1', city: "Nsk", country: "RU"},
-    ]);
+    ])
 
-    const [showCreateManufacture, setShowCreateManufacture]=useState(false);
-    const [editedManufacture, setEditedManufacture] = useState<Manufacturer|null>(null);
+    useEffect(() => {
+        TelelinskiyAxios.get<{ items: Manufacturer[] }>(
+            'https://canstudy.ru/orderapi/manufacturer/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+    },[])
 
-    const onCreate =(newManufacturer:Manufacturer)=>{
-        setManufacturies(prev=>[...prev,newManufacturer]);
+    const [ShowCreateManufacture, setShowCreateManufacture] = useState(false);
+    const [editedManufacture, setShowEditManufacture] = useState <Manufacturer|null>(null);
 
+
+
+    const onCreate = (newManufacture: Manufacturer) => {
+        setCategories(prev => [...prev, newManufacture]);
     }
+    const onEdit = (Manufacture: Manufacturer) => {
+        setCategories(prev => {
+            const editManufacture = prev.find(el => el.id === Manufacture.id)
 
-    const onEdit = (manufacturer: Manufacturer)=>{
-        setManufacturies(prev=>{
-            const editCategory = prev.find(el=>el.id === manufacturer.id);
-
-            if (editCategory){
-                editCategory.name = manufacturer.name;
-                editCategory.city = manufacturer.city;
-                editCategory.country = manufacturer.country;
+            if(editManufacture) {
+                editManufacture.name = Manufacture.name;
+                editManufacture.city = Manufacture.city;
+                editManufacture.country = Manufacture.country;
             }
-
             return [...prev];
         });
     }
 
     return (
         <div>
-            <div style={{display:'flex',
-                justifyContent:'space-between',
-                alignItems:'center'
-            }}
-            >
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h1>
-                    Производитель
+                    Мануфактуры
                 </h1>
+
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setShowCreateManufacture(true)}>
-                        Добавить производителя
+                        onClick={() => setShowCreateManufacture(true)}
+                    >
+                        Добавить мануфактуру
                     </Button>
                 </div>
+
             </div>
 
-            {showCreateManufacture && <TelelinskiyCreateManufacturerPopUp
-                open={showCreateManufacture}
-                onClose={ ()=> setShowCreateManufacture(false)}
-                onCreate={(manufacture)=>onCreate(manufacture)}
+            {ShowCreateManufacture && <TelelinskiyCreateManufacturerPopUp
+                open={ShowCreateManufacture}
+                onClose={() => setShowCreateManufacture(false)}
+                onCreate={(Manufacture) => onCreate(Manufacture)}
 
             />}
 
             {editedManufacture !== null && <TelelinskiyEditManufacturerPopUp
-                open={editedManufacture !==null}
-                onClose={()=>setEditedManufacture(null)}
-                manufacturer={editedManufacture}
-                onEdit={(manufacturer)=>onEdit(manufacturer)}
+                open={editedManufacture !== null}
+                onClose={()=> setShowEditManufacture(null)}
+                manufacture={editedManufacture}
+                onEdit={(Manufacturer)=>onEdit(Manufacturer)}
             />}
 
-            <Box sx={{height:'100vh',width:'100%'}}>
+            <Box sx={{height: '70vh', width: '100%'}}>
                 <DataGrid
-                    rows={manufacturies}
+                    rows={categories}
                     columns={columns}
                 />
             </Box>
         </div>
-
     );
-}
+};
 
 export default ManufacturerPage;

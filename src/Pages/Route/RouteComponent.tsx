@@ -62,7 +62,7 @@ import {default as TelelinskiyCategory} from "../StudentPage/TelelinskiyAndrey/C
 import {default as TelelinskiyClient} from "../StudentPage/TelelinskiyAndrey/Client/ClientPage";
 import {default as TelelinskiyManufacturer} from "../StudentPage/TelelinskiyAndrey/Manufacturer/ManufacturerPage";
 import {default as TelelinskiyOrder} from "../StudentPage/TelelinskiyAndrey/Order/Order";
-import {default as TelelinskiyProduct} from "../StudentPage/TelelinskiyAndrey/Product/Product";
+import {default as TelelinskiyProduct} from "../StudentPage/TelelinskiyAndrey/Product/ProductPage";
 
 
 import VishnyakAlekseiPage from "../StudentPage/VishnyakAleksei/VishnyakAlekseiPage";

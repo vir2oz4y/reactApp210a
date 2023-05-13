@@ -2,65 +2,74 @@ import {Button, TextField } from '@mui/material';
 import  React, { useState } from 'react'
 import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Telelinskiy/TelelinskiyPopUp/TelelinskiyPopUP";
 import { Manufacturer } from '../models';
+import {TelelinskiyAxios} from "../../TelelinskiyAndreyPage";
 
 
 type Props = IPopup & {
-    onCreate:(newManufacturer: Manufacturer)=>void;
+    onCreate: (newManufacture: Manufacturer) => void;
 }
-export const TelelinskiyCreateManufacturerPopUp =({open,onClose,onCreate}:Props)=>{
 
-    const [manufacturer, setManufacturer]=useState<Manufacturer>({
-        id: Math.random(),
-        city: "",
-        country: "",
-        name: ""
-    })
+export const TelelinskiyCreateManufacturerPopUp = ({ open, onClose, onCreate }: Props) => {
 
-    const onCreateClick=()=>{
-        onCreate(manufacturer)
-        onClose();
+    const [ManufactureName, setManufactureName] = useState('')
+    const [ManufactureCity, setManufactureCity] = useState('')
+    const [ManufactureCountry, setManufactureCountry] = useState('')
+
+    const onCreateClick = () => {
+        TelelinskiyAxios.post<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                name: ManufactureName,
+                city: ManufactureCity,
+                country:ManufactureCountry
+            })
+            .then(response => {
+                onCreate(response.data.item)
+                onClose()
+            })
     }
 
-
-    return (<div>
+    return (
         <TelelinskiyPopUp
             open={open}
             onClose={onClose}
-            title={'создание Производителя'}
+            title={"Create Manufacture"}
         >
-            <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
-
+            <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                 <TextField
-                    label="Manufacturer name"
+                    label="Manufacture name"
                     variant="standard"
-                    value={manufacturer.name}
-                    onChange={e=>setManufacturer(prev=>({...prev, name:e.target.value}))}
-
+                    value={ManufactureName}
+                    onChange={e => setManufactureName(e.target.value)}
                 />
-                <TextField
-                    label="city name"
-                    variant="standard"
-                    value={manufacturer.city}
-                    onChange={e=>setManufacturer(prev=>({...prev, city:e.target.value}))}
 
-                />
-                <TextField
-                    label="country name"
-                    variant="standard"
-                    value={manufacturer.country}
-                    onChange={e=>setManufacturer(prev=>({...prev, country:e.target.value}))}
+                <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                    <TextField
+                        label="Manufacture city"
+                        variant="standard"
+                        value={ManufactureCity}
+                        onChange={e => setManufactureCity(e.target.value)}
+                    />
 
-                />
-                <div style={{display:'flex',justifyContent:'center'}}>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={()=>onCreateClick()}
-                    >
-                        Create
-                    </Button>
+                    <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+                        <TextField
+                            label="Manufacture country"
+                            variant="standard"
+                            value={ManufactureCountry}
+                            onChange={e => setManufactureCountry(e.target.value)}
+                        />
+
+                        <div style = {{display: 'flex', justifyContent: 'center'}}>
+                            <Button
+                                color={'primary'}
+                                variant={'contained'}
+                                onClick={() => onCreateClick()}
+                            >
+                                Create
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </TelelinskiyPopUp>
-    </div>)
+    )
 }
