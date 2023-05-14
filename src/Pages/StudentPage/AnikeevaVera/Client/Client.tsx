@@ -1,107 +1,116 @@
-import React, {useState} from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import {Box} from "@mui/material";
-import Button from "@mui/material/Button";
-import {Client} from "./model";
+import React, {useEffect, useState} from 'react';
+import { DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import { Box, Button } from '@mui/material';
+import { Client } from './model';
 import AnikeevaPopUp from "../AnikeevaPopUp/AnikeevaPopUp";
-import { AnikeevaCreateClientPagePopup } from '../AnikeevaPopUp/popups/AnikeevaCreateClientPagePopup';
-import { AnikeevaEditClientPagePopup } from '../AnikeevaPopUp/popups/AnikeevaEditClientPagePopup';
-
+import { AnikeevaCreateClientPagePopup } from '../AnikeevaPopUp/Popups/AnikeevaCreateClientPopup';
+import {AnikeevaEditClientPagePopup} from "../AnikeevaPopUp/Popups/AnikeevaEditClientPopup";
+import { AnikeevaAxios } from '../AnikeevaVeraPage';
 
 
 const ClientPage = () => {
+
     const columns: GridColDef[] = [
         {
             field: 'id',
             headerName: 'ID',
-            width: 100,
-            editable: true,
+            flex: .3
         },
         {
             field: 'sex',
-            headerName: 'sex',
-            width: 100,
+            headerName: 'Sex',
+            flex: 1,
             editable: true,
         },
         {
             field: 'firstName',
-            headerName: 'first Name',
-            flex:1,
+            headerName: 'First name',
+            flex: 1,
             editable: true,
         },
         {
             field: 'lastName',
-            headerName: 'last Name',
-            flex:1,
+            headerName: 'Last name',
+            flex: 1,
             editable: true,
         },
         {
             field: 'email',
-            headerName: 'email',
-            flex:1,
+            headerName: 'Email',
+            flex: 1,
             editable: true,
         },
         {
             field: 'phoneNumber',
-            headerName: 'phone Number',
-            flex:1,
+            headerName: 'Phone number',
+            flex: 1,
             editable: true,
         },
-
         {
             field: '',
             headerName: '',
             width: 200,
-            renderCell:(e:any) =>{
-                return <div style={{display: 'flex', gap:'lem'}}>
+            renderCell: (e: any) => {
+                return <div style={{display: 'flex', gap: '1em'}}>
                     <Button
-                        color = {'primary'}
-                        variant = {'contained'}
-                        onClick = {()=>setShowEditClient(e.row)}>
-
-                        EDIT
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick = {()=>setShowEditClient(e.row)}
+                    >
+                        Edit
                     </Button>
 
-                    <Button color ={'primary'} variant = {'contained'} onClick={()=>OneDeleteClick(e.row.id)}>
-                        DELETE
+                    <Button color={'primary'}
+                            variant={'contained'}
+                            onClick={()=>OneDeleteClick(e.row.id)}
+                    >
+                        Delete
                     </Button>
                 </div>
-            }
-        },
+            },
+        }
+
     ];
 
-    const OneDeleteClick = (id:number)=>{
-        SetCategories(prev => prev.filter(el=>el.id!==id))
-    }
+    const OneDeleteClick = (id:number) => {
 
-    const [categories,SetCategories] = useState<Client[]>([
-        { id: 1, sex: 1, firstName: 'Ivan', lastName: 'Ivanov', email: 'email@.com', phoneNumber: '79512345678'},
-        { id: 2, sex: 2, firstName: 'Ivan', lastName: 'Ivanov', email: 'email@.com', phoneNumber: '79512345678'},
-        { id: 3, sex: 3, firstName: 'Ivan', lastName: 'Ivanov', email: 'email@.com', phoneNumber: '79512345678'},
-        { id: 4, sex: 4, firstName: 'Ivan', lastName: 'Ivanov', email: 'email@.com', phoneNumber: '79512345678'},
-        { id: 5, sex: 5, firstName: 'Ivan', lastName: 'Ivanov', email: 'email@.com', phoneNumber: '79512345678'},
-        { id: 6, sex: 6, firstName: 'Ivan', lastName: 'Ivanov', email: 'email@.com', phoneNumber: '79512345678'},])
+        AnikeevaAxios.delete(`https://canstudy.ru/orderapi/client/${id}`)
+            .then(() => {
+                setClients(prev => prev.filter(el => el.id !== id)
+                )
+            })
+    }
+    const [clients, setClients] = useState<Client[]>([
+
+    ])
+
+    useEffect(() => {
+        AnikeevaAxios.get<{ items: Client[] }>(
+            'https://canstudy.ru/orderapi/client/list'
+        )
+            .then((response) => {
+                setClients(response.data.items);
+            })
+    }, [])
 
     const [ShowCreateClient, setShowCreateClient] = useState(false);
-    const [EditedClient, setShowEditClient] = useState<Client|null>(null);
-
+    const [editedClient, setShowEditClient] = useState <Client|null>(null);
 
     const onCreate = (newClient: Client) => {
-        SetCategories(prev => [...prev, newClient]);
+        setClients(prev => [...prev, newClient]);
     }
-    const onEdit = (Client: Client) => {
-        SetCategories(prev => {
-            const EditClient = prev.find(el => el.id === Client.id)
+    const onEdit = (client: Client) => {
+        setClients(prev => {
+            const editClient = prev.find(el => el.id === client.id)
 
-
-            if (EditClient) {
-                EditClient.sex = Client.sex;
-                EditClient.firstName = Client.firstName;
-                EditClient.lastName =Client.lastName;
-                EditClient.email =Client.email;
-                EditClient.phoneNumber =Client.phoneNumber;
+            if(editClient) {
+                editClient.sex = client.sex;
+                editClient.firstName = client.firstName;
+                editClient.lastName = client.lastName;
+                editClient.email = client.email;
+                editClient.phoneNumber = client.phoneNumber;
             }
-            return [...prev]
+            return [...prev];
         });
     }
 
@@ -116,38 +125,36 @@ const ClientPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => setShowCreateClient(true)}>
-
+                        onClick={() => setShowCreateClient(true)}
+                    >
                         Добавить клиента
                     </Button>
                 </div>
             </div>
-            <div>
-                {ShowCreateClient && <AnikeevaCreateClientPagePopup
-                    open={ShowCreateClient}
-                    onClose={() => setShowCreateClient(false)}
-                    onCreate={(Client) => onCreate(Client)}
 
-                />}
+            {ShowCreateClient && <AnikeevaCreateClientPagePopup
+                open={ShowCreateClient}
+                onClose={() => setShowCreateClient(false)}
+                onCreate={(Client) => onCreate(Client)}
 
-                {EditedClient !== null && <AnikeevaEditClientPagePopup
-                    open={EditedClient !== null}
-                    onClose={()=>setShowEditClient(null)}
-                    Client = {EditedClient}
-                    onEdit={(Client)=>onEdit(Client)}
-                />}
+            />}
 
-                <Box sx={{height: '70vh', width: '100%'}}>
-                    <DataGrid
-                        rows={categories}
-                        columns={columns}
-                    />
-                </Box>
-            </div>
+            {editedClient !== null && <AnikeevaEditClientPagePopup
+                open={editedClient !== null}
+                onClose={()=> setShowEditClient(null)}
+                client={editedClient}
+                onEdit={(Client)=>onEdit(Client)}
+            />}
+
+            <Box sx={{height: '70vh', width: '100%'}}>
+                <DataGrid
+                    rows={clients}
+                    columns={columns}
+                />
+            </Box>
         </div>
     );
 };
 
 export default ClientPage;
-
 

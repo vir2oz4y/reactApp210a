@@ -2,45 +2,44 @@ import React from 'react';
 import {Box, Modal, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import "./AnikeevaPopUp.scss"
-
 export type Ipopup = {
     open:boolean,
     onClose:()=>void;
 }
 
-type Props = Ipopup  & {
-    title: string
-    children: any
+type Props = Ipopup & {
+    title:string,
+    children:any
 }
-const AnikeevaPopUp = ({open,onClose, title,children}:Props) => {
+const AnikeevaPopUp = ({open, onClose, title, children}:Props) => {
     return (
-        <div>
-            <Modal
-                open={open}
-                onClose={onClose}
-            >
-                <div className={'popup'}>
-                    <div className={'popup__content'}>
-                        <div className={'popup__content__title'}>
-                            <div>
-                                {title}
-                            </div>
+        <Modal
+            open={open}
+            onClose={onClose}
 
-                            <div>
-                                <Button color = {'primary'} variant = {'contained'} onClick={()=>onClose()}>
-                                    Закрыть
-                                </Button>
-                            </div>
+
+        >
+            <div className={'popup'}>
+                <div className={'popup__content'}>
+                    <div className={'popup__content__title'}>
+                        <div>
+                            {title}
                         </div>
 
                         <div>
-                            {children}
+                            <Button color = {'primary'} variant = {'contained'} onClick={()=>onClose()}>
+                                Закрыть
+                            </Button>
                         </div>
                     </div>
 
+                    <div>
+                        {children}
+                    </div>
                 </div>
-            </Modal>
-        </div>
+
+            </div>
+        </Modal>
     );
 };
 

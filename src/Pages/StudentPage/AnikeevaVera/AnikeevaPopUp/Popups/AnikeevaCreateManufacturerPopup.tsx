@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { Manufacturer } from '../../Manufacturer/model'
 import AnikeevaPopUp, { Ipopup } from '../AnikeevaPopUp'
+import {AnikeevaAxios} from "../../AnikeevaVeraPage";
 
 type Props = Ipopup & {
     onCreate: (newManufacturer: Manufacturer) => void;
@@ -14,13 +15,16 @@ export const AnikeevaCreateManufacturerPagePopup = ({ open, onClose, onCreate }:
     const [ManufacturerCountry, setManufacturerCountry] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: ManufacturerName,
-            city: ManufacturerCity,
-            country: ManufacturerCountry
-        })
-        onClose();
+        AnikeevaAxios.post<{ item: Manufacturer }>('https://canstudy.ru/orderapi/Manufacturer',
+            {
+                name: ManufacturerName,
+                city: ManufacturerCity,
+                country:ManufacturerCountry
+            })
+            .then(response => {
+                onCreate(response.data.item)
+                onClose()
+            })
     }
 
     return (
@@ -39,7 +43,7 @@ export const AnikeevaCreateManufacturerPagePopup = ({ open, onClose, onCreate }:
 
                 <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                     <TextField
-                        label="City"
+                        label="Manufacturer city"
                         variant="standard"
                         value={ManufacturerCity}
                         onChange={e => setManufacturerCity(e.target.value)}
@@ -47,7 +51,7 @@ export const AnikeevaCreateManufacturerPagePopup = ({ open, onClose, onCreate }:
 
                     <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                         <TextField
-                            label="Country"
+                            label="Manufacturer country"
                             variant="standard"
                             value={ManufacturerCountry}
                             onChange={e => setManufacturerCountry(e.target.value)}
@@ -64,7 +68,7 @@ export const AnikeevaCreateManufacturerPagePopup = ({ open, onClose, onCreate }:
                 </div>
             </div>
                 </div>
-                    </div>
+            </div>
         </AnikeevaPopUp>
     )
 }

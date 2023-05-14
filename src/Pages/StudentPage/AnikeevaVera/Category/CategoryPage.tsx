@@ -1,25 +1,24 @@
-import React, {useState} from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import {Box} from "@mui/material";
-import Button from "@mui/material/Button";
-import {Category} from "./model";
+import React, {useEffect, useState} from 'react';
+import { DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import { Box, Button } from '@mui/material';
 import AnikeevaPopUp from "../AnikeevaPopUp/AnikeevaPopUp";
-import { AnikeevaCreateCategoryPagePopup } from '../AnikeevaPopUp/popups/AnikeevaCreateCategoryPagePopup';
-import {AnikeevaEditCategoryPagePopup} from "../AnikeevaPopUp/popups/AnikeevaEditCategoryPagePopup";
-
+import { AnikeevaCreateCategoryPagePopup } from '../AnikeevaPopUp/Popups/AnikeevaCreateCategoryPopup';
+import { AnikeevaEditCategoryPagePopup } from '../AnikeevaPopUp/Popups/AnikeevaEditCategoryPopup';
+import { Category } from './model';
+import { AnikeevaAxios } from '../AnikeevaVeraPage';
 
 
 const CategoryPage = () => {
+
     const columns: GridColDef[] = [
         {
             field: 'id',
             headerName: 'ID',
-            width: 100,
-            editable: true,
+            width: 90
         },
         {
             field: 'name',
-            headerName: 'Category',
+            headerName: 'first name',
             width: 150,
             editable: true,
         },
@@ -27,51 +26,65 @@ const CategoryPage = () => {
             field: '',
             headerName: '',
             width: 200,
-            renderCell:(e:any) =>{
-                return <div style={{display: 'flex', gap:'lem'}}>
+            renderCell: (e: any) => {
+                return <div style={{display: 'flex', gap: '1em'}}>
                     <Button
-                        color = {'primary'}
-                        variant = {'contained'}
-                        onClick = {()=>setShowEditCategory(e.row)}>
-
-                        EDIT
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick = {()=>setShowEditCategory(e.row)}
+                    >
+                        Edit
                     </Button>
 
-                    <Button color ={'primary'} variant = {'contained'} onClick={()=>OneDeleteClick(e.row.id)}>
-                        DELETE
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={() => OneDeleteClick(e.row.id)}
+                    >
+                        Delete
                     </Button>
                 </div>
-            }
-        },
+            },
+        }
+
     ];
 
-    const OneDeleteClick = (id:number)=>{
-        SetCategories(prev => prev.filter(el=>el.id!==id))
-    }
+    const OneDeleteClick = (id: number) => {
 
-    const [categories,SetCategories] = useState<Category[]>([
-        { id: 1, name: 'category 1' },
-        { id: 2, name: 'category 2' },
-        { id: 3, name: 'category 3' },
-        { id: 4, name: 'category 4' },
-        { id: 5, name: 'category 5' },
-        { id: 6, name: 'category 6' },])
+        AnikeevaAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+            .then(() => {
+                setCategories(prev => prev.filter(el => el.id !== id)
+                )
+            })
+    }
+    const [categories, setCategories] = useState<Category[]>([
+
+    ])
+
+    useEffect(() => {
+        AnikeevaAxios.get<{ items: Category[] }>(
+            'https://canstudy.ru/orderapi/category/list'
+        )
+            .then((response) => {
+                setCategories(response.data.items);
+            })
+    }, [])
 
     const [ShowCreateCategory, setShowCreateCategory] = useState(false);
-    const [EditedCategory, setShowEditCategory] = useState<Category|null>(null);
+    const [editedCategory, setShowEditCategory] = useState <Category|null>(null);
 
 
     const onCreate = (newCategory: Category) => {
-        SetCategories(prev => [...prev, newCategory]);
+        setCategories(prev => [...prev, newCategory]);
     }
     const onEdit = (category: Category) => {
-        SetCategories(prev => {
-            const EditCategory = prev.find(el => el.id === category.id)
+        setCategories(prev => {
+            const editCategory = prev.find(el => el.id === category.id)
 
-            if (EditCategory) {
-                EditCategory.name = category.name;
+            if(editCategory) {
+                editCategory.name = category.name;
             }
-            return [...prev]
+            return [...prev];
         });
     }
 
@@ -86,36 +99,38 @@ const CategoryPage = () => {
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => setShowCreateCategory(true)}>
-
+                        onClick={() => setShowCreateCategory(true)}
+                    >
                         Добавить категорию
                     </Button>
                 </div>
+
             </div>
-            <div>
-                {ShowCreateCategory && <AnikeevaCreateCategoryPagePopup
-                    open={ShowCreateCategory}
-                    onClose={() => setShowCreateCategory(false)}
-                    onCreate={(category) => onCreate(category)}
 
-                />}
+            {ShowCreateCategory && <AnikeevaCreateCategoryPagePopup
+                open={ShowCreateCategory}
+                onClose={() => setShowCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
 
-                {EditedCategory !== null && <AnikeevaEditCategoryPagePopup
-                    open={EditedCategory !== null}
-                    onClose={()=>setShowEditCategory(null)}
-                    category = {EditedCategory}
-                    onEdit={(category)=>onEdit(category)}
-                    />}
+            />}
 
-                <Box sx={{height: '70vh', width: '100%'}}>
-                    <DataGrid
-                        rows={categories}
-                        columns={columns}
-                    />
-                </Box>
-            </div>
+            {editedCategory !== null && <AnikeevaEditCategoryPagePopup
+                open={editedCategory !== null}
+                onClose={()=> setShowEditCategory(null)}
+                category={editedCategory}
+                onEdit={(category)=>onEdit(category)}
+            />}
+
+            <Box sx={{height: '70vh', width: '100%'}}>
+                <DataGrid
+                    rows={categories}
+                    columns={columns}
+                />
+            </Box>
         </div>
     );
 };
 
 export default CategoryPage;
+
+

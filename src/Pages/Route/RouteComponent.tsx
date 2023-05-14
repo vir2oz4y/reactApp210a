@@ -40,7 +40,7 @@ import { default as BushmanovPurchasePage } from "../StudentPage/BushmanovMak/Pu
 import { default as BushmanovUserPage } from "../StudentPage/BushmanovMak/User/User";
 
 
-import AnikeevaVeraPage from "../StudentPage/AnikeevaVera/AnikeevaVeraPage";
+import AnikeevaVeraPage from '../StudentPage/AnikeevaVera/AnikeevaVeraPage';
 import {default as AnikeevaCategory} from "../StudentPage/AnikeevaVera/Category/CategoryPage";
 import {default as AnikeevaClient} from "../StudentPage/AnikeevaVera/Client/Client";
 import {default as AnikeevaManufacturer} from "../StudentPage/AnikeevaVera/Manufacturer/Manufacturer";
@@ -90,6 +90,9 @@ import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
 import AleshinNickPage from "../StudentPage/Aleshin/Aleshin";
 import { default as AleshinTest1Page } from "../StudentPage/Aleshin/Test1/Test1";
 import { default as AleshinTest2Page } from "../StudentPage/Aleshin/Test2/Test2";
+
+
+
 
 
 

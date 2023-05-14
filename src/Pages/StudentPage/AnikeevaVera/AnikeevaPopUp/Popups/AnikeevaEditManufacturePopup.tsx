@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { Manufacturer } from '../../Manufacturer/model'
 import AnikeevaPopUp, { Ipopup } from '../AnikeevaPopUp'
+import {AnikeevaAxios} from "../../AnikeevaVeraPage";
 
 type Props = Ipopup & {
     Manufacturer: Manufacturer,
@@ -9,13 +10,22 @@ type Props = Ipopup & {
     onEdit: (Manufacturer: Manufacturer) => void;
 }
 
-export const AnikeevaEditManufacturerPagePopup = ({ open, onClose, onEdit, Manufacturer:ManufacturerProps }: Props) => {
+export const AnikeevaEditManufacturerPagePopup = ({ open, onClose, onEdit, Manufacturer:ManufacturerProps}: Props) => {
 
     const [Manufacturer, setManufacturer] = useState(ManufacturerProps)
 
+
     const onEditClick = () => {
-        onEdit(Manufacturer);
-        onClose();
+        AnikeevaAxios.patch<{item: Manufacturer}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: Manufacturer
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item);
+                onClose();
+            })
     }
 
     return (
@@ -35,16 +45,17 @@ export const AnikeevaEditManufacturerPagePopup = ({ open, onClose, onEdit, Manuf
                 />
                 <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                     <TextField
-                        label="City"
+                        label="Manufacturer city"
                         variant="standard"
                         value={Manufacturer.city}
                         onChange={e => setManufacturer(prev => ({
                             ...prev, city: e.target.value
                         }))}
                     />
+
                     <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
                         <TextField
-                            label="Country"
+                            label="Manufacturer country"
                             variant="standard"
                             value={Manufacturer.country}
                             onChange={e => setManufacturer(prev => ({
@@ -61,7 +72,9 @@ export const AnikeevaEditManufacturerPagePopup = ({ open, onClose, onEdit, Manuf
                         Edit
                     </Button>
                 </div>
-            </div></div></div>
+            </div>
+                </div>
+            </div>
         </AnikeevaPopUp>
     )
 }

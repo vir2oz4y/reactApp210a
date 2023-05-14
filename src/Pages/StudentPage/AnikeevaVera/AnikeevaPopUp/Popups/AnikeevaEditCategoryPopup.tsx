@@ -1,7 +1,9 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import { Category } from '../../Category/model'
-import AnikeevaPopUp, { Ipopup } from '../AnikeevaPopUp'
+import { AnikeevaAxios } from '../../AnikeevaVeraPage';
+import { Category } from '../../Category/model';
+import AnikeevaPopUp, { Ipopup } from '../AnikeevaPopUp';
+
 
 type Props = Ipopup & {
     category: Category,
@@ -13,8 +15,17 @@ export const AnikeevaEditCategoryPagePopup = ({ open, onClose, onEdit, category:
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
-        onEdit(category);
-        onClose();
+
+        AnikeevaAxios.patch<{item: Category}>(
+            'https://canstudy.ru/orderapi/category',
+            {
+                item: category
+            }
+        )
+            .then((response) => {
+                onEdit(response.data.item);
+                onClose();
+            })     
     }
 
     return (
@@ -46,3 +57,4 @@ export const AnikeevaEditCategoryPagePopup = ({ open, onClose, onEdit, category:
         </AnikeevaPopUp>
     )
 }
+

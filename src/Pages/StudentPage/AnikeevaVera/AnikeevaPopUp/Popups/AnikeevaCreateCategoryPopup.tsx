@@ -1,7 +1,8 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import { Category } from '../../Category/model'
-import AnikeevaPopUp, { Ipopup } from '../AnikeevaPopUp'
+import { AnikeevaAxios } from '../../AnikeevaVeraPage';
+import { Category } from '../../Category/model';
+import AnikeevaPopUp, { Ipopup } from '../AnikeevaPopUp';
 
 type Props = Ipopup & {
     onCreate: (newCategory: Category) => void;
@@ -12,11 +13,17 @@ export const AnikeevaCreateCategoryPagePopup = ({ open, onClose, onCreate }: Pro
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
-        onCreate({
-            id: Math.random(),
-            name: categoryName
-        })
-        onClose();
+
+        AnikeevaAxios.post<{item: Category}>('https://canstudy.ru/orderapi/category',
+            {
+                name: categoryName
+            }
+        )
+            .then((response) => {
+                onCreate(response.data.item)
+                onClose();
+            })
+        
     }
 
     return (

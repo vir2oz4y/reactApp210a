@@ -1,6 +1,6 @@
-export type Client = {
+export type  Client = {
     id: number,
-    sex: number,
+    sex: string,
     firstName: string,
     lastName: string,
     email: string,
