@@ -1,54 +1,70 @@
-import {Button, ListItemAvatarProps, TextField} from '@mui/material'
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import {Button, TextField} from "@mui/material";
 import {Manufacturer} from "../models";
+import {VishnyakAxios} from "../../VishnyakAlekseiPage";
 import VishnyakPopup, {IPopup} from "../../../../../Components/Vishnyak/VishnyakPopup/VishnyakPopup";
 
 type Props = IPopup & {
-    manufacturer: Manufacturer,
     onEdit: (newManufacturer: Manufacturer) => void;
+    Manufacturer: Manufacturer
 }
-
-export const VishnyakEditManufacturerPopup = ({open, onClose, manufacturer: manufacturerProps, onEdit}: Props) => {
-
-    const [manufacturer, setManufacturer] = useState<Manufacturer>(manufacturerProps)
-
+const VishnyakEditManufacturerPopup = ({open, onClose, Manufacturer, onEdit}: Props) => {
+    const [ManufacturerEdit, setManufacturerEdit] = useState(Manufacturer)
     const onEditClick = () => {
-        onEdit(manufacturer)
-
-        onClose();
+        VishnyakAxios.patch<{ item:Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+            {
+                item:{
+                    id:ManufacturerEdit.id,
+                    name:ManufacturerEdit.name,
+                    city:ManufacturerEdit.city,
+                    country:ManufacturerEdit.country,
+                }
+            })
+            .then(res => {
+                onEdit(ManufacturerEdit)
+                onClose();
+            })
     }
-
     return (
         <VishnyakPopup
+            title={'Создание категории'}
             open={open}
-            onClose={onClose}
-            title={'Изменение производителя'}
+            onClose={() => onClose()}
         >
-            <div style={{display: 'flex', flexDirection: 'column', gap: '1em'}}>
-
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
                 <TextField
-                    label="Название"
+                    label="Название производителя"
                     variant="standard"
-                    value={manufacturer.name}
-                    onChange={e => setManufacturer(prev => ({...prev, name: e.target.value}))}
+                    fullWidth={true}
+                    value={ManufacturerEdit.name}
+                    onChange={e =>
+                        setManufacturerEdit(prev => ({...prev, name: e.target.value}))
+                    }
                 />
-
                 <TextField
                     label="Страна"
                     variant="standard"
-                    value={manufacturer.country}
-                    onChange={e => setManufacturer(prev => ({...prev, country: e.target.value}))}
+                    fullWidth={true}
+                    value={ManufacturerEdit.country}
+                    onChange={e => setManufacturerEdit(prev => (
+                        {...prev, country: e.target.value}
+                    ))}
                 />
-
-
                 <TextField
                     label="Город"
                     variant="standard"
-                    value={manufacturer.city}
-                    onChange={e => setManufacturer(prev => ({...prev, city: e.target.value}))}
+                    fullWidth={true}
+                    value={ManufacturerEdit.city}
+                    onChange={e => setManufacturerEdit(prev => (
+                        {...prev, city: e.target.value}
+                    ))}
                 />
-
-
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                     <Button
                         color={'primary'}
@@ -57,9 +73,9 @@ export const VishnyakEditManufacturerPopup = ({open, onClose, manufacturer: manu
                     >
                         Изменить
                     </Button>
-
                 </div>
             </div>
         </VishnyakPopup>
-    )
-}
+    );
+};
+export default VishnyakEditManufacturerPopup;

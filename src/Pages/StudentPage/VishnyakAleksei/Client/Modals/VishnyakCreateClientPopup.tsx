@@ -1,82 +1,116 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react'
-import VishnyakPopup, { IPopup } from "../../../../../Components/Vishnyak/VishnyakPopup/VishnyakPopup";
-import { Client } from '../models';
+import React, {useEffect, useState} from 'react';
+import VishnyakPopup, {IPopup} from "../../../../../Components/Vishnyak/VishnyakPopup/VishnyakPopup";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Client} from "../models";
+import axios from 'axios';
+import {VishnyakAxios} from "../../VishnyakAlekseiPage";
 
 
 type Props = IPopup & {
-    onCreate: (newClient: Client) => void;
+    onCreate:(newClient:Client)=>void;
 }
-export const VishnyakCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
 
-    const [client, setClient] = useState<Client>({
-        id: Math.random(),
-        sex: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: ''
-    })
+const VishnyakCreateClientPopup = ({open, onClose, onCreate}: Props) => {
 
-    const onCreateClick = () => {
-        onCreate(client)
-        onClose();
+    const createClient = () => {
+        VishnyakAxios.post<{ item:Client }>('https://canstudy.ru/orderapi/Client',
+            {
+                ...client
+            })
+            .then(res => {
+                onCreate(res.data.item)
+            })
     }
 
 
-    return (<div>
+    const [client, setClient] = useState<Client>({
+        sex: 0,
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        id: 0,
+    })
+
+    const onCreateClick = () =>{
+        createClient();
+
+        onClose();
+    }
+
+    return (
         <VishnyakPopup
+            title={'Создание клиента'}
             open={open}
-            onClose={onClose}
-            title={'Creating a Client'}
+            onClose={() => onClose()}
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em',
+                    paddingTop:'1em'
+                }}
+            >
+
+                <FormControl fullWidth>
+                    <InputLabel id="sex">Пол</InputLabel>
+                    <Select
+                        labelId="sex"
+                        value={client.sex?.toString()}
+                        label="Пол"
+                        onChange={(e)=>setClient(prev=>({...prev, sex:e.target.value as any}))}
+                    >
+                        <MenuItem value={"0"}>Женский</MenuItem>
+                        <MenuItem value={"1"}>Мужской</MenuItem>
+                    </Select>
+                </FormControl>
+
 
                 <TextField
-                    label="Client sex"
+                    label="Имя"
                     variant="standard"
-                    value={client.sex}
-                    onChange={e => setClient(prev => ({ ...prev, sex: e.target.value }))}
-
-                />
-                <TextField
-                    label="Client First Name"
-                    variant="standard"
+                    fullWidth={true}
                     value={client.firstName}
-                    onChange={e => setClient(prev => ({ ...prev, firstName: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  firstName:e.target.value}))}
                 />
+
                 <TextField
-                    label="Client Last Name"
+                    label="Фамилия"
                     variant="standard"
+                    fullWidth={true}
                     value={client.lastName}
-                    onChange={e => setClient(prev => ({ ...prev, lastName: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  lastName:e.target.value}))}
                 />
+
                 <TextField
-                    label="Client Email"
+                    label="Почта"
                     variant="standard"
+                    fullWidth={true}
                     value={client.email}
-                    onChange={e => setClient(prev => ({ ...prev, email: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  email:e.target.value}))}
                 />
+
                 <TextField
-                    label="Client PhoneNumber"
+                    label="Телефон"
                     variant="standard"
+                    fullWidth={true}
                     value={client.phoneNumber}
-                    onChange={e => setClient(prev => ({ ...prev, phoneNumber: e.target.value }))}
-
+                    onChange={e=>setClient(prev=>({...prev,  phoneNumber:e.target.value}))}
                 />
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => onCreateClick()}
+                        onClick={()=>onCreateClick()}
                     >
-                        Create
+                        Создать
                     </Button>
                 </div>
+
             </div>
         </VishnyakPopup>
-    </div>)
-}
+    );
+};
+export default VishnyakCreateClientPopup;
