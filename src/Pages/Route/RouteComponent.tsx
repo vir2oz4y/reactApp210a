@@ -103,6 +103,13 @@ const RouteComponent = () => {
                         <Route path={'Test2'} element={<BushmanovTest2Page/>} />
                     </Route>
 
+                    <Route path={'Sviridenko'} element={<SviridenkoDimPage/>}>
+                        <Route path={'Category'} element={<SviridenkoCategory/>} />
+                        <Route path={'Client'} element={<SviridenkoClient/>} />
+                        <Route path={'Manufacturer'} element={<SviridenkoManufacturer/>} />
+                        <Route path={'Product'} element={<SviridenkoProduct/>} />
+                    </Route>
+
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>
                         <Route path={'test1'} element={<Burlak1/>} />
                         <Route path={'test2'} element={<Burlak2/>} />
