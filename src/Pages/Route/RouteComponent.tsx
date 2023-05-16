@@ -12,6 +12,7 @@ import {default as SviridenkoCategory} from "../StudentPage/SviridenkoDim/Catego
 import {default as SviridenkoClient} from "../StudentPage/SviridenkoDim/Client/ClientPage";
 import {default as SviridenkoManufacturer} from "../StudentPage/SviridenkoDim/Manufacturer/ManufacturerPage";
 import {default as SviridenkoProduct} from "../StudentPage/SviridenkoDim/Product/ProductPage";
+import {default as SviridenkoOrder} from "../StudentPage/SviridenkoDim/Order/Order";
 
 
 import GayvoronskikhAndrei from "../StudentPage/GayvoronskikhAndrei/GayvoronskikhAndrei";
@@ -108,6 +109,7 @@ const RouteComponent = () => {
                         <Route path={'Client'} element={<SviridenkoClient/>} />
                         <Route path={'Manufacturer'} element={<SviridenkoManufacturer/>} />
                         <Route path={'Product'} element={<SviridenkoProduct/>} />
+                        <Route path={'Order'} element={<SviridenkoOrder/>} />
                     </Route>
 
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>

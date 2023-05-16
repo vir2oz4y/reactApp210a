@@ -68,7 +68,7 @@ const StudentsPage = () => {
 
                 <StudentElement
                     fio={'Свириденко Дмитрий Борисович'}
-                    description={'Юзуал студент ин энгасу сэбистрин'}
+                    description={'Student'}
                     imageSrc={'http://mtdata.ru/u7/photo8543/20977584733-0/original.jpg'}
                     navigateTo={'/student'}
                 />
