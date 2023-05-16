@@ -114,6 +114,13 @@ const StudentsPage = () => {
                     navigateTo={'/MalahovDmitriy'}
                 />
 
+                <StudentElement
+                    fio={'Догонашев Матвей Юрьевич'}
+                    description={'Сырник'}
+                    imageSrc={'https://i.ytimg.com/vi/h-Y38pKdrOc/maxresdefault.jpg'}
+                    navigateTo={'/Dogonashev'}
+                />
+
             </Stack>
         </div>
 
