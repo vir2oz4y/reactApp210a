@@ -1,54 +1,47 @@
 
-import React from "react";
-import {Modal} from "@mui/material";
-import Button from "@mui/material/Button";
+import {Box, Button, Modal } from '@mui/material';
+import React from 'react';
+import "./TelelinskiyPopUp.scss"
 
-
-export type IPopup = {
+export type IPopup ={
     open:boolean,
     onClose:()=>void;
 }
 
-type Props = IPopup &{
-
+type Props = IPopup&{
+    title:string,
+    children:any
 }
-
-
-
-const SviridenkoDdd = ({open,onClose}:Props) => {
+const TelelinskiyPopUp = ({open,onClose,title,children}:Props) => {
     return (
-
-            <Modal
-                open={open}
-                onClose={onClose}
-            >
-                <div className={'popup'}>
-                    <div className={'popup__content'}>
-                        <div className={'popup__content__title'}>
-                            <div>
-                                Заголовок
-                            </div>
-
-                            <div>
-                                <Button
-                                    color ={'primary'}
-                                    variant={'contained'}
-                                    >
-
-                                </Button>
-                            </div>
+        <Modal
+            open={open}
+            onClose={onClose}
+        >
+            <div className={'popup'}>
+                <div className={'popup__content'}>
+                    <div className={'popup__content__title'}>
+                        <div>
+                            заголовок
                         </div>
 
                         <div>
-                            1232131232131
+                            <Button
+                                color={'primary'}
+                                variant={'contained'}
+                                onClick={()=>onClose()}
+                            >
+                                Закрыть
+                            </Button>
                         </div>
                     </div>
-
+                    <div>
+                        {children}
+                    </div>
                 </div>
-
-            </Modal>
-
+            </div>
+        </Modal>
     );
 };
 
-export default SviridenkoDdd;
+export default TelelinskiyPopUp;
