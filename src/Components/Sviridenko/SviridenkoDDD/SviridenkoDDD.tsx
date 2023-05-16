@@ -1,7 +1,7 @@
 
 import {Box, Button, Modal } from '@mui/material';
 import React from 'react';
-import "./TelelinskiyPopUp.scss"
+import "./SviridenkoDDD.scss"
 
 export type IPopup ={
     open:boolean,
@@ -12,7 +12,7 @@ type Props = IPopup&{
     title:string,
     children:any
 }
-const TelelinskiyPopUp = ({open,onClose,title,children}:Props) => {
+const SviridenkoDdd = ({open,onClose,title,children}:Props) => {
     return (
         <Modal
             open={open}
@@ -44,4 +44,4 @@ const TelelinskiyPopUp = ({open,onClose,title,children}:Props) => {
     );
 };
 
-export default TelelinskiyPopUp;
+export default SviridenkoDdd;

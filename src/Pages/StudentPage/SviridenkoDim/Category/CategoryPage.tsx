@@ -3,8 +3,9 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import {useEffect, useState} from 'react';
 import { Category } from './models';
+import SviridenkoDdd from "../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import {SviridenkoCreateCategory} from "./Modals/SviridenkoCreateCategory";
-import {TelelinskiyEditCategoryPopUp} from "./Modals/SviridenkoEditCategory";
+import {SviridenkoEditCategory} from "./Modals/SviridenkoEditCategory";
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 
 const CategoryPage=()=>{
@@ -113,8 +114,8 @@ const CategoryPage=()=>{
 
             />}
 
-            {editedCategory !== null && <TelelinskiyEditCategoryPopUp
-                open={editedCategory !==null}
+            {editedCategory !== null && <SviridenkoEditCategory
+                open={true}
                 onClose={()=>setEditedCategory(null)}
                 category={editedCategory}
                 onEdit={(category)=>onEdit(category)}

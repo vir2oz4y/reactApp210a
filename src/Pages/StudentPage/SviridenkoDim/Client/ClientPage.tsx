@@ -3,8 +3,8 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import {useEffect, useState} from 'react';
 import { Client } from './models';
-import { TelelinskiyCreateClientPopUp } from './Modals/SviridenkoCreateClient';
-import { TelelinskiyEditClientPopUp } from './Modals/SviridenkoEditClient';
+import { SviridenkoCreateClient } from './Modals/SviridenkoCreateClient';
+import { SviridenkoEditClient } from './Modals/SviridenkoEditClient';
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 
 const ClientPage = () => {
@@ -131,14 +131,14 @@ const ClientPage = () => {
                 </div>
             </div>
 
-            {ShowCreateClient && <TelelinskiyCreateClientPopUp
+            {ShowCreateClient && <SviridenkoCreateClient
                 open={ShowCreateClient}
                 onClose={() => setShowCreateClient(false)}
                 onCreate={(Client) => onCreate(Client)}
 
             />}
 
-            {editedClient !== null && <TelelinskiyEditClientPopUp
+            {editedClient !== null && <SviridenkoEditClient
                 open={true}
                 onClose={()=> setShowEditClient(null)}
                 client={editedClient}

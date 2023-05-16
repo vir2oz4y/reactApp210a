@@ -4,8 +4,8 @@ import { Box, Button } from '@mui/material';
 import {useEffect, useState } from 'react';
 import { Manufacturer } from './models';
 import SviridenkoDDD from "../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
-import {SviridenkoCreateManufacturer} from './Modals/SviridenkoCreateManufacturer';
-import { TelelinskiyEditManufacturerPopUp } from './Modals/SviridenkoEditManufacturer';
+import { SviridenkoCreateManufacturer } from './Modals/SviridenkoCreateManufacturer';
+import { SviridenkoEditManufacturer } from './Modals/SviridenkoEditManufacturer';
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 const ManufacturerPage = () => {
 
@@ -124,7 +124,7 @@ const ManufacturerPage = () => {
 
             />}
 
-            {editedManufacture !== null && <TelelinskiyEditManufacturerPopUp
+            {editedManufacture !== null && <SviridenkoEditManufacturer
                 open={editedManufacture !== null}
                 onClose={()=> setShowEditManufacture(null)}
                 manufacture={editedManufacture}

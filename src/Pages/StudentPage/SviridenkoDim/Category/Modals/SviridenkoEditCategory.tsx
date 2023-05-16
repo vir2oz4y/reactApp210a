@@ -9,7 +9,7 @@ type Props = IPopup & {
     category:Category,
     onEdit:(category:Category)=>void;
 }
-export const TelelinskiyEditCategoryPopUp =({open,onClose,onEdit,category:categoryProps}:Props)=>{
+export const SviridenkoEditCategory =({open,onClose,onEdit,category:categoryProps}:Props)=>{
 
     const [category, setCategory]=useState(categoryProps)
 

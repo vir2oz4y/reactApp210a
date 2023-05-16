@@ -1,6 +1,6 @@
 import {Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import  React, {useEffect, useState } from 'react'
-import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import SviridenkoDdd , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import { Product } from '../models';
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 import {Category} from "../../Category/models";
@@ -10,7 +10,7 @@ type Props = IPopup & {
     onCreate: (newProduct: Product) => void;
 }
 
-const TelelinskiyCreateProductPopUp = ({open, onClose, onCreate}: Props) => {
+const SviridenkoCreateProduct = ({open, onClose, onCreate}: Props) => {
 
     const createProduct = () => {
         SviridenkoAxios.post<{ item: Product }>('https://canstudy.ru/orderapi/Product',
@@ -65,7 +65,7 @@ const TelelinskiyCreateProductPopUp = ({open, onClose, onCreate}: Props) => {
     console.log(Product)
 
     return (
-        <TelelinskiyPopUp
+        <SviridenkoDdd
             title={'Создание товара'}
             open={open}
             onClose={() => onClose()}
@@ -146,8 +146,8 @@ const TelelinskiyCreateProductPopUp = ({open, onClose, onCreate}: Props) => {
                 </div>
 
             </div>
-        </TelelinskiyPopUp>
+        </SviridenkoDdd>
     );
 };
 
-export default TelelinskiyCreateProductPopUp;
+export default SviridenkoCreateProduct;

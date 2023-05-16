@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Button, IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import {useEffect, useState } from 'react';
 import { Product } from './models';
-import TelelinskiyPopUp from "../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
-import TelelinskiyCreateProductPopUp from './Modals/SviridenkoCreateProduct';
-import TelelinskiyEditProductPopUp from './Modals/SviridenkoEditProduct';
+import SviridenkoCreateProduct from './Modals/SviridenkoCreateProduct';
+import SviridenkoEditProduct from './Modals/SviridenkoEditProduct';
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 const ProductPage = () => {
 
@@ -118,14 +117,14 @@ const ProductPage = () => {
     return (
         <div style={{width: '100%'}}>
 
-            {createPopupOpened && <TelelinskiyCreateProductPopUp
+            {createPopupOpened && <SviridenkoCreateProduct
                 open={createPopupOpened}
                 onClose={() => setCreatePopupOpened(false)}
                 onCreate={(newProduct) => onCreate(newProduct)}
             />}
 
 
-            {editProduct !== null && <TelelinskiyEditProductPopUp
+            {editProduct !== null && <SviridenkoEditProduct
                 open={editProduct !== null}
                 onClose={() => setEditProduct(null)}
                 Product={editProduct}

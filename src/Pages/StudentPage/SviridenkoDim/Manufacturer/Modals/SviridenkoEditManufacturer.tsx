@@ -1,6 +1,6 @@
 import {Button, TextField } from '@mui/material';
 import  React, { useState } from 'react'
-import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import SviridenkoDDD , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import { Manufacturer } from '../models';
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 
@@ -10,7 +10,7 @@ type Props = IPopup & {
     onEdit: (Manufacture: Manufacturer) => void;
 }
 
-export const TelelinskiyEditManufacturerPopUp = ({ open, onClose, onEdit, manufacture:ManufactureProps}: Props) => {
+export const SviridenkoEditManufacturer = ({ open, onClose, onEdit, manufacture:ManufactureProps}: Props) => {
 
     const [Manufacturer, setManufacture] = useState(ManufactureProps)
 
@@ -29,7 +29,7 @@ export const TelelinskiyEditManufacturerPopUp = ({ open, onClose, onEdit, manufa
     }
 
     return (
-        <TelelinskiyPopUp
+        <SviridenkoDDD
             open={open}
             onClose={onClose}
             title={"Edit Manufacture"}
@@ -75,6 +75,6 @@ export const TelelinskiyEditManufacturerPopUp = ({ open, onClose, onEdit, manufa
                     </div>
                 </div>
             </div>
-        </TelelinskiyPopUp>
+        </SviridenkoDDD>
     )
 }

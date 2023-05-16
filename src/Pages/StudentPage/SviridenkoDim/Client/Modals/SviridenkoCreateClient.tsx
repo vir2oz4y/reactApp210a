@@ -1,6 +1,6 @@
 import {Button,TextField } from '@mui/material';
 import  React, { useState } from 'react'
-import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import SviridenkoDDD , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import { Client } from '../models';
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 import {Category} from "../../Category/models";
@@ -10,7 +10,7 @@ type Props = IPopup & {
     onCreate: (newClient: Client) => void;
 }
 
-export const TelelinskiyCreateClientPopUp = ({ open, onClose, onCreate }: Props) => {
+export const SviridenkoCreateClient = ({ open, onClose, onCreate }: Props) => {
 
     const [ClientSex, setClientSex] = useState('')
     const [ClientFirstName, setClientFirstName] = useState('')
@@ -37,7 +37,7 @@ export const TelelinskiyCreateClientPopUp = ({ open, onClose, onCreate }: Props)
     }
 
     return (
-        <TelelinskiyPopUp
+        <SviridenkoDDD
             open={open}
             onClose={onClose}
             title={"Create Client"}
@@ -97,6 +97,6 @@ export const TelelinskiyCreateClientPopUp = ({ open, onClose, onCreate }: Props)
                     </div>
                 </div>
             </div>
-        </TelelinskiyPopUp>
+        </SviridenkoDDD>
     )
 }

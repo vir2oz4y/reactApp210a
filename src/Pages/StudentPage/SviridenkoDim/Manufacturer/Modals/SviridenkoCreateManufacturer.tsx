@@ -1,6 +1,6 @@
 import {Button, TextField } from '@mui/material';
 import  React, { useState } from 'react'
-import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import SviridenkoDDD , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import { Manufacturer } from '../models';
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 
@@ -29,7 +29,7 @@ export const SviridenkoCreateManufacturer = ({ open, onClose, onCreate }: Props)
     }
 
     return (
-        <TelelinskiyPopUp
+        <SviridenkoDDD
             open={open}
             onClose={onClose}
             title={"Create Manufacture"}
@@ -70,6 +70,6 @@ export const SviridenkoCreateManufacturer = ({ open, onClose, onCreate }: Props)
                     </div>
                 </div>
             </div>
-        </TelelinskiyPopUp>
+        </SviridenkoDDD>
     )
 }

@@ -5,11 +5,10 @@
     "\\src\\Pages",
     "\\src\\Pages\\StudentPage",
     "\\src\\Pages\\StudentPage\\SviridenkoDim",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Kategory product",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Klient",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Manufacture",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Postavshiki",
-    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Tovary"
+    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Category",
+    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Client",
+    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Manufacturer",
+    "\\src\\Pages\\StudentPage\\SviridenkoDim\\Product"
   ],
   "SelectedNode": "\\src\\Pages\\StudentPage\\SviridenkoDim\\SviridenkoDimPage.tsx",
   "PreviewInSolutionExplorer": false

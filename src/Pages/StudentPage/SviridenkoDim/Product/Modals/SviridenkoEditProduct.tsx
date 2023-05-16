@@ -1,6 +1,6 @@
 import {Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import  React, {useEffect, useState } from 'react'
-import TelelinskiyPopUp, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import SviridenkoDdd, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import { Product } from '../models';
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 import {Category} from "../../Category/models";
@@ -12,7 +12,7 @@ type Props = IPopup & {
     Product: Product
 }
 
-const TelelinskiyEditProductPopUp = ({open, onClose, Product:ProductEdit, onEdit}: Props) => {
+const SviridenkoEditProduct = ({open, onClose, Product:ProductEdit, onEdit}: Props) => {
 
     const [Product, setProduct] = useState(ProductEdit)
 
@@ -55,7 +55,7 @@ const TelelinskiyEditProductPopUp = ({open, onClose, Product:ProductEdit, onEdit
 
 
     return (
-        <TelelinskiyPopUp
+        <SviridenkoDdd
             title={'Изменение клиента'}
             open={open}
             onClose={() => onClose()}
@@ -133,8 +133,8 @@ const TelelinskiyEditProductPopUp = ({open, onClose, Product:ProductEdit, onEdit
                 </div>
 
             </div>
-        </TelelinskiyPopUp>
+        </SviridenkoDdd>
     );
 };
 
-export default TelelinskiyEditProductPopUp;
+export default SviridenkoEditProduct;
