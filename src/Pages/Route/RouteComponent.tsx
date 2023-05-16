@@ -74,10 +74,13 @@ const RouteComponent = () => {
                         <Route path={'Test2'} element={<Telelinskiy2Page/>} />
                     </Route>
 
-                    <Route path={'student'} element={<SviridenkoDimPage/>}>
-                        {/*<Route path={'test1'} element={<SDBTest1Page/>}/>
-                        <Route path={'test2'} element={<SDBTest2Page/>}/>*/}
-                    </Route>                 
+                    <Route path={'Sviridenko'} element={<SviridenkoDimPage/>}>
+                        <Route path={'Category'} element={<SviridenkoCategory/>} />
+                        <Route path={'Client'} element={<SviridenkoClient/>} />
+                        <Route path={'Manufacturer'} element={<SviridenkoManufacturer/>} />
+                        <Route path={'Product'} element={<SviridenkoProduct/>} />
+                        <Route path={'Order'} element={<SviridenkoOrder/>} />
+                    </Route>
                     
                     {/*<Route path={'payzunov'} element={<Payzunov/>}>
                         <Route path={'Test 1'} element={<PayzunovTest1Page/>}/>
@@ -104,13 +107,7 @@ const RouteComponent = () => {
                         <Route path={'Test2'} element={<BushmanovTest2Page/>} />
                     </Route>
 
-                    <Route path={'Sviridenko'} element={<SviridenkoDimPage/>}>
-                        <Route path={'Category'} element={<SviridenkoCategory/>} />
-                        <Route path={'Client'} element={<SviridenkoClient/>} />
-                        <Route path={'Manufacturer'} element={<SviridenkoManufacturer/>} />
-                        <Route path={'Product'} element={<SviridenkoProduct/>} />
-                        <Route path={'Order'} element={<SviridenkoOrder/>} />
-                    </Route>
+
 
                     <Route path={'BurlakAD'} element={<BurlakAD/>}>
                         <Route path={'test1'} element={<Burlak1/>} />
