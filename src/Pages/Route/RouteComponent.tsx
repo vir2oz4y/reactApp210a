@@ -74,7 +74,7 @@ const RouteComponent = () => {
                         <Route path={'Test2'} element={<Telelinskiy2Page/>} />
                     </Route>
 
-                    <Route path={'Sviridenko'} element={<SviridenkoDimPage/>}>
+                    <Route path={'student'} element={<SviridenkoDimPage/>}>
                         <Route path={'Category'} element={<SviridenkoCategory/>} />
                         <Route path={'Client'} element={<SviridenkoClient/>} />
                         <Route path={'Manufacturer'} element={<SviridenkoManufacturer/>} />

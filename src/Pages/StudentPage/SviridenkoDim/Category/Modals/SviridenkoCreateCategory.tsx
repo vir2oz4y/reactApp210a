@@ -32,7 +32,7 @@ export const SviridenkoCreateCategory =({open,onClose,onCreate}:Props)=>{
             <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
 
                 <TextField
-                    label="Category name"
+                    label="Название категории"
                     variant="standard"
                     value={categoryName}
                     onChange={e=>setCategoryName(e.target.value)}
