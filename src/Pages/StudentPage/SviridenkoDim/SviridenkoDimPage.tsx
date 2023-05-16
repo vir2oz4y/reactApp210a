@@ -7,7 +7,7 @@ import axios from "axios";
 
 export const SviridenkoAxios = axios.create();
 
-const key = "c0fccd07-58ad-434a-b594-2d8396c26c61";
+const key = "92881e8-162f-46f3-a8dd-895dcacb8528";
 const SviridenkoDimPage = () => {
 
     useEffect(()=>{
