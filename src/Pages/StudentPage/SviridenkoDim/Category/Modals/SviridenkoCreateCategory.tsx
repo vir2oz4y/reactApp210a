@@ -6,48 +6,54 @@ import {SviridenkoAxios} from "../../SviridenkoDimPage";
 
 
 type Props = IPopup & {
-    onCreate:(newCategory: Category)=>void;
+    onCreate: (newCategory: Category) => void;
 }
-export const SviridenkoCreateCategory =({open,onClose,onCreate}:Props)=>{
 
-    const [categoryName, setCategoryName]=useState('')
+const SviridenkoCreateCategory = ({open, onClose, onCreate}:Props) => {
 
-    const onCreateClick=()=>{
-        SviridenkoAxios.post<{item:Category}>(
-            'https://canstudy.ru/orderapi/category',
+    const [categoryName, setCategoryName] = useState('')
+
+    const onCrateClick = () => {
+
+        SviridenkoAxios.post<{ item: Category }>(
+            "https://canstudy.ru/orderapi/category",
             {
                 name: categoryName
             }
-        ).then((response)=>{
+        ).then((response) => {
+
             onCreate(response.data.item)
             onClose();
         })
     }
-    return (<div>
+
+    return (
         <SviridenkoDdd
-            open={open}
-            onClose={onClose}
-            title={'создание категории'}
+            open ={open}
+            onClose ={onClose}
+            title={"Создание категории"}
         >
-            <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
-
+            <div style={{display: 'flex', flexDirection: 'column', gap: '1em'}}>
                 <TextField
-                    label="Название категории"
-                    variant="standard"
+                    label="Имя категории"
+                    variant="outlined"
                     value={categoryName}
-                    onChange={e=>setCategoryName(e.target.value)}
-
+                    onChange={e => setCategoryName(e.target.value)}
                 />
-                <div style={{display:'flex',justifyContent:'center'}}>
+
+                <div style={{display:'flex', justifyContent:'center'}}>
                     <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={()=>onCreateClick()}
+                        color = {'primary'}
+                        variant = {'contained'}
+                        onClick={() => onCrateClick()}
                     >
-                        Create
+                        Создать
                     </Button>
+
                 </div>
             </div>
         </SviridenkoDdd>
-    </div>)
-}
+    );
+};
+
+export default SviridenkoCreateCategory;

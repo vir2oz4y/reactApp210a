@@ -3,9 +3,8 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import {useEffect, useState} from 'react';
 import { Category } from './models';
-import SviridenkoDdd from "../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
-import {SviridenkoCreateCategory} from "./Modals/SviridenkoCreateCategory";
-import {SviridenkoEditCategory} from "./Modals/SviridenkoEditCategory";
+import SviridenkoCreateCategory from "./Modals/SviridenkoCreateCategory";
+import SviridenkoEditCategory from "./Modals/SviridenkoEditCategory";
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 
 const CategoryPage=()=>{
