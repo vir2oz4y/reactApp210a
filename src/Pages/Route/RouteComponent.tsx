@@ -54,8 +54,12 @@ import {default as PayzunovTest1Page} from "../StudentPage/Payzunov/Test1/Test1P
 import {default as PayzunovTest2Page} from "../StudentPage/Payzunov/Test2/Test2Page";
 
 import TatarnikovEgorPage from "../StudentPage/TatarnikovEgor/TatarnikovEgorPage";
-import {default as MemePage1} from "../StudentPage/TatarnikovEgor/test1/test1page";
-import {default as MemePage2} from "../StudentPage/TatarnikovEgor/test2/test2page";
+import {default as TatarnikovCategoryPage} from "../StudentPage/TatarnikovEgor/Category/CategoryPage";
+import {default as TatarnikovClientPage} from "../StudentPage/TatarnikovEgor/Client/ClientPage";
+import {default as TatarnikovManufacturerPage} from "../StudentPage/TatarnikovEgor/Manufacturer/ManufacturerPage";
+import {default as TatarnikovOrderPage} from "../StudentPage/TatarnikovEgor/Order/Order";
+import {default as TatarnikovProductPage} from "../StudentPage/TatarnikovEgor/Product/ProductPage";
+
 
 import TelelinskiyAndreyPage from "../StudentPage/TelelinskiyAndrey/TelelinskiyAndreyPage";
 import {default as TelelinskiyCategory} from "../StudentPage/TelelinskiyAndrey/Category/Category";
@@ -193,8 +197,13 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'blink'} element={<TatarnikovEgorPage/>}>
-                        <Route path={'test1'} element={<MemePage1/>}/>
-                        <Route path={'test2'} element={<MemePage2/>}/>
+                        <Route path={'Category'} element={<TatarnikovCategoryPage/>} />
+                        <Route path={'Client'} element={<TatarnikovClientPage/>} />
+                        <Route path={'Manufacturer'} element={<TatarnikovManufacturerPage/>} />
+                        <Route path={'Order'} element={<TatarnikovOrderPage/>} />
+                        <Route path={'Product'} element={<TatarnikovProductPage/>} />
+
+
                     </Route>
 
 

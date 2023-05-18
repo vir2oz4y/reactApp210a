@@ -1,36 +1,45 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
+import {dividerClasses, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 import Button from '@mui/material/Button';
-import ListItemText from '@mui/material/ListItemText';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import {useNavigate} from "react-router-dom";
 
 const Menu = () => {
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
 
     return (
-        <div>
-            <List>
-                <ListItem disablePadding>
-                    <ListItemButton  onClick={()=>navigate('test1')}>
-                        <ListItemText primary="Test_1" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton onClick={()=>navigate('test2')}>
-                        <ListItemText primary="Test_2" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
+        <List>
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Category')}>
+                    <ListItemText primary="Категории товаров" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Client')}>
+                    <ListItemText primary="Клиенты" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Manufacturer')}>
+                    <ListItemText primary="Производитель" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Product')}>
+                    <ListItemText primary="Товар" />
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton onClick={()=>navigate('Order')}>
+                    <ListItemText primary="Заказ" />
+                </ListItemButton>
+            </ListItem>
 
-            <div>
-                <TextField id="standard-basic" label="Отдай сало" variant="standard" />
-            </div>
+        </List>
 
 
-        </div>
+
     );
 };
 
