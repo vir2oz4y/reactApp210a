@@ -1,10 +1,11 @@
-import {Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import  React, {useEffect, useState } from 'react'
-import SviridenkoDdd , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
-import { Product } from '../models';
+import React, {useEffect, useState} from 'react';
+import SviridenkoDdd, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Product} from "../models";
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 import {Category} from "../../Category/models";
-import { Manufacturer } from '../../Manufacturer/models';
+import {Manufacturer} from "../../Manufacturer/models";
+
 
 type Props = IPopup & {
     onCreate: (newProduct: Product) => void;
@@ -17,8 +18,8 @@ const SviridenkoCreateProduct = ({open, onClose, onCreate}: Props) => {
             {
                 ...Product
             })
-            .then(response => {
-                onCreate(response.data.item)
+            .then(res => {
+                onCreate(res.data.item)
             })
     }
 
@@ -28,15 +29,15 @@ const SviridenkoCreateProduct = ({open, onClose, onCreate}: Props) => {
 
     const getCategories = () => {
         SviridenkoAxios.get<{ items: Category[] }>('https://canstudy.ru/orderapi/category/list')
-            .then(response => {
-                setCategoryList(response.data.items);
+            .then(res => {
+                setCategoryList(res.data.items);
             })
     }
 
     const getManufacturies = () => {
         SviridenkoAxios.get<{ items: Manufacturer[] }>('https://canstudy.ru/orderapi/manufacturer/list')
-            .then(response => {
-                setManufactureList(response.data.items);
+            .then(res => {
+                setManufactureList(res.data.items);
             })
     }
 
@@ -78,6 +79,9 @@ const SviridenkoCreateProduct = ({open, onClose, onCreate}: Props) => {
                     paddingTop: '1em'
                 }}
             >
+
+
+
 
                 <TextField
                     label="Название"

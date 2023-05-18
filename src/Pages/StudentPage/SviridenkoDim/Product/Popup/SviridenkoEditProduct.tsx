@@ -1,11 +1,10 @@
-import {Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import  React, {useEffect, useState } from 'react'
-import SviridenkoDdd, {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
-import { Product } from '../models';
+import React, {useEffect, useState} from 'react';
+import SviridenkoDdd , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Product} from "../models";
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
 import {Category} from "../../Category/models";
-import { Manufacturer } from '../../Manufacturer/models';
-
+import {Manufacturer} from "../../Manufacturer/models";
 
 type Props = IPopup & {
     onEdit: (newProduct: Product) => void;
@@ -24,8 +23,8 @@ const SviridenkoEditProduct = ({open, onClose, Product:ProductEdit, onEdit}: Pro
                     ...Product
                 }
             })
-            .then(response => {
-                onEdit(response.data.item)
+            .then(res => {
+                onEdit(res.data.item)
                 onClose();
             })
     }
@@ -36,15 +35,15 @@ const SviridenkoEditProduct = ({open, onClose, Product:ProductEdit, onEdit}: Pro
 
     const getCategories = () => {
         SviridenkoAxios<{ items: Category[] }>('https://canstudy.ru/orderapi/category/list')
-            .then(response => {
-                setCategoryList(response.data.items);
+            .then(res => {
+                setCategoryList(res.data.items);
             })
     }
 
     const getManufacturies = () => {
         SviridenkoAxios.get<{ items: Manufacturer[] }>('https://canstudy.ru/orderapi/manufacturer/list')
-            .then(response => {
-                setManufactureList(response.data.items);
+            .then(res => {
+                setManufactureList(res.data.items);
             })
     }
 

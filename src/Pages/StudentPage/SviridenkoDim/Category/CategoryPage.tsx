@@ -1,19 +1,20 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
-import {useEffect, useState} from 'react';
 import { Category } from './models';
 import SviridenkoCreateCategory from "./Modals/SviridenkoCreateCategory";
 import SviridenkoEditCategory from "./Modals/SviridenkoEditCategory";
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 
-const CategoryPage=()=>{
+
+const CategoryPage = () => {
+
     const columns: GridColDef[] = [
-        {
-            field: 'id',
+        {   field: 'id',
             headerName: 'ID',
-            width: 90
+            width: 90,
         },
+
         {
             field: 'name',
             headerName: 'First name',
@@ -21,60 +22,62 @@ const CategoryPage=()=>{
             editable: true,
         },
         {
-            field:'',
-            headerName:'',
-            width:500,
-            renderCell:(e:any)=>{
-                return <div style={{display:'flex',gap:'1em'}}>
+            field: '',
+            headerName: '',
+            width: 200,
+            renderCell: (e:any)=> {
+                return <div style={{display:'flex', gap:'1em'}}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={()=>setEditedCategory(e.row)}
                     >
-                        Редактировать
+                        Edit
                     </Button>
+
                     <Button
                         color={'primary'}
                         variant={'contained'}
                         onClick={()=>onDeleteClick(e.row.id)}
                     >
-                        Удалить
+                        Delete
                     </Button>
                 </div>
             },
         }
     ];
 
-    const onDeleteClick = (id:number)=>{
-        SviridenkoAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
-            .then(()=>{
-                setCategories(prev=>
-                    prev.filter(el=>el.id !== id)
+    const onDeleteClick = (id: number) => {
+
+        SviridenkoAxios.delete( `https://canstudy.ru/orderapi/category/${id}`)
+            .then(() => {
+                setCategories(prev =>
+                    prev.filter(el => el.id !== id)
                 )
             })
     }
 
-    const [categories,setCategories]=useState<Category[]>([]);
+    const [categories, setCategories] = useState<Category[]>([])
 
     useEffect(() => {
-        SviridenkoAxios.get<{
-            items: Category[]
-        }>(
+        SviridenkoAxios.get<{ items: Category[] }>(
             'https://canstudy.ru/orderapi/category/list'
         )
-            .then((response)=>{
-                setCategories(response.data.items)
+            .then((response) => {
+                setCategories(response.data.items);
             })
     },[])
 
-    const [showCreateCategory, setShowCreateCategory]=useState(false);
+    const [showCreateCategory, setShowCreateCategory] = useState(false);
+
     const [editedCategory, setEditedCategory] = useState<Category|null>(null);
 
-    const onCreate =(newCategory:Category)=>{
-        setCategories(prev=>[...prev,newCategory]);
+
+    const onCreate = (newCategory: Category) => {
+        setCategories(prev=> [...prev, newCategory]);
     }
 
-    const onEdit = (category: Category)=>{
+    const onEdit = (category: Category) => {
         setCategories(prev=>{
             const editCategory = prev.find(el=>el.id === category.id);
 
@@ -82,53 +85,52 @@ const CategoryPage=()=>{
                 editCategory.name = category.name;
             }
 
-            return [...prev];
+            return[...prev];
         });
     }
 
     return (
         <div>
-            <div style={{display:'flex',
-                justifyContent:'space-between',
-                alignItems:'center'
-            }}
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}
             >
-                <h1>
-                    Категории
-                </h1>
+                <h1>Категории</h1>
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={()=>setShowCreateCategory(true)}>
+                        onClick={()=> setShowCreateCategory(true)}
+                    >
                         Добавить категорию
                     </Button>
                 </div>
             </div>
 
             {showCreateCategory && <SviridenkoCreateCategory
-                open={true}
-                onClose={ ()=> setShowCreateCategory(false)}
-                onCreate={(category)=>onCreate(category)}
-
+                open={showCreateCategory}
+                onClose={() => setShowCreateCategory(false)}
+                onCreate={(category) => onCreate(category)}
             />}
 
             {editedCategory !== null && <SviridenkoEditCategory
-                open={true}
+                open={editedCategory !== null}
                 onClose={()=>setEditedCategory(null)}
                 category={editedCategory}
                 onEdit={(category)=>onEdit(category)}
             />}
 
-            <Box sx={{height:'100vh',width:'100%'}}>
+            <Box sx={{ height: '70vh', width: '100%' }}>
                 <DataGrid
                     rows={categories}
                     columns={columns}
                 />
             </Box>
         </div>
-
     );
-}
+};
 
 export default CategoryPage;

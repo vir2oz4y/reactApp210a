@@ -1,108 +1,107 @@
-import {Button,TextField } from '@mui/material';
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import  React, { useState } from 'react'
 import SviridenkoDDD , {IPopup} from "../../../../../Components/Sviridenko/SviridenkoDDD/SviridenkoDDD";
 import { Client } from '../models';
 import {SviridenkoAxios} from "../../SviridenkoDimPage";
-import {Category} from "../../Category/models";
+
 
 
 type Props = IPopup & {
-    client: Client,
-
-    onEdit: (client: Client) => void;
+    onEdit: (newClient: Client) => void;
+    client: Client
 }
 
-export const SviridenkoEditClient = ({ open, onClose, onEdit, client:ClientProps}: Props) => {
+const SviridenkoEditClient = ({open, onClose, client:clientEdit, onEdit}: Props) => {
 
-    const [client, setClient] = useState(ClientProps)
-
+    const [client, setClient] = useState(clientEdit)
 
     const onEditClick = () => {
-        SviridenkoAxios.patch<{item: Client}>(
-            'https://canstudy.ru/orderapi/client',
+
+        SviridenkoAxios.patch<{ item:Client }>('https://canstudy.ru/orderapi/Client',
             {
-                item: {
-                    ...client,
-                    sex: parseInt(client.sex, 10)
+                item:{
+                    ...client
                 }
-            }
-        )
-            .then((response) => {
-                onEdit(response.data.item);
+            })
+            .then(res => {
+                onEdit(res.data.item)
                 onClose();
             })
     }
 
     return (
         <SviridenkoDDD
+            title={'Изменение клиента'}
             open={open}
-            onClose={onClose}
-            title={"Edit Client"}
+            onClose={() => onClose()}
         >
-            <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em'
+                }}
+            >
+                <FormControl fullWidth>
+                    <InputLabel id="sex">Пол</InputLabel>
+                    <Select
+                        labelId="sex"
+                        value={client.sex}
+                        label="Пол"
+                        onChange={(e)=>setClient(prev=>({...prev, sex:e.target.value as any}))}
+                    >
+                        <MenuItem value={0}>Женский</MenuItem>
+                        <MenuItem value={1}>Мужской</MenuItem>
+                    </Select>
+                </FormControl>
+
+
                 <TextField
-                    label="Client sex"
+                    label="Имя"
                     variant="standard"
-                    value={client.sex}
-                    onChange={e => setClient(prev => ({
-                        ...prev, sex: e.target.value
-                    }))}
+                    fullWidth={true}
+                    value={client.firstName}
+                    onChange={e=>setClient(prev=>({...prev,  firstName:e.target.value}))}
                 />
 
-                <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
-                    <TextField
-                        label="Client name"
-                        variant="standard"
-                        value={client.firstName}
-                        onChange={e => setClient(prev => ({
-                            ...prev, firstName: e.target.value
-                        }))}
-                    />
+                <TextField
+                    label="Фамилия"
+                    variant="standard"
+                    fullWidth={true}
+                    value={client.lastName}
+                    onChange={e=>setClient(prev=>({...prev,  lastName:e.target.value}))}
+                />
 
-                    <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
-                        <TextField
-                            label="Client city"
-                            variant="standard"
-                            value={client.lastName}
-                            onChange={e => setClient(prev => ({
-                                ...prev, lastName: e.target.value
-                            }))}
-                        />
+                <TextField
+                    label="Почта"
+                    variant="standard"
+                    fullWidth={true}
+                    value={client.email}
+                    onChange={e=>setClient(prev=>({...prev,  email:e.target.value}))}
+                />
 
-                        <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
-                            <TextField
-                                label="Client country"
-                                variant="standard"
-                                value={client.email}
-                                onChange={e => setClient(prev => ({
-                                    ...prev, email: e.target.value
-                                }))}
-                            />
+                <TextField
+                    label="Телефон"
+                    variant="standard"
+                    fullWidth={true}
+                    value={client.phoneNumber}
+                    onChange={e=>setClient(prev=>({...prev,  phoneNumber:e.target.value}))}
+                />
 
-                            <div style={{display: 'flex', flexDirection:'column', gap: '1em'}}>
-                                <TextField
-                                    label="Client country"
-                                    variant="standard"
-                                    value={client.phoneNumber}
-                                    onChange={e => setClient(prev => ({
-                                        ...prev, phoneNumber: e.target.value
-                                    }))}
-                                />
-
-                                <div style = {{display: 'flex', justifyContent: 'center'}}>
-                                    <Button
-                                        color={'primary'}
-                                        variant={'contained'}
-                                        onClick={() => onEditClick()}
-                                    >
-                                        Edit
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <Button
+                        color={'primary'}
+                        variant={'contained'}
+                        onClick={() => onEditClick()}
+                    >
+                        Изменить
+                    </Button>
                 </div>
+
             </div>
         </SviridenkoDDD>
-    )
-}
+    );
+};
+
+
+export default SviridenkoEditClient;

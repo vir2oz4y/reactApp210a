@@ -1,156 +1,186 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material';
+import {Button, IconButton} from '@mui/material';
 import {useEffect, useState} from 'react';
 import { Client } from './models';
-import { SviridenkoCreateClient } from './Modals/SviridenkoCreateClient';
-import { SviridenkoEditClient } from './Modals/SviridenkoEditClient';
+import  SviridenkoCreateClient  from './Modals/SviridenkoCreateClient';
+import  SviridenkoEditClient  from './Modals/SviridenkoEditClient';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
 import {SviridenkoAxios} from "../SviridenkoDimPage";
 
+
 const ClientPage = () => {
+
+    const [ClientList, setClientList] = useState<Client[]>([])
+
+    const getClients = () => {
+        SviridenkoAxios.get<{ items: Client[] }>('https://canstudy.ru/orderapi/Client/list')
+            .then(res => {
+                setClientList(res.data.items);
+            })
+    }
+
+
+    useEffect(() => {
+        getClients();
+    }, [])
+
+
+    const onDeleteClick = (id: number) => {
+        SviridenkoAxios.delete(`https://canstudy.ru/orderapi/Client/${id}`)
+            .then(res => {
+                setClientList(prev =>
+                    prev.filter(el => el.id !== id)
+                )
+            })
+    }
+
+    const onEditClick = (id: number) => {
+        const Client = ClientList.find(el => el.id === id)!;
+        setEditClient(Client)
+    }
+
+    const onCreate = (Client: Client) => {
+        setClientList(prev => [...prev, Client])
+    }
+
+    const onEdit = (Client: Client) => {
+        setClientList(prev => {
+            const curClient = prev.find(el => el.id === Client.id)!;
+
+            if (curClient) {
+                curClient.firstName = Client.firstName;
+                curClient.lastName = Client.lastName;
+                curClient.phoneNumber = Client.phoneNumber;
+                curClient.email = Client.email;
+                curClient.sex = Client.sex;
+            }
+
+            return [...prev]
+        })
+    }
 
     const columns: GridColDef[] = [
         {
             field: 'id',
-            headerName: 'ID',
-            flex: .3
+            headerName: 'Id'
         },
         {
             field: 'sex',
-            headerName: 'Sex',
+            headerName: 'Пол',
             flex: 1,
-            editable: true,
+            renderCell:(e)=>{
+                if (e.value?.toString() === "0")
+                    return <MaleIcon/>
+
+                return <FemaleIcon/>
+            }
         },
         {
             field: 'firstName',
-            headerName: 'First name',
-            flex: 1,
-            editable: true,
+            headerName: 'Имя',
+            flex: 1
         },
         {
             field: 'lastName',
-            headerName: 'Last name',
-            flex: 1,
-            editable: true,
+            headerName: 'Фамилия',
+            flex: 1
         },
         {
             field: 'email',
-            headerName: 'Email',
-            flex: 1,
-            editable: true,
+            headerName: 'Почта',
+            flex: 1
         },
         {
             field: 'phoneNumber',
-            headerName: 'Phone number',
-            flex: 1,
-            editable: true,
+            headerName: 'Телефон',
+            flex: 1
         },
         {
             field: '',
             headerName: '',
-            width: 200,
             renderCell: (e: any) => {
                 return <div style={{display: 'flex', gap: '1em'}}>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick = {()=>setShowEditClient(e.row)}
-                    >
-                        Edit
-                    </Button>
 
-                    <Button color={'primary'}
-                            variant={'contained'}
-                            onClick={()=>OneDeleteClick(e.row.id)}
+                    <IconButton
+                        aria-label="edit"
+                        onClick={() => onEditClick(e.row.id)}
                     >
-                        Delete
-                    </Button>
+                        <EditIcon/>
+                    </IconButton>
+
+                    <IconButton
+                        onClick={() => onDeleteClick(e.row.id)}
+                        aria-label="delete"
+                    >
+                        <DeleteIcon/>
+                    </IconButton>
                 </div>
-            },
-        }
-
-    ];
-
-    const OneDeleteClick = (id:number) => {
-
-        SviridenkoAxios.delete(`https://canstudy.ru/orderapi/client/${id}`)
-            .then(() => {
-                setClients(prev => prev.filter(el => el.id !== id)
-                )
-            })
-    }
-    const [clients, setClients] = useState<Client[]>([
-
-    ])
-
-    useEffect(() => {
-        SviridenkoAxios.get<{ items: Client[] }>(
-            'https://canstudy.ru/orderapi/client/list'
-        )
-            .then((response) => {
-                setClients(response.data.items);
-            })
-    }, [])
-
-    const [ShowCreateClient, setShowCreateClient] = useState(false);
-    const [editedClient, setShowEditClient] = useState <Client|null>(null);
-
-    const onCreate = (newClient: Client) => {
-        setClients(prev => [...prev, newClient]);
-    }
-    const onEdit = (client: Client) => {
-        setClients(prev => {
-            const editClient = prev.find(el => el.id === client.id)
-
-            if(editClient) {
-                editClient.sex = client.sex;
-                editClient.firstName = client.firstName;
-                editClient.lastName = client.lastName;
-                editClient.email = client.email;
-                editClient.phoneNumber = client.phoneNumber;
             }
-            return [...prev];
-        });
-    }
+        }
+    ]
+
+    const [createPopupOpened, setCreatePopupOpened] = useState(false)
+
+    const [editClient, setEditClient] = useState<Client | null>(null)
 
     return (
-        <div>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <h1>
-                    Клиенты
-                </h1>
+        <div style={{width: '100%'}}>
+
+            {createPopupOpened && <SviridenkoCreateClient
+                open={createPopupOpened}
+                onClose={() => setCreatePopupOpened(false)}
+                onCreate={(newClient) => onCreate(newClient)}
+            />}
+
+
+            {editClient !== null && <SviridenkoEditClient
+                open={editClient !== null}
+                onClose={() => setEditClient(null)}
+                client={editClient}
+                onEdit={(editClient) => onEdit(editClient)}
+            />}
+
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+            }}>
+
+                <h1>Клиенты</h1>
 
                 <div>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => setShowCreateClient(true)}
+                        onClick={() => setCreatePopupOpened(true)}
                     >
-                        Добавить клиента
+                        Создать клиента
                     </Button>
+
                 </div>
             </div>
 
-            {ShowCreateClient && <SviridenkoCreateClient
-                open={ShowCreateClient}
-                onClose={() => setShowCreateClient(false)}
-                onCreate={(Client) => onCreate(Client)}
 
-            />}
-
-            {editedClient !== null && <SviridenkoEditClient
-                open={true}
-                onClose={()=> setShowEditClient(null)}
-                client={editedClient}
-                onEdit={(Client)=>onEdit(Client)}
-            />}
-
-            <Box sx={{height: '70vh', width: '100%'}}>
+            <div style={{height: '80vh', width: '100%'}}>
                 <DataGrid
-                    rows={clients}
+                    rows={ClientList}
                     columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: 5,
+                            },
+                        },
+                    }}
+                    pageSizeOptions={[5]}
+                    //checkboxSelection
+                    disableRowSelectionOnClick
                 />
-            </Box>
+            </div>
         </div>
     );
 };

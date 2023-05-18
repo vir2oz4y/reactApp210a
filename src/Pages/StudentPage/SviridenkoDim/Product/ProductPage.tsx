@@ -1,19 +1,22 @@
-import * as React from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Button, IconButton } from '@mui/material';
-import {useEffect, useState } from 'react';
-import { Product } from './models';
-import SviridenkoCreateProduct from './Modals/SviridenkoCreateProduct';
-import SviridenkoEditProduct from './Modals/SviridenkoEditProduct';
+import {Button, IconButton} from '@mui/material';
+import {DataGrid, GridColDef} from '@mui/x-data-grid';
+import React, {useEffect, useState} from 'react';
+import {Product} from './models';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import {SviridenkoAxios} from "../SviridenkoDimPage";
+import SviridenkoCreateProduct from "./Popup/SviridenkoCreateProduct";
+import SviridenkoEditProduct from "./Popup/SviridenkoEditProduct";
+
+
 const ProductPage = () => {
 
     const [ProductList, setProductList] = useState<Product[]>([])
 
     const getProducts = () => {
-        SviridenkoAxios.get<{ items: Product[] }>('https://canstudy.ru/orderapi/product/list')
-            .then(response => {
-                setProductList(response.data.items);
+        SviridenkoAxios.get<{ items: Product[] }>('https://canstudy.ru/orderapi/Product/list')
+            .then(res => {
+                setProductList(res.data.items);
             })
     }
 
@@ -24,8 +27,8 @@ const ProductPage = () => {
 
 
     const onDeleteClick = (id: number) => {
-        SviridenkoAxios.delete(`https://canstudy.ru/orderapi/product/${id}`)
-            .then(response => {
+        SviridenkoAxios.delete(`https://canstudy.ru/orderapi/Product/${id}`)
+            .then(res => {
                 setProductList(prev =>
                     prev.filter(el => el.id !== id)
                 )
@@ -88,7 +91,6 @@ const ProductPage = () => {
         {
             field: '',
             headerName: '',
-            width: 200,
             renderCell: (e: any) => {
                 return <div style={{display: 'flex', gap: '1em'}}>
 
@@ -96,14 +98,14 @@ const ProductPage = () => {
                         aria-label="edit"
                         onClick={() => onEditClick(e.row.id)}
                     >
-                        edit
+                        <EditIcon/>
                     </IconButton>
 
                     <IconButton
                         onClick={() => onDeleteClick(e.row.id)}
                         aria-label="delete"
                     >
-                        delete
+                        <DeleteIcon/>
                     </IconButton>
                 </div>
             }
@@ -115,60 +117,62 @@ const ProductPage = () => {
     const [editProduct, setEditProduct] = useState<Product | null>(null)
 
     return (
-        <div style={{width: '100%'}}>
 
-            {createPopupOpened && <SviridenkoCreateProduct
-                open={createPopupOpened}
-                onClose={() => setCreatePopupOpened(false)}
-                onCreate={(newProduct) => onCreate(newProduct)}
-            />}
+            <div style={{width: '100%'}}>
+
+                {createPopupOpened && <SviridenkoCreateProduct
+                    open={createPopupOpened}
+                    onClose={() => setCreatePopupOpened(false)}
+                    onCreate={(newProduct) => onCreate(newProduct)}
+                />}
 
 
-            {editProduct !== null && <SviridenkoEditProduct
-                open={editProduct !== null}
-                onClose={() => setEditProduct(null)}
-                Product={editProduct}
-                onEdit={(editProduct) => onEdit(editProduct)}
-            />}
+                {editProduct !== null && <SviridenkoEditProduct
+                    open={editProduct !== null}
+                    onClose={() => setEditProduct(null)}
+                    Product={editProduct}
+                    onEdit={(editProduct) => onEdit(editProduct)}
+                />}
 
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
 
-                <h1>Товар</h1>
+                    <h1>Товар</h1>
 
-                <div>
-                    <Button
-                        color={'primary'}
-                        variant={'contained'}
-                        onClick={() => setCreatePopupOpened(true)}
-                    >
-                        Создать товар
-                    </Button>
+                    <div>
+                        <Button
+                            color={'primary'}
+                            variant={'contained'}
+                            onClick={() => setCreatePopupOpened(true)}
+                        >
+                            Создать товар
+                        </Button>
 
+                    </div>
+                </div>
+
+
+                <div style={{height: '80vh', width: '100%'}}>
+                    <DataGrid
+                        rows={ProductList}
+                        columns={columns}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 5,
+                                },
+                            },
+                        }}
+                        pageSizeOptions={[5]}
+                        //checkboxSelection
+                        disableRowSelectionOnClick
+                    />
                 </div>
             </div>
 
-
-            <div style={{height: '80vh', width: '100%'}}>
-                <DataGrid
-                    rows={ProductList}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
-                            },
-                        },
-                    }}
-                    pageSizeOptions={[5]}
-                    //checkboxSelection
-                    disableRowSelectionOnClick
-                />
-            </div>
-        </div>
-    );
-};
+            );
+            };
 export default ProductPage;
