@@ -88,6 +88,7 @@ const Productpage = () => {
         {
             field: '',
             headerName: '',
+            width: 200,
             renderCell: (e: any) => {
                 return <div style={{display: 'flex', gap: '1em'}}>
 
