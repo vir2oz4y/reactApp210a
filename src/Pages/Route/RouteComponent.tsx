@@ -85,6 +85,10 @@ import {default as TeacherProductPage} from "../StudentPage/KryuchkovNick/Produc
 
 
 import PosniyPage from '../StudentPage/PosnijArtyom/PosniyPage';
+import { default as PosnijManufacturerPage } from "../StudentPage/PosnijArtyom/Manufacturer/Manufacturer";
+import {default as PosnijCategoryPage} from "../StudentPage/PosnijArtyom/Category/CategoryPage";
+import {default as PosnijClientPage} from "../StudentPage/PosnijArtyom/Client/ClientPage";
+import {default as PosnijProductPage} from "../StudentPage/PosnijArtyom/Product/Product1Page";
 import JabrovPage1 from '../StudentPage/Jabrov1/JabrovPage';
 
 import AleshinNickPage from "../StudentPage/Aleshin/Aleshin";
@@ -130,8 +134,10 @@ const RouteComponent = () => {
                     </Route>
 
                     <Route path={'Posniy'} element={<PosniyPage />}>
-                        <Route path={'Test1'} element={<PosniyPage />} />
-                        <Route path={'Test2'} element={<PosniyPage />} />
+                        <Route path={'Manufacturer'} element={<PosnijManufacturerPage />} />
+                        <Route path={'CategoryPage'} element={<PosnijCategoryPage />} />
+						<Route path={'Client'} element={<PosnijClientPage />} />
+                        <Route path={'Product'} element={<PosnijProductPage />} />
                     </Route>
 
                     <Route path={'student'} element={<SviridenkoDimPage/>}>
