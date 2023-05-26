@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
 import { Button, TextField } from "@mui/material";
 import { Manufacturer } from "../models";
-import { MalahovAxios } from '../../MalahovDmitriy'
+import { MuseichukAxios } from '../../MuseichukIO'
 type Props = IPopup & {
     onCreate: (newManufacturer: Manufacturer) => void;
 }
-const MalahovCreateManufacturerPopup = ({ open, onClose, onCreate }: Props) => {
+const MuseichukCreateManufacturerPopup = ({ open, onClose, onCreate }: Props) => {
     const createManufacturer = () => {
-        MalahovAxios.post<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+        MuseichukAxios.post<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
             {
                 name: manufacturer.name,
                 city: manufacturer.city,
@@ -29,7 +29,7 @@ const MalahovCreateManufacturerPopup = ({ open, onClose, onCreate }: Props) => {
         onClose();
     }
     return (
-        <MalahovDY
+        <MuseichukDY
             title={'Создание производителя'}
             open={open}
             onClose={() => onClose()}
@@ -78,7 +78,7 @@ const MalahovCreateManufacturerPopup = ({ open, onClose, onCreate }: Props) => {
                     </Button>
                 </div>
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     );
 };
-export default MalahovCreateManufacturerPopup;
+export default MuseichukCreateManufacturerPopup;

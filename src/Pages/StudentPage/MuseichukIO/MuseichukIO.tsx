@@ -4,15 +4,15 @@ import ContentBlock from "../../../Components/ContentBlock/ContentBlock";
 import axios from "axios"
 import Menu2 from "./Menu/Menu";
 import { Outlet } from "react-router-dom";
-import Menu from '../MalahovDmitriy/Menu/Menu';
+import Menu from '../MuseichukIO/Menu/Menu';
 
-export const MalahovAxios = axios.create();
+export const MuseichukAxios = axios.create();
 const key = "19436010-da02-4b6a-be9d-5febaa38468b";
 
-const MalahovDmitriy = () => {
+const MuseichukIO = () => {
 
     useEffect(() => {
-        MalahovAxios.post<{ authToken: string }>(
+        MuseichukAxios.post<{ authToken: string }>(
             'https://canstudy.ru/orderapi/user/login',
             {
                 identifier: key
@@ -20,7 +20,7 @@ const MalahovDmitriy = () => {
         )
             .then((response) => {
 
-                MalahovAxios
+                MuseichukAxios
                     .defaults
                     .headers
                     .common['Authorization'] = 'Bearer ' + response.data.authToken
@@ -29,7 +29,7 @@ const MalahovDmitriy = () => {
 
     return (
         <div>
-            <Header studentFio={'Malahov Dmitry'} />
+            <Header studentFio={'Museichuk Ilya'} />
 
             <ContentBlock>
                 <div style={{ display: 'flex', gap: '1em' }}>
@@ -47,4 +47,4 @@ const MalahovDmitriy = () => {
     );
 };
 
-export default MalahovDmitriy;
+export default MuseichukIO;

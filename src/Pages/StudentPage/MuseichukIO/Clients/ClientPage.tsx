@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { Client } from './models';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { MalahovAxios } from '../MalahovDmitriy';
-import MalahovCreateClientPopup from "./Modals/MalahovCreateClientPopup";
-import MalahovEditClientPopup from "./Modals/MalahovEditClientPopup";
+import { MuseichukAxios } from '../MuseichukIO';
+import MuseichukCreateClientPopup from "./Modals/MuseichukCreateClientPopup";
+import MuseichukEditClientPopup from "./Modals/MuseichukEditClientPopup";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 
@@ -15,7 +15,7 @@ const ClientPage = () => {
     const [ClientList, setClientList] = useState<Client[]>([])
 
     const getClients = () => {
-        MalahovAxios.get<{ items: Client[] }>('https://canstudy.ru/orderapi/Client/list')
+        MuseichukAxios.get<{ items: Client[] }>('https://canstudy.ru/orderapi/Client/list')
             .then(res => {
                 setClientList(res.data.items);
             })
@@ -28,7 +28,7 @@ const ClientPage = () => {
 
 
     const onDeleteClick = (id: number) => {
-        MalahovAxios.delete(`https://canstudy.ru/orderapi/Client/${id}`)
+        MuseichukAxios.delete(`https://canstudy.ru/orderapi/Client/${id}`)
             .then(res => {
                 setClientList(prev =>
                     prev.filter(el => el.id !== id)
@@ -128,14 +128,14 @@ const ClientPage = () => {
     return (
         <div style={{ width: '100%' }}>
 
-            {createPopupOpened && <MalahovCreateClientPopup
+            {createPopupOpened && <MuseichukCreateClientPopup
                 open={createPopupOpened}
                 onClose={() => setCreatePopupOpened(false)}
                 onCreate={(newClient) => onCreate(newClient)}
             />}
 
 
-            {editClient !== null && <MalahovEditClientPopup
+            {editClient !== null && <MuseichukEditClientPopup
                 open={editClient !== null}
                 onClose={() => setEditClient(null)}
                 client={editClient}

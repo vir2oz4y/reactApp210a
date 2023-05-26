@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button, dividerClasses } from '@mui/material';
 import { Category } from "./models";
-import MalahovDY, { IPopup } from "../../../../Components/Malahov/MalahovDY/MalahovDY";
-import { Malahov_Create_Category_Popup } from './modals/Malahov_Create_Category_Popup';
-import { MalahovEditCategoryPopup } from "./modals/MalahovEditCategoryPopup";
-import { MalahovAxios } from '../MalahovDmitriy';
+import MuseichukDY, { IPopup } from "../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
+import { Museichuk_Create_Category_Popup } from './modals/Museichuk_Create_Category_Popup';
+import { MuseichukEditCategoryPopup } from "./modals/MuseichukEditCategoryPopup";
+import { MuseichukAxios } from '../MuseichukIO';
 
 const CategoryPage = () => {
 
@@ -46,7 +46,7 @@ const CategoryPage = () => {
 
     const onDeleteClick = (id: number) => {
 
-        MalahovAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
+        MuseichukAxios.delete(`https://canstudy.ru/orderapi/category/${id}`)
             .then(() => {
                 setCategories(prev =>
                     prev.filter(el => el.id !== id)
@@ -58,7 +58,7 @@ const CategoryPage = () => {
 
 
     useEffect(() => {
-        MalahovAxios.get<{ items: Category[] }>(
+        MuseichukAxios.get<{ items: Category[] }>(
             'https://canstudy.ru/orderapi/category/list'
         )
             .then((response) => {
@@ -109,13 +109,13 @@ const CategoryPage = () => {
                 </div>
             </div>
 
-            {showCreateCategory && <Malahov_Create_Category_Popup
+            {showCreateCategory && <Museichuk_Create_Category_Popup
                 open={showCreateCategory}
                 onClose={() => setShowCreateCategory(false)}
                 onCreate={(category) => onCreate(category)}
             />}
 
-            {editedCategory !== null && <MalahovEditCategoryPopup
+            {editedCategory !== null && <MuseichukEditCategoryPopup
                 open={editedCategory !== null}
                 onClose={() => setEditedCategory(null)}
                 category={editedCategory}

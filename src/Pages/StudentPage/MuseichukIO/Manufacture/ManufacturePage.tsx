@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from "@mui/material";
 import { Manufacturer } from "./models";
-import MalahovCreateManufacturerPopup from "./Popups/Malahov_Create_Manufacture_Popup";
-import MalahovEditManufacturerPopup from "./Popups/Malahov_Edit_Manufacture_Popup";
-import { MalahovAxios } from '../MalahovDmitriy'
+import MuseichukCreateManufacturerPopup from "./Popups/Museichuk_Create_Manufacture_Popup";
+import MuseichukEditManufacturerPopup from "./Popups/Museichuk_Edit_Manufacture_Popup";
+import { MuseichukAxios } from '../MuseichukIO'
 
 const ManufacturerPage = () => {
 
@@ -60,7 +60,7 @@ const ManufacturerPage = () => {
     ];
 
     const onDeleteClick = (id: number) => {
-        MalahovAxios.delete(`https://canstudy.ru/orderapi/manufacturer/${id}`)
+        MuseichukAxios.delete(`https://canstudy.ru/orderapi/manufacturer/${id}`)
             .then(() => {
                 setManufactureries(prev =>
                     prev.filter(el => el.id !== id)
@@ -71,7 +71,7 @@ const ManufacturerPage = () => {
     const [manufactureries, setManufactureries] = useState<Manufacturer[]>([])
 
     useEffect(() => {
-        MalahovAxios.get<{ items: Manufacturer[] }>(
+        MuseichukAxios.get<{ items: Manufacturer[] }>(
             'https://canstudy.ru/orderapi/manufacturer/list'
         )
             .then((response) => {
@@ -122,13 +122,13 @@ const ManufacturerPage = () => {
                 </div>
             </div>
 
-            {showCreateManufacturer && <MalahovCreateManufacturerPopup
+            {showCreateManufacturer && <MuseichukCreateManufacturerPopup
                 open={showCreateManufacturer}
                 onClose={() => setShowCreateManufacturer(false)}
                 onCreate={(manufacturer) => onCreate(manufacturer)}
             />}
 
-            {editedManufacturer !== null && <MalahovEditManufacturerPopup
+            {editedManufacturer !== null && <MuseichukEditManufacturerPopup
                 open={editedManufacturer !== null}
                 onClose={() => setEditedManufacturer(null)}
                 Manufacturer={editedManufacturer}

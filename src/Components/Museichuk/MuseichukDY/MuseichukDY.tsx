@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal} from "@mui/material"
 import {Button} from '@mui/material';
-import "./MalahovDY.scss"
+import "./MuseichukDY.scss"
 
 export type  IPopup = {
     open: boolean,
@@ -11,7 +11,7 @@ type Props = IPopup & {
     title: string
     children: any
 }
-const MalahovDy = ({open, onClose, title, children}: Props) => {
+const MuseichukDY = ({open, onClose, title, children}: Props) => {
     return (
         <Modal
             open={open}
@@ -46,4 +46,4 @@ const MalahovDy = ({open, onClose, title, children}: Props) => {
     );
 };
 
-export default MalahovDy;
+export default MuseichukDY;

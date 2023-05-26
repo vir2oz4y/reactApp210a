@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Pages",
+    "\\src\\Pages\\Route",
     "\\src\\Pages\\StudentPage",
     "\\src\\Pages\\StudentPage\\MalahovDmitriy",
-    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Clients",
     "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Clients\\Modals",
     "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Kategorii\\modals",
-    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Manufacture",
-    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Manufacture\\Popups"
+    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Product",
+    "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Product\\Popups"
   ],
-  "SelectedNode": "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Manufacture\\Popups\\Malahov_Edit_Manufacture_Popup.tsx",
+  "SelectedNode": "\\src\\Pages\\StudentPage\\MalahovDmitriy\\Product\\Popups\\MalahovCreateProductPopup.tsx",
   "PreviewInSolutionExplorer": false
 }

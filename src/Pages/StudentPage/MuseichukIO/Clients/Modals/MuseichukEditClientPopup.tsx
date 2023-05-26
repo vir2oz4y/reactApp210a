@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { Client } from "../models";
-import { MalahovAxios } from '../../MalahovDmitriy';
+import { MuseichukAxios } from '../../MuseichukIO';
 
 type Props = IPopup & {
     onEdit: (newClient: Client) => void;
     client: Client
 }
 
-const  MalahovEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: Props) => {
+const  MuseichukEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: Props) => {
 
     const [client, setClient] = useState(clientEdit)
 
     const onEditClick = () => {
 
-        MalahovAxios.patch<{ item: Client }>('https://canstudy.ru/orderapi/Client',
+        MuseichukAxios.patch<{ item: Client }>('https://canstudy.ru/orderapi/Client',
             {
                 item: {
                     ...client
@@ -28,7 +28,7 @@ const  MalahovEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: 
     }
 
     return (
-        <MalahovDY
+        <MuseichukDY
             title={'Changing the client'}
             open={open}
             onClose={() => onClose()}
@@ -97,8 +97,8 @@ const  MalahovEditClientPopup = ({ open, onClose, client: clientEdit, onEdit }: 
                 </div>
 
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     );
 };
 
-export default  MalahovEditClientPopup;
+export default  MuseichukEditClientPopup;

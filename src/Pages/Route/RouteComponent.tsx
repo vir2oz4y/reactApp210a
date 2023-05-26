@@ -23,15 +23,15 @@ import SesNV from "../StudentPage/SesNV/SesNV";
 import {default as Ses1} from "../StudentPage/SesNV/Test1/test1page";
 import { default as Ses2 } from "../StudentPage/SesNV/Test2/test2page";
 
-import MalahovDmitriy from "../StudentPage/MalahovDmitriy/MalahovDmitriy";
-import { default as Mal1 } from "../StudentPage/MalahovDmitriy/Test1/test1page";
-import { default as Malahov_Category } from "../StudentPage/MalahovDmitriy/Kategorii/Category";
-import { default as Mal2 } from "../StudentPage/MalahovDmitriy/Test2/test2page";
-import {default as MalahovManufacturePage} from "../StudentPage/MalahovDmitriy/Manufacture/ManufacturePage"
-import { default as MalahovClient } from "../StudentPage/MalahovDmitriy/Clients/ClientPage";
-import { default as MalahovProduct } from "../StudentPage/MalahovDmitriy/Product/ProductPage";
-import { default as MalahovTovar } from "../StudentPage/MalahovDmitriy/Tovar/tovar";
-import { default as MalahovZakaz } from "../StudentPage/MalahovDmitriy/Zakaz/zakaz";
+import MuseichukIO from "../StudentPage/MuseichukIO/MuseichukIO";
+import { default as Mal1 } from "../StudentPage/MuseichukIO/Test1/test1page";
+import { default as Museichuk_Category } from "../StudentPage/MuseichukIO/Kategorii/Category";
+import { default as Mal2 } from "../StudentPage/MuseichukIO/Test2/test2page";
+import {default as MuseichukManufacturePage} from "../StudentPage/MuseichukIO/Manufacture/ManufacturePage"
+import { default as MuseichukClient } from "../StudentPage/MuseichukIO/Clients/ClientPage";
+import { default as MuseichukProduct } from "../StudentPage/MuseichukIO/Product/ProductPage";
+import { default as MuseichukTovar } from "../StudentPage/MuseichukIO/Tovar/tovar";
+import { default as MuseichukZakaz } from "../StudentPage/MuseichukIO/Zakaz/zakaz";
 
 import BushmanovMakPage from "../StudentPage/BushmanovMak/BushmanovMakPage";
 import {default as BushmanovTest1Page} from "../StudentPage/BushmanovMak/SiteMenu/Test1/Test1";
@@ -119,15 +119,15 @@ const RouteComponent = () => {
                         <Route path={'test1'} element={<Ses1/>} />
                         <Route path={'test2'} element={<Ses2/>} />
                     </Route>
-                    <Route path={'MalahovDmitriy'} element={<MalahovDmitriy />} >
-                        <Route path={'Kategorii'} element={<Malahov_Category />} />
+                    <Route path={'MuseichukIO'} element={<MuseichukIO />} >
+                        <Route path={'Kategorii'} element={<Museichuk_Category />} />
                         <Route path={'test1'} element={<Mal1 />} />
                         <Route path={'test2'} element={<Mal2 />} />
-                        <Route path={'Client'} element={<MalahovClient/>} />
-                        <Route path={'Manufacture'} element={< MalahovManufacturePage />} />
-                        <Route path={'Product'} element={< MalahovProduct />} />
-                        <Route path={'tovar'} element={<MalahovTovar />} />
-                        <Route path={'zakaz'} element={<MalahovZakaz />} />
+                        <Route path={'Client'} element={<MuseichukClient/>} />
+                        <Route path={'Manufacture'} element={< MuseichukManufacturePage />} />
+                        <Route path={'Product'} element={< MuseichukProduct />} />
+                        <Route path={'tovar'} element={<MuseichukTovar />} />
+                        <Route path={'zakaz'} element={<MuseichukZakaz />} />
 
                     </Route>
 

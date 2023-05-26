@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 import { Manufacturer } from "../models";
-import { MalahovAxios } from '../../MalahovDmitriy'
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
+import { MuseichukAxios } from '../../MuseichukIO'
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
 
 type Props = IPopup & {
     onEdit: (newManufacturer: Manufacturer) => void;
     Manufacturer: Manufacturer
 }
-const MalahovEditManufacturerPopup = ({ open, onClose, Manufacturer, onEdit }: Props) => {
+const MuseichukEditManufacturerPopup = ({ open, onClose, Manufacturer, onEdit }: Props) => {
     const [ManufacturerEdit, setManufacturerEdit] = useState(Manufacturer)
     const onEditClick = () => {
-        MalahovAxios.patch<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
+        MuseichukAxios.patch<{ item: Manufacturer }>('https://canstudy.ru/orderapi/manufacturer',
             {
                 item: {
                     id: ManufacturerEdit.id,
@@ -26,7 +26,7 @@ const MalahovEditManufacturerPopup = ({ open, onClose, Manufacturer, onEdit }: P
             })
     }
     return (
-        <MalahovDY
+        <MuseichukDY
             title={'Создание категории'}
             open={open}
             onClose={() => onClose()}
@@ -75,7 +75,7 @@ const MalahovEditManufacturerPopup = ({ open, onClose, Manufacturer, onEdit }: P
                     </Button>
                 </div>
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     );
 };
-export default MalahovEditManufacturerPopup;
+export default MuseichukEditManufacturerPopup;

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { Client } from "../models";
 import axios from 'axios';
-import { MalahovAxios } from '../../MalahovDmitriy';
+import { MuseichukAxios } from '../../MuseichukIO';
 
 type Props = IPopup & {
     onCreate: (newClient: Client) => void;
 }
 
-const MalahovCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
+const MuseichukCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
 
     const createClient = () => {
-        MalahovAxios.post<{ item: Client }>('https://canstudy.ru/orderapi/Client',
+        MuseichukAxios.post<{ item: Client }>('https://canstudy.ru/orderapi/Client',
             {
                 ...client
             })
@@ -38,7 +38,7 @@ const MalahovCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
     }
 
     return (
-        <MalahovDY
+        <MuseichukDY
             title={'Create a client'}
             open={open}
             onClose={() => onClose()}
@@ -109,8 +109,8 @@ const MalahovCreateClientPopup = ({ open, onClose, onCreate }: Props) => {
                 </div>
 
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     );
 };
 
-export default MalahovCreateClientPopup;
+export default MuseichukCreateClientPopup;

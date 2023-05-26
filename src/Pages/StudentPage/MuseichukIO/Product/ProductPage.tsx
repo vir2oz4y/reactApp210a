@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { Product } from './model';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { MalahovAxios } from '../MalahovDmitriy'
-import MalahovCreateProductPopup from "./Popups/MalahovCreateProductPopup";
-import MalahovEditProductPopup from "./Popups/MalahovEditProductPopup";
+import { MuseichukAxios } from '../MuseichukIO'
+import MuseichukCreateProductPopup from "./Popups/MuseichukCreateProductPopup";
+import MuseichukEditProductPopup from "./Popups/MuseichukEditProductPopup";
 
 
 const ProductPage = () => {
@@ -14,7 +14,7 @@ const ProductPage = () => {
     const [ProductList, setProductList] = useState<Product[]>([])
 
     const getProducts = () => {
-        MalahovAxios.get<{ items: Product[] }>('https://canstudy.ru/orderapi/Product/list')
+        MuseichukAxios.get<{ items: Product[] }>('https://canstudy.ru/orderapi/Product/list')
             .then(res => {
                 setProductList(res.data.items);
             })
@@ -27,7 +27,7 @@ const ProductPage = () => {
 
 
     const onDeleteClick = (id: number) => {
-        MalahovAxios.delete(`https://canstudy.ru/orderapi/Product/${id}`)
+        MuseichukAxios.delete(`https://canstudy.ru/orderapi/Product/${id}`)
             .then(res => {
                 setProductList(prev =>
                     prev.filter(el => el.id !== id)
@@ -119,14 +119,14 @@ const ProductPage = () => {
     return (
         <div style={{ width: '100%' }}>
 
-            {createPopupOpened && <MalahovCreateProductPopup
+            {createPopupOpened && <MuseichukCreateProductPopup
                 open={createPopupOpened}
                 onClose={() => setCreatePopupOpened(false)}
                 onCreate={(newProduct) => onCreate(newProduct)}
             />}
 
 
-            {editProduct !== null && <MalahovEditProductPopup
+            {editProduct !== null && <MuseichukEditProductPopup
                 open={editProduct !== null}
                 onClose={() => setEditProduct(null)}
                 Product={editProduct}

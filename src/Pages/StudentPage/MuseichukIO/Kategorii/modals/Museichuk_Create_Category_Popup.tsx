@@ -1,20 +1,20 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
-import { MalahovAxios } from '../../MalahovDmitriy'
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
+import { MuseichukAxios } from '../../MuseichukIO'
 import { Category } from '../models'
 
 type Props = IPopup & {
     onCreate: (newCategory: Category) => void;
 }
 
-export const Malahov_Create_Category_Popup = ({ open, onClose, onCreate }: Props) => {
+export const Museichuk_Create_Category_Popup = ({ open, onClose, onCreate }: Props) => {
 
     const [categoryName, setCategoryName] = useState('')
 
     const onCreateClick = () => {
 
-        MalahovAxios.post<{ item: Category }>(
+        MuseichukAxios.post<{ item: Category }>(
             'https://canstudy.ru/orderapi/category',
             {
                 name: categoryName
@@ -27,7 +27,7 @@ export const Malahov_Create_Category_Popup = ({ open, onClose, onCreate }: Props
     }
 
     return (
-        <MalahovDY
+        <MuseichukDY
             open={open}
             onClose={onClose}
             title={'Create category'}
@@ -52,6 +52,6 @@ export const Malahov_Create_Category_Popup = ({ open, onClose, onCreate }: Props
 
                 </div>
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     )
 }

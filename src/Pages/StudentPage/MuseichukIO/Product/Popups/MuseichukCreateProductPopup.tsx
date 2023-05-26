@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { Product } from "../model";
-import { MalahovAxios } from '../../MalahovDmitriy'
+import { MuseichukAxios } from '../../MuseichukIO'
 import { Category } from "../../Kategorii/models";
 import { Manufacturer } from "../../Manufacture/models";
 
 type Props = IPopup & {
-    onEdit: (newProduct: Product) => void;
-    Product: Product
+    onCreate: (newProduct: Product) => void;
 }
 
-const MalahovEditProductPopup = ({ open, onClose, Product: ProductEdit, onEdit }: Props) => {
+const MuseichukCreateProductPopup = ({ open, onClose, onCreate }: Props) => {
 
-    const [Product, setProduct] = useState(ProductEdit)
-
-    const onEditClick = () => {
-
-        MalahovAxios.patch<{ item: Product }>('https://canstudy.ru/orderapi/Product',
+    const createProduct = () => {
+        MuseichukAxios.post<{ item: Product }>('https://canstudy.ru/orderapi/Product',
             {
-                item: {
-                    ...Product
-                }
+                ...Product
             })
             .then(res => {
-                onEdit(res.data.item)
-                onClose();
+                onCreate(res.data.item)
             })
     }
 
@@ -34,14 +27,14 @@ const MalahovEditProductPopup = ({ open, onClose, Product: ProductEdit, onEdit }
     const [manufactureList, setManufactureList] = useState<Manufacturer[]>([])
 
     const getCategories = () => {
-        MalahovAxios<{ items: Category[] }>('https://canstudy.ru/orderapi/category/list')
+        MuseichukAxios.get<{ items: Category[] }>('https://canstudy.ru/orderapi/category/list')
             .then(res => {
                 setCategoryList(res.data.items);
             })
     }
 
     const getManufacturies = () => {
-        MalahovAxios.get<{ items: Manufacturer[] }>('https://canstudy.ru/orderapi/manufacturer/list')
+        MuseichukAxios.get<{ items: Manufacturer[] }>('https://canstudy.ru/orderapi/manufacturer/list')
             .then(res => {
                 setManufactureList(res.data.items);
             })
@@ -52,10 +45,28 @@ const MalahovEditProductPopup = ({ open, onClose, Product: ProductEdit, onEdit }
         getManufacturies();
     }, [])
 
+    const [Product, setProduct] = useState<Product>({
+        categoryId: 0,
+        categoryName: "",
+        cost: 0,
+        description: "",
+        id: 0,
+        manufacturerId: 0,
+        manufacturerName: "",
+        name: ""
+    })
+
+    const onCreateClick = () => {
+        createProduct();
+
+        onClose();
+    }
+
+    console.log(Product)
 
     return (
-        <MalahovDY
-            title={'Changing the client'}
+        <MuseichukDY
+            title={'Create a product'}
             open={open}
             onClose={() => onClose()}
         >
@@ -63,9 +74,14 @@ const MalahovEditProductPopup = ({ open, onClose, Product: ProductEdit, onEdit }
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '1em'
+                    gap: '1em',
+                    paddingTop: '1em'
                 }}
             >
+
+
+
+
                 <TextField
                     label="Title"
                     variant="standard"
@@ -121,19 +137,20 @@ const MalahovEditProductPopup = ({ open, onClose, Product: ProductEdit, onEdit }
                     </Select>
                 </FormControl>
 
+
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button
                         color={'primary'}
                         variant={'contained'}
-                        onClick={() => onEditClick()}
+                        onClick={() => onCreateClick()}
                     >
-                        To change
+                        Create
                     </Button>
                 </div>
 
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     );
 };
 
-export default MalahovEditProductPopup;
+export default MuseichukCreateProductPopup;

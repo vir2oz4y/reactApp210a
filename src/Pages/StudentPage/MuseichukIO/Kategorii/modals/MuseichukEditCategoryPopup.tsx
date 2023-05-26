@@ -1,7 +1,7 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import MalahovDY, { IPopup } from "../../../../../Components/Malahov/MalahovDY/MalahovDY";
-import { MalahovAxios } from '../../MalahovDmitriy'
+import MuseichukDY, { IPopup } from "../../../../../Components/Museichuk/MuseichukDY/MuseichukDY";
+import { MuseichukAxios } from '../../MuseichukIO'
 import { Category } from '../models'
 
 type Props = IPopup & {
@@ -9,13 +9,13 @@ type Props = IPopup & {
     onEdit: (category: Category) => void;
 }
 
-export const MalahovEditCategoryPopup = ({ open, onClose, onEdit, category: categoryProps }: Props) => {
+export const MuseichukEditCategoryPopup = ({ open, onClose, onEdit, category: categoryProps }: Props) => {
 
     const [category, setCategory] = useState(categoryProps)
 
     const onEditClick = () => {
 
-        MalahovAxios.patch<{ item: Category }>(
+        MuseichukAxios.patch<{ item: Category }>(
             'https://canstudy.ru/orderapi/category',
             {
                 item: category
@@ -27,7 +27,7 @@ export const MalahovEditCategoryPopup = ({ open, onClose, onEdit, category: cate
     }
 
     return (
-        <MalahovDY
+        <MuseichukDY
             open={open}
             onClose={onClose}
             title={'Edit category'}
@@ -54,6 +54,6 @@ export const MalahovEditCategoryPopup = ({ open, onClose, onEdit, category: cate
                     </Button>
                 </div>
             </div>
-        </MalahovDY>
+        </MuseichukDY>
     )
 }
